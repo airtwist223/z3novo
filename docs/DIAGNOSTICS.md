@@ -1,6 +1,6 @@
 # Отчёт о проблеме / Problem reports
 
-> Инструменты появятся в T1. Этот файл будет дополнен, когда их проверят.
+> Скрипты для Windows и Linux уже здесь. Отчёт из прошивки появится в T1.
 
 ## Что понадобится
 
@@ -8,8 +8,10 @@
    текстовый файл: сводка о системе, журнал последних запусков (на каком шаге остановился неудачный старт), причины
    перезагрузок, ошибки процессора, память и настройки. Если компьютер зависает при запуске, после зависания включите
    его снова, откройте приложение и сделайте отчёт: в нём будет видно, где остановился предыдущий старт.
-2. **Отчёт из системы** (если Windows или Linux запускаются): скрипт `z3report.ps1` для Windows или `z3report.sh`
-   для Linux соберёт журналы сбоев (синие экраны, внезапные выключения, аппаратные ошибки) в один файл.
+2. **Отчёт из системы** (если Windows или Linux запускаются): скрипт [`z3report.ps1`](../tools/report/z3report.ps1) для
+   Windows или [`z3report.sh`](../tools/report/z3report.sh) для Linux соберёт журналы сбоев (синие экраны, внезапные
+   выключения, аппаратные ошибки) в один файл. Как запустить — [tools/report/README.md](../tools/report/README.md).
+   Скрипт для Linux проверен; скрипт для Windows ещё проходит первую проверку на настоящей Windows.
 
 ## Что в отчёты не попадает
 
@@ -24,7 +26,7 @@
 
 # Problem reports
 
-> The tools arrive in T1. This file will be completed once they have been tested.
+> The Windows and Linux scripts are already here. The firmware report arrives in T1.
 
 ## What you will need
 
@@ -32,8 +34,10 @@
    USB stick: a system summary, the log of recent starts (where a failed start stopped), the reasons for restarts,
    processor errors, memory and settings. If the computer hangs while starting, power it on again after the hang, open
    the app and make a report: it shows where the previous start stopped.
-2. **A report from the operating system** (if Windows or Linux starts): the `z3report.ps1` script for Windows or
-   `z3report.sh` for Linux gathers the crash logs (blue screens, unexpected shutdowns, hardware errors) into one file.
+2. **A report from the operating system** (if Windows or Linux starts): the [`z3report.ps1`](../tools/report/z3report.ps1)
+   script for Windows or [`z3report.sh`](../tools/report/z3report.sh) for Linux gathers the crash logs (blue screens,
+   unexpected shutdowns, hardware errors) into one file. How to run them: [tools/report/README.md](../tools/report/README.md).
+   The Linux script has been tested; the Windows script is still getting its first run on a real Windows machine.
 
 ## What the reports leave out
 

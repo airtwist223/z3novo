@@ -14,7 +14,8 @@ Newest first. T1, T2… are public test versions; 1.0 will be the first stable o
 - Включение после пропадания питания.
 - Загрузка по сети UEFI (PXE).
 - DASH: по умолчанию выключено; настройки сети DASH в приложении.
-- В работе: обновление прошивки с флешки, «Отчёт для диагностики», скрипты сбора журналов для Windows и Linux.
+- Скрипты сбора журналов для Windows и Linux ([tools/report](tools/report/README.md)); скрипт для Windows ещё проходит первую проверку.
+- В работе: обновление прошивки с флешки, «Отчёт для диагностики» в приложении.
 
 ### Ограничения
 - Напряжение памяти всегда 1,2 В (так устроена плата), см. [docs/LIMITS.md](docs/LIMITS.md).
@@ -37,7 +38,8 @@ Newest first. T1, T2… are public test versions; 1.0 will be the first stable o
 - Power on after a power loss.
 - UEFI network boot (PXE).
 - DASH: off by default; DASH network settings in the app.
-- In progress: firmware updates from a USB stick, the diagnostics report, log collection scripts for Windows and Linux.
+- Log collection scripts for Windows and Linux ([tools/report](tools/report/README.md)); the Windows script is still getting its first test.
+- In progress: firmware updates from a USB stick, the diagnostics report in the app.
 
 ### Limits
 - The memory voltage is always 1.2 V (that is how the board is built), see [docs/LIMITS.md](docs/LIMITS.md).
