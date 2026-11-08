@@ -360,7 +360,7 @@ mem_from_udev() {
 
 mem_from_dmi() {
     awk -v facts="$FACTS" '
-        function bytes(s, a) { split(s, a, " "); return a[1] * (a[2] == "TB" ? 1099511627776 : a[2] == "GB" ? 1073741824 : a[2] == "MB" ? 1048576 : 0) }
+        function bytes(s, a) { split(s, a, " "); return a[1] * (a[2] ~ /^T/ ? 1099511627776 : a[2] ~ /^G/ ? 1073741824 : a[2] ~ /^M/ ? 1048576 : a[2] ~ /^[kK]/ ? 1024 : 0) }  # dmidecode prints GB or, newer ones, GiB
         /^Physical Memory Array/ { sec = "arr"; next }
         /^Memory Device/ { sec = "dev"; n++; next }
         /^[^\t]/ { sec = ""; next }
