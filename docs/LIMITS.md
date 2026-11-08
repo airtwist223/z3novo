@@ -36,14 +36,22 @@
   поможет только сброс настроек BIOS перемычкой или батарейкой (сбросятся все настройки).
 - Четыре планки работают медленнее, чем две: обычно DDR4-1866–2133.
 
-## 3. Плата рассчитана на процессоры до 65 Вт
+## 3. Питание процессора и охлаждение
 
-Схема питания процессора без радиаторов, блок питания на 180–210 Вт, штатный кулер на 65 Вт.
+Lenovo выпускала эту плату под процессоры с TDP до 65 Вт. Что на самом деле ограничивает и что можно изменить:
 
-- Разгон процессора в T1 выключен.
-- Ryzen 7 2700 и похожие не разгоняйте и не включайте автоматический разгон (PBO): блок питания может не справиться,
-  особенно вместе с видеокартой.
-- Ryzen 5 5600: понижать напряжение (Curve Optimizer) можно, повышать пределы мощности — нет.
+| Что | Можно ли улучшить | Что это значит |
+|---|---|---|
+| **Кулер** (штатный — на 65 Вт) | да | Крепление стандартное AM4 (отверстия 54×90 мм), но в корпусе SFF помещается кулер высотой примерно до 65–70 мм. Мощнее кулер — процессор дольше держит высокую частоту. |
+| **Схема питания процессора на плате** (4+2 фазы, без радиаторов) | нет | Кулер процессора её почти не охлаждает. Под долгой нагрузкой выше ~90–100 Вт она сильно греется. |
+| **Блок питания** (180 или 210 Вт на весь компьютер) | только заменой | Блок нестандартный, под корпус Lenovo. С видеокартой запаса почти нет. |
+
+Что из этого следует:
+
+- **Процессоры до 65 Вт** (2200G, 2700, 3600, 5600, 5600G, 5700G и подобные) — работают без оговорок.
+- **Процессоры на 95–105 Вт** (2700X, 3800X, 5800X, 5900X и подобные) — не рекомендуем: под нагрузкой схема питания и
+  блок питания будут на пределе, а ограничить мощность в меню T1 пока нельзя.
+- Разгон и автоматический разгон (PBO) в T1 выключены.
 
 ## 4. Память для встроенной графики
 
@@ -101,14 +109,22 @@ What this means in practice:
   settings with the jumper or the battery helps (it resets all settings).
 - Four sticks run slower than two, usually DDR4-1866–2133.
 
-## 3. The board is built for processors up to 65 W
+## 3. Processor power and cooling
 
-The processor power circuit has no heatsinks, the power supply is rated 180–210 W, and the stock cooler is built for 65 W.
+Lenovo made this board for processors with a TDP of up to 65 W. What actually sets the limit, and what can be changed:
 
-- Processor overclocking is turned off in T1.
-- Do not overclock a Ryzen 7 2700 or similar, and do not turn on automatic overclocking (PBO): the power supply may not
-  cope, especially with a graphics card.
-- Ryzen 5 5600: lowering the voltage (Curve Optimizer) is fine, raising the power limits is not.
+| What | Can it be improved | What it means |
+|---|---|---|
+| **Cooler** (the stock one is for 65 W) | yes | The mount is standard AM4 (holes 54×90 mm), but the SFF case fits a cooler only about 65–70 mm tall. A stronger cooler lets the processor hold a high speed for longer. |
+| **Processor power circuit on the board** (4+2 phases, no heatsinks) | no | The processor cooler barely cools it. Under long loads above about 90–100 W it runs very hot. |
+| **Power supply** (180 or 210 W for the whole computer) | only by replacing it | It is a non-standard unit made for Lenovo's case. With a graphics card there is almost no headroom. |
+
+What follows from that:
+
+- **Processors up to 65 W** (2200G, 2700, 3600, 5600, 5600G, 5700G and the like) work without caveats.
+- **95–105 W processors** (2700X, 3800X, 5800X, 5900X and the like) are not recommended: under load the power circuit and
+  the power supply are at their limit, and the T1 menu cannot cap the power yet.
+- Overclocking and automatic overclocking (PBO) are off in T1.
 
 ## 4. Memory for built-in graphics
 
