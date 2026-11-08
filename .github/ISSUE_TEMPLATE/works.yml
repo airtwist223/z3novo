@@ -1,0 +1,80 @@
+name: Всё работает / Works for me
+description: Расскажите, на какой сборке Z3NOVO работает — так собирается список проверенных компьютеров / Tell us which setup Z3NOVO works on — this builds the list of tested computers
+title: "[Работает / Works] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо! Сообщения «всё работает» важны так же, как сообщения о проблемах: по ним видно, на каких процессорах,
+        памяти и видеокартах прошивка уже проверена.
+
+        Thank you! "It works" reports matter as much as problem reports: they show which processors, memory and graphics
+        cards the firmware has already been tested with.
+  - type: input
+    id: version
+    attributes:
+      label: Версия Z3NOVO / Z3NOVO version
+      description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
+      placeholder: T1
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Ревизия платы / Board revision
+      description: Напечатана на плате рядом с AM4P2MS. / Printed on the board next to AM4P2MS.
+      placeholder: Ver 1.1
+    validations:
+      required: true
+  - type: input
+    id: cpu
+    attributes:
+      label: Процессор / Processor
+      placeholder: Ryzen 5 2600
+    validations:
+      required: true
+  - type: input
+    id: memory
+    attributes:
+      label: Память / Memory
+      description: Сколько планок, объём, модель; какая частота выставлена и на какой работает. / How many sticks, size, model; the speed set and the speed it runs at.
+      placeholder: 2 × 8 ГБ Kingston KVR32N22S8/8, вручную 2933
+  - type: input
+    id: video
+    attributes:
+      label: Видео / Graphics
+      description: Встроенная графика или видеокарта; разъём монитора и кабель. / Built-in graphics or a graphics card; the monitor socket and cable.
+      placeholder: GT 1030, HDMI на видеокарте
+  - type: input
+    id: os
+    attributes:
+      label: Система / Operating system
+      placeholder: Windows 10 Pro 22H2
+  - type: checkboxes
+    id: tested
+    attributes:
+      label: Что проверили, и оно работает / What you tested and it works
+      options:
+        - label: Включение и перезагрузки / Power-on and restarts
+        - label: Сон и пробуждение / Sleep and wake-up
+        - label: Включение после пропадания света / Power-on after a power cut
+        - label: USB / USB
+        - label: Сеть / Network
+        - label: Звук / Sound
+        - label: DisplayPort
+        - label: VGA
+        - label: SATA
+        - label: M.2
+        - label: Частота памяти вручную или XMP / Manual memory speed or XMP
+        - label: Обновление BIOS из меню / BIOS update from the menu
+        - label: DASH
+        - label: Тест-флешка без ошибок / Test stick with no errors
+  - type: input
+    id: time
+    attributes:
+      label: Сколько пользуетесь / How long you have used it
+      placeholder: неделю / a week
+  - type: textarea
+    id: notes
+    attributes:
+      label: Что ещё / Anything else

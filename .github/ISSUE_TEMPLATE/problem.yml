@@ -12,12 +12,18 @@ body:
         2. **Если Windows или Linux запускаются** — отчёт скрипта `z3report.ps1` или `z3report.sh`.
         3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки (готовится).
 
+        ⚠️ Если компьютер завис, а потом снова включился — **сначала сделайте отчёт F11**, и только потом сбрасывайте
+        настройки батарейкой: сброс стирает журнал запусков, по которому видна причина.
+
         Thank you for testing! Fill in what you know: the more detail, the sooner we find the cause.
 
         **What to attach** (details in [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md)):
         1. **Always** — the BIOS report: USB stick in, **Del** → **F11**, the `\Z3NOVO\REPORT-….TXT` file from the stick (from version T1).
         2. **If Windows or Linux starts** — the `z3report.ps1` or `z3report.sh` script report.
         3. **If the failure is rare and puzzling** — the test stick's results folder (in preparation).
+
+        ⚠️ If the computer hung and then started again, **make the F11 report first**, and only then reset the settings
+        with the battery: the reset erases the boot log that shows the cause.
   - type: input
     id: version
     attributes:
@@ -26,6 +32,12 @@ body:
       placeholder: T1
     validations:
       required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Ревизия платы / Board revision
+      description: Напечатана на плате рядом с AM4P2MS. / Printed on the board next to AM4P2MS.
+      placeholder: Ver 1.1
   - type: input
     id: cpu
     attributes:
