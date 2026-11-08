@@ -22,25 +22,25 @@
 
 ### Что замазывается
 
-Имя компьютера, имена пользователей, серийные номера, UUID, MAC-адреса (остаются первые 3 байта, по ним виден только производитель), IP-адреса, имена сетей Wi-Fi, пути в домашних папках (заменяются на `~`). Замазанные места выглядят как `<host>`, `<user>`, `<serial>`, `<uuid>`, `<id>`, `<ip>`, `<email>`, `<wifi>`, `<url>`, `<key>`, `~`, `aa:bb:cc:xx:xx:xx`.
+Имя компьютера, имена пользователей, серийные номера, UUID, MAC-адреса (остаются первые 3 байта, по ним виден только производитель), IP-адреса, имена сетей Wi-Fi, пути в домашних папках (заменяются на `~`). В строках SMBIOS (BIOS, плата, система, корпус) замазываются и похожие на серийные уникальные номера: например, версия платы `SDK0J40697 WIN 1234567890123` станет `SDK0J40697 WIN <serial>`. Замазанные места выглядят как `<host>`, `<user>`, `<serial>`, `<uuid>`, `<id>`, `<ip>`, `<email>`, `<wifi>`, `<url>`, `<key>`, `~`, `aa:bb:cc:xx:xx:xx`.
 
 ### Windows 10 и 11
 
 1. Скачайте файл `z3report.ps1` целиком (не копируйте его текст в Блокнот).
-2. Самый простой способ: щёлкните по файлу правой кнопкой и выберите «Выполнить с помощью PowerShell». Когда появится «Готово», нажмите Enter.
-3. Полный отчёт (со служебными переменными прошивки и списком аварийных дампов) нужны права администратора:
+2. Самый простой способ: щёлкните по файлу правой кнопкой и выберите «Выполнить с помощью PowerShell». Скрипт спросит, перезапуститься ли с правами администратора (они добавляют служебные переменные прошивки, аварийные дампы и тип подключения мониторов): Enter или «Д» — да, Windows покажет окно подтверждения, и отчёт соберётся в новом окне; «Н» — нет, отчёт соберётся без них. Когда появится «Готово», нажмите Enter.
+3. Или сразу с правами администратора:
    - нажмите «Пуск», наберите `PowerShell`, щёлкните правой кнопкой по «Windows PowerShell» и выберите «Запуск от имени администратора»;
    - перейдите в папку со скриптом, например: `cd $HOME\Downloads`;
    - запустите: `powershell -ExecutionPolicy Bypass -File .\z3report.ps1`
 4. Через одну-две минуты на Рабочем столе появится файл `z3report-os-<дата>-<время>.txt`, его путь скрипт напишет в конце.
 
-`-ExecutionPolicy Bypass` разрешает запустить этот скрипт один раз и ничего не меняет в настройках Windows.
+`-ExecutionPolicy Bypass` разрешает запустить этот скрипт один раз и ничего не меняет в настройках Windows. Чтобы скрипт не спрашивал про права администратора, добавьте в конце `-NoElevate`.
 
 ### Linux
 
 1. Скачайте файл `z3report.sh`.
 2. Откройте терминал в папке со скриптом и запустите: `bash z3report.sh`
-3. Полнее (модули памяти из SMBIOS, журналы ядра, сохранённые при сбое, журнал системы, если у вашего пользователя нет к нему доступа): `sudo bash z3report.sh`
+3. Скрипт предложит перезапуститься через sudo. Так отчёт будет полнее: модули памяти из SMBIOS, журналы ядра, сохранённые при сбое, журнал системы, если у вашего пользователя нет к нему доступа. Enter или «д» — да, sudo спросит пароль; «н» — нет. Можно и сразу `sudo bash z3report.sh`, а `bash z3report.sh --no-sudo` не задаёт вопрос.
 4. Файл `z3report-os-<дата>-<время>.txt` появится в домашней папке (если туда нельзя писать, в текущей), путь скрипт напишет в конце.
 
 Если в отчёте написано «прошлых загрузок в журнале нет», ваша система хранит журнал только в памяти и после сбоя он пропадает. По желанию включите постоянный журнал (это делаете вы, не скрипт): `sudo mkdir -p /var/log/journal && sudo systemctl restart systemd-journald`. Следующий сбой тогда будет виден.
@@ -73,25 +73,25 @@ The script only reads. It changes nothing in the system, installs no programs or
 
 ### What is masked
 
-Computer name, user names, serial numbers, UUIDs, MAC addresses (the first 3 bytes stay, they only tell the maker), IP addresses, Wi-Fi network names, home folder paths (shown as `~`). Masked values look like `<host>`, `<user>`, `<serial>`, `<uuid>`, `<id>`, `<ip>`, `<email>`, `<wifi>`, `<url>`, `<key>`, `~`, `aa:bb:cc:xx:xx:xx`.
+Computer name, user names, serial numbers, UUIDs, MAC addresses (the first 3 bytes stay, they only tell the maker), IP addresses, Wi-Fi network names, home folder paths (shown as `~`). In SMBIOS strings (BIOS, board, system, chassis) serial-like unique numbers are masked too: a board version `SDK0J40697 WIN 1234567890123` becomes `SDK0J40697 WIN <serial>`. Masked values look like `<host>`, `<user>`, `<serial>`, `<uuid>`, `<id>`, `<ip>`, `<email>`, `<wifi>`, `<url>`, `<key>`, `~`, `aa:bb:cc:xx:xx:xx`.
 
 ### Windows 10 and 11
 
 1. Download the file `z3report.ps1` itself (do not copy its text into Notepad).
-2. The simplest way: right-click the file and choose "Run with PowerShell". When it says "Done", press Enter.
-3. The full report (with the firmware variables and the crash dump list) needs administrator rights:
+2. The simplest way: right-click the file and choose "Run with PowerShell". The script asks whether to restart with administrator rights (they add the firmware variables, crash dumps and the monitors' connection types): Enter or "Y" for yes, Windows shows a confirmation and the report is collected in a new window; "N" for no, the report is collected without them. When it says "Done", press Enter.
+3. Or start with administrator rights right away:
    - press Start, type `PowerShell`, right-click "Windows PowerShell" and choose "Run as administrator";
    - go to the folder with the script, for example: `cd $HOME\Downloads`;
    - run: `powershell -ExecutionPolicy Bypass -File .\z3report.ps1`
 4. After a minute or two the file `z3report-os-<date>-<time>.txt` appears on the Desktop; the script prints its path at the end.
 
-`-ExecutionPolicy Bypass` lets this one script run once and changes no Windows settings.
+`-ExecutionPolicy Bypass` lets this one script run once and changes no Windows settings. Add `-NoElevate` at the end if you do not want the question about administrator rights.
 
 ### Linux
 
 1. Download the file `z3report.sh`.
 2. Open a terminal in its folder and run: `bash z3report.sh`
-3. More details (memory modules from SMBIOS, kernel logs saved across a crash, the system journal if your user may not read it): `sudo bash z3report.sh`
+3. The script offers to run again through sudo, which gives more details: memory modules from SMBIOS, kernel logs saved across a crash, and the system journal if your user may not read it. Enter or "y" for yes, sudo asks for your password; "n" for no. You can also start with `sudo bash z3report.sh` right away; `bash z3report.sh --no-sudo` skips the question.
 4. The file `z3report-os-<date>-<time>.txt` appears in your home folder (or the current folder if home is not writable); the script prints its path at the end.
 
 If the report says "no previous boots in the journal", your system keeps the journal in RAM only and loses it at a crash. If you like, turn on the persistent journal (you do this, not the script): `sudo mkdir -p /var/log/journal && sudo systemctl restart systemd-journald`. The next crash will then be visible.
@@ -113,3 +113,5 @@ If you are asked to, also attach the report from the firmware itself: it is made
 - Linux test hook: `Z3REPORT_EFIVARS=/path/to/folder bash z3report.sh` reads files laid out like efivarfs (4 attribute bytes, then data) from that folder instead of `/sys/firmware/efi/efivars`.
 - Linux never reads `/sys/class/thermal` or the `acpitz` hwmon (on the AM4P2MS board the ACPI thermal zone's `_TMP` method accesses the Super I/O chip); hwmon is read only for `k10temp`, `zenpower`, `amdgpu`, `radeon`, `nouveau`, `nvme`, `coretemp`, `fam15h_power`. Windows reads no temperatures at all for the same reason.
 - `z3report.ps1` keeps its code ASCII; the Russian strings live in one here-string that is re-decoded at run time if the file lost its UTF-8 BOM. Keep the BOM when editing.
+- SMBIOS strings of types 0 to 3 (BIOS, board, system, chassis; the kernel's `DMI:` line on Linux) go through one rule, the same in both scripts (`SmbSafe` / `smbsafe`): a run of 8+ digits, or a letters-and-digits run of 10+ characters, becomes `<serial>`, unless it is a Lenovo machine type and model (`10MCS02600`), part number (`SDK0J40697`) or notebook board model (`LNVNB161216`). Memory part numbers are model numbers and are not passed through it; serial numbers and asset tags are never read.
+- The elevated restart on Windows starts the same script with `-ExecutionPolicy Bypass -Relaunched`; `-Relaunched` is internal (no question, wait for Enter at the end). On Linux the question is asked only with a terminal on both input and output, and `sudo bash z3report.sh --no-sudo` is what it runs.

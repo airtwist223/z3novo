@@ -3,12 +3,13 @@ z3report.ps1: report for testers of the Z3NOVO firmware (Lenovo ThinkCentre M715
 
     powershell -ExecutionPolicy Bypass -File z3report.ps1
 
-Works without administrator rights. Run it from a PowerShell window opened "as administrator" to add the UEFI
-variables (Z3Chip, Z3Novo*) and the minidump list.
+Works without administrator rights. Started without them in an interactive window, it offers to restart itself with
+them (one UAC prompt); they add the UEFI variables (Z3Chip, Z3Novo*), the minidump list and the monitors'
+connection types. -NoElevate skips the offer.
 
 Writes ONE UTF-8 text file z3report-os-<date>-<time>.txt to the Desktop and prints its path. Read-only.
-Computer and user names, serial numbers, UUIDs, MAC tails, IP addresses, Wi-Fi names and user folder paths are
-masked in the file. Read the file before sending it.
+Computer and user names, serial numbers, UUIDs, MAC tails, IP addresses, Wi-Fi names, user folder paths and
+unique numbers in SMBIOS strings are masked in the file. Read the file before sending it.
 
 Never done here: reading the Windows product key (ACPI MSDM table, DigitalProductId) or the product ID; reading ACPI
 thermal zones (MSAcpi_ThermalZoneTemperature, "Thermal Zone Information" counters: on the AM4P2MS board they run
@@ -17,12 +18,18 @@ firmware code that accesses the Super I/O chip); loading drivers; writing anythi
 Windows PowerShell 5.1 (Windows 10 and 11). The code is plain ASCII on purpose: all Russian text sits in the
 $TextData block, which is re-decoded at run time if the file lost its UTF-8 BOM on the way.
 #>
+param(
+    [switch]$NoElevate,   # do not offer to restart with administrator rights
+    [switch]$Relaunched   # set by the script itself when it restarts elevated: no offer, wait for Enter at the end
+)
 
 Set-StrictMode -Off
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 
 $Version = '1.0'
+$ScriptPath = $PSCommandPath   # captured here, at script level, for the elevated restart
+if (-not $ScriptPath) { $ScriptPath = $MyInvocation.MyCommand.Path }
 $GuidChip = '7a3c5d11-42e9-4f60-9d1b-5e7713a8c402'   # Z3Chip, the firmware driver's log
 $GuidApp = '7c9d3f2a-41b6-4e1d-9a57-2f8e116cd4a0'    # Z3Novo*, the setup app's variables
 $Inv = [Globalization.CultureInfo]::InvariantCulture
@@ -48,8 +55,16 @@ no_ip|IP-адреса и имена сетей Wi-Fi не собираются|I
 no_z3vars|переменных Z3Chip и Z3Novo* не видно|no Z3Chip or Z3Novo* variables visible to the OS
 close|Нажмите Enter, чтобы закрыть окно|Press Enter to close this window
 crash_list|Запуски, штатные и внезапные выключения, синие экраны, сначала старые (последние 80)|Starts, clean and unexpected shutdowns, blue screens, oldest first (last 80)
+elevate_q|Для полного отчёта нужны права администратора: переменные прошивки, мини-дампы, тип подключения мониторов. Перезапустить скрипт с ними? Enter или Д — да, Н — нет.|A full report needs administrator rights: firmware variables, minidumps, monitor connection types. Restart the script with them? Enter or Y for yes, N for no.
+yes_words|д да|y yes
+elevate_started|Открыто окно с правами администратора, отчёт соберётся в нём. Это окно можно закрыть.|A window with administrator rights is open; the report is collected there. You can close this one.
+elevate_no|Продолжаю без прав администратора.|Going on without administrator rights.
+elevate_failed|Не удалось перезапустить с правами администратора, продолжаю без них|Could not restart with administrator rights, going on without them
+hz_unknown|частота неизвестна (стандартный драйвер)|refresh rate unknown (standard driver)
+gpu_nodriver|драйвер производителя не установлен, работает «Базовый видеоадаптер (Майкрософт)»|the vendor's driver is not installed, the Microsoft Basic Display Adapter is in use
+no_data|нет данных|no data
 collected|Собрано: версия Windows, время загрузки и аптайм; SMBIOS (BIOS, плата, процессор, модули памяти); микрокод; видео и его память (выделенная и общая); мониторы; устройства PCI и устройства с ошибками; сетевые адаптеры (без адресов); диски (модель и объём); сбои, зависания, синие экраны и аппаратные ошибки (WHEA) за 30 дней; события прошивки, ACPI и TPM; ошибки дисков, NTFS и видеодрайвера; список мини-дампов (имена и размеры); переменные UEFI Z3Chip и Z3Novo* (hex, только с правами администратора).|Collected: Windows version, boot time and uptime; SMBIOS (BIOS, board, CPU, memory modules); microcode; graphics and its memory (dedicated and shared); monitors; PCI devices and devices with problems; network adapters (no addresses); disks (model and size); crashes, hangs, blue screens and hardware errors (WHEA) over 30 days; firmware, ACPI and TPM events; disk, NTFS and display driver errors; the minidump list (names and sizes); UEFI variables Z3Chip and Z3Novo* (hex, administrator only).
-excluded|Исключено: имя компьютера, имена пользователей, серийные номера, UUID, MAC-адреса (оставлены первые 3 байта), IP-адреса, имена сетей Wi-Fi, пути в папках пользователей (заменены на ~), ключ и код продукта Windows (не читаются вовсе). Скрипт ничего не меняет в системе, не ставит драйверы и не читает термозоны ACPI.|Excluded: computer name, user names, serial numbers, UUIDs, MAC addresses (first 3 bytes kept), IP addresses, Wi-Fi names, user folder paths (shown as ~), the Windows product key and product ID (never read). The script changes nothing, installs no drivers and does not read ACPI thermal zones.
+excluded|Исключено: имя компьютера, имена пользователей, серийные номера (и похожие на них уникальные номера в строках SMBIOS), UUID, MAC-адреса (оставлены первые 3 байта), IP-адреса, имена сетей Wi-Fi, пути в папках пользователей (заменены на ~), ключ и код продукта Windows (не читаются вовсе). Скрипт ничего не меняет в системе, не ставит драйверы и не читает термозоны ACPI.|Excluded: computer name, user names, serial numbers (and serial-like unique numbers in SMBIOS strings), UUIDs, MAC addresses (first 3 bytes kept), IP addresses, Wi-Fi names, user folder paths (shown as ~), the Windows product key and product ID (never read). The script changes nothing, installs no drivers and does not read ACPI thermal zones.
 masks|Замены / Masks: <host> <user> <serial> <uuid> <id> <ip> <email> <wifi> <url> <key>, ~ = папка пользователя / user folder, aa:bb:cc:xx:xx:xx = MAC.|
 end_check|Проверьте файл перед отправкой: замазанные места выглядят как <host>, <user>, <ip>, ~ и так далее. Если увидите то, чем не хотите делиться, удалите эту строку.|Check this file before sending it: masked values look like <host>, <user>, <ip>, ~ and so on. If you see anything you do not want to share, delete that line.
 sensors|Температуры и обороты на Windows не читаются: встроенного безопасного способа нет, а чтение термозон ACPI на плате AM4P2MS заставляет прошивку обращаться к микросхеме Super I/O.|Temperatures and fan speeds are not read on Windows: there is no safe built-in way, and reading ACPI thermal zones on the AM4P2MS board makes the firmware access the Super I/O chip.
@@ -100,6 +115,9 @@ if ($PSVersionTable.PSVersion.Major -lt 3) {
     Write-Host (TE 'ps_old')
     exit 1
 }
+
+$IsAdmin = $false
+try { $IsAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) } catch { }
 
 # ---------------------------------------------------------------- output and small helpers
 
@@ -347,6 +365,105 @@ function Mask([string]$s) {
     return $s
 }
 
+# SMBIOS strings (BIOS, board, system, chassis): vendors sometimes put a unique number into a "Version" or similar
+# field (a Lenovo board: "SDK0J40697 WIN 1234567890123"). In these fields every run of 8+ digits, and every
+# letters-and-digits run of 10+ characters that is not a Lenovo machine type and model (10MCS02600), part number
+# (SDK0J40697) or notebook board model (LNVNB161216), becomes <serial>: "SDK0J40697 WIN 1234567890123" ->
+# "SDK0J40697 WIN <serial>". The same rule is in z3report.sh (smbsafe). Memory part numbers are model numbers and
+# are not passed through it.
+$ReSmbRun = New-Object Text.RegularExpressions.Regex '[A-Za-z0-9]+'
+$SmbEval = [Text.RegularExpressions.MatchEvaluator] {
+    param($m)
+    $r = $m.Value
+    if ($r.Length -ge 8 -and $r -cmatch '^[0-9]+$') { return '<serial>' }
+    if ($r.Length -ge 10 -and $r -cmatch '[A-Za-z]' -and $r -cmatch '[0-9]') {
+        if ($r -cmatch '^[0-9]{2}[0-9A-Z]{8}$') { return $r }          # Lenovo machine type and model
+        if ($r -cmatch '^[0-9A-Z]{4}[A-Z][0-9]{5}$') { return $r }     # Lenovo part number (FRU)
+        if ($r -cmatch '^LNVNB[0-9]{6}$') { return $r }                 # Lenovo notebook board model
+        return '<serial>'
+    }
+    return $r
+}
+function SmbSafe($v) {
+    if ($null -eq $v) { return '' }
+    return $ReSmbRun.Replace(([string]$v).Trim(), $SmbEval)
+}
+
+# The maker of a PCI device from VEN_xxxx in its id, so a card without its driver still says whose it is.
+$VendorNames = @{
+    '10DE' = 'NVIDIA'; '1002' = 'AMD'; '1022' = 'AMD'; '8086' = 'Intel'; '1A03' = 'ASPEED'; '102B' = 'Matrox'; '15AD' = 'VMware';
+    '1234' = 'QEMU/Bochs'; '1AF4' = 'Red Hat (virtio)'; '1B36' = 'Red Hat (QEMU)'; '1414' = 'Microsoft (Hyper-V)'; '80EE' = 'VirtualBox';
+    '5333' = 'S3'; '126F' = 'Silicon Motion'; '1013' = 'Cirrus Logic'; '1106' = 'VIA'; '1039' = 'SiS'; '10EC' = 'Realtek';
+    '14E4' = 'Broadcom'; '1B21' = 'ASMedia'; '144D' = 'Samsung'; '1D17' = 'Zhaoxin'; '1ED5' = 'Moore Threads'
+}
+function VendorOf([string]$pnp) {
+    if (-not $pnp -or $pnp -notmatch 'VEN_([0-9A-Fa-f]{4})') { return '' }
+    $id = $Matches[1].ToUpperInvariant()
+    $n = $VendorNames[$id]
+    if (-not $n) { $n = 'unknown vendor' }
+    return ($n + ' (VEN_' + $id + ')')
+}
+
+# WmiMonitorConnectionParams.VideoOutputTechnology (D3DKMDT_VIDEO_OUTPUT_TECHNOLOGY).
+function VotName($v) {
+    if ($null -eq $v) { return '' }
+    switch ([int64]$v) {
+        0 { return 'VGA (HD15)' }
+        1 { return 'S-Video' }
+        2 { return 'composite' }
+        3 { return 'component' }
+        4 { return 'DVI' }
+        5 { return 'HDMI' }
+        6 { return 'LVDS, internal' }
+        8 { return 'D-Jpn' }
+        9 { return 'SDI' }
+        10 { return 'DisplayPort' }
+        11 { return 'DisplayPort embedded, internal' }
+        12 { return 'UDI' }
+        13 { return 'UDI embedded, internal' }
+        14 { return 'SDTV dongle' }
+        15 { return 'Miracast' }
+        16 { return 'indirect, wired' }
+        17 { return 'indirect, virtual' }
+        2147483648 { return 'internal' }
+        4294967295 { return 'other' }
+        -1 { return 'other' }
+    }
+    return ('code ' + $v)
+}
+
+# Interactive means a person can answer: not a service, not -NonInteractive, input not redirected.
+function Test-Interactive {
+    if (-not [Environment]::UserInteractive) { return $false }
+    foreach ($a in [Environment]::GetCommandLineArgs()) { if ($a -match '^[-/]noni') { return $false } }
+    try { if ([Console]::IsInputRedirected) { return $false } } catch { }
+    return $true
+}
+# Started without administrator rights by a person: offer to restart elevated (one UAC prompt). Yes: start an
+# elevated PowerShell with the same script and -ExecutionPolicy Bypass, then quit this one. No, or UAC refused or
+# failed: go on as now.
+function Request-Elevation {
+    if ($IsAdmin -or $NoElevate -or $Relaunched -or -not $ScriptPath) { return }
+    if (-not (Test-Interactive)) { return }
+    Write-Host ''
+    Write-Host (TR 'elevate_q')
+    Write-Host (TE 'elevate_q')
+    $ans = $null
+    try { $ans = Read-Host '[Y/n]' } catch { return }
+    $a = ([string]$ans).Trim().ToLowerInvariant()
+    $yes = @('') + @((TR 'yes_words') -split ' ') + @((TE 'yes_words') -split ' ')
+    if ($yes -notcontains $a) { Write-Host (Tx 'elevate_no'); return }
+    $argList = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', ('"' + $ScriptPath + '"'), '-Relaunched')
+    try {
+        $exe = [Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+        Start-Process -FilePath $exe -ArgumentList $argList -Verb RunAs -ErrorAction Stop
+        Write-Host (Tx 'elevate_started')
+        exit 0
+    } catch {
+        Write-Host ((Tx 'elevate_failed') + ': ' + (ErrText $_))
+    }
+}
+
 # ---------------------------------------------------------------- native code (compiled only when used)
 
 $DxgiCode = @'
@@ -509,8 +626,39 @@ public static class Z3Fw {
 }
 '@
 
+$FwTypeCode = @'
+using System.Runtime.InteropServices;
+
+public static class Z3FwType {
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern bool GetFirmwareType(out uint type);
+
+    // 1 BIOS, 2 UEFI, 0 unknown. Needs no rights (Windows 8 and later).
+    public static int Get() {
+        uint t;
+        return GetFirmwareType(out t) ? (int)t : 0;
+    }
+}
+'@
+
 function Use-Type([string]$Name, [string]$Code) {
     if (-not ($Name -as [type])) { Add-Type -TypeDefinition $Code -Language CSharp -ErrorAction Stop }
+}
+
+# How Windows was started: 2 UEFI, 1 legacy BIOS, 0 unknown. The variable firmware_type needs no rights; the registry
+# value and the API are the fall-backs.
+function Get-FwType {
+    $e = [string]$env:firmware_type
+    if ($e -eq 'UEFI') { return 2 }
+    if ($e -eq 'Legacy') { return 1 }
+    $r = RegVal 'SYSTEM\CurrentControlSet\Control' 'PEFirmwareType'
+    if ($r -eq 1 -or $r -eq 2) { return [int]$r }
+    try {
+        Use-Type 'Z3FwType' $FwTypeCode
+        $t = [Z3FwType]::Get()
+        if ($t -eq 1 -or $t -eq 2) { return $t }
+    } catch { }
+    return 0
 }
 
 # 16 bytes per line: "    0000: xx xx ...  |ascii|", the same layout as the Linux script.
@@ -575,11 +723,9 @@ function Out-Ev($list, [int]$MaxLines) {
 
 # ---------------------------------------------------------------- steps
 
-$IsAdmin = $false
-try { $IsAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) } catch { }
 $RunAs = 'normal user (some parts need administrator)'
 if ($IsAdmin) { $RunAs = 'administrator' }
-$FwType = RegVal 'SYSTEM\CurrentControlSet\Control' 'PEFirmwareType'   # 1 BIOS, 2 UEFI
+$FwType = Get-FwType   # 1 BIOS, 2 UEFI, 0 unknown
 
 $StepNo = 0
 $StepTotal = 18
@@ -651,23 +797,34 @@ function Step-Os {
 function Step-Firmware {
     $b = Q 'Win32_BIOS' @('Manufacturer', 'SMBIOSBIOSVersion', 'BIOSVersion', 'ReleaseDate', 'SMBIOSMajorVersion', 'SMBIOSMinorVersion',
         'SystemBiosMajorVersion', 'SystemBiosMinorVersion', 'EmbeddedControllerMajorVersion', 'EmbeddedControllerMinorVersion')
-    KV 'BIOS vendor' $b.Manufacturer
-    KV 'BIOS version' $b.SMBIOSBIOSVersion
-    KV 'BIOS version strings' (@($b.BIOSVersion) -join ' | ')
+    # Every SMBIOS string goes through SmbSafe (unique numbers -> <serial>).
+    KV 'BIOS vendor' (SmbSafe $b.Manufacturer)
+    KV 'BIOS version' (SmbSafe $b.SMBIOSBIOSVersion)
+    KV 'BIOS version strings' ((@($b.BIOSVersion) | ForEach-Object { SmbSafe $_ }) -join ' | ')
     KV 'BIOS date' (FmtDate $b.ReleaseDate)
     KV 'BIOS release' (F '{0}.{1}' $b.SystemBiosMajorVersion $b.SystemBiosMinorVersion)
     KV 'EC release' (F '{0}.{1}' $b.EmbeddedControllerMajorVersion $b.EmbeddedControllerMinorVersion)
     KV 'SMBIOS version' (F '{0}.{1}' $b.SMBIOSMajorVersion $b.SMBIOSMinorVersion)
-    $Facts['bios'] = F '{0} {1} ({2})' $b.Manufacturer $b.SMBIOSBIOSVersion (FmtDate $b.ReleaseDate)
+    $Facts['bios'] = F '{0} {1} ({2})' (SmbSafe $b.Manufacturer) (SmbSafe $b.SMBIOSBIOSVersion) (FmtDate $b.ReleaseDate)
     try {
         $bb = Q 'Win32_BaseBoard' @('Manufacturer', 'Product', 'Version')
-        KV 'Board' (F '{0} {1} {2}' $bb.Manufacturer $bb.Product $bb.Version)
-        $Facts['board'] = F '{0} {1} {2}' $bb.Manufacturer $bb.Product $bb.Version
+        $board = F '{0} {1} {2}' (SmbSafe $bb.Manufacturer) (SmbSafe $bb.Product) (SmbSafe $bb.Version)
+        KV 'Board' $board
+        $Facts['board'] = $board
     } catch { Note ('Board: ' + (Tx 'failed') + ': ' + (ErrText $_)) }
     try {
         $cs = Q 'Win32_ComputerSystem' @('Manufacturer', 'Model', 'SystemFamily', 'SystemSKUNumber')
-        KV 'System' (F '{0} {1}' $cs.Manufacturer $cs.Model)
-        KV 'Family / SKU' (F '{0} / {1}' $cs.SystemFamily $cs.SystemSKUNumber)
+        KV 'System' (F '{0} {1}' (SmbSafe $cs.Manufacturer) (SmbSafe $cs.Model))
+        KV 'Family / SKU' (F '{0} / {1}' (SmbSafe $cs.SystemFamily) (SmbSafe $cs.SystemSKUNumber))
+    } catch { }
+    try {
+        $kinds = @{ 3 = 'desktop'; 4 = 'low profile desktop'; 5 = 'pizza box'; 6 = 'mini tower'; 7 = 'tower'; 8 = 'portable'; 9 = 'laptop';
+            10 = 'notebook'; 13 = 'all in one'; 15 = 'space-saving'; 16 = 'lunch box'; 35 = 'mini PC'; 36 = 'stick PC'
+        }
+        foreach ($en in @(Q 'Win32_SystemEnclosure' @('Manufacturer', 'Version', 'ChassisTypes'))) {
+            $types = @($en.ChassisTypes | ForEach-Object { $k = $kinds[[int]$_]; if ($k) { $k } else { 'type ' + $_ } }) -join ', '
+            KV 'Chassis' (F '{0} {1}, {2}' (SmbSafe $en.Manufacturer) (SmbSafe $en.Version) $types)
+        }
     } catch { }
     $ft = '?'
     if ($FwType -eq 2) { $ft = 'UEFI' } elseif ($FwType -eq 1) { $ft = 'legacy BIOS (CSM)' }
@@ -738,16 +895,30 @@ function Step-Memory {
 
 function Step-Graphics {
     $sum = @()
+    $pnp = @()
+    try { $pnp = Get-Pnp } catch { }   # only for the BasicDisplay check; the adapter list does not depend on it
     try {
         foreach ($v in @(Q 'Win32_VideoController' @('Name', 'DriverVersion', 'DriverDate', 'AdapterRAM', 'VideoProcessor', 'PNPDeviceID', 'Status',
-                    'ConfigManagerErrorCode', 'CurrentHorizontalResolution', 'CurrentVerticalResolution', 'CurrentRefreshRate'))) {
+                    'ConfigManagerErrorCode', 'CurrentHorizontalResolution', 'CurrentVerticalResolution', 'CurrentRefreshRate', 'InfFilename', 'InfSection'))) {
+            # The Microsoft Basic Display Adapter (display.inf, section MSBDA, service BasicDisplay): no vendor driver.
+            $svc = @($pnp | Where-Object { $_.PNPDeviceID -eq $v.PNPDeviceID } | ForEach-Object { $_.Service })
+            $basic = ($v.InfFilename -eq 'display.inf') -or ($v.InfSection -eq 'MSBDA') -or ($svc -contains 'BasicDisplay')
+            $vendor = VendorOf $v.PNPDeviceID
             Note ('Adapter: ' + $v.Name)
+            KV '  vendor' $vendor
             KV '  hardware id' (HwId $v.PNPDeviceID)
-            KV '  driver' (F '{0} ({1})' $v.DriverVersion (FmtDate $v.DriverDate))
+            KV '  driver' (F '{0} ({1}), {2}' $v.DriverVersion (FmtDate $v.DriverDate) $v.InfFilename)
+            if ($basic) { KV '  driver note' (Tx 'gpu_nodriver') }
             KV '  status' (F '{0}, problem code {1}' $v.Status $v.ConfigManagerErrorCode)
             KV '  AdapterRAM (WMI, caps at 4 GB)' (MiB $v.AdapterRAM)
-            if ($v.CurrentHorizontalResolution) { KV '  current mode' (F '{0}x{1} @ {2} Hz' $v.CurrentHorizontalResolution $v.CurrentVerticalResolution $v.CurrentRefreshRate) }
-            $sum += (F '{0} [driver {1}]' $v.Name $v.DriverVersion)
+            if ($v.CurrentHorizontalResolution) {
+                $hz = Tx 'hz_unknown'   # the basic driver reports 0 or 1 Hz
+                if ([int]$v.CurrentRefreshRate -gt 1) { $hz = F '{0} Hz' $v.CurrentRefreshRate }
+                KV '  current mode' (F '{0}x{1}, {2}' $v.CurrentHorizontalResolution $v.CurrentVerticalResolution $hz)
+            }
+            $note = ''
+            if ($basic) { $note = ', no vendor driver' }
+            $sum += (F '{0} [{1}, driver {2}{3}]' $v.Name $vendor $v.DriverVersion $note)
         }
     } catch { Note ('Win32_VideoController: ' + (Tx 'failed') + ': ' + (ErrText $_)) }
     $Facts['gpu'] = $sum -join '; '
@@ -782,11 +953,26 @@ function Step-Graphics {
 }
 
 function Step-Monitors {
-    $list = @(Q 'WmiMonitorID' @('Active', 'ManufacturerName', 'ProductCodeID', 'UserFriendlyName') '' 'root\wmi')
+    $list = @(Q 'WmiMonitorID' @('InstanceName', 'Active', 'ManufacturerName', 'ProductCodeID', 'UserFriendlyName') '' 'root\wmi')
     if ($list.Count -eq 0) { Note (Tx 'none'); return }
+    # How each monitor is connected (DisplayPort, HDMI, DVI, VGA, internal); joined to WmiMonitorID by InstanceName,
+    # which is never printed.
+    $conn = @{}
+    $connNote = ''
+    try {
+        foreach ($c in @(Q 'WmiMonitorConnectionParams' @('InstanceName', 'VideoOutputTechnology') '' 'root\wmi')) {
+            $conn[[string]$c.InstanceName] = $c.VideoOutputTechnology
+        }
+        if ($conn.Count -eq 0) { $connNote = Tx 'no_data' }
+    } catch {
+        if ($IsAdmin) { $connNote = (Tx 'no_data') + ': ' + (ErrText $_) } else { $connNote = Tx 'need_admin' }
+    }
+    $dec = { param($a) if ($null -eq $a) { return '' }; return (-join ([char[]]@($a | Where-Object { $_ -ne 0 }))).Trim() }
     foreach ($m in $list) {
-        $dec = { param($a) if ($null -eq $a) { return '' }; return (-join ([char[]]@($a | Where-Object { $_ -ne 0 }))).Trim() }
-        W (F '  {0} {1} {2} | active {3}' (& $dec $m.ManufacturerName) (& $dec $m.ProductCodeID) (& $dec $m.UserFriendlyName) $m.Active)
+        $how = $connNote
+        $key = [string]$m.InstanceName
+        if ($conn.ContainsKey($key)) { $how = VotName $conn[$key] } elseif (-not $how) { $how = Tx 'no_data' }
+        W (F '  {0} {1} {2} | active {3} | connection: {4}' (& $dec $m.ManufacturerName) (& $dec $m.ProductCodeID) (& $dec $m.UserFriendlyName) $m.Active $how)
     }
 }
 
@@ -797,7 +983,7 @@ function Step-Problems {
     if ($bad.Count -eq 0) { Note (Tx 'none'); return }
     foreach ($d in ($bad | Sort-Object PNPClass, Name)) {
         $code = [int]$d.ConfigManagerErrorCode
-        W (F '  {0} | {1} | class {2} | code {3}: {4} | status {5}' $d.Name (HwId $d.PNPDeviceID) $d.PNPClass $code $CmText[$code] $d.Status)
+        W (F '  {0} | {1} | {2} | class {3} | code {4}: {5} | status {6}' $d.Name (VendorOf $d.PNPDeviceID) (HwId $d.PNPDeviceID) $d.PNPClass $code $CmText[$code] $d.Status)
     }
 }
 
@@ -940,7 +1126,7 @@ function Step-Pci {
         $dv = DrvOf $d.PNPDeviceID
         $ver = ''
         if ($dv) { $ver = F '{0} {1}' $dv.DriverVersion $dv.DriverProviderName }
-        W (F '  {0} | {1} | {2} | service {3} | driver {4}' (HwId $d.PNPDeviceID) $d.Name $d.Status $d.Service $ver)
+        W (F '  {0} | {1} | {2} | {3} | service {4} | driver {5}' (HwId $d.PNPDeviceID) (VendorOf $d.PNPDeviceID) $d.Name $d.Status $d.Service $ver)
     }
     $Facts['pci'] = $list.Count
 }
@@ -1028,6 +1214,8 @@ function Step-Efi {
 
 # ---------------------------------------------------------------- run
 
+Request-Elevation   # may restart the script elevated and quit this copy
+
 Write-Host ('Z3NOVO: ' + (TR 'collecting'))
 Write-Host ('        ' + (TE 'collecting'))
 if (-not $IsAdmin) {
@@ -1114,6 +1302,7 @@ foreach ($d in $dirs) {
 Write-Host ''
 if (-not $outPath) {
     Write-Host ((TR 'write_failed') + ' / ' + (TE 'write_failed'))
+    if ($Relaunched) { try { [void](Read-Host ((TR 'close') + ' / ' + (TE 'close'))) } catch { } }
     exit 1
 }
 Write-Host ((TR 'done') + ' / ' + (TE 'done') + ':')
@@ -1121,7 +1310,8 @@ Write-Host ('  ' + $outPath)
 Write-Host (TR 'check')
 Write-Host (TE 'check')
 Write-Host ((TR 'send') + ' / ' + (TE 'send'))
-# Started by "Run with PowerShell" from Explorer: the window would close at once, so wait for Enter.
-if ([Environment]::CommandLine -match 'Set-ExecutionPolicy -Scope Process') {
+# Started by "Run with PowerShell" from Explorer, or restarted elevated by this script: the window would close at once,
+# so wait for Enter.
+if ($Relaunched -or [Environment]::CommandLine -match 'Set-ExecutionPolicy -Scope Process') {
     try { [void](Read-Host ((TR 'close') + ' / ' + (TE 'close'))) } catch { }
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # z3report.sh: report for testers of the Z3NOVO firmware (Lenovo ThinkCentre M715s, board AM4P2MS), OS side, Linux.
 #
-#   bash z3report.sh          as a normal user
+#   bash z3report.sh          as a normal user; in a terminal it offers to run again through sudo (--no-sudo: no offer)
 #   sudo bash z3report.sh     adds SMBIOS details (memory modules, CPU), pstore crash logs, rasdaemon/mcelog,
 #                             and the system journal when your user may not read it
 #
@@ -91,6 +91,34 @@ drvname() {
 mib() { awk -v b="$1" 'BEGIN { if (b != "") printf "%d MiB", b / 1048576 }'; }
 osr() { sed -n "s/^$1=//p" /etc/os-release 2>/dev/null | head -n 1 | sed 's/^"//; s/"$//'; }
 cpuf() { awk -F': *' -v k="$1" '{ key = $1; sub(/[ \t]+$/, "", key) } key == k { print $2; exit }' /proc/cpuinfo 2>/dev/null; }
+# SMBIOS strings (BIOS, board, system, chassis): vendors sometimes put a unique number into a "Version" or similar
+# field (a Lenovo board: "SDK0J40697 WIN 1234567890123"). Every run of 8+ digits, and every letters-and-digits run of
+# 10+ characters that is not a Lenovo machine type and model (10MCS02600), part number (SDK0J40697) or notebook board
+# model (LNVNB161216), becomes <serial>: "SDK0J40697 WIN 1234567890123" -> "SDK0J40697 WIN <serial>". The same rule
+# is in z3report.ps1 (SmbSafe).
+# smbsafe [TEXT]: only lines containing TEXT are changed (used for the kernel's "DMI:" line), others pass as they are.
+smbsafe() {
+    LC_ALL=C awk -v only="${1:-}" '
+        function safe(r) {
+            if (r ~ /^[0-9]+$/ && length(r) >= 8) return "<serial>"
+            if (length(r) >= 10 && r ~ /[A-Za-z]/ && r ~ /[0-9]/) {
+                if (r ~ /^[0-9][0-9][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z]$/) return r
+                if (r ~ /^[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][A-Z][0-9][0-9][0-9][0-9][0-9]$/) return r
+                if (r ~ /^LNVNB[0-9][0-9][0-9][0-9][0-9][0-9]$/) return r   # Lenovo notebook board model
+                return "<serial>"
+            }
+            return r
+        }
+        only != "" && index($0, only) == 0 { print; next }
+        {
+            s = $0; out = ""
+            while (match(s, /[A-Za-z0-9]+/)) {
+                out = out substr(s, 1, RSTART - 1) safe(substr(s, RSTART, RLENGTH))
+                s = substr(s, RSTART + RLENGTH)
+            }
+            print out s
+        }'
+}
 fact() { printf '%s=%s\n' "$1" "$2" >>"$FACTS"; }
 getfact() { sed -n "s/^$1=//p" "$FACTS" 2>/dev/null | tail -n 1; }
 
@@ -162,7 +190,21 @@ pci_ids_awk() {
             for (k in sname) printf "C%s\t%s\t%s\n", k, cname[substr(k, 1, 2)], sname[k]
         }'
 }
-pci_name() { awk -F'\t' -v k="$1" '$1 == k { print $2 " " $3; exit }' "$TMPD/pcinames" 2>/dev/null; }
+# The maker by vendor id, for when pci.ids is missing or does not know the device.
+vendor_name() {
+    case $1 in
+    10de) printf 'NVIDIA' ;; 1002 | 1022) printf 'AMD' ;; 8086) printf 'Intel' ;; 1a03) printf 'ASPEED' ;;
+    102b) printf 'Matrox' ;; 15ad) printf 'VMware' ;; 1234) printf 'QEMU/Bochs' ;; 1af4 | 1b36) printf 'Red Hat (QEMU)' ;;
+    1414) printf 'Microsoft (Hyper-V)' ;; 80ee) printf 'VirtualBox' ;; 10ec) printf 'Realtek' ;; 14e4) printf 'Broadcom' ;;
+    1b21) printf 'ASMedia' ;; 144d) printf 'Samsung' ;; *) printf 'unknown vendor %s' "$1" ;;
+    esac
+}
+pci_name() {
+    local n
+    n=$(awk -F'\t' -v k="$1" '$1 == k { print $2 " " $3; exit }' "$TMPD/pcinames" 2>/dev/null)
+    case $n in '' | '? '*) n="$(vendor_name "${1%%:*}") device ${1#*:}" ;; esac
+    printf '%s' "$n"
+}
 pci_class() { awk -F'\t' -v k="C$1" '$1 == k { print $3; exit }' "$TMPD/pcinames" 2>/dev/null; }
 pci_id() {
     local v d
@@ -226,12 +268,13 @@ dmi() {
 
 s_fw() {
     local d=/sys/class/dmi/id k v
+    # every SMBIOS string goes through smbsafe (unique numbers -> <serial>)
     for k in bios_vendor bios_version bios_date bios_release ec_firmware_release board_vendor board_name board_version \
         sys_vendor product_name product_version product_family product_sku chassis_vendor chassis_version; do
-        kv "$k" "$(sv "$d/$k")"
+        kv "$k" "$(sv "$d/$k" | smbsafe)"
     done
-    fact bios "$(sv $d/bios_vendor) $(sv $d/bios_version) ($(sv $d/bios_date))"
-    fact board "$(sv $d/board_vendor) $(sv $d/board_name) $(sv $d/board_version)"
+    fact bios "$(printf '%s %s (%s)' "$(sv $d/bios_vendor)" "$(sv $d/bios_version)" "$(sv $d/bios_date)" | smbsafe)"
+    fact board "$(printf '%s %s %s' "$(sv $d/board_vendor)" "$(sv $d/board_name)" "$(sv $d/board_version)" | smbsafe)"
     if [ -d /sys/firmware/efi ]; then
         kv "Boot mode" "UEFI, $(sv /sys/firmware/efi/fw_platform_size)-bit"
         v=$(efivar_bytes "SecureBoot-$GUID_EFI" | cut -d' ' -f1)
@@ -251,8 +294,8 @@ s_fw() {
         fact z3chip "absent"
     fi
     if [ "$IS_ROOT" = 1 ]; then
-        note "SMBIOS types 0, 1, 2 (dmidecode, no serial numbers or UUID):"
-        dmi -t 0 -t 1 -t 2
+        note "SMBIOS types 0, 1, 2, 3 (dmidecode, no serial numbers or UUID):"
+        dmi -t 0 -t 1 -t 2 -t 3 | smbsafe
     else
         note "SMBIOS details from dmidecode: need sudo / нужен sudo"
     fi
@@ -368,7 +411,12 @@ s_gpu() {
         drv=$(drvname "$d")
         name=$(pci_name "$id")
         note "GPU $n: ${d##*/} [$id] $name"
-        kv "  driver" "${drv:-none / нет}"
+        kv "  vendor" "$(vendor_name "${id%%:*}")"
+        if [ -n "$drv" ]; then
+            kv "  driver" "$drv"
+        else
+            kv "  driver" "none: no driver is bound, the vendor's driver is not loaded / драйвер производителя не загружен"
+        fi
         [ "$(sv "$d/boot_vga")" = 1 ] && kv "  boot display" "yes (the firmware showed its screens here)"
         kv "  VBIOS" "$(sv "$d/vbios_version")"
         v=$(sv "$d/mem_info_vram_total")
@@ -411,16 +459,29 @@ edid_name() {
         }'
 }
 
+# Connection type from the DRM connector name (card0-HDMI-A-1 and so on).
+conn_type() {
+    case $1 in
+    *-eDP-* | *-LVDS-* | *-DSI-*) printf 'internal' ;;
+    *-DP-*) printf 'DisplayPort' ;;
+    *-HDMI-*) printf 'HDMI' ;;
+    *-DVI-*) printf 'DVI' ;;
+    *-VGA-*) printf 'VGA' ;;
+    *-Virtual-*) printf 'virtual' ;;
+    *) printf 'other' ;;
+    esac
+}
 s_display() {
     local c st mode mon n=0
     for c in /sys/class/drm/card[0-9]*-*; do
         [ -r "$c/status" ] || continue
+        case ${c##*/} in *-Writeback-*) continue ;; esac # not a socket
         n=$((n + 1))
         st=$(sv "$c/status")
         mode=$(sv "$c/modes")
         mon=""
         [ "$st" = connected ] && mon=$(edid_name "$c/edid")
-        printf '  %-18s %-13s %s%s\n' "${c##*/}" "$st" "${mode:+preferred mode $mode}" "${mon:+, monitor $mon}"
+        printf '  %-18s %-12s %-13s %s%s\n' "${c##*/}" "$(conn_type "${c##*/}")" "$st" "${mode:+preferred mode $mode}" "${mon:+, monitor $mon}"
     done
     [ "$n" -gt 0 ] || note "no DRM connectors / разъёмов DRM нет"
 }
@@ -561,7 +622,7 @@ s_kernel() {
     fi
     kv "Source" "$KSRC"
     note "Boot, firmware and memory lines / Строки о загрузке, прошивке и памяти:"
-    klog | grep -E "$BOOT_RE" | head -n 60 | ind | none_if_empty "not in the log any more (it keeps only recent lines) / в журнале их уже нет"
+    klog | grep -E "$BOOT_RE" | head -n 60 | smbsafe 'DMI: ' | ind | none_if_empty "not in the log any more (it keeps only recent lines) / в журнале их уже нет"
     note "Warnings and errors, this boot (last 150) / Предупреждения и ошибки:"
     klog_warn | nofw >"$TMPD/kwarn"
     tail -n 150 "$TMPD/kwarn" | ind | none_if_empty
@@ -961,9 +1022,9 @@ header() {
     printf '%s\n' "Z3NOVO OS report / Отчёт ОС для Z3NOVO"
     printf '%s\n' "script z3report.sh $VERSION (Linux) | created $NOW_TEXT | run as $RUNAS"
     printf '%s\n' "Собрано: ОС и ядро, время загрузки и аптайм; SMBIOS (BIOS, плата, процессор, модули памяти); микрокод; видео и его память; мониторы; устройства PCI и USB; сетевые адаптеры (без адресов); диски (модель и объём); ошибки ядра и журнала; загрузки, сбои и аппаратные ошибки (MCE) за 30 дней; метки ядра; температуры только от безопасных драйверов (k10temp, amdgpu, nvme); переменные UEFI Z3Chip и Z3Novo* (hex)."
-    printf '%s\n' "Исключено: имя компьютера, имена пользователей, серийные номера, UUID, MAC-адреса (оставлены первые 3 байта), IP-адреса, имена сетей Wi-Fi, пути в домашних папках (заменены на ~), ключ Windows (таблица ACPI MSDM не читается). Скрипт ничего не пишет в систему и не обращается к железу напрямую (порты, /dev/mem, SMBus, микросхема Super I/O, термозоны ACPI)."
+    printf '%s\n' "Исключено: имя компьютера, имена пользователей, серийные номера (и похожие на них уникальные номера в строках SMBIOS), UUID, MAC-адреса (оставлены первые 3 байта), IP-адреса, имена сетей Wi-Fi, пути в домашних папках (заменены на ~), ключ Windows (таблица ACPI MSDM не читается). Скрипт ничего не пишет в систему и не обращается к железу напрямую (порты, /dev/mem, SMBus, микросхема Super I/O, термозоны ACPI)."
     printf '%s\n' "Collected: OS and kernel, boot time and uptime; SMBIOS (BIOS, board, CPU, memory modules); microcode; graphics and its memory; displays; PCI and USB devices; network adapters (no addresses); disks (model and size); kernel and journal errors; boots, crashes and machine checks over 30 days; kernel taint; temperatures from safe drivers only (k10temp, amdgpu, nvme); UEFI variables Z3Chip and Z3Novo* (hex)."
-    printf '%s\n' "Excluded: computer name, user names, serial numbers, UUIDs, MAC addresses (first 3 bytes kept), IP addresses, Wi-Fi names, home folder paths (shown as ~), the Windows key (ACPI table MSDM is not read). The script writes nothing to the system and does not touch hardware directly (I/O ports, /dev/mem, SMBus, the Super I/O chip, ACPI thermal zones)."
+    printf '%s\n' "Excluded: computer name, user names, serial numbers (and serial-like unique numbers in SMBIOS strings), UUIDs, MAC addresses (first 3 bytes kept), IP addresses, Wi-Fi names, home folder paths (shown as ~), the Windows key (ACPI table MSDM is not read). The script writes nothing to the system and does not touch hardware directly (I/O ports, /dev/mem, SMBus, the Super I/O chip, ACPI thermal zones)."
     printf '%s\n' "Masks / Замены: <host> <user> <serial> <uuid> <id> <ip> <email> <wifi> <url> <cmd> <key>, ~ = home folder / домашняя папка, aa:bb:cc:xx:xx:xx = MAC."
 }
 
@@ -1036,19 +1097,50 @@ out_dir() {
     printf '/tmp'
 }
 
+# Started by a person without root: offer to run again through sudo (sudo asks for the password itself). Yes and sudo
+# worked: that run made the report and this one stops. No, no sudo, no terminal, or sudo failed: go on as now.
+offer_sudo() {
+    local ans=""
+    [ "$IS_ROOT" = 1 ] && return 1
+    have sudo || return 1
+    { [ -t 0 ] && [ -t 1 ]; } || return 1
+    say ""
+    say "Для полного отчёта нужны права root: модули памяти из SMBIOS, журналы сбоев (pstore), журнал системы. Перезапустить через sudo? Enter или д — да, н — нет."
+    say "A full report needs root: memory modules from SMBIOS, saved crash logs (pstore), the system journal. Run again through sudo? Enter or y for yes, n for no."
+    printf '[Y/n] '
+    read -r ans || return 1
+    case $(printf '%s' "$ans" | tr 'A-Z' 'a-z') in
+    '' | y | yes | 'д' | 'да' | 'Д' | 'Да' | 'ДА') ;;
+    *)
+        say "Продолжаю без sudo. / Going on without sudo."
+        return 1
+        ;;
+    esac
+    if sudo bash "$0" --no-sudo; then return 0; fi
+    say "sudo не сработал, продолжаю без него. / sudo did not work, going on without it."
+    return 1
+}
+
 main() {
+    local no_sudo=0
     case ${1:-} in
     -h | --help)
         say "z3report.sh $VERSION: collects a read-only OS report for Z3NOVO firmware testers into one text file."
-        say "Usage: bash z3report.sh   (more details: sudo bash z3report.sh)"
+        say "Usage: bash z3report.sh [--no-sudo]   (more details: sudo bash z3report.sh)"
+        say "  Started without root in a terminal, it offers to run again through sudo; --no-sudo skips the offer."
         say "Собирает отчёт ОС для тестеров прошивки Z3NOVO в один текстовый файл, только чтение."
+        say "  Без root в терминале предлагает перезапуститься через sudo; --no-sudo отключает вопрос."
         return 0
         ;;
     -V | --version)
         say "$VERSION"
         return 0
         ;;
+    --no-sudo) no_sudo=1 ;;
     esac
+    if [ "$no_sudo" = 0 ] && offer_sudo; then
+        return 0
+    fi
 
     TMPD=$(mktemp -d "${TMPDIR:-/tmp}/z3report.XXXXXX" 2>/dev/null) || {
         TMPD=${TMPDIR:-/tmp}/z3report.$$
