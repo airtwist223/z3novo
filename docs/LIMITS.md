@@ -42,7 +42,7 @@ Lenovo выпускала эту плату под процессоры с TDP �
 
 | Что | Можно ли улучшить | Что это значит |
 |---|---|---|
-| **Кулер** (штатный — на 65 Вт) | да | Крепление стандартное AM4 (отверстия 54×90 мм), но в корпусе SFF помещается кулер высотой примерно до 65–70 мм. Мощнее кулер — процессор дольше держит высокую частоту. |
+| **Кулер** (штатный — на 65 Вт) | да, но с переделкой | Крепление у Lenovo своё: по чертежу отверстия на тех же местах, что у AM4 (54×90 мм), но пластиковых упоров AM4 нет, винты и задняя пластина свои. Обычный кулер AM4 может потребовать переделки крепления; это не проверено. В корпус SFF помещается кулер высотой примерно до 65–70 мм. Мощнее кулер — процессор дольше держит высокую частоту. |
 | **Схема питания процессора на плате** (4+2 фазы, без радиаторов) | нет | Кулер процессора её почти не охлаждает. Под долгой нагрузкой выше ~90–100 Вт она сильно греется. |
 | **Блок питания** (штатный — 180 или 210 Вт на весь компьютер) | да | Можно поставить мощнее. У платы свой разъём питания Lenovo, поэтому для обычного блока нужен переходник. Со штатным блоком и видеокартой запаса почти нет. |
 
@@ -117,7 +117,7 @@ Lenovo made this board for processors with a TDP of up to 65 W. What actually se
 
 | What | Can it be improved | What it means |
 |---|---|---|
-| **Cooler** (the stock one is for 65 W) | yes | The mount is standard AM4 (holes 54×90 mm), but the SFF case fits a cooler only about 65–70 mm tall. A stronger cooler lets the processor hold a high speed for longer. |
+| **Cooler** (the stock one is for 65 W) | yes, with some rework | Lenovo uses its own mount: on the drawing the holes sit where AM4 has them (54×90 mm), but there are no AM4 plastic brackets, and the screws and backplate are Lenovo's. An ordinary AM4 cooler may need its mount reworked; this has not been tried. The SFF case fits a cooler only about 65–70 mm tall. A stronger cooler lets the processor hold a high speed for longer. |
 | **Processor power circuit on the board** (4+2 phases, no heatsinks) | no | The processor cooler barely cools it. Under long loads above about 90–100 W it runs very hot. |
 | **Power supply** (the stock one is 180 or 210 W for the whole computer) | yes | A stronger one can be fitted. The board has Lenovo's own power socket, so an ordinary unit needs an adapter. With the stock unit and a graphics card there is almost no headroom. |
 
