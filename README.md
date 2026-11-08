@@ -50,6 +50,22 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 - **В T1 (в работе):** обновление прошивки с флешки без программатора и «Отчёт для диагностики» по клавише F11 —
   файл на флешке, который прикладывают к сообщению о проблеме ([подробнее](docs/DIAGNOSTICS.md)).
 
+## Что мы написали сами
+
+Z3NOVO — это не просто чужая прошивка с другой картинкой. В неё встроены наши собственные драйверы и исправления:
+
+| Что | Что делает | Что это дало |
+|---|---|---|
+| **Меню Z3NOVO** | графическое меню настроек внутри BIOS: мышь, RU/EN, поиск, простой режим, редактор кривой вентилятора, настройки сети DASH, отчёт F11, обновление с флешки | удобная настройка вместо старого текстового меню |
+| **Z3Entry** (драйвер) | по клавишам Del и F9 открывает наше меню и наше меню загрузки | новое меню без лишних шагов |
+| **Z3Chip** (драйвер) | работает с микросхемой датчиков и питания (Super I/O) с проверкой каждого обращения, выключает её собственный опрос температуры, включает компьютер после пропадания света по логике Lenovo, включает и выключает DASH | ушли зависания из-за этой микросхемы, работает автовключение |
+| **Z3Fan** (драйвер) | дважды в секунду берёт температуру прямо из процессора и плавно ведёт вентилятор — и в BIOS, и в Windows, и в Linux | тихий вентилятор без рывков |
+| **Ранние исправления запуска** | ограничение времени на обмен по шине LPC, проверенная начальная настройка Super I/O, страховочный таймер на опасных участках, паузы без лишних обращений к шине | исчезли зависания при включении и перезагрузке: 100 перезагрузок из 100 |
+| **«Чёрный ящик»** | журнал каждого включения: на каком шаге шёл запуск и почему плата перезагрузилась | по нему нашли причины зависаний; на нём держится отчёт F11 |
+| **Исправления чужих модулей** | драйвер сетевой карты Realtek (зависал при сохранении настроек DASH), таблица видеовыходов (DisplayPort вместо HDMI), лишние записи в микросхему Super I/O в модулях Biostar | сохраняются настройки DASH, правильно работают разъёмы DisplayPort |
+| **Таблицы этой платы** | из родной прошивки Lenovo перенесены линии PCIe, выводы, питание процессоров, настройка Super I/O | основа от другой платы работает именно на M715s |
+| **Инструменты вне BIOS** | скрипты отчёта для Windows и Linux, расшифровщик отчётов, тест-флешка (готовится) | сведения о сбоях у тестеров собираются за минуту |
+
 ## Что работает, а что нет
 
 Проверено на плате с Ryzen 3 2200G и двумя планками по 8 ГБ.
@@ -133,6 +149,22 @@ support, in Russian and English.
   gateway, name) are edited right in the app.
 - **Coming in T1 (in progress):** firmware updates from a USB stick without a programmer, and a "Diagnostics report" on
   the F11 key — a file on a USB stick to attach to a problem report ([details](docs/DIAGNOSTICS.md)).
+
+## What we wrote ourselves
+
+Z3NOVO is not just someone else's firmware with a new picture. It carries our own drivers and fixes:
+
+| What | What it does | What it gave |
+|---|---|---|
+| **Z3NOVO menu** | a graphical settings menu inside the BIOS: mouse, RU/EN, search, a simple view, a fan curve editor, DASH network settings, the F11 report, updates from a USB stick | easy setup instead of the old text menu |
+| **Z3Entry** (driver) | opens our menu and our boot menu on the Del and F9 keys | the new menu with no extra steps |
+| **Z3Chip** (driver) | talks to the board's sensor and power chip (Super I/O), checking every access; turns off the chip's own temperature polling; powers the computer on after a power cut the way Lenovo does; turns DASH on and off | the hangs caused by this chip are gone, power-on after a power cut works |
+| **Z3Fan** (driver) | twice a second reads the temperature straight from the processor and drives the fan smoothly — in the BIOS, in Windows and in Linux | a quiet fan without jumps |
+| **Early start fixes** | a time limit on the LPC bus, a checked Super I/O setup, a safety timer over risky steps, pauses that do not hammer the bus | the hangs at power-on and restart are gone: 100 restarts out of 100 |
+| **"Black box"** | a log of every power-on: which step the start reached and why the board restarted | it found the causes of the hangs; the F11 report is built on it |
+| **Fixes to other vendors' modules** | the Realtek network card driver (hung when saving DASH settings), the video output table (DisplayPort instead of HDMI), stray writes to the Super I/O chip in Biostar's modules | DASH settings save, the DisplayPort sockets work as they should |
+| **This board's tables** | PCIe lanes, pins, processor power and Super I/O setup taken over from Lenovo's own firmware | a base from another board runs on the M715s itself |
+| **Tools outside the BIOS** | report scripts for Windows and Linux, a report decoder, a test stick (in preparation) | testers collect failure details in a minute |
 
 ## What works and what does not
 
