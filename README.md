@@ -32,30 +32,39 @@ Z3NOVO заменяет родной BIOS. С ним:
 Проверяли на плате с процессором Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
 
 ✅ **Работает**
-- Компьютер включается и перезагружается без зависаний (проверили 100 раз подряд), засыпает и просыпается.
-- Новое меню настроек — и мышью, и с клавиатуры. Меню «с чего загрузиться» по клавише F9.
-- Монитор через HDMI, в том числе Full HD (1920×1080).
-- USB: быстрые флешки и диски, клавиатура, мышь.
-- Интернет по проводу.
-- Обычные диски SSD и HDD (разъём SATA).
-- Две планки памяти работают вместе, в быстром двухканальном режиме.
-- Тихий вентилятор и автовключение, когда дали свет.
-- Linux.
+- **Включение и перезагрузка** — без зависаний, проверили 100 раз подряд.
+- **Сон (S3)** — компьютер засыпает и просыпается; **пробуждение по таймеру (RTC)** тоже работает.
+- **Новое меню настроек** — мышью и с клавиатуры. **Меню загрузки (F9)** — выбрать, с чего запуститься.
+- **HDMI** — монитор, в том числе Full HD (1920×1080).
+- **USB 3.0** — флешки и диски на полной скорости (5 Гбит/с); USB-клавиатура и мышь.
+- **Сеть 1 Гбит/с** — интернет по проводу, на деле около 940 Мбит/с.
+- **SATA 6 Гбит/с** — обычные SSD и жёсткие диски.
+- **Память DDR4-2667 в двух каналах** — две планки работают вместе, так быстрее.
+- **Вентилятор** — тихий, обороты меняются плавно.
+- **Restore on AC Power Loss** — компьютер сам включается, когда дали свет.
+- **TPM 2.0** — модуль безопасности, встроенный в процессор (нужен для Windows 11): Linux его видит.
+- **DASH** — удалённое управление по сети, как Intel AMT: работает текстовый экран BIOS по сети.
+- **Linux**.
 
 ⚠️ **Есть, но ещё не проверили**
-- Другие процессоры — всё, кроме Ryzen 3 2200G.
-- Отдельная видеокарта и SSD в маленьком разъёме M.2.
-- Четыре планки памяти и быстрый режим памяти XMP.
-- Мониторы через DisplayPort и VGA.
-- Звук: звуковую карту компьютер видит, но звук ещё не включали.
-- Каждый USB-разъём по отдельности, спереди и сзади.
-- Windows.
-- Обновление BIOS с флешки и «Отчёт для диагностики» — появятся в T1.
+- **Другие процессоры** — всё, кроме Ryzen 3 2200G.
+- **Видеокарта в слоте PCIe x16** и **SSD M.2** — маленький SSD-модуль на плате.
+- **Четыре планки памяти** и **XMP** — заводской быстрый режим памяти.
+- **DisplayPort и VGA** — другие разъёмы для монитора.
+- **Звук** — звуковую карту система видит, но звук ещё не включали.
+- **COM-порт** — старый разъём для модемов, станков и подобного: система его видит, обмен данными не проверяли.
+- **Каждый USB-разъём по отдельности** — передние и задние.
+- **Wake-on-LAN** — включение компьютера по сети с другого компьютера.
+- **Загрузка по сети (PXE)** — запуск системы с сервера по сети, только в режиме UEFI.
+- **Настройки сети DASH в новом меню.**
+- **Windows.**
+- **Обновление BIOS с флешки** и **«Отчёт для диагностики»** — появятся в T1.
 
 ❌ **Не работает**
-- Поднять напряжение памяти — так устроена плата ([подробнее](docs/LIMITS.md)).
-- Старые процессоры AMD A-серии (A6, A8, A10, A12).
-- Разгон — в T1 выключен.
+- **Изменение напряжения памяти** — всегда 1,2 В, так устроена плата ([подробнее](docs/LIMITS.md)).
+- **Процессоры AMD A-серии** (A6, A8, A10, A12, Athlon X4 9xx) — эта прошивка их не поддерживает.
+- **Разгон** — в T1 выключен.
+- **Загрузка по сети в старом режиме (Legacy PXE)** — только в режиме UEFI.
 
 ## Что нужно знать заранее
 
@@ -80,14 +89,8 @@ Z3NOVO заменяет родной BIOS. С ним:
 
 ## Для тех, кому интересно
 
-- Плата AM4P2MS на чипсете AMD B350. Основа прошивки — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F от платы Biostar на том
-  же чипсете. В неё перенесены настройки именно этой платы Lenovo: линии PCIe, питание, вентилятор, микросхема Super I/O.
-- Проверенные скорости: USB 3.0 — 5 Гбит/с, сеть — 1 Гбит/с (около 940 Мбит/с на деле), SATA — 6 Гбит/с, память —
-  DDR4-2667 в двух каналах.
-- Загрузка по сети (PXE) есть только в режиме UEFI, на плате ещё не проверялась.
-- DASH (удалённое управление через встроенную сетевую карту): по умолчанию выключено; проверена текстовая консоль BIOS
-  по сети, настройки сети DASH в новом меню ещё проверяются.
-- COM-порт система видит, обмен данными через него не проверялся.
+Плата AM4P2MS на чипсете AMD B350. Основа прошивки — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F от платы Biostar на том
+же чипсете. В неё перенесены настройки именно этой платы Lenovo: линии PCIe, питание, вентилятор, микросхема Super I/O.
 
 ---
 
@@ -123,30 +126,39 @@ Z3NOVO replaces Lenovo's BIOS. With it:
 Tested on a board with a Ryzen 3 2200G processor and two 8 GB memory sticks.
 
 ✅ **Works**
-- The computer powers on and restarts without hanging (tested 100 times in a row), sleeps and wakes up.
-- The new settings menu, with a mouse or a keyboard. The "what to start from" menu on the F9 key.
-- A monitor over HDMI, including Full HD (1920×1080).
-- USB: fast USB sticks and drives, keyboard, mouse.
-- Wired internet.
-- Ordinary SSDs and hard drives (SATA).
-- Two memory sticks working together in fast dual-channel mode.
-- The quiet fan, and switching on when power comes back.
-- Linux.
+- **Power-on and restart** — no hangs, tested 100 times in a row.
+- **Sleep (S3)** — the computer sleeps and wakes up; **waking on a timer (RTC)** works too.
+- **The new settings menu** — with a mouse or a keyboard. **Boot menu (F9)** — choose what to start from.
+- **HDMI** — a monitor, including Full HD (1920×1080).
+- **USB 3.0** — USB sticks and drives at full speed (5 Gbit/s); USB keyboard and mouse.
+- **1 Gbit/s network** — wired internet, about 940 Mbit/s in practice.
+- **SATA 6 Gbit/s** — ordinary SSDs and hard drives.
+- **Dual-channel DDR4-2667 memory** — two sticks working together, which is faster.
+- **Fan** — quiet, its speed changes smoothly.
+- **Restore on AC Power Loss** — the computer switches itself on when power comes back.
+- **TPM 2.0** — the security module built into the processor (Windows 11 needs it): Linux sees it.
+- **DASH** — remote management over the network, like Intel AMT: the text BIOS screen over the network works.
+- **Linux.**
 
 ⚠️ **There, but not tested yet**
-- Other processors — anything but the Ryzen 3 2200G.
-- A graphics card, and SSDs in the small M.2 slot.
-- Four memory sticks, and the XMP fast memory mode.
-- Monitors over DisplayPort and VGA.
-- Sound: the computer sees the sound card, but no sound has been played yet.
-- Each USB socket on its own, front and back.
-- Windows.
-- Updating the BIOS from a USB stick and the "Diagnostics report" — coming in T1.
+- **Other processors** — anything but the Ryzen 3 2200G.
+- **A graphics card in the PCIe x16 slot** and **M.2 SSDs** — the small SSD modules that fit on the board.
+- **Four memory sticks** and **XMP** — the factory fast mode of memory sticks.
+- **DisplayPort and VGA** — the other monitor sockets.
+- **Sound** — the system sees the sound card, but no sound has been played yet.
+- **Serial (COM) port** — the old socket for modems, machines and the like: the system sees it, data has not been sent yet.
+- **Each USB socket on its own** — front and back.
+- **Wake-on-LAN** — switching the computer on over the network from another computer.
+- **Network boot (PXE)** — starting a system from a server over the network, UEFI mode only.
+- **DASH network settings in the new menu.**
+- **Windows.**
+- **Updating the BIOS from a USB stick** and the **"Diagnostics report"** — coming in T1.
 
 ❌ **Does not work**
-- Raising the memory voltage — that is how the board is built ([details](docs/LIMITS.md)).
-- Old AMD A-series processors (A6, A8, A10, A12).
-- Overclocking — off in T1.
+- **Changing the memory voltage** — always 1.2 V, that is how the board is built ([details](docs/LIMITS.md)).
+- **AMD A-series processors** (A6, A8, A10, A12, Athlon X4 9xx) — this firmware does not support them.
+- **Overclocking** — off in T1.
+- **Network boot in the old mode (Legacy PXE)** — UEFI mode only.
 
 ## Know this first
 
@@ -171,11 +183,5 @@ Describe what happened under **Issues** on GitHub and attach a report. How to ma
 
 ## For the curious
 
-- Board AM4P2MS with the AMD B350 chipset. The firmware is AMI Aptio V with AGESA ComboAM4v2PI 1.2.0.F from a Biostar
-  board with the same chipset, carrying this Lenovo board's own settings: PCIe lanes, power, fan, the Super I/O chip.
-- Measured speeds: USB 3.0 at 5 Gbit/s, network at 1 Gbit/s (about 940 Mbit/s in practice), SATA at 6 Gbit/s, memory
-  at DDR4-2667 in dual channel.
-- Network boot (PXE) is available in UEFI mode only and has not been tried on a board yet.
-- DASH (remote management through the onboard network card): off by default; the text BIOS console over the network
-  works, and the DASH network settings in the new menu are still being tested.
-- The serial (COM) port is detected; sending data through it has not been tried.
+Board AM4P2MS with the AMD B350 chipset. The firmware is AMI Aptio V with AGESA ComboAM4v2PI 1.2.0.F from a Biostar board
+with the same chipset, carrying this Lenovo board's own settings: PCIe lanes, power, fan, the Super I/O chip.
