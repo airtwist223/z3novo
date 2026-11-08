@@ -68,9 +68,9 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **Z3Chip** (драйвер) | работает с микросхемой датчиков и питания (Super I/O) с проверкой каждого обращения, выключает её собственный опрос температуры, включает компьютер после пропадания света по логике Lenovo, включает и выключает DASH | ушли зависания из-за этой микросхемы, работает автовключение |
 | **Z3Fan** (драйвер) | дважды в секунду берёт температуру прямо из процессора и плавно ведёт вентилятор — и в BIOS, и в Windows, и в Linux | тихий вентилятор без рывков |
 | **Ранние исправления запуска** | ограничение времени на обмен по шине LPC, проверенная начальная настройка Super I/O, страховочный таймер на опасных участках, паузы без лишних обращений к шине | исчезли зависания при включении и перезагрузке: 100 перезагрузок из 100 |
-| **«Чёрный ящик»** | журнал каждого включения: на каком шаге шёл запуск и почему плата перезагрузилась | по нему нашли причины зависаний; на нём держится отчёт F11 |
-| **Исправления чужих модулей** | драйвер сетевой карты Realtek (зависал при сохранении настроек DASH), таблица видеовыходов (DisplayPort вместо HDMI), лишние записи в микросхему Super I/O в модулях Biostar | сохраняются настройки DASH, правильно работают разъёмы DisplayPort |
-| **Таблицы этой платы** | из родной прошивки Lenovo перенесены линии PCIe, выводы, питание процессоров, настройка Super I/O | основа от другой платы работает именно на M715s |
+| **Журнал запусков** | при каждом включении записывает, до какого шага дошёл запуск и почему плата перезагрузилась | по нему нашли причины зависаний; на нём держится отчёт F11 |
+| **Доработанные модули AMD, Biostar и Realtek** | драйвер сетевой карты Realtek (зависал при сохранении настроек DASH), видеовыходы (DisplayPort вместо HDMI), лишние записи в микросхему Super I/O в модулях Biostar | сохраняются настройки DASH, правильно работают разъёмы DisplayPort |
+| **Адаптация под плату M715s** | из родной прошивки Lenovo перенесено устройство именно этой платы: какие разъёмы и слоты куда подключены, видеовыходы, питание процессоров, настройка Super I/O | прошивка знает, как разведена M715s, а не плата-донор |
 | **Инструменты вне BIOS** | скрипты отчёта для Windows и Linux, расшифровщик отчётов, тест-флешка (готовится) | сведения о сбоях у тестеров собираются за минуту |
 
 ## Что работает, а что нет
@@ -177,9 +177,9 @@ was made from scratch:
 | **Z3Chip** (driver) | talks to the board's sensor and power chip (Super I/O), checking every access; turns off the chip's own temperature polling; powers the computer on after a power cut the way Lenovo does; turns DASH on and off | the hangs caused by this chip are gone, power-on after a power cut works |
 | **Z3Fan** (driver) | twice a second reads the temperature straight from the processor and drives the fan smoothly — in the BIOS, in Windows and in Linux | a quiet fan without jumps |
 | **Early start fixes** | a time limit on the LPC bus, a checked Super I/O setup, a safety timer over risky steps, pauses that do not hammer the bus | the hangs at power-on and restart are gone: 100 restarts out of 100 |
-| **"Black box"** | a log of every power-on: which step the start reached and why the board restarted | it found the causes of the hangs; the F11 report is built on it |
-| **Fixes to other vendors' modules** | the Realtek network card driver (hung when saving DASH settings), the video output table (DisplayPort instead of HDMI), stray writes to the Super I/O chip in Biostar's modules | DASH settings save, the DisplayPort sockets work as they should |
-| **This board's tables** | PCIe lanes, pins, processor power and Super I/O setup taken over from Lenovo's own firmware | a base from another board runs on the M715s itself |
+| **Boot log** | on every power-on, records how far the start got and why the board restarted | it found the causes of the hangs; the F11 report is built on it |
+| **Reworked AMD, Biostar and Realtek modules** | the Realtek network card driver (hung when saving DASH settings), the video outputs (DisplayPort instead of HDMI), stray writes to the Super I/O chip in Biostar's modules | DASH settings save, the DisplayPort sockets work as they should |
+| **Fitted to the M715s board** | the layout of this very board taken over from Lenovo's own firmware: which sockets and slots go where, the video outputs, processor power, the Super I/O setup | the firmware knows how the M715s is wired, not the donor board |
 | **Tools outside the BIOS** | report scripts for Windows and Linux, a report decoder, a test stick (in preparation) | testers collect failure details in a minute |
 
 ## What works and what does not
