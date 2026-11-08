@@ -44,13 +44,15 @@ Lenovo выпускала эту плату под процессоры с TDP �
 |---|---|---|
 | **Кулер** (штатный — на 65 Вт) | да | Крепление стандартное AM4 (отверстия 54×90 мм), но в корпусе SFF помещается кулер высотой примерно до 65–70 мм. Мощнее кулер — процессор дольше держит высокую частоту. |
 | **Схема питания процессора на плате** (4+2 фазы, без радиаторов) | нет | Кулер процессора её почти не охлаждает. Под долгой нагрузкой выше ~90–100 Вт она сильно греется. |
-| **Блок питания** (180 или 210 Вт на весь компьютер) | только заменой | Блок нестандартный, под корпус Lenovo. С видеокартой запаса почти нет. |
+| **Блок питания** (штатный — 180 или 210 Вт на весь компьютер) | да | Можно поставить мощнее. У платы свой разъём питания Lenovo, поэтому для обычного блока нужен переходник. Со штатным блоком и видеокартой запаса почти нет. |
 
 Что из этого следует:
 
 - **Процессоры до 65 Вт** (2200G, 2700, 3600, 5600, 5600G, 5700G и подобные) — работают без оговорок.
-- **Процессоры на 95–105 Вт** (2700X, 3800X, 5800X, 5900X и подобные) — не рекомендуем: под нагрузкой схема питания и
-  блок питания будут на пределе, а ограничить мощность в меню T1 пока нельзя.
+- **Процессоры на 95–105 Вт** (2700X, 3800X, 5800X, 5900X и подобные) — главный предел тут схема питания на плате:
+  кулер и блок питания можно поменять, её — нет. Если ставите такой процессор, нужны мощный блок питания и обдув платы
+  вокруг сокета (например, кулер, который дует вниз на плату), и следите за нагревом. Ограничить мощность процессора в
+  меню T1 пока нельзя.
 - Разгон и автоматический разгон (PBO) в T1 выключены.
 
 ## 4. Память для встроенной графики
@@ -117,13 +119,15 @@ Lenovo made this board for processors with a TDP of up to 65 W. What actually se
 |---|---|---|
 | **Cooler** (the stock one is for 65 W) | yes | The mount is standard AM4 (holes 54×90 mm), but the SFF case fits a cooler only about 65–70 mm tall. A stronger cooler lets the processor hold a high speed for longer. |
 | **Processor power circuit on the board** (4+2 phases, no heatsinks) | no | The processor cooler barely cools it. Under long loads above about 90–100 W it runs very hot. |
-| **Power supply** (180 or 210 W for the whole computer) | only by replacing it | It is a non-standard unit made for Lenovo's case. With a graphics card there is almost no headroom. |
+| **Power supply** (the stock one is 180 or 210 W for the whole computer) | yes | A stronger one can be fitted. The board has Lenovo's own power socket, so an ordinary unit needs an adapter. With the stock unit and a graphics card there is almost no headroom. |
 
 What follows from that:
 
 - **Processors up to 65 W** (2200G, 2700, 3600, 5600, 5600G, 5700G and the like) work without caveats.
-- **95–105 W processors** (2700X, 3800X, 5800X, 5900X and the like) are not recommended: under load the power circuit and
-  the power supply are at their limit, and the T1 menu cannot cap the power yet.
+- **95–105 W processors** (2700X, 3800X, 5800X, 5900X and the like): the main limit here is the board's power circuit —
+  the cooler and the power supply can be replaced, the circuit cannot. If you fit one, use a strong power supply and
+  airflow over the board around the socket (for example a cooler that blows down onto the board), and watch the
+  temperatures. The T1 menu cannot cap the processor's power yet.
 - Overclocking and automatic overclocking (PBO) are off in T1.
 
 ## 4. Memory for built-in graphics
