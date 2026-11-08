@@ -12,6 +12,8 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - Тихий вентилятор с плавными оборотами и своим графиком.
 - Включение после пропадания света.
 - Исправлены зависания при включении и перезагрузке с Ryzen 3 2200G.
+- Видеовыходы настроены как у Lenovo: оба разъёма DisplayPort теперь работают как DisplayPort (раньше два выхода были
+  настроены как HDMI, и монитор на кабеле DP–DP мог не показывать); должен заработать VGA. Кабели DP→HDMI работают как раньше.
 - Загрузка по сети.
 - Удалённое управление DASH (по умолчанию выключено), его настройки сети меняются прямо в меню.
 - Скрипты для Windows и Linux, которые собирают отчёт о сбоях ([как пользоваться](tools/report/README.md)).
@@ -39,6 +41,8 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - A quiet fan with smooth speed changes and a curve of your own.
 - Power on after a power cut.
 - Fixes for hangs at power-on and reboot with the Ryzen 3 2200G.
+- Video outputs set up as Lenovo has them: both DisplayPort sockets now work as DisplayPort (two outputs used to be set
+  up as HDMI, so a monitor on a DP–DP cable might show nothing); VGA should start working. DP→HDMI cables work as before.
 - Network boot.
 - DASH remote management (off by default), with its network settings in the menu.
 - Scripts for Windows and Linux that collect a crash report ([how to use them](tools/report/README.md)).
