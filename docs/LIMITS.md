@@ -43,16 +43,16 @@ Lenovo выпускала эту плату под процессоры с TDP �
 | Что | Можно ли улучшить | Что это значит |
 |---|---|---|
 | **Кулер** (штатный — на 65 Вт) | да, но с переделкой | Крепление у Lenovo своё: по чертежу отверстия на тех же местах, что у AM4 (54×90 мм), но пластиковых упоров AM4 нет, винты и задняя пластина свои. Обычный кулер AM4 может потребовать переделки крепления; это не проверено. В корпус SFF помещается кулер высотой примерно до 65–70 мм. Мощнее кулер — процессор дольше держит высокую частоту. |
-| **Схема питания процессора на плате** (4+2 фазы, без радиаторов) | нет | Кулер процессора её почти не охлаждает. Под долгой нагрузкой выше ~90–100 Вт она сильно греется. |
+| **Схема питания процессора на плате** (4+2 фазы, без радиаторов) | частично | Сами фазы не поменять, но охлаждение улучшить можно: наклеить небольшие радиаторы на силовые транзисторы (через термопрокладку и так, чтобы не замкнуть соседние детали) и дать обдув — например, кулер, который дует вниз на плату. Без этого под долгой нагрузкой выше ~90–100 Вт она сильно греется. |
 | **Блок питания** (штатный — 180 или 210 Вт на весь компьютер) | да | Можно поставить мощнее. У платы свой разъём питания Lenovo, поэтому для обычного блока нужен переходник. Со штатным блоком и видеокартой запаса почти нет. |
 
 Что из этого следует:
 
 - **Процессоры до 65 Вт** (2200G, 2700, 3600, 5600, 5600G, 5700G и подобные) — работают без оговорок.
 - **Процессоры на 95–105 Вт** (2700X, 3800X, 5800X, 5900X и подобные) — главный предел тут схема питания на плате:
-  кулер и блок питания можно поменять, её — нет. Если ставите такой процессор, нужны мощный блок питания и обдув платы
-  вокруг сокета (например, кулер, который дует вниз на плату), и следите за нагревом. Ограничить мощность процессора в
-  меню T1 пока нельзя.
+  кулер и блок питания можно поменять, а её — только лучше охлаждать. Если ставите такой процессор: мощный блок питания,
+  радиаторы на транзисторы схемы питания, обдув платы вокруг сокета, и следите за нагревом. Ограничить мощность
+  процессора в меню T1 пока нельзя.
 - Разгон и автоматический разгон (PBO) в T1 выключены.
 
 ## 4. Память для встроенной графики
@@ -118,15 +118,15 @@ Lenovo made this board for processors with a TDP of up to 65 W. What actually se
 | What | Can it be improved | What it means |
 |---|---|---|
 | **Cooler** (the stock one is for 65 W) | yes, with some rework | Lenovo uses its own mount: on the drawing the holes sit where AM4 has them (54×90 mm), but there are no AM4 plastic brackets, and the screws and backplate are Lenovo's. An ordinary AM4 cooler may need its mount reworked; this has not been tried. The SFF case fits a cooler only about 65–70 mm tall. A stronger cooler lets the processor hold a high speed for longer. |
-| **Processor power circuit on the board** (4+2 phases, no heatsinks) | no | The processor cooler barely cools it. Under long loads above about 90–100 W it runs very hot. |
+| **Processor power circuit on the board** (4+2 phases, no heatsinks) | partly | The phases themselves cannot be changed, but their cooling can: stick small heatsinks on the power transistors (with a thermal pad, without shorting nearby parts) and add airflow, for example a cooler that blows down onto the board. Without that, long loads above about 90–100 W make it run very hot. |
 | **Power supply** (the stock one is 180 or 210 W for the whole computer) | yes | A stronger one can be fitted. The board has Lenovo's own power socket, so an ordinary unit needs an adapter. With the stock unit and a graphics card there is almost no headroom. |
 
 What follows from that:
 
 - **Processors up to 65 W** (2200G, 2700, 3600, 5600, 5600G, 5700G and the like) work without caveats.
 - **95–105 W processors** (2700X, 3800X, 5800X, 5900X and the like): the main limit here is the board's power circuit —
-  the cooler and the power supply can be replaced, the circuit cannot. If you fit one, use a strong power supply and
-  airflow over the board around the socket (for example a cooler that blows down onto the board), and watch the
+  the cooler and the power supply can be replaced, the circuit can only be cooled better. If you fit one: a strong power
+  supply, heatsinks on the power circuit's transistors, airflow over the board around the socket, and watch the
   temperatures. The T1 menu cannot cap the processor's power yet.
 - Overclocking and automatic overclocking (PBO) are off in T1.
 

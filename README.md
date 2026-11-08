@@ -57,7 +57,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 ## Ограничения железа
 
 Коротко: **напряжение памяти на этой плате всегда 1,2 В** — его не меняет никакая прошивка; питание процессора на плате рассчитано на
-процессоры до 65 Вт (кулер и блок питания можно поставить мощнее, саму схему питания на плате — нет). Подробно, с последствиями для XMP, разгона и памяти встроенной графики: [docs/LIMITS.md](docs/LIMITS.md).
+процессоры до 65 Вт (кулер и блок питания можно поставить мощнее, а схему питания на плате — только лучше охлаждать). Подробно, с последствиями для XMP, разгона и памяти встроенной графики: [docs/LIMITS.md](docs/LIMITS.md).
 
 ## Документы
 
@@ -125,7 +125,7 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB sticks.
 ## Hardware limits
 
 In short: **the memory voltage on this board is always 1.2 V**, no firmware can change it, and the board's processor power circuit is built
-for processors up to 65 W (the cooler and the power supply can be upgraded, the board's power circuit cannot). Details, including what this means for XMP, overclocking and integrated graphics memory:
+for processors up to 65 W (the cooler and the power supply can be upgraded; the board's power circuit can only be cooled better). Details, including what this means for XMP, overclocking and integrated graphics memory:
 [docs/LIMITS.md](docs/LIMITS.md).
 
 ## Documents
