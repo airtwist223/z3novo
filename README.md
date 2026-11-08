@@ -36,43 +36,17 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 
 ## Что работает, а что нет
 
-Проверено на плате с Ryzen 3 2200G и двумя планками памяти по 8 ГБ. ✅ работает · ⚠️ есть, но не проверено · ❌ не работает
+Проверено на плате с Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
 
-| Что | | Подробности |
-|---|:-:|---|
-| Ryzen 3 2200G | ✅ | на нём проверено всё, что ниже |
-| Другие Ryzen 1000–5000 | ⚠️ | прошивка их поддерживает, на плате не проверены; без встроенной графики нужна видеокарта |
-| Процессоры A-серии (A6–A12, Athlon X4 9xx) | ❌ | эта прошивка их не поддерживает |
-| Включение и перезагрузка | ✅ | 100 из 100 подряд без зависаний |
-| Сон (S3) и включение по будильнику (RTC) | ✅ | засыпает и просыпается; по таймеру включается даже из выключенного состояния |
-| Включение после пропадания питания | ✅ | настройка «Restore on AC Power Loss» |
-| Wake-on-LAN (включение по сети) | ✅ | включается с другого компьютера по сети, система загружается за ~30 с |
-| Меню настроек Z3NOVO (Del) | ✅ | мышь и клавиатура, RU/EN, поиск |
-| Меню загрузки (F9) и родное меню BIOS | ✅ | |
-| Память, 2 планки, два канала, DDR4-2667 | ✅ | memtest86+ без ошибок |
-| Память, 4 планки | ⚠️ | не проверено; частота будет ниже (1866–2133) |
-| XMP | ⚠️ | только одинаковые планки с профилем; напряжение не поднимается |
-| Напряжение памяти | ❌ | всегда 1,2 В — так устроена плата |
-| Встроенная графика, DisplayPort с кабелем DP→HDMI | ✅ | 1920×1080 |
-| Монитор DisplayPort на кабеле DP–DP | ⚠️ | похоже, разъём настроен как HDMI — исправим до T1 |
-| Второй DisplayPort, VGA | ⚠️ | не проверено |
-| Видеокарта в слоте PCIe x16 | ⚠️ | не проверено |
-| USB 3.0 | ✅ | флешки на 5 Гбит/с, клавиатура, мышь; работают USB и процессора, и чипсета |
-| Каждый USB-разъём отдельно (передние, задние) | ⚠️ | не проверено по отдельности |
-| SATA | ✅ | SSD на 6 Гбит/с, проверены три разъёма |
-| M.2: SSD и Wi-Fi | ⚠️ | не проверено |
-| Сеть | ✅ | 1 Гбит/с, на деле около 940 Мбит/с |
-| Загрузка по сети (PXE) | ⚠️ | только UEFI; не проверено |
-| DASH (удалённое управление) | ✅ | по умолчанию выключено; консоль BIOS по сети работает, настройки в меню ещё проверяются |
-| Звук: на плате и через DP | ⚠️ | система видит, звук не включали |
-| COM-порт | ⚠️ | система видит, обмен данными не проверяли |
-| Вентилятор процессора | ✅ | плавная кривая, режимы «Тихо/Авто/Макс» |
-| Температура процессора | ✅ | в меню и в системе |
-| TPM 2.0 (в процессоре) | ✅ | Linux его видит и пользуется им; с Windows 11 не проверено |
-| Linux | ✅ | |
-| Windows | ⚠️ | не проверено; может попросить активацию заново |
-| Разгон | ❌ | в T1 выключен |
-| Обновление BIOS с флешки, отчёт для диагностики | ⚠️ | появятся в T1 |
+| | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
+|---|---|---|---|
+| **Процессор** | Ryzen 3 2200G, температура, тихий вентилятор | другие Ryzen 1000–5000 | A-серия; разгон (выключен в T1) |
+| **Память** | 2 планки в двух каналах, DDR4-2667 | 4 планки, XMP | напряжение выше 1,2 В |
+| **Видео** | DisplayPort (кабель DP→HDMI), 1920×1080 | DP–DP, второй DP, VGA, видеокарта | |
+| **USB и диски** | USB 3.0 (5 Гбит/с), SATA (6 Гбит/с) | каждый разъём по отдельности, M.2 | |
+| **Сеть** | 1 Гбит/с, Wake-on-LAN, консоль DASH | загрузка по сети, настройки DASH в меню | загрузка по сети в старом режиме |
+| **Питание** | 100 перезагрузок без зависаний, сон, включение по будильнику и после пропадания света | | |
+| **Остальное** | меню Del и F9, TPM 2.0, Linux | звук, COM-порт, Windows; обновление с флешки и отчёт (в T1) | |
 
 ## Ограничения железа
 
@@ -124,43 +98,17 @@ support, in Russian and English.
 
 ## What works and what does not
 
-Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks. ✅ works · ⚠️ there, not tested · ❌ does not work
+Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
 
-| What | | Details |
-|---|:-:|---|
-| Ryzen 3 2200G | ✅ | everything below was tested with it |
-| Other Ryzen 1000–5000 | ⚠️ | supported by the firmware, not tested on a board; without built-in graphics you need a graphics card |
-| A-series processors (A6–A12, Athlon X4 9xx) | ❌ | this firmware does not support them |
-| Power-on and restart | ✅ | 100 out of 100 in a row without a hang |
-| Sleep (S3) and power-on by alarm (RTC) | ✅ | sleeps and wakes up; a timer switches it on even from power-off |
-| Power on after a power cut | ✅ | the "Restore on AC Power Loss" setting |
-| Wake-on-LAN (power on over the network) | ✅ | switches on from another computer over the network, the system is up in ~30 s |
-| Z3NOVO settings menu (Del) | ✅ | mouse and keyboard, RU/EN, search |
-| Boot menu (F9) and the stock BIOS menu | ✅ | |
-| Memory, 2 sticks, dual channel, DDR4-2667 | ✅ | memtest86+ without errors |
-| Memory, 4 sticks | ⚠️ | not tested; the speed will be lower (1866–2133) |
-| XMP | ⚠️ | identical sticks with a profile only; the voltage cannot be raised |
-| Memory voltage | ❌ | always 1.2 V — that is how the board is built |
-| Built-in graphics, DisplayPort with a DP→HDMI cable | ✅ | 1920×1080 |
-| A DisplayPort monitor on a DP–DP cable | ⚠️ | the socket seems to be set up as HDMI — to be fixed before T1 |
-| Second DisplayPort, VGA | ⚠️ | not tested |
-| Graphics card in the PCIe x16 slot | ⚠️ | not tested |
-| USB 3.0 | ✅ | USB sticks at 5 Gbit/s, keyboard, mouse; both the processor's and the chipset's USB work |
-| Each USB socket on its own (front, back) | ⚠️ | not tested one by one |
-| SATA | ✅ | SSD at 6 Gbit/s, three sockets tested |
-| M.2: SSD and Wi-Fi | ⚠️ | not tested |
-| Network | ✅ | 1 Gbit/s, about 940 Mbit/s in practice |
-| Network boot (PXE) | ⚠️ | UEFI only; not tested |
-| DASH (remote management) | ✅ | off by default; the BIOS console over the network works, the settings in the menu are still being tested |
-| Sound: onboard and over DP | ⚠️ | the system sees it, no sound played yet |
-| Serial (COM) port | ⚠️ | the system sees it, no data sent yet |
-| Processor fan | ✅ | smooth curve, Quiet/Auto/Max modes |
-| Processor temperature | ✅ | in the menu and in the system |
-| TPM 2.0 (in the processor) | ✅ | Linux sees and uses it; not tested with Windows 11 |
-| Linux | ✅ | |
-| Windows | ⚠️ | not tested; may ask to be activated again |
-| Overclocking | ❌ | off in T1 |
-| BIOS update from a USB stick, diagnostics report | ⚠️ | coming in T1 |
+| | ✅ Works | ⚠️ Not tested | ❌ Does not work |
+|---|---|---|---|
+| **Processor** | Ryzen 3 2200G, temperature, quiet fan | other Ryzen 1000–5000 | A-series; overclocking (off in T1) |
+| **Memory** | 2 sticks in dual channel, DDR4-2667 | 4 sticks, XMP | voltage above 1.2 V |
+| **Video** | DisplayPort (DP→HDMI cable), 1920×1080 | DP–DP, second DP, VGA, graphics card | |
+| **USB and drives** | USB 3.0 (5 Gbit/s), SATA (6 Gbit/s) | each socket on its own, M.2 | |
+| **Network** | 1 Gbit/s, Wake-on-LAN, DASH console | network boot, DASH settings in the menu | network boot in the old mode |
+| **Power** | 100 restarts without a hang, sleep, power-on by alarm and after a power cut | | |
+| **Other** | Del and F9 menus, TPM 2.0, Linux | sound, COM port, Windows; USB-stick update and report (in T1) | |
 
 ## Hardware limits
 
