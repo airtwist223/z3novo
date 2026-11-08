@@ -47,7 +47,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 | **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
 | **Диски** | SATA (SSD, HDD) | M.2 SSD | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
-| **DASH** (удалённое управление) | экран BIOS по сети | правка настроек DASH в новом меню | |
+| **DASH** (удалённое управление) | текстовое меню BIOS с другого компьютера (консоль по сети) | правка настроек DASH в новом меню | |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
 | **Меню BIOS** | новое меню (Del), выбор загрузки (F9) | обновление с флешки, отчёт (будут в T1) | |
 | **Системы** | Linux | Windows | |
@@ -115,7 +115,7 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB sticks.
 | **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
 | **Drives** | SATA (SSD, HDD) | M.2 SSD | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
-| **DASH** (remote management) | BIOS screen over the network | editing DASH settings in the new menu | |
+| **DASH** (remote management) | the text BIOS menu from another computer (network console) | editing DASH settings in the new menu | |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
 | **BIOS menu** | new menu (Del), boot choice (F9) | USB-stick update, report (coming in T1) | |
 | **Systems** | Linux | Windows | |
