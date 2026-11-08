@@ -1,8 +1,15 @@
 # Z3NOVO — новый BIOS для Lenovo ThinkCentre M715s
 
+[Русский](#z3novo--новый-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--a-new-bios-for-the-lenovo-thinkcentre-m715s)
+
 > **Это публичный тест.** Первая тестовая версия — **T1**, она ещё готовится.
 > Прошивку сделали энтузиасты, а не Lenovo. Ставите её на свой страх и риск.
 > Перед установкой обязательно сохраните копию своего BIOS — как, написано в [инструкции](docs/FLASHING.md).
+
+<p align="center">
+  <img src="docs/img/ez_home_ru.png" alt="Главный экран меню Z3NOVO" width="900">
+</p>
+<p align="center"><sub>Главный экран нового меню: процессор и его температура, память по слотам, вентилятор, быстрые настройки.</sub></p>
 
 ## Что это и зачем
 
@@ -54,6 +61,11 @@ Z3NOVO заменяет родной BIOS. С ним:
 > **This is a public test.** The first test version is **T1**, still in preparation.
 > The firmware is made by enthusiasts, not by Lenovo. Install it at your own risk.
 > Save a copy of your own BIOS before you install anything — see the [guide](docs/FLASHING.md).
+
+<p align="center">
+  <img src="docs/img/ez_home_ru.png" alt="The Z3NOVO menu's home screen" width="900">
+</p>
+<p align="center"><sub>The new menu's home screen (shown in Russian; English is one click away): processor and its temperature, memory by slot, fan, quick settings.</sub></p>
 
 ## What it is and why
 
