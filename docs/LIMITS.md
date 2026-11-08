@@ -18,8 +18,11 @@
 
 **XMP** — это заводской «быстрый режим», записанный в самой планке памяти.
 
-- В режиме «Авто» память на Ryzen 2000 и процессорах со встроенной графикой работает не быстрее DDR4-2667.
-  Быстрее — только вручную.
+- В режиме «Авто» память на Ryzen 2000 и процессорах со встроенной графикой работает не быстрее DDR4-2667 — даже если
+  планка рассчитана на 3000 или 3200. Быстрее — только вручную или через XMP. С Ryzen 5000 «Авто» поднимается до 3200.
+- У «игровых» планок (например, «DDR4-3000») высокая частота обычно записана только в профиле XMP, а их обычная частота —
+  2133 или 2400. В режиме «Авто» они работают именно на ней.
+- Вручную с Ryzen 3 2200G можно пробовать 2800 или 2933 с задержками «Авто».
 - XMP в меню можно выбрать, только если все планки одинаковые и у них есть такой режим. Если режиму нужно больше
   1,2 В, меню предупредит.
 - После замены планок сначала один раз включите компьютер с «Авто», и только потом выбирайте XMP.
@@ -75,8 +78,11 @@ What this means in practice:
 
 **XMP** is a factory "fast mode" stored in the memory stick itself.
 
-- On Auto, memory on Ryzen 2000 and processors with built-in graphics runs no faster than DDR4-2667. Faster speeds are
-  set by hand.
+- On Auto, memory on Ryzen 2000 and processors with built-in graphics runs no faster than DDR4-2667, even if the stick is
+  rated for 3000 or 3200. Faster is manual or XMP only. With a Ryzen 5000, Auto goes up to 3200.
+- "Gaming" sticks (for example "DDR4-3000") usually keep their high speed only in the XMP profile; their ordinary speed is
+  2133 or 2400, and that is what they run at on Auto.
+- By hand, a Ryzen 3 2200G can try 2800 or 2933 with timings on Auto.
 - The menu lets you choose XMP only when all sticks are identical and have this mode. If the mode needs more than 1.2 V,
   the menu warns you.
 - After changing sticks, start the computer once on Auto before choosing XMP.
