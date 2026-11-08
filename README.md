@@ -52,7 +52,14 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 
 ## Что мы написали сами
 
-Z3NOVO — это не просто чужая прошивка с другой картинкой. В неё встроены наши собственные драйверы и исправления:
+Z3NOVO — это не «слегка переделанный Biostar». От прошивки-донора взята только основа: код AMD и AMI, который запускает
+процессор, память и чипсет. Всё, что вы видите, и всё, что делает прошивку стабильной именно на M715s, сделано заново:
+
+- около **34 000 строк** своего кода на C в меню Z3NOVO и около **4 600 строк** в своих драйверах прошивки (C и ассемблер);
+- исправлено **больше 15 модулей** Biostar, AMD, AMI и Realtek;
+- около **1 200 автоматических проверок** меню в эмуляторе перед каждой сборкой;
+- **сотни перезагрузок** на настоящей плате, пока искали и чинили зависания.
+
 
 | Что | Что делает | Что это дало |
 |---|---|---|
@@ -152,7 +159,16 @@ support, in Russian and English.
 
 ## What we wrote ourselves
 
-Z3NOVO is not just someone else's firmware with a new picture. It carries our own drivers and fixes:
+Z3NOVO is not "a lightly modified Biostar". Only the base comes from the donor firmware: the AMD and AMI code that starts
+the processor, memory and chipset. Everything you see, and everything that makes the firmware stable on the M715s itself,
+was made from scratch:
+
+- about **34,000 lines** of our own C code in the Z3NOVO menu and about **4,600 lines** in our own firmware drivers (C and
+  assembly);
+- **more than 15 modules** from Biostar, AMD, AMI and Realtek fixed;
+- about **1,200 automatic checks** of the menu in an emulator before every build;
+- **hundreds of restarts** on a real board while the hangs were found and fixed.
+
 
 | What | What it does | What it gave |
 |---|---|---|
