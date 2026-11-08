@@ -47,7 +47,8 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 - **Загрузка по сети UEFI (PXE).**
 - **DASH** — удалённое управление по сети через встроенную сетевую карту. По умолчанию выключено. Настройки сети
   DASH (адрес, маска, шлюз, имя) меняются прямо в приложении.
-- **В T1 (в работе):** обновление прошивки с флешки без программатора и «Отчёт для диагностики» одной кнопкой.
+- **В T1 (в работе):** обновление прошивки с флешки без программатора и «Отчёт для диагностики» по клавише F11 —
+  файл на флешке, который прикладывают к сообщению о проблеме ([подробнее](docs/DIAGNOSTICS.md)).
 
 ## Что работает, а что нет
 
@@ -130,7 +131,8 @@ support, in Russian and English.
 - **UEFI network boot (PXE).**
 - **DASH** remote management over the onboard network card. Off by default. Its network settings (address, mask,
   gateway, name) are edited right in the app.
-- **Coming in T1 (in progress):** firmware updates from a USB stick without a programmer, and a one-button diagnostics report.
+- **Coming in T1 (in progress):** firmware updates from a USB stick without a programmer, and a "Diagnostics report" on
+  the F11 key — a file on a USB stick to attach to a problem report ([details](docs/DIAGNOSTICS.md)).
 
 ## What works and what does not
 

@@ -6,10 +6,18 @@ body:
     attributes:
       value: |
         Спасибо, что тестируете! Заполните, что знаете: чем подробнее, тем быстрее найдём причину.
-        Как собрать отчёты — в [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md).
+
+        **Что приложить** (подробно — в [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md)):
+        1. **Всегда** — отчёт из BIOS: флешка в компьютер, **Del** → **F11**, файл `\Z3NOVO\REPORT-….TXT` с флешки (с версии T1).
+        2. **Если Windows или Linux запускаются** — отчёт скрипта `z3report.ps1` или `z3report.sh`.
+        3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки (готовится).
 
         Thank you for testing! Fill in what you know: the more detail, the sooner we find the cause.
-        How to collect the reports: [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md).
+
+        **What to attach** (details in [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md)):
+        1. **Always** — the BIOS report: USB stick in, **Del** → **F11**, the `\Z3NOVO\REPORT-….TXT` file from the stick (from version T1).
+        2. **If Windows or Linux starts** — the `z3report.ps1` or `z3report.sh` script report.
+        3. **If the failure is rare and puzzling** — the test stick's results folder (in preparation).
   - type: input
     id: version
     attributes:
@@ -79,6 +87,14 @@ body:
         - label: Компьютер пищал / The computer beeped
         - label: Помогло долгое нажатие кнопки питания / Holding the power button helped
         - label: Пришлось выдернуть шнур или батарейку / Had to pull the power cord or the battery
+  - type: checkboxes
+    id: attached
+    attributes:
+      label: Что приложено / What is attached
+      options:
+        - label: Отчёт из BIOS (F11) / BIOS report (F11)
+        - label: Отчёт скрипта из Windows или Linux / Windows or Linux script report
+        - label: Результаты тест-флешки / Test stick results
   - type: textarea
     id: reports
     attributes:
