@@ -28,6 +28,32 @@ Z3NOVO заменяет родной BIOS. С ним:
 - **Загрузка по сети** и **удалённое управление DASH** (по умолчанию выключено).
 - **Скоро, в T1:** обновление BIOS с флешки прямо из меню и кнопка «Отчёт для диагностики».
 
+## Что работает, а что нет
+
+Проверено на плате с Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
+
+✅ **Работает**
+- включение и перезагрузки (100 из 100 подряд), сон;
+- новое меню мышью и клавиатурой, меню загрузки (F9);
+- изображение со встроенной графики, USB-клавиатура и мышь, SSD SATA, сеть;
+- память в двух каналах на DDR4-2667;
+- тихий вентилятор, включение после пропадания света;
+- Linux;
+- DASH: текстовая консоль BIOS по сети.
+
+⚠️ **Есть, но ещё не проверено**
+- другие процессоры (Ryzen 2000, 3000, 5000), видеокарта, SSD M.2;
+- четыре планки памяти, XMP;
+- Windows, звук, COM-порт, загрузка по сети;
+- настройки сети DASH в новом меню;
+- обновление BIOS с флешки и «Отчёт для диагностики» — появятся в T1.
+
+❌ **Не работает**
+- изменение напряжения памяти — так устроена плата;
+- процессоры A-серии;
+- разгон — в T1 выключен;
+- загрузка по сети в старом режиме (не UEFI).
+
 ## Что нужно знать заранее
 
 - **Первый раз прошивку ставят программатором.** Это недорогое устройство, которое подключают прямо к микросхеме
@@ -83,6 +109,32 @@ Z3NOVO replaces Lenovo's BIOS. With it:
 - **Fixes for hangs** at power-on and reboot that used to happen on this board.
 - **Network boot** and **DASH remote management** (off by default).
 - **Coming in T1:** updating the BIOS from a USB stick right from the menu, and a "Diagnostics report" button.
+
+## What works and what does not
+
+Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
+
+✅ **Works**
+- power-on and reboots (100 out of 100 in a row), sleep;
+- the new menu with mouse and keyboard, the boot menu (F9);
+- picture from the built-in graphics, USB keyboard and mouse, SATA SSD, network;
+- dual-channel memory at DDR4-2667;
+- the quiet fan, power on after a power cut;
+- Linux;
+- DASH: the text BIOS console over the network.
+
+⚠️ **There, but not tested yet**
+- other processors (Ryzen 2000, 3000, 5000), a graphics card, an M.2 SSD;
+- four memory sticks, XMP;
+- Windows, sound, the serial (COM) port, network boot;
+- DASH network settings in the new menu;
+- updating the BIOS from a USB stick and the "Diagnostics report" — coming in T1.
+
+❌ **Does not work**
+- changing the memory voltage — that is how the board is built;
+- A-series processors;
+- overclocking — off in T1;
+- network boot in the old (non-UEFI) mode.
 
 ## Know this first
 
