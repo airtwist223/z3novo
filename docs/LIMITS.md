@@ -14,21 +14,26 @@
   на «Авто».
 - Лучше всего подходят обычные планки без разгона, например DDR4-3200, которым хватает 1,2 В.
 
-## 2. Частота памяти и XMP
+## 2. Как выставить частоту памяти
 
-**XMP** — это заводской «быстрый режим», записанный в самой планке памяти.
+**XMP** — заводской «быстрый режим», записанный в самой планке. У обычных планок его нет, у «игровых» есть.
 
-- В режиме «Авто» память на Ryzen 2000 и процессорах со встроенной графикой работает не быстрее DDR4-2667 — даже если
-  планка рассчитана на 3000 или 3200. Быстрее — только вручную или через XMP. С Ryzen 5000 «Авто» поднимается до 3200.
-- У «игровых» планок (например, «DDR4-3000») высокая частота обычно записана только в профиле XMP, а их обычная частота —
-  2133 или 2400. В режиме «Авто» они работают именно на ней.
-- Вручную с Ryzen 3 2200G можно пробовать 2800 или 2933 с задержками «Авто».
-- XMP в меню можно выбрать, только если все планки одинаковые и у них есть такой режим. Если режиму нужно больше
-  1,2 В, меню предупредит.
-- После замены планок сначала один раз включите компьютер с «Авто», и только потом выбирайте XMP.
-- Если с новой частотой память не заработает, компьютер после трёх неудачных попыток запустится сам на безопасных
-  настройках и покажет надпись «Memory OC fail». Тогда верните частоту на «Авто». Если компьютер завис и ничего не
-  пишет — поможет только сброс настроек BIOS перемычкой или батарейкой (сбросятся все настройки).
+| Планки | Процессор | Что выставить |
+|---|---|---|
+| Обычные DDR4-2400 или 2666 | любой | «Авто» |
+| Обычные DDR4-2933 или 3200 на 1,2 В | Ryzen 1000, 2000, 2000G, 3000G (например 2200G, 2700, 3200G) | **вручную 2933** — «Авто» даст только 2667 |
+| Обычные DDR4-2933 или 3200 на 1,2 В | Ryzen 3000, 4000G, 5000, 5000G | «Авто» — даст до 3200 |
+| «Игровые» с XMP на 1,2 В (обычно 2666, бывает 2933–3200) | любой | XMP |
+| «Игровые» с XMP на 1,35 В (почти все 3000 и выше) | любой | вручную на ступень-две ниже профиля, задержки «Авто» |
+
+- «Вручную» — в меню частота памяти, режим «Manual» и нужная частота; задержки оставить «Авто».
+- У «игровых» планок обычная частота без XMP — часто 2133 или 2400. В режиме «Авто» они на ней и работают.
+- XMP можно выбрать, только если все планки одинаковые и у них есть профиль. Если профилю нужно больше 1,2 В,
+  меню предупредит.
+- После замены планок сначала один раз включите компьютер с «Авто», и только потом выбирайте XMP или ручную частоту.
+- Если с новой частотой память не заработала, компьютер после трёх неудачных попыток запустится сам на безопасных
+  настройках и покажет надпись «Memory OC fail». Тогда верните «Авто». Если компьютер завис и ничего не пишет,
+  поможет только сброс настроек BIOS перемычкой или батарейкой (сбросятся все настройки).
 - Четыре планки работают медленнее, чем две: обычно DDR4-1866–2133.
 
 ## 3. Плата рассчитана на процессоры до 65 Вт
@@ -74,21 +79,26 @@ What this means in practice:
   speed. Set the speed by hand one or two steps lower and leave the timings on Auto.
 - Ordinary sticks without overclocking, such as DDR4-3200 ones that are happy at 1.2 V, suit this board best.
 
-## 2. Memory speed and XMP
+## 2. How to set the memory speed
 
-**XMP** is a factory "fast mode" stored in the memory stick itself.
+**XMP** is a factory "fast mode" stored in the memory stick itself. Ordinary sticks do not have it; "gaming" sticks do.
 
-- On Auto, memory on Ryzen 2000 and processors with built-in graphics runs no faster than DDR4-2667, even if the stick is
-  rated for 3000 or 3200. Faster is manual or XMP only. With a Ryzen 5000, Auto goes up to 3200.
-- "Gaming" sticks (for example "DDR4-3000") usually keep their high speed only in the XMP profile; their ordinary speed is
-  2133 or 2400, and that is what they run at on Auto.
-- By hand, a Ryzen 3 2200G can try 2800 or 2933 with timings on Auto.
-- The menu lets you choose XMP only when all sticks are identical and have this mode. If the mode needs more than 1.2 V,
-  the menu warns you.
-- After changing sticks, start the computer once on Auto before choosing XMP.
+| Sticks | Processor | What to set |
+|---|---|---|
+| Ordinary DDR4-2400 or 2666 | any | Auto |
+| Ordinary DDR4-2933 or 3200 at 1.2 V | Ryzen 1000, 2000, 2000G, 3000G (for example 2200G, 2700, 3200G) | **2933 by hand** — Auto gives only 2667 |
+| Ordinary DDR4-2933 or 3200 at 1.2 V | Ryzen 3000, 4000G, 5000, 5000G | Auto — gives up to 3200 |
+| "Gaming" with XMP at 1.2 V (usually 2666, sometimes 2933–3200) | any | XMP |
+| "Gaming" with XMP at 1.35 V (nearly all 3000 and up) | any | by hand, one or two steps below the profile, timings on Auto |
+
+- "By hand" means: in the menu, memory speed, mode "Manual" and the speed you want; leave the timings on Auto.
+- Without XMP, "gaming" sticks often run at an ordinary 2133 or 2400, and that is what they do on Auto.
+- XMP can be chosen only when all sticks are identical and have a profile. If the profile needs more than 1.2 V, the menu
+  warns you.
+- After changing sticks, start the computer once on Auto before choosing XMP or a manual speed.
 - If memory does not work at the new speed, after three failed attempts the computer starts by itself on safe settings
-  and shows "Memory OC fail". Then set the speed back to Auto. If the computer hangs with nothing on screen, only
-  resetting the BIOS settings with the jumper or the battery helps (it resets all settings).
+  and shows "Memory OC fail". Then set Auto again. If the computer hangs with nothing on screen, only resetting the BIOS
+  settings with the jumper or the battery helps (it resets all settings).
 - Four sticks run slower than two, usually DDR4-1866–2133.
 
 ## 3. The board is built for processors up to 65 W
