@@ -36,17 +36,17 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 
 ## Что работает, а что нет
 
-Проверено на плате с Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
+Проверено на плате с Ryzen 3 2200G и двумя планками по 8 ГБ.
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
-| **Процессор** | Ryzen 3 2200G, температура, тихий вентилятор | другие Ryzen 1000–5000 | A-серия; разгон (выключен в T1) |
-| **Память** | 2 планки в двух каналах, DDR4-2667 | 4 планки, XMP | напряжение выше 1,2 В |
-| **Видео** | DisplayPort (кабель DP→HDMI), 1920×1080 | DP–DP, второй DP, VGA, видеокарта | |
-| **USB и диски** | USB 3.0 (5 Гбит/с), SATA (6 Гбит/с) | каждый разъём по отдельности, M.2 | |
-| **Сеть** | 1 Гбит/с, Wake-on-LAN, консоль DASH | загрузка по сети, настройки DASH в меню | загрузка по сети в старом режиме |
-| **Питание** | 100 перезагрузок без зависаний, сон, включение по будильнику и после пропадания света | | |
-| **Остальное** | меню Del и F9, TPM 2.0, Linux | звук, COM-порт, Windows; обновление с флешки и отчёт (в T1) | |
+| **Процессор** | Ryzen 3 2200G | другие Ryzen 1000–5000 | A-серия, разгон |
+| **Память** | 2 планки, DDR4-2667 | 4 планки, XMP | выше 1,2 В |
+| **Видео** | DisplayPort → HDMI | DP–DP, VGA, видеокарта | |
+| **USB и диски** | USB 3.0, SATA | M.2 | |
+| **Сеть** | 1 Гбит/с, Wake-on-LAN, DASH | загрузка по сети | |
+| **Питание** | стабильный старт, сон, автовключение | | |
+| **Прочее** | меню, TPM 2.0, Linux | звук, COM, Windows | |
 
 ## Ограничения железа
 
@@ -98,17 +98,17 @@ support, in Russian and English.
 
 ## What works and what does not
 
-Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
+Tested on a board with a Ryzen 3 2200G and two 8 GB sticks.
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
-| **Processor** | Ryzen 3 2200G, temperature, quiet fan | other Ryzen 1000–5000 | A-series; overclocking (off in T1) |
-| **Memory** | 2 sticks in dual channel, DDR4-2667 | 4 sticks, XMP | voltage above 1.2 V |
-| **Video** | DisplayPort (DP→HDMI cable), 1920×1080 | DP–DP, second DP, VGA, graphics card | |
-| **USB and drives** | USB 3.0 (5 Gbit/s), SATA (6 Gbit/s) | each socket on its own, M.2 | |
-| **Network** | 1 Gbit/s, Wake-on-LAN, DASH console | network boot, DASH settings in the menu | network boot in the old mode |
-| **Power** | 100 restarts without a hang, sleep, power-on by alarm and after a power cut | | |
-| **Other** | Del and F9 menus, TPM 2.0, Linux | sound, COM port, Windows; USB-stick update and report (in T1) | |
+| **Processor** | Ryzen 3 2200G | other Ryzen 1000–5000 | A-series, overclocking |
+| **Memory** | 2 sticks, DDR4-2667 | 4 sticks, XMP | above 1.2 V |
+| **Video** | DisplayPort → HDMI | DP–DP, VGA, graphics card | |
+| **USB and drives** | USB 3.0, SATA | M.2 | |
+| **Network** | 1 Gbit/s, Wake-on-LAN, DASH | network boot | |
+| **Power** | reliable start, sleep, auto power-on | | |
+| **Other** | menu, TPM 2.0, Linux | sound, COM, Windows | |
 
 ## Hardware limits
 
