@@ -35,7 +35,10 @@ Z3NOVO заменяет родной BIOS. С ним:
 ✅ **Работает**
 - включение и перезагрузки (100 из 100 подряд), сон;
 - новое меню мышью и клавиатурой, меню загрузки (F9);
-- изображение со встроенной графики, USB-клавиатура и мышь, SSD SATA, сеть;
+- изображение со встроенной графики через HDMI (1920×1080);
+- USB 3.0 на полной скорости (5 Гбит/с), USB-клавиатура и мышь;
+- сеть 1 Гбит/с (около 940 Мбит/с на деле);
+- SSD SATA на 6 Гбит/с;
 - память в двух каналах на DDR4-2667;
 - тихий вентилятор, включение после пропадания света;
 - Linux;
@@ -44,7 +47,11 @@ Z3NOVO заменяет родной BIOS. С ним:
 ⚠️ **Есть, но ещё не проверено**
 - другие процессоры (Ryzen 2000, 3000, 5000), видеокарта, SSD M.2;
 - четыре планки памяти, XMP;
-- Windows, звук, COM-порт, загрузка по сети;
+- выходы DisplayPort и VGA;
+- звук: звуковые устройства система видит, но звук ещё не включали;
+- COM-порт: система его видит, передачу не проверяли;
+- каждый USB-разъём по отдельности (передние и задние);
+- Windows, загрузка по сети;
 - настройки сети DASH в новом меню;
 - обновление BIOS с флешки и «Отчёт для диагностики» — появятся в T1.
 
@@ -117,7 +124,10 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
 ✅ **Works**
 - power-on and reboots (100 out of 100 in a row), sleep;
 - the new menu with mouse and keyboard, the boot menu (F9);
-- picture from the built-in graphics, USB keyboard and mouse, SATA SSD, network;
+- picture from the built-in graphics over HDMI (1920×1080);
+- USB 3.0 at full speed (5 Gbit/s), USB keyboard and mouse;
+- network at 1 Gbit/s (about 940 Mbit/s in practice);
+- SATA SSD at 6 Gbit/s;
 - dual-channel memory at DDR4-2667;
 - the quiet fan, power on after a power cut;
 - Linux;
@@ -126,7 +136,11 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
 ⚠️ **There, but not tested yet**
 - other processors (Ryzen 2000, 3000, 5000), a graphics card, an M.2 SSD;
 - four memory sticks, XMP;
-- Windows, sound, the serial (COM) port, network boot;
+- the DisplayPort and VGA outputs;
+- sound: the system sees the sound devices, but sound has not been played yet;
+- the serial (COM) port: the system sees it, data has not been sent through it yet;
+- each USB socket on its own (front and back);
+- Windows, network boot;
 - DASH network settings in the new menu;
 - updating the BIOS from a USB stick and the "Diagnostics report" — coming in T1.
 
