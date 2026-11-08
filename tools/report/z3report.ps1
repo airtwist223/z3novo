@@ -426,8 +426,8 @@ function VotName($v) {
         16 { return 'indirect, wired' }
         17 { return 'indirect, virtual' }
         2147483648 { return 'internal' }
-        4294967295 { return 'other' }
-        -1 { return 'other' }
+        4294967295 { return 'not reported by the driver (the standard Microsoft driver does not say) / драйвер не сообщает (стандартный драйвер Microsoft этого не знает)' }
+        -1 { return 'not reported by the driver (the standard Microsoft driver does not say) / драйвер не сообщает (стандартный драйвер Microsoft этого не знает)' }
     }
     return ('code ' + $v)
 }
