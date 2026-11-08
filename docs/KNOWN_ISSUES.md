@@ -1,43 +1,41 @@
 # Известные проблемы / Known issues
 
-## Для всех версий
-
-- **Активация Windows.** После установки прошивка сообщает другое имя платы и не содержит ключа Windows, вшитого
-  Lenovo. Windows может попросить активацию заново: введите свой ключ или войдите в учётную запись Microsoft, к
-  которой привязана цифровая лицензия. Ваш ключ остаётся в сохранённой копии заводской прошивки.
-- **Имя платы.** В сведениях о системе плата видна под именем платы-донора прошивки (Biostar). На работу это не влияет.
-- **Программы мониторинга.** С Ryzen 3 2200G обмен процессора с микросхемой Super I/O (ITE IT8738) сбоит в 8–12 %
-  обращений — это свойство процессора, прошивка его обходит. Не используйте датчики Super I/O в программах
-  мониторинга (драйвер it87 в Linux, раздел ITE в HWiNFO/AIDA64): они будут показывать мусор и могут мешать
-  вентилятору. Температуру процессора берите из датчиков самого процессора (k10temp, «CPU» в HWiNFO).
-- **DASH.** Прошивка сетевой карты 2016 года, в ней есть известные уязвимости. Держите DASH выключенным или
-  включайте только на прямом кабеле к доверенному компьютеру или в отдельной сети без выхода в интернет.
-- **Разгон** процессора и графики в T1 закрыт: механизм отката неудачного разгона ещё не проверен на плате.
-- **Проверено только с Ryzen 3 2200G.** Остальные процессоры и четыре планки памяти — не проверены.
-- **Ручная частота памяти:** по разбору кода прошивки-донора может давать один лишний перезапуск при каждом втором
-  включении. Проверяется.
-- **«3G» видеопамяти при включённом CSM** опасен, см. [LIMITS.md](LIMITS.md), раздел 4.
+- **Windows может попросить активацию заново.** Новый BIOS называет плату по-другому, и в нём нет ключа Windows,
+  который Lenovo записала в родной BIOS. Введите свой ключ или войдите в учётную запись Microsoft, к которой привязана
+  лицензия. Ваш ключ остаётся в сохранённой копии родного BIOS.
+- **Плата называется по-другому.** В сведениях о системе она видна под именем платы Biostar, с которой взята основа
+  прошивки. На работу это не влияет.
+- **Программы, показывающие температуры и обороты.** С процессором Ryzen 3 2200G связь с микросхемой датчиков на плате
+  (ITE IT8738) иногда сбоит — это особенность процессора, прошивка её обходит. Не включайте в таких программах датчики
+  этой микросхемы (раздел ITE в HWiNFO и AIDA64, драйвер it87 в Linux): они покажут ерунду и могут мешать вентилятору.
+  Температуру процессора смотрите по датчику самого процессора («CPU» в HWiNFO, k10temp в Linux).
+- **DASH** (удалённое управление). Встроенная программа сетевой карты 2016 года, в ней есть известные дыры.
+  Не включайте DASH без надобности. Если нужен — только на прямом кабеле к своему компьютеру или в отдельной сети без
+  выхода в интернет.
+- **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
+- **Проверено только с Ryzen 3 2200G.** Другие процессоры и четыре планки памяти ещё никто не проверял.
+- **Ручная частота памяти** может давать лишнюю перезагрузку при каждом втором включении. Проверяется.
+- **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4.
 
 ---
 
 # Known issues
 
-## All versions
-
-- **Windows activation.** After installation the firmware reports a different board name and does not carry the Windows
-  key Lenovo put in its firmware. Windows may ask to be activated again: enter your key or sign in to the Microsoft
-  account your digital licence is linked to. Your key stays in the saved copy of the factory firmware.
-- **Board name.** System information shows the board under the name of the firmware donor's board (Biostar). It does
-  not affect how anything works.
-- **Monitoring programs.** With the Ryzen 3 2200G, 8–12 % of the processor's accesses to the Super I/O chip (ITE IT8738)
-  fail. That is a property of the processor, and the firmware works around it. Do not use the Super I/O sensors in
-  monitoring programs (the it87 driver on Linux, the ITE section in HWiNFO/AIDA64): they will show garbage and can get in
-  the fan's way. Read the CPU temperature from the processor's own sensors (k10temp, "CPU" in HWiNFO).
-- **DASH.** The network card's firmware is from 2016 and has known vulnerabilities. Keep DASH off, or use it only on a
-  direct cable to a trusted computer or on a separate network with no internet access.
-- **Overclocking** of the processor and graphics is locked in T1: the way back from a failed overclock has not been
-  tested on a board yet.
-- **Tested only with the Ryzen 3 2200G.** Other processors and four memory sticks are untested.
-- **Manual memory speed:** by our reading of the donor firmware's code it may cause one extra restart on every second
-  power-on. Being checked.
-- **"3G" of graphics memory with CSM on** is dangerous, see [LIMITS.md](LIMITS.md), section 4.
+- **Windows may ask to be activated again.** The new BIOS gives the board a different name and does not carry the
+  Windows key Lenovo put in its BIOS. Enter your key or sign in to the Microsoft account your licence is linked to.
+  Your key stays in the saved copy of Lenovo's BIOS.
+- **The board has a different name.** System information shows it under the name of the Biostar board the firmware is
+  based on. It does not affect how anything works.
+- **Programs that show temperatures and fan speeds.** With the Ryzen 3 2200G, talking to the board's sensor chip
+  (ITE IT8738) sometimes fails. That is a quirk of the processor, and the firmware works around it. Do not turn on that
+  chip's sensors in such programs (the ITE section in HWiNFO and AIDA64, the it87 driver on Linux): they will show
+  nonsense and can get in the fan's way. Read the processor temperature from the processor's own sensor ("CPU" in
+  HWiNFO, k10temp on Linux).
+- **DASH** (remote management). The network card's built-in program is from 2016 and has known holes. Do not turn DASH
+  on unless you need it. If you do, use it only on a direct cable to your own computer or on a separate network with no
+  internet access.
+- **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
+  tested yet.
+- **Tested only with the Ryzen 3 2200G.** Nobody has tried other processors or four memory sticks yet.
+- **Manual memory speed** may cause an extra restart on every second power-on. Being checked.
+- **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4.

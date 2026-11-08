@@ -1,85 +1,99 @@
-# Z3NOVO — прошивка BIOS для Lenovo ThinkCentre M715s
+# Z3NOVO — новый BIOS для Lenovo ThinkCentre M715s
 
-> **Статус: публичный тест.** Первая тестовая версия — **T1** (готовится, ещё не выпущена).
-> Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
-> Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
+> **Это публичный тест.** Первая тестовая версия — **T1**, она ещё готовится.
+> Прошивку сделали энтузиасты, а не Lenovo. Ставите её на свой страх и риск.
+> Перед установкой обязательно сохраните копию своего BIOS — как, написано в [инструкции](docs/FLASHING.md).
 
-## Что это
+## Что это и зачем
 
-Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, плата AM4P2MS, чипсет AMD B350).
-Основа — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F (от платы Biostar на том же чипсете), в которую перенесены таблицы
-именно этой платы Lenovo: линии PCIe, выводы, питание, вентилятор, Super I/O. Вместо старого текстового меню —
-своё графическое приложение настроек с мышью, на русском и английском.
+BIOS — это программа внутри компьютера, которая его включает и запускает Windows или Linux.
+Родной BIOS Lenovo для M715s старый: новые процессоры с ним не работают, меню неудобное, вентилятор шумит.
 
-## Что умеет
+Z3NOVO заменяет родной BIOS. С ним:
 
-- **Процессоры:** Ryzen 1000–5000 для AM4 по возможностям AGESA. На этой плате проверен только Ryzen 3 2200G.
-  Процессоры без встроенной графики (например, Ryzen 7 2700, Ryzen 5 5600) работают только с видеокартой.
-- **Приложение настроек (Del):** мышь и клавиатура, RU/EN, поиск по настройкам, простой режим и все настройки,
-  страница состояния (температура процессора, вентилятор), меню загрузки (F9), разрешение экрана по монитору,
-  экранная клавиатура.
-- **Вентилятор:** плавную кривую ведёт прошивка; режимы «Тихо», «Авто», «Макс» и свой редактор кривой.
-- **Стабильный старт:** исправлены зависания при включении и перезагрузке, найденные на этой плате с Ryzen 3 2200G
-  (в проверке 100 перезагрузок из 100).
-- **Включение после пропадания питания** (настройка «Restore on AC Power Loss»).
-- **Загрузка по сети UEFI (PXE).**
-- **DASH** — удалённое управление по сети через встроенную сетевую карту. По умолчанию выключено. Настройки сети
-  DASH (адрес, маска, шлюз, имя) меняются прямо в приложении.
-- **В T1 (в работе):** обновление прошивки с флешки без программатора и «Отчёт для диагностики» одной кнопкой.
+- **Можно поставить более новый процессор Ryzen**, вплоть до 5000-й серии.
+  *Пока проверено только с Ryzen 3 2200G.* Процессорам без встроенной графики (например, Ryzen 7 2700 или
+  Ryzen 5 5600) нужна отдельная видеокарта.
+- **Удобное меню настроек** (клавиша Del): работает мышью, на русском и английском, есть поиск и простой режим.
+- **Тихий вентилятор**: обороты меняются плавно, есть режимы «Тихо», «Авто», «Макс» и свой график.
+- **Включение после пропадания света**, если включить это в настройках.
+- **Исправлены зависания** при включении и перезагрузке, которые бывали на этой плате.
+- **Загрузка по сети** и **удалённое управление DASH** (по умолчанию выключено).
+- **Скоро, в T1:** обновление BIOS с флешки прямо из меню и кнопка «Отчёт для диагностики».
 
-## Ограничения железа
+## Что нужно знать заранее
 
-Коротко: **напряжение памяти на этой плате всегда 1,2 В** — его не меняет никакая прошивка; плата рассчитана на
-процессоры 65 Вт. Подробно, с последствиями для XMP, разгона и памяти встроенной графики: [docs/LIMITS.md](docs/LIMITS.md).
+- **Первый раз прошивку ставят программатором.** Это недорогое устройство, которое подключают прямо к микросхеме
+  BIOS на плате. Потом обновлять можно будет с флешки. Подробно — в [инструкции по установке](docs/FLASHING.md).
+- **Windows может попросить активацию заново.** Держите под рукой ключ или вход в учётную запись Microsoft.
+  Подробно — в [известных проблемах](docs/KNOWN_ISSUES.md).
+- **У самой платы есть ограничения,** их не исправит никакой BIOS: напряжение памяти всегда 1,2 В, а плата рассчитана
+  на процессоры до 65 Вт. Что из этого следует — в [ограничениях платы](docs/LIMITS.md).
+
+## Если что-то не так
+
+Опишите, что случилось, в разделе **Issues** на GitHub и приложите отчёт. Как его собрать — в [этой инструкции](docs/DIAGNOSTICS.md).
 
 ## Документы
 
-- [docs/FLASHING.md](docs/FLASHING.md) — установка, обновление, откат.
-- [docs/LIMITS.md](docs/LIMITS.md) — что плата может и чего не может.
-- [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — как собрать отчёт о проблеме.
-- [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — известные проблемы.
-- [CHANGELOG.md](CHANGELOG.md) — история версий.
+- [Установка, обновление и возврат к родному BIOS](docs/FLASHING.md)
+- [Что плата может и чего не может](docs/LIMITS.md)
+- [Известные проблемы](docs/KNOWN_ISSUES.md)
+- [Как сообщить о проблеме](docs/DIAGNOSTICS.md)
+- [История версий](CHANGELOG.md)
+
+## Для тех, кому интересно
+
+Плата AM4P2MS на чипсете AMD B350. Основа прошивки — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F от платы Biostar на том
+же чипсете. В неё перенесены настройки именно этой платы Lenovo: линии PCIe, питание, вентилятор, микросхема Super I/O.
 
 ---
 
-# Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
+# Z3NOVO — a new BIOS for the Lenovo ThinkCentre M715s
 
-> **Status: public test.** The first test version is **T1** (in preparation, not released yet).
-> This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
-> Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
+> **This is a public test.** The first test version is **T1**, still in preparation.
+> The firmware is made by enthusiasts, not by Lenovo. Install it at your own risk.
+> Save a copy of your own BIOS before you install anything — see the [guide](docs/FLASHING.md).
 
-## What it is
+## What it is and why
 
-Z3NOVO is firmware for the Lenovo ThinkCentre M715s (SFF case, board AM4P2MS, AMD B350 chipset). It is AMI Aptio V with
-AGESA ComboAM4v2PI 1.2.0.F (from a Biostar board with the same chipset), carrying this Lenovo board's own tables:
-PCIe lanes, pins, power, fan, Super I/O. Instead of the old text menu it has its own graphical settings app with mouse
-support, in Russian and English.
+The BIOS is the program inside the computer that switches it on and starts Windows or Linux.
+Lenovo's own BIOS for the M715s is old: newer processors do not work with it, its menu is awkward, and the fan is loud.
 
-## What it does
+Z3NOVO replaces Lenovo's BIOS. With it:
 
-- **Processors:** AM4 Ryzen 1000–5000 as far as AGESA supports them. Only the Ryzen 3 2200G has been tested on this board.
-  Processors without integrated graphics (for example the Ryzen 7 2700 or Ryzen 5 5600) need a graphics card.
-- **Settings app (Del):** mouse and keyboard, RU/EN, settings search, a simple view and all settings, a status page (CPU
-  temperature, fan), a boot menu (F9), screen resolution from the monitor, an on-screen keyboard.
-- **Fan:** the firmware drives a smooth curve; Quiet, Auto and Max presets and a curve editor of your own.
-- **Reliable start:** fixes for hangs at power-on and reboot found on this board with the Ryzen 3 2200G (100 out of 100
-  reboots in testing).
-- **Power on after a power loss** (the "Restore on AC Power Loss" setting).
-- **UEFI network boot (PXE).**
-- **DASH** remote management over the onboard network card. Off by default. Its network settings (address, mask,
-  gateway, name) are edited right in the app.
-- **Coming in T1 (in progress):** firmware updates from a USB stick without a programmer, and a one-button diagnostics report.
+- **You can fit a newer Ryzen processor**, up to the 5000 series.
+  *So far only the Ryzen 3 2200G has been tested.* Processors without built-in graphics (for example the Ryzen 7 2700
+  or Ryzen 5 5600) need a graphics card.
+- **An easy settings menu** (the Del key): works with a mouse, in English and Russian, with search and a simple view.
+- **A quiet fan**: its speed changes smoothly, with Quiet, Auto and Max modes and a curve of your own.
+- **Power on after a power cut**, if you turn that on in the settings.
+- **Fixes for hangs** at power-on and reboot that used to happen on this board.
+- **Network boot** and **DASH remote management** (off by default).
+- **Coming in T1:** updating the BIOS from a USB stick right from the menu, and a "Diagnostics report" button.
 
-## Hardware limits
+## Know this first
 
-In short: **the memory voltage on this board is always 1.2 V**, no firmware can change it, and the board is built for
-65 W processors. Details, including what this means for XMP, overclocking and integrated graphics memory:
-[docs/LIMITS.md](docs/LIMITS.md).
+- **The first install needs a programmer.** It is an inexpensive device that connects straight to the BIOS chip on the
+  board. After that, updates will work from a USB stick. Details: the [install guide](docs/FLASHING.md).
+- **Windows may ask to be activated again.** Keep your key or your Microsoft account login at hand.
+  Details: [known issues](docs/KNOWN_ISSUES.md).
+- **The board itself has limits** that no BIOS can fix: the memory voltage is always 1.2 V, and the board is built for
+  processors up to 65 W. What that means: [board limits](docs/LIMITS.md).
+
+## If something goes wrong
+
+Describe what happened under **Issues** on GitHub and attach a report. How to make one: [this guide](docs/DIAGNOSTICS.md).
 
 ## Documents
 
-- [docs/FLASHING.md](docs/FLASHING.md) — installing, updating, going back.
-- [docs/LIMITS.md](docs/LIMITS.md) — what the board can and cannot do.
-- [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — how to collect a problem report.
-- [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — known problems.
-- [CHANGELOG.md](CHANGELOG.md) — version history.
+- [Installing, updating and going back to Lenovo's BIOS](docs/FLASHING.md)
+- [What the board can and cannot do](docs/LIMITS.md)
+- [Known issues](docs/KNOWN_ISSUES.md)
+- [How to report a problem](docs/DIAGNOSTICS.md)
+- [Version history](CHANGELOG.md)
+
+## For the curious
+
+Board AM4P2MS with the AMD B350 chipset. The firmware is AMI Aptio V with AGESA ComboAM4v2PI 1.2.0.F from a Biostar
+board with the same chipset, carrying this Lenovo board's own settings: PCIe lanes, power, fan, the Super I/O chip.

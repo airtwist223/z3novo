@@ -20,7 +20,9 @@
 
 ## Что написать вместе с отчётами
 
-Что делали, что ожидали, что произошло; процессор, планки памяти, видеокарта; версия Z3NOVO (видна в заголовке приложения).
+Что делали, что ожидали, что произошло; процессор, планки памяти, видеокарта; версия Z3NOVO (видна в заголовке меню).
+
+Куда отправлять: раздел **Issues** на странице проекта на GitHub — новое обращение, описание и файлы отчётов.
 
 ---
 
@@ -47,4 +49,6 @@ Open the files and check them before you send them anyway.
 ## What to write along with the reports
 
 What you did, what you expected, what happened; your processor, memory sticks and graphics card; the Z3NOVO version
-(shown in the app's header).
+(shown in the menu's header).
+
+Where to send them: **Issues** on the project's GitHub page — open a new issue with the description and the report files.
