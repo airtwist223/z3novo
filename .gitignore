@@ -1,0 +1,12 @@
+# Firmware images and dumps never go into git: images are attached to releases, dumps hold personal data.
+*.bin
+*.rom
+*.BST
+*.bst
+*.cap
+*.zip
+*.7z
+*.efi
+*.EFI
+# Reports from testers may hold personal data: keep them out of the repository.
+reports/
