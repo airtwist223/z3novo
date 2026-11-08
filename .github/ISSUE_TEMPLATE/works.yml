@@ -5,11 +5,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        Спасибо! Сообщения «всё работает» важны так же, как сообщения о проблемах: по ним видно, на каких процессорах,
-        памяти и видеокартах прошивка уже проверена.
+        ### Русский
 
-        Thank you! "It works" reports matter as much as problem reports: they show which processors, memory and graphics
-        cards the firmware has already been tested with.
+        Спасибо! Сообщения «всё работает» важны так же, как сообщения о проблемах: по ним видно, на каких процессорах, памяти и видеокартах прошивка уже проверена.
+
+        ---
+
+        ### English
+
+        Thank you! "It works" reports matter as much as problem reports: they show which processors, memory and graphics cards the firmware has already been tested with.
+
+        ---
   - type: input
     id: version
     attributes:

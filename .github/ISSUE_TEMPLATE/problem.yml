@@ -5,25 +5,33 @@ body:
   - type: markdown
     attributes:
       value: |
+        ### Русский
+
         Спасибо, что тестируете! Заполните, что знаете: чем подробнее, тем быстрее найдём причину.
 
         **Что приложить** (подробно — в [инструкции по отчётам](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md)):
+
         1. **Всегда** — отчёт из BIOS: флешка в компьютер, **Del** → **F11**, файл `\Z3NOVO\REPORT-….TXT` с флешки (с версии T1).
         2. **Если Windows или Linux запускаются** — отчёт скрипта: [для Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) или [для Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [как запустить](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки (готовится).
 
-        ⚠️ Если компьютер завис, а потом снова включился — **сначала сделайте отчёт F11**, и только потом сбрасывайте
-        настройки батарейкой: сброс стирает журнал запусков, по которому видна причина.
+        > ⚠️ Если компьютер завис, а потом снова включился — **сначала сделайте отчёт F11**, и только потом сбрасывайте настройки батарейкой: сброс стирает журнал запусков, по которому видна причина.
+
+        ---
+
+        ### English
 
         Thank you for testing! Fill in what you know: the more detail, the sooner we find the cause.
 
         **What to attach** (details in [the problem report guide](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md)):
+
         1. **Always** — the BIOS report: USB stick in, **Del** → **F11**, the `\Z3NOVO\REPORT-….TXT` file from the stick (from version T1).
         2. **If Windows or Linux starts** — the script report: [for Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) or [for Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [how to run them](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **If the failure is rare and puzzling** — the test stick's results folder (in preparation).
 
-        ⚠️ If the computer hung and then started again, **make the F11 report first**, and only then reset the settings
-        with the battery: the reset erases the boot log that shows the cause.
+        > ⚠️ If the computer hung and then started again, **make the F11 report first**, and only then reset the settings with the battery: the reset erases the boot log that shows the cause.
+
+        ---
   - type: input
     id: version
     attributes:
