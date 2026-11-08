@@ -11,6 +11,21 @@
 </p>
 <p align="center"><sub>Главный экран нового меню: процессор и его температура, память по слотам, вентилятор, быстрые настройки.</sub></p>
 
+## Отказ от ответственности
+
+- Прошивка распространяется **«как есть», без каких-либо гарантий**. Вы устанавливаете её сами, по своему решению и на
+  свой риск.
+- Автор **не несёт ответственности** за любые последствия установки и использования: неработающий или повреждённый
+  компьютер, вышедшие из строя детали, потерю данных, потерю гарантии, расходы на ремонт и любой другой ущерб.
+- Каждая версия перед выпуском проверяется на **собственном компьютере автора** (Lenovo ThinkCentre M715s, Ryzen 3 2200G,
+  2 × 8 ГБ DDR4-2666). Что проверено — отмечено в таблице «Что работает, а что нет» и в [истории версий](CHANGELOG.md).
+  Всё, что не отмечено как проверенное, **не проверялось** и может не работать.
+- Это неофициальная прошивка. Lenovo, AMD, AMI, Biostar и Realtek к ней отношения не имеют и её не поддерживают.
+  Установка неофициального BIOS может лишить вас гарантии производителя.
+- Перед установкой сохраните копию своего BIOS: это единственный способ вернуть всё как было.
+
+Устанавливая прошивку, вы соглашаетесь с этими условиями.
+
 ## Что это
 
 Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, плата AM4P2MS, чипсет AMD B350).
@@ -79,6 +94,21 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
   <img src="docs/img/ez_home_ru.png" alt="The Z3NOVO menu's home screen" width="900">
 </p>
 <p align="center"><sub>The new menu's home screen (shown in Russian; English is one click away): processor and its temperature, memory by slot, fan, quick settings.</sub></p>
+
+## Disclaimer
+
+- The firmware is provided **"as is", without any warranty**. You install it yourself, by your own decision and at your
+  own risk.
+- The author **accepts no liability** for any consequences of installing or using it: a computer that does not work or
+  is damaged, failed parts, lost data, a voided warranty, repair costs or any other damage.
+- Every version is tested before release on **the author's own computer** (Lenovo ThinkCentre M715s, Ryzen 3 2200G,
+  2 × 8 GB DDR4-2666). What was tested is marked in the "What works and what does not" table and in the
+  [version history](CHANGELOG.md). Anything not marked as tested **has not been tested** and may not work.
+- This is unofficial firmware. Lenovo, AMD, AMI, Biostar and Realtek have nothing to do with it and do not support it.
+  Installing an unofficial BIOS may void the manufacturer's warranty.
+- Save a copy of your BIOS before installing: it is the only way to put everything back as it was.
+
+By installing the firmware you accept these terms.
 
 ## What it is
 

@@ -1,5 +1,7 @@
 # Установка, обновление и возврат / Installing, updating and going back
 
+> Устанавливая прошивку, вы принимаете [отказ от ответственности](../README.md#отказ-от-ответственности): всё делаете сами и на свой риск.
+
 ## Первая установка
 
 Родной BIOS Lenovo не даст поставить чужую прошивку обычным способом. Поэтому в первый раз её записывают
@@ -56,6 +58,8 @@ flashrom -p ch341a_spi -c W25Q128.W -w backup1.bin
 ---
 
 # Installing, updating and going back
+
+> By installing the firmware you accept the [disclaimer](../README.md#disclaimer): you do everything yourself and at your own risk.
 
 ## First install
 
