@@ -13,6 +13,20 @@
    выключения, аппаратные ошибки) в один файл. Как запустить — [tools/report/README.md](../tools/report/README.md).
    Скрипт для Linux проверен; скрипт для Windows ещё проходит первую проверку на настоящей Windows.
 
+## Если компьютер не включается совсем
+
+Отчёт тогда снять нечем, поэтому важно то, что вы видите. Запишите:
+- горит ли лампочка питания, крутится ли вентилятор, пищит ли компьютер, есть ли что-то на экране;
+- что меняли перед этим: настройки, частоту памяти, процессор, планки, видеокарту, обновляли ли BIOS.
+
+Потом попробуйте по порядку:
+1. Выключите, выньте шнур из розетки на минуту, включите снова.
+2. Если меняли память или её частоту — подождите пару минут: после трёх неудачных попыток плата сама запускается на
+   безопасных настройках.
+3. Сбросьте настройки BIOS: выключите, выньте шнур и круглую батарейку на плате на 5 минут. Все настройки вернутся
+   к заводским.
+4. Если не помогло — верните родной BIOS программатором (см. [FLASHING.md](FLASHING.md)).
+
 ## Что в отчёты не попадает
 
 Серийные номера, UUID, MAC-адреса (только первые три байта), ключ Windows, пароли, имя компьютера и пользователей.
@@ -22,7 +36,7 @@
 
 Что делали, что ожидали, что произошло; процессор, планки памяти, видеокарта; версия Z3NOVO (видна в заголовке меню).
 
-Куда отправлять: раздел **Issues** на странице проекта на GitHub — новое обращение, описание и файлы отчётов.
+Куда отправлять: раздел **Issues** на странице проекта на GitHub → **New issue** → форма «Проблема». В ней уже есть все нужные вопросы и место для файлов отчётов.
 
 ---
 
@@ -41,6 +55,20 @@
    unexpected shutdowns, hardware errors) into one file. How to run them: [tools/report/README.md](../tools/report/README.md).
    The Linux script has been tested; the Windows script is still getting its first run on a real Windows machine.
 
+## If the computer does not start at all
+
+Then there is no way to make a report, so what you see matters. Write down:
+- whether the power light is on, the fan spins, the computer beeps, anything is on the screen;
+- what you changed before: settings, memory speed, processor, sticks, graphics card, whether you updated the BIOS.
+
+Then try, in this order:
+1. Shut it down, unplug the cord for a minute, power it on again.
+2. If you changed the memory or its speed, wait a couple of minutes: after three failed attempts the board starts by
+   itself on safe settings.
+3. Reset the BIOS settings: shut down, unplug the cord and take out the round battery on the board for 5 minutes. All
+   settings go back to factory values.
+4. If that does not help, go back to Lenovo's BIOS with a programmer (see [FLASHING.md](FLASHING.md)).
+
 ## What the reports leave out
 
 Serial numbers, UUIDs, MAC addresses (only the first three bytes), the Windows key, passwords, computer and user names.
@@ -51,4 +79,4 @@ Open the files and check them before you send them anyway.
 What you did, what you expected, what happened; your processor, memory sticks and graphics card; the Z3NOVO version
 (shown in the menu's header).
 
-Where to send them: **Issues** on the project's GitHub page — open a new issue with the description and the report files.
+Where to send them: **Issues** on the project's GitHub page → **New issue** → the "Problem" form. It already asks everything we need and has room for the report files.

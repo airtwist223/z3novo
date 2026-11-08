@@ -1,0 +1,92 @@
+name: Проблема / Problem
+description: Сообщить о проблеме с прошивкой Z3NOVO / Report a problem with the Z3NOVO firmware
+title: "[Проблема / Problem] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо, что тестируете! Заполните, что знаете: чем подробнее, тем быстрее найдём причину.
+        Как собрать отчёты — в [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md).
+
+        Thank you for testing! Fill in what you know: the more detail, the sooner we find the cause.
+        How to collect the reports: [docs/DIAGNOSTICS.md](../blob/main/docs/DIAGNOSTICS.md).
+  - type: input
+    id: version
+    attributes:
+      label: Версия Z3NOVO / Z3NOVO version
+      description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
+      placeholder: T1
+    validations:
+      required: true
+  - type: input
+    id: cpu
+    attributes:
+      label: Процессор / Processor
+      placeholder: Ryzen 3 2200G
+    validations:
+      required: true
+  - type: input
+    id: memory
+    attributes:
+      label: Память / Memory
+      description: Сколько планок, объём, модель или частота; какая частота выставлена в меню. / How many sticks, size, model or speed; the speed set in the menu.
+      placeholder: 2 × 8 ГБ Crucial DDR4-2666, «Авто»
+  - type: input
+    id: video
+    attributes:
+      label: Видео и монитор / Graphics and monitor
+      description: Встроенная графика или видеокарта; в какой разъём включён монитор и каким кабелем. / Built-in graphics or a graphics card; which socket the monitor is on and with what cable.
+      placeholder: встроенная графика, DisplayPort → HDMI
+  - type: dropdown
+    id: when
+    attributes:
+      label: Когда случилось / When it happened
+      options:
+        - При включении, до заставки / At power-on, before the logo
+        - На заставке или в меню BIOS / On the logo or in the BIOS menu
+        - Во время загрузки системы / While the system was starting
+        - В работе Windows или Linux / While Windows or Linux was running
+        - При перезагрузке, выключении или выходе из сна / At restart, shutdown or wake-up
+        - При обновлении BIOS / While updating the BIOS
+        - Другое / Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: Что делали и что случилось / What you did and what happened
+      description: Что меняли перед этим (настройки, процессор, память, видеокарту), что ожидали, что увидели. / What you changed before (settings, processor, memory, graphics card), what you expected, what you saw.
+    validations:
+      required: true
+  - type: dropdown
+    id: often
+    attributes:
+      label: Как часто / How often
+      options:
+        - Один раз / Once
+        - Иногда / Sometimes
+        - Каждый раз / Every time
+  - type: checkboxes
+    id: state
+    attributes:
+      label: Что было с компьютером в этот момент / What the computer was doing at that moment
+      options:
+        - label: Чёрный экран / Black screen
+        - label: Изображение застыло / The picture froze
+        - label: Горела лампочка питания / The power light was on
+        - label: Вентилятор крутился / The fan was spinning
+        - label: Вентилятор на полных оборотах / The fan was at full speed
+        - label: Компьютер пищал / The computer beeped
+        - label: Помогло долгое нажатие кнопки питания / Holding the power button helped
+        - label: Пришлось выдернуть шнур или батарейку / Had to pull the power cord or the battery
+  - type: textarea
+    id: reports
+    attributes:
+      label: Отчёты / Reports
+      description: |
+        Перетащите сюда файлы: отчёт из прошивки (F11 в меню, файл REPORT-….TXT с флешки) и, если система запускается, отчёт из Windows или Linux. Перед отправкой откройте файлы и проверьте их.
+        Drag the files here: the firmware report (F11 in the menu, the REPORT-….TXT file from the USB stick) and, if the system starts, the Windows or Linux report. Open and check the files before sending.
+  - type: textarea
+    id: more
+    attributes:
+      label: Что ещё / Anything else
