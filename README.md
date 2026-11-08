@@ -19,47 +19,43 @@ BIOS — это программа внутри компьютера, котор
 Z3NOVO заменяет родной BIOS. С ним:
 
 - **Можно поставить более новый процессор Ryzen**, вплоть до 5000-й серии.
-  *Пока проверено только с Ryzen 3 2200G.* Процессорам без встроенной графики (например, Ryzen 7 2700 или
-  Ryzen 5 5600) нужна отдельная видеокарта.
+  *Пока проверено только с Ryzen 3 2200G.* Если у процессора нет встроенной графики (например, Ryzen 7 2700 или
+  Ryzen 5 5600), понадобится отдельная видеокарта.
 - **Удобное меню настроек** (клавиша Del): работает мышью, на русском и английском, есть поиск и простой режим.
 - **Тихий вентилятор**: обороты меняются плавно, есть режимы «Тихо», «Авто», «Макс» и свой график.
-- **Включение после пропадания света**, если включить это в настройках.
+- **Компьютер сам включается, когда дали свет**, если включить это в настройках.
 - **Исправлены зависания** при включении и перезагрузке, которые бывали на этой плате.
-- **Загрузка по сети** и **удалённое управление DASH** (по умолчанию выключено).
 - **Скоро, в T1:** обновление BIOS с флешки прямо из меню и кнопка «Отчёт для диагностики».
 
 ## Что работает, а что нет
 
-Проверено на плате с Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
+Проверяли на плате с процессором Ryzen 3 2200G и двумя планками памяти по 8 ГБ.
 
 ✅ **Работает**
-- включение и перезагрузки (100 из 100 подряд), сон;
-- новое меню мышью и клавиатурой, меню загрузки (F9);
-- изображение со встроенной графики через HDMI (1920×1080);
-- USB 3.0 на полной скорости (5 Гбит/с), USB-клавиатура и мышь;
-- сеть 1 Гбит/с (около 940 Мбит/с на деле);
-- SSD SATA на 6 Гбит/с;
-- память в двух каналах на DDR4-2667;
-- тихий вентилятор, включение после пропадания света;
-- Linux;
-- DASH: текстовая консоль BIOS по сети.
+- Компьютер включается и перезагружается без зависаний (проверили 100 раз подряд), засыпает и просыпается.
+- Новое меню настроек — и мышью, и с клавиатуры. Меню «с чего загрузиться» по клавише F9.
+- Монитор через HDMI, в том числе Full HD (1920×1080).
+- USB: быстрые флешки и диски, клавиатура, мышь.
+- Интернет по проводу.
+- Обычные диски SSD и HDD (разъём SATA).
+- Две планки памяти работают вместе, в быстром двухканальном режиме.
+- Тихий вентилятор и автовключение, когда дали свет.
+- Linux.
 
-⚠️ **Есть, но ещё не проверено**
-- другие процессоры (Ryzen 2000, 3000, 5000), видеокарта, SSD M.2;
-- четыре планки памяти, XMP;
-- выходы DisplayPort и VGA;
-- звук: звуковые устройства система видит, но звук ещё не включали;
-- COM-порт: система его видит, передачу не проверяли;
-- каждый USB-разъём по отдельности (передние и задние);
-- Windows, загрузка по сети;
-- настройки сети DASH в новом меню;
-- обновление BIOS с флешки и «Отчёт для диагностики» — появятся в T1.
+⚠️ **Есть, но ещё не проверили**
+- Другие процессоры — всё, кроме Ryzen 3 2200G.
+- Отдельная видеокарта и SSD в маленьком разъёме M.2.
+- Четыре планки памяти и быстрый режим памяти XMP.
+- Мониторы через DisplayPort и VGA.
+- Звук: звуковую карту компьютер видит, но звук ещё не включали.
+- Каждый USB-разъём по отдельности, спереди и сзади.
+- Windows.
+- Обновление BIOS с флешки и «Отчёт для диагностики» — появятся в T1.
 
 ❌ **Не работает**
-- изменение напряжения памяти — так устроена плата;
-- процессоры A-серии;
-- разгон — в T1 выключен;
-- загрузка по сети в старом режиме (не UEFI).
+- Поднять напряжение памяти — так устроена плата ([подробнее](docs/LIMITS.md)).
+- Старые процессоры AMD A-серии (A6, A8, A10, A12).
+- Разгон — в T1 выключен.
 
 ## Что нужно знать заранее
 
@@ -84,8 +80,14 @@ Z3NOVO заменяет родной BIOS. С ним:
 
 ## Для тех, кому интересно
 
-Плата AM4P2MS на чипсете AMD B350. Основа прошивки — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F от платы Biostar на том
-же чипсете. В неё перенесены настройки именно этой платы Lenovo: линии PCIe, питание, вентилятор, микросхема Super I/O.
+- Плата AM4P2MS на чипсете AMD B350. Основа прошивки — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F от платы Biostar на том
+  же чипсете. В неё перенесены настройки именно этой платы Lenovo: линии PCIe, питание, вентилятор, микросхема Super I/O.
+- Проверенные скорости: USB 3.0 — 5 Гбит/с, сеть — 1 Гбит/с (около 940 Мбит/с на деле), SATA — 6 Гбит/с, память —
+  DDR4-2667 в двух каналах.
+- Загрузка по сети (PXE) есть только в режиме UEFI, на плате ещё не проверялась.
+- DASH (удалённое управление через встроенную сетевую карту): по умолчанию выключено; проверена текстовая консоль BIOS
+  по сети, настройки сети DASH в новом меню ещё проверяются.
+- COM-порт система видит, обмен данными через него не проверялся.
 
 ---
 
@@ -108,47 +110,43 @@ Lenovo's own BIOS for the M715s is old: newer processors do not work with it, it
 Z3NOVO replaces Lenovo's BIOS. With it:
 
 - **You can fit a newer Ryzen processor**, up to the 5000 series.
-  *So far only the Ryzen 3 2200G has been tested.* Processors without built-in graphics (for example the Ryzen 7 2700
-  or Ryzen 5 5600) need a graphics card.
+  *So far only the Ryzen 3 2200G has been tested.* If the processor has no built-in graphics (for example the Ryzen 7
+  2700 or Ryzen 5 5600), you will need a graphics card.
 - **An easy settings menu** (the Del key): works with a mouse, in English and Russian, with search and a simple view.
 - **A quiet fan**: its speed changes smoothly, with Quiet, Auto and Max modes and a curve of your own.
-- **Power on after a power cut**, if you turn that on in the settings.
+- **The computer switches itself on when power comes back**, if you turn that on in the settings.
 - **Fixes for hangs** at power-on and reboot that used to happen on this board.
-- **Network boot** and **DASH remote management** (off by default).
 - **Coming in T1:** updating the BIOS from a USB stick right from the menu, and a "Diagnostics report" button.
 
 ## What works and what does not
 
-Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks.
+Tested on a board with a Ryzen 3 2200G processor and two 8 GB memory sticks.
 
 ✅ **Works**
-- power-on and reboots (100 out of 100 in a row), sleep;
-- the new menu with mouse and keyboard, the boot menu (F9);
-- picture from the built-in graphics over HDMI (1920×1080);
-- USB 3.0 at full speed (5 Gbit/s), USB keyboard and mouse;
-- network at 1 Gbit/s (about 940 Mbit/s in practice);
-- SATA SSD at 6 Gbit/s;
-- dual-channel memory at DDR4-2667;
-- the quiet fan, power on after a power cut;
-- Linux;
-- DASH: the text BIOS console over the network.
+- The computer powers on and restarts without hanging (tested 100 times in a row), sleeps and wakes up.
+- The new settings menu, with a mouse or a keyboard. The "what to start from" menu on the F9 key.
+- A monitor over HDMI, including Full HD (1920×1080).
+- USB: fast USB sticks and drives, keyboard, mouse.
+- Wired internet.
+- Ordinary SSDs and hard drives (SATA).
+- Two memory sticks working together in fast dual-channel mode.
+- The quiet fan, and switching on when power comes back.
+- Linux.
 
 ⚠️ **There, but not tested yet**
-- other processors (Ryzen 2000, 3000, 5000), a graphics card, an M.2 SSD;
-- four memory sticks, XMP;
-- the DisplayPort and VGA outputs;
-- sound: the system sees the sound devices, but sound has not been played yet;
-- the serial (COM) port: the system sees it, data has not been sent through it yet;
-- each USB socket on its own (front and back);
-- Windows, network boot;
-- DASH network settings in the new menu;
-- updating the BIOS from a USB stick and the "Diagnostics report" — coming in T1.
+- Other processors — anything but the Ryzen 3 2200G.
+- A graphics card, and SSDs in the small M.2 slot.
+- Four memory sticks, and the XMP fast memory mode.
+- Monitors over DisplayPort and VGA.
+- Sound: the computer sees the sound card, but no sound has been played yet.
+- Each USB socket on its own, front and back.
+- Windows.
+- Updating the BIOS from a USB stick and the "Diagnostics report" — coming in T1.
 
 ❌ **Does not work**
-- changing the memory voltage — that is how the board is built;
-- A-series processors;
-- overclocking — off in T1;
-- network boot in the old (non-UEFI) mode.
+- Raising the memory voltage — that is how the board is built ([details](docs/LIMITS.md)).
+- Old AMD A-series processors (A6, A8, A10, A12).
+- Overclocking — off in T1.
 
 ## Know this first
 
@@ -173,5 +171,11 @@ Describe what happened under **Issues** on GitHub and attach a report. How to ma
 
 ## For the curious
 
-Board AM4P2MS with the AMD B350 chipset. The firmware is AMI Aptio V with AGESA ComboAM4v2PI 1.2.0.F from a Biostar
-board with the same chipset, carrying this Lenovo board's own settings: PCIe lanes, power, fan, the Super I/O chip.
+- Board AM4P2MS with the AMD B350 chipset. The firmware is AMI Aptio V with AGESA ComboAM4v2PI 1.2.0.F from a Biostar
+  board with the same chipset, carrying this Lenovo board's own settings: PCIe lanes, power, fan, the Super I/O chip.
+- Measured speeds: USB 3.0 at 5 Gbit/s, network at 1 Gbit/s (about 940 Mbit/s in practice), SATA at 6 Gbit/s, memory
+  at DDR4-2667 in dual channel.
+- Network boot (PXE) is available in UEFI mode only and has not been tried on a board yet.
+- DASH (remote management through the onboard network card): off by default; the text BIOS console over the network
+  works, and the DASH network settings in the new menu are still being tested.
+- The serial (COM) port is detected; sending data through it has not been tried.
