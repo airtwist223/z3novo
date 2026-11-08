@@ -44,9 +44,9 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 | Другие Ryzen 1000–5000 | ⚠️ | прошивка их поддерживает, на плате не проверены; без встроенной графики нужна видеокарта |
 | Процессоры A-серии (A6–A12, Athlon X4 9xx) | ❌ | эта прошивка их не поддерживает |
 | Включение и перезагрузка | ✅ | 100 из 100 подряд без зависаний |
-| Сон (S3) и пробуждение по таймеру | ✅ | |
+| Сон (S3) и включение по будильнику (RTC) | ✅ | засыпает и просыпается; по таймеру включается даже из выключенного состояния |
 | Включение после пропадания питания | ✅ | настройка «Restore on AC Power Loss» |
-| Wake-on-LAN (включение по сети) | ⚠️ | не проверено |
+| Wake-on-LAN (включение по сети) | ✅ | включается с другого компьютера по сети, система загружается за ~30 с |
 | Меню настроек Z3NOVO (Del) | ✅ | мышь и клавиатура, RU/EN, поиск |
 | Меню загрузки (F9) и родное меню BIOS | ✅ | |
 | Память, 2 планки, два канала, DDR4-2667 | ✅ | memtest86+ без ошибок |
@@ -57,7 +57,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 | Монитор DisplayPort на кабеле DP–DP | ⚠️ | похоже, разъём настроен как HDMI — исправим до T1 |
 | Второй DisplayPort, VGA | ⚠️ | не проверено |
 | Видеокарта в слоте PCIe x16 | ⚠️ | не проверено |
-| USB 3.0 | ✅ | флешки на 5 Гбит/с, клавиатура, мышь |
+| USB 3.0 | ✅ | флешки на 5 Гбит/с, клавиатура, мышь; работают USB и процессора, и чипсета |
 | Каждый USB-разъём отдельно (передние, задние) | ⚠️ | не проверено по отдельности |
 | SATA | ✅ | SSD на 6 Гбит/с, проверены три разъёма |
 | M.2: SSD и Wi-Fi | ⚠️ | не проверено |
@@ -68,7 +68,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 | COM-порт | ⚠️ | система видит, обмен данными не проверяли |
 | Вентилятор процессора | ✅ | плавная кривая, режимы «Тихо/Авто/Макс» |
 | Температура процессора | ✅ | в меню и в системе |
-| TPM 2.0 (в процессоре) | ✅ | Linux видит; с Windows 11 не проверено |
+| TPM 2.0 (в процессоре) | ✅ | Linux его видит и пользуется им; с Windows 11 не проверено |
 | Linux | ✅ | |
 | Windows | ⚠️ | не проверено; может попросить активацию заново |
 | Разгон | ❌ | в T1 выключен |
@@ -132,9 +132,9 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks. ✅ works · 
 | Other Ryzen 1000–5000 | ⚠️ | supported by the firmware, not tested on a board; without built-in graphics you need a graphics card |
 | A-series processors (A6–A12, Athlon X4 9xx) | ❌ | this firmware does not support them |
 | Power-on and restart | ✅ | 100 out of 100 in a row without a hang |
-| Sleep (S3) and waking on a timer | ✅ | |
+| Sleep (S3) and power-on by alarm (RTC) | ✅ | sleeps and wakes up; a timer switches it on even from power-off |
 | Power on after a power cut | ✅ | the "Restore on AC Power Loss" setting |
-| Wake-on-LAN (power on over the network) | ⚠️ | not tested |
+| Wake-on-LAN (power on over the network) | ✅ | switches on from another computer over the network, the system is up in ~30 s |
 | Z3NOVO settings menu (Del) | ✅ | mouse and keyboard, RU/EN, search |
 | Boot menu (F9) and the stock BIOS menu | ✅ | |
 | Memory, 2 sticks, dual channel, DDR4-2667 | ✅ | memtest86+ without errors |
@@ -145,7 +145,7 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks. ✅ works · 
 | A DisplayPort monitor on a DP–DP cable | ⚠️ | the socket seems to be set up as HDMI — to be fixed before T1 |
 | Second DisplayPort, VGA | ⚠️ | not tested |
 | Graphics card in the PCIe x16 slot | ⚠️ | not tested |
-| USB 3.0 | ✅ | USB sticks at 5 Gbit/s, keyboard, mouse |
+| USB 3.0 | ✅ | USB sticks at 5 Gbit/s, keyboard, mouse; both the processor's and the chipset's USB work |
 | Each USB socket on its own (front, back) | ⚠️ | not tested one by one |
 | SATA | ✅ | SSD at 6 Gbit/s, three sockets tested |
 | M.2: SSD and Wi-Fi | ⚠️ | not tested |
@@ -156,7 +156,7 @@ Tested on a board with a Ryzen 3 2200G and two 8 GB memory sticks. ✅ works · 
 | Serial (COM) port | ⚠️ | the system sees it, no data sent yet |
 | Processor fan | ✅ | smooth curve, Quiet/Auto/Max modes |
 | Processor temperature | ✅ | in the menu and in the system |
-| TPM 2.0 (in the processor) | ✅ | Linux sees it; not tested with Windows 11 |
+| TPM 2.0 (in the processor) | ✅ | Linux sees and uses it; not tested with Windows 11 |
 | Linux | ✅ | |
 | Windows | ⚠️ | not tested; may ask to be activated again |
 | Overclocking | ❌ | off in T1 |
