@@ -13,7 +13,8 @@
   Не включайте DASH без надобности. Если нужен — только на прямом кабеле к своему компьютеру или в отдельной сети без
   выхода в интернет.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
-- **Проверено только с Ryzen 3 2200G.** Другие процессоры и четыре планки памяти ещё никто не проверял.
+- **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
+  и четыре планки памяти ещё никто не проверял.
 - **Ручная частота памяти** может давать лишнюю перезагрузку при каждом втором включении. Проверяется.
 - **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4.
 
@@ -36,6 +37,7 @@
   internet access.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
-- **Tested only with the Ryzen 3 2200G.** Nobody has tried other processors or four memory sticks yet.
+- **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
+  other processors or four memory sticks yet.
 - **Manual memory speed** may cause an extra restart on every second power-on. Being checked.
 - **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4.

@@ -5,6 +5,7 @@
 > **Статус: публичный тест.** Первая тестовая версия — **T1** (готовится, ещё не выпущена).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
+> **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
 
 <p align="center">
   <img src="docs/img/ez_home_ru.png" alt="Главный экран меню Z3NOVO" width="900">
@@ -17,8 +18,8 @@
   свой риск.
 - Автор **не несёт ответственности** за любые последствия установки и использования: неработающий или повреждённый
   компьютер, вышедшие из строя детали, потерю данных, потерю гарантии, расходы на ремонт и любой другой ущерб.
-- Каждая версия перед выпуском проверяется на **собственном компьютере автора** (Lenovo ThinkCentre M715s, Ryzen 3 2200G,
-  2 × 8 ГБ DDR4-2666). Что проверено — отмечено в таблице «Что работает, а что нет» и в [истории версий](CHANGELOG.md).
+- Каждая версия перед выпуском проверяется на **собственном компьютере автора** (Lenovo ThinkCentre M715s, плата AM4P2MS
+  ревизии 1.1, Ryzen 3 2200G, 2 × 8 ГБ DDR4-2666). Что проверено — отмечено в таблице «Что работает, а что нет» и в [истории версий](CHANGELOG.md).
   Всё, что не отмечено как проверенное, **не проверялось** и может не работать.
 - Это неофициальная прошивка. Lenovo, AMD, AMI, Biostar и Realtek к ней отношения не имеют и её не поддерживают.
   Установка неофициального BIOS может лишить вас гарантии производителя.
@@ -29,6 +30,9 @@
 ## Что это
 
 Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, плата AM4P2MS, чипсет AMD B350).
+**Ревизия платы — 1.1:** только на ней прошивка проверена. Плата AM4P2MS выпускалась и в других ревизиях (например, 1.5),
+и разводка у них может отличаться, поэтому на них прошивка может работать не полностью или не запуститься. Ревизия
+напечатана на самой плате рядом с её названием (надпись вида «AM4P2MS Ver 1.1»); посмотрите её до установки.
 Основа — AMI Aptio V с AGESA ComboAM4v2PI 1.2.0.F (от платы Biostar на том же чипсете), в которую перенесены таблицы
 именно этой платы Lenovo: линии PCIe, выводы, питание, вентилятор, Super I/O. Вместо старого текстового меню —
 своё графическое приложение настроек с мышью, на русском и английском.
@@ -75,7 +79,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 ## Что работает, а что нет
 
-Проверено на плате с Ryzen 3 2200G и двумя планками по 8 ГБ.
+Проверено на плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G и двумя планками по 8 ГБ.
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
@@ -113,6 +117,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 > **Status: public test.** The first test version is **T1** (in preparation, not released yet).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
+> **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
 
 <p align="center">
   <img src="docs/img/ez_home_ru.png" alt="The Z3NOVO menu's home screen" width="900">
@@ -125,8 +130,8 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
   own risk.
 - The author **accepts no liability** for any consequences of installing or using it: a computer that does not work or
   is damaged, failed parts, lost data, a voided warranty, repair costs or any other damage.
-- Every version is tested before release on **the author's own computer** (Lenovo ThinkCentre M715s, Ryzen 3 2200G,
-  2 × 8 GB DDR4-2666). What was tested is marked in the "What works and what does not" table and in the
+- Every version is tested before release on **the author's own computer** (Lenovo ThinkCentre M715s, board AM4P2MS
+  revision 1.1, Ryzen 3 2200G, 2 × 8 GB DDR4-2666). What was tested is marked in the "What works and what does not" table and in the
   [version history](CHANGELOG.md). Anything not marked as tested **has not been tested** and may not work.
 - This is unofficial firmware. Lenovo, AMD, AMI, Biostar and Realtek have nothing to do with it and do not support it.
   Installing an unofficial BIOS may void the manufacturer's warranty.
@@ -136,7 +141,10 @@ By installing the firmware you accept these terms.
 
 ## What it is
 
-Z3NOVO is firmware for the Lenovo ThinkCentre M715s (SFF case, board AM4P2MS, AMD B350 chipset). It is AMI Aptio V with
+Z3NOVO is firmware for the Lenovo ThinkCentre M715s (SFF case, board AM4P2MS, AMD B350 chipset).
+**Board revision 1.1:** the firmware has been tested only on it. The AM4P2MS was also made in other revisions (for example
+1.5), and their wiring may differ, so the firmware may not fully work or may not start on them. The revision is printed on
+the board next to its name (something like "AM4P2MS Ver 1.1"); check it before installing. It is AMI Aptio V with
 AGESA ComboAM4v2PI 1.2.0.F (from a Biostar board with the same chipset), carrying this Lenovo board's own tables:
 PCIe lanes, pins, power, fan, Super I/O. Instead of the old text menu it has its own graphical settings app with mouse
 support, in Russian and English.
@@ -184,7 +192,7 @@ was made from scratch:
 
 ## What works and what does not
 
-Tested on a board with a Ryzen 3 2200G and two 8 GB sticks.
+Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks.
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|

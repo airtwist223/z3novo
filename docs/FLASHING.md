@@ -4,6 +4,10 @@
 
 ## Первая установка
 
+**Сначала посмотрите ревизию платы.** Она напечатана на плате рядом с названием AM4P2MS (надпись вида «Ver 1.1»).
+Прошивка проверена только на ревизии 1.1. На других ревизиях устанавливайте только на свой страх и риск и будьте готовы
+вернуть родной BIOS программатором.
+
 Родной BIOS Lenovo не даст поставить чужую прошивку обычным способом. Поэтому в первый раз её записывают
 **программатором**: это небольшое USB-устройство, которое прищепкой цепляют прямо к микросхеме BIOS на плате.
 Если вы никогда этого не делали, попросите помочь знакомого, который умеет.
@@ -62,6 +66,10 @@ flashrom -p ch341a_spi -c W25Q128.W -w backup1.bin
 > By installing the firmware you accept the [disclaimer](../README.md#disclaimer): you do everything yourself and at your own risk.
 
 ## First install
+
+**Check the board revision first.** It is printed on the board next to the name AM4P2MS (something like "Ver 1.1").
+The firmware has been tested only on revision 1.1. On other revisions install it only at your own risk, and be ready to
+put Lenovo's BIOS back with the programmer.
 
 Lenovo's BIOS will not let you install other firmware the usual way. So the first time it is written with a
 **programmer**: a small USB device that clips straight onto the BIOS chip on the board. If you have never done this,
