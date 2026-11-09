@@ -11,7 +11,8 @@
   Температуру процессора смотрите по датчику самого процессора («CPU» в HWiNFO, k10temp в Linux).
 - **DASH** (удалённое управление). Встроенная программа сетевой карты 2016 года, в ней есть известные дыры.
   Не включайте DASH без надобности. Если нужен — только на прямом кабеле к своему компьютеру или в отдельной сети без
-  выхода в интернет.
+  выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
+  пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
 - **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
   и четыре планки памяти ещё никто не проверял.
@@ -34,7 +35,8 @@
   HWiNFO, k10temp on Linux).
 - **DASH** (remote management). The network card's built-in program is from 2016 and has known holes. Do not turn DASH
   on unless you need it. If you do, use it only on a direct cable to your own computer or on a separate network with no
-  internet access.
+  internet access. DASH sign-in uses the factory password that every such card shares, and our menu cannot change it
+  yet: anyone on the same network can control the computer.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
 - **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,

@@ -85,14 +85,14 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 |---|---|---|---|
 | **Процессор** | Ryzen 3 2200G | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
 | **Память** | 2 планки в двухканале, DDR4-2667 | 4 планки, профиль XMP | напряжение выше 1,2 В |
-| **Монитор** | DisplayPort (кабель DP→HDMI) | DP→DP, VGA | |
+| **Монитор** | оба разъёма DisplayPort (кабель DP→HDMI) | кабель DP→DP, VGA | |
 | **Видеокарта** | | в слоте PCIe x16 | |
 | **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
 | **Диски** | SATA (SSD, HDD) | M.2 SSD | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
-| **DASH** (удалённое управление) | текстовое меню BIOS с другого компьютера (консоль по сети) | правка настроек DASH в новом меню | |
+| **DASH** (удалённое управление) | текстовое меню BIOS с другого компьютера (консоль по сети), настройка адреса DASH в новом меню, веб-страница DASH | | |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
-| **Меню BIOS** | новое меню (Del), выбор загрузки (F9) | обновление с флешки, отчёт (будут в T1) | |
+| **Меню BIOS** | новое меню (Del), выбор загрузки (F9), отчёт для диагностики (F11) | обновление прошивки с флешки (проверяется) | |
 | **Системы** | Linux | Windows | |
 | **Звук** | | на плате и через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
@@ -205,14 +205,14 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 |---|---|---|---|
 | **Processor** | Ryzen 3 2200G | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
 | **Memory** | 2 sticks in dual channel, DDR4-2667 | 4 sticks, XMP profile | voltage above 1.2 V |
-| **Monitor** | DisplayPort (DP→HDMI cable) | DP→DP, VGA | |
+| **Monitor** | both DisplayPort sockets (DP→HDMI cable) | DP→DP cable, VGA | |
 | **Graphics card** | | in the PCIe x16 slot | |
 | **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
 | **Drives** | SATA (SSD, HDD) | M.2 SSD | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
-| **DASH** (remote management) | the text BIOS menu from another computer (network console) | editing DASH settings in the new menu | |
+| **DASH** (remote management) | the text BIOS menu from another computer (network console), setting the DASH address in the new menu, the DASH web page | | |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
-| **BIOS menu** | new menu (Del), boot choice (F9) | USB-stick update, report (coming in T1) | |
+| **BIOS menu** | new menu (Del), boot choice (F9), diagnostics report (F11) | firmware update from a USB stick (being tested) | |
 | **Systems** | Linux | Windows | |
 | **Sound** | | onboard and over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |
