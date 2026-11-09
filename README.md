@@ -90,7 +90,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
 | **Диски** | SATA (SSD, HDD) | M.2 SSD | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
-| **DASH** (удалённое управление) | текстовое меню BIOS с другого компьютера (консоль по сети), настройка адреса DASH в новом меню, веб-страница DASH | | |
+| **DASH** (удалённое управление) | текстовая консоль по сети, настройка адреса DASH в новом меню, веб-страница DASH | экран BIOS в консоли DASH | включение, выключение и перезагрузка через DASH; подключение ISO по сети |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
 | **Меню BIOS** | новое меню (Del), выбор загрузки (F9), отчёт для диагностики (F11) | обновление прошивки с флешки (проверяется) | |
 | **Системы** | Linux | Windows | |
@@ -210,7 +210,7 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
 | **Drives** | SATA (SSD, HDD) | M.2 SSD | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
-| **DASH** (remote management) | the text BIOS menu from another computer (network console), setting the DASH address in the new menu, the DASH web page | | |
+| **DASH** (remote management) | the text console over the network, setting the DASH address in the new menu, the DASH web page | the BIOS screen in the DASH console | power on, off and restart through DASH; attaching an ISO over the network |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
 | **BIOS menu** | new menu (Del), boot choice (F9), diagnostics report (F11) | firmware update from a USB stick (being tested) | |
 | **Systems** | Linux | Windows | |
