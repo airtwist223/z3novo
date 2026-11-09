@@ -14,6 +14,10 @@
   выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
   пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
+- **Меню загрузки F9 не запускает флешку, для которой у прошивки нет постоянной записи загрузки** (обычно это только что
+  вставленная флешка): компьютер перезагружается и грузится как обычно. Пока обойти так: оставьте флешку единственным
+  загрузочным устройством и просто включите компьютер — прошивка загрузится с неё сама; или в нашем меню нажмите F1 и
+  выберите флешку в родном меню BIOS (Save & Exit → Boot Override). Исправление — в T1.1.
 - **DASH: удалённое включение, выключение и перезагрузка в Linux.** Драйвер SMBus в Linux (`i2c_piix4`) при загрузке
   трогает ту же шину, по которой карта DASH передаёт команды питания, и они перестают доходить. Обход: параметр ядра
   `module_blacklist=i2c_piix4` (при этом в Linux не будут видны данные модулей памяти по SMBus). В Windows без программ,
@@ -44,6 +48,10 @@
   yet: anyone on the same network can control the computer.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
+- **The F9 boot menu does not start a USB stick the firmware has no permanent boot entry for** (usually a stick that was
+  just plugged in): the computer restarts and boots as usual. Workaround for now: leave the stick as the only bootable
+  device and just power on, and the firmware boots from it by itself; or press F1 in our menu and pick the stick in the
+  stock BIOS menu (Save & Exit → Boot Override). The fix comes in T1.1.
 - **DASH remote power on, power off and restart on Linux.** Linux's SMBus driver (`i2c_piix4`) touches, at boot, the same
   bus the DASH card sends its power commands over, and they stop getting through. Workaround: the kernel parameter
   `module_blacklist=i2c_piix4` (Linux then cannot read the memory sticks' data over SMBus). On Windows it does no harm
