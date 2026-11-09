@@ -24,7 +24,8 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - Исправлены зависания при включении и перезагрузке с Ryzen 3 2200G.
 - Загрузка по сети (UEFI).
 - **DASH** — удалённое управление (по умолчанию выключено): веб-страница карты, текстовая консоль по сети, настройки сети
-  DASH прямо в меню. Удалённое включение, выключение и перезагрузка через DASH пока не работают (разбираемся, T2).
+  DASH прямо в меню, удалённое включение, выключение и перезагрузка. В Linux для удалённого питания нужен параметр ядра
+  `module_blacklist=i2c_piix4` ([подробнее](docs/KNOWN_ISSUES.md)).
 - Скрипты для Windows и Linux, которые собирают отчёт о сбоях ([как пользоваться](tools/report/README.md)).
 
 ### Ограничения
@@ -41,7 +42,7 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - Серии перезагрузок без зависаний, сон и пробуждение по будильнику, включение по будильнику и по сети.
 - Оба разъёма DisplayPort (кабель DP→HDMI), заставка и система.
 - Отчёт F11, вентилятор под нагрузкой, сеть 1 Гбит/с, USB 3.0.
-- DASH: веб-страница, консоль в обе стороны, адрес из меню.
+- DASH: веб-страница, консоль в обе стороны, адрес из меню, удалённые перезагрузка, выключение и включение.
 
 ### Что ещё не проверено
 - Другие процессоры, четыре планки памяти, XMP, разгон памяти, режимы мощности под нагрузкой, Resizable BAR, видеокарта,
@@ -68,7 +69,8 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - Fixes for hangs at power-on and reboot with the Ryzen 3 2200G.
 - Network boot (UEFI).
 - **DASH** remote management (off by default): the card's web page, a text console over the network, DASH network
-  settings right in the menu. Remote power on, power off and restart through DASH do not work yet (being worked on, T2).
+  settings right in the menu, remote power on, power off and restart. On Linux, remote power needs the kernel parameter
+  `module_blacklist=i2c_piix4` ([details](docs/KNOWN_ISSUES.md)).
 - Scripts for Windows and Linux that collect a crash report ([how to use them](tools/report/README.md)).
 
 ### Limits
@@ -84,7 +86,7 @@ On the author's board: AM4P2MS revision 1.1, Ryzen 3 2200G, two 8 GB DDR4-2666 s
 - Series of reboots without hangs, sleep and wake by alarm, power on by alarm and over the network.
 - Both DisplayPort sockets (DP→HDMI cable), the boot logo and the system.
 - The F11 report, the fan under load, 1 Gbit/s network, USB 3.0.
-- DASH: web page, console both ways, address from the menu.
+- DASH: web page, console both ways, address from the menu, remote restart, power off and power on.
 
 ### Not tested yet
 - Other processors, four memory sticks, XMP, memory overclocking, power modes under load, Resizable BAR, a graphics card,

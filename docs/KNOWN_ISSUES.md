@@ -14,9 +14,11 @@
   выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
   пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
-- **DASH: удалённое включение, выключение и перезагрузка** пока не работают: команда с веб-страницы или из программы
-  управления принимается картой, но до компьютера не доходит. Разбираемся. Экран BIOS в текстовой консоли DASH и
-  подключение ISO по сети тоже пока не работают.
+- **DASH: удалённое включение, выключение и перезагрузка в Linux.** Драйвер SMBus в Linux (`i2c_piix4`) при загрузке
+  трогает ту же шину, по которой карта DASH передаёт команды питания, и они перестают доходить. Обход: параметр ядра
+  `module_blacklist=i2c_piix4` (при этом в Linux не будут видны данные модулей памяти по SMBus). В Windows без программ,
+  которые опрашивают SMBus (HWiNFO, AIDA64 и подобные), это не мешает. В следующей версии прошивка спрячет эту шину
+  от системы сама. Экран BIOS в текстовой консоли DASH и подключение ISO по сети пока не работают.
 - **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
   и четыре планки памяти ещё никто не проверял.
 - **Ручная частота памяти** может давать лишнюю перезагрузку при каждом втором включении. Проверяется.
@@ -42,9 +44,11 @@
   yet: anyone on the same network can control the computer.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
-- **DASH remote power on, power off and restart** do not work yet: the card accepts the command from its web page or a
-  management program, but it does not reach the computer. Being worked on. The BIOS screen in the DASH text console and
-  attaching an ISO over the network do not work yet either.
+- **DASH remote power on, power off and restart on Linux.** Linux's SMBus driver (`i2c_piix4`) touches, at boot, the same
+  bus the DASH card sends its power commands over, and they stop getting through. Workaround: the kernel parameter
+  `module_blacklist=i2c_piix4` (Linux then cannot read the memory sticks' data over SMBus). On Windows it does no harm
+  as long as no program polls the SMBus (HWiNFO, AIDA64 and the like). The next version will hide this bus from the
+  system by itself. The BIOS screen in the DASH text console and attaching an ISO over the network do not work yet.
 - **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
   other processors or four memory sticks yet.
 - **Manual memory speed** may cause an extra restart on every second power-on. Being checked.
