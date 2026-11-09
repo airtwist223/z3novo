@@ -14,6 +14,9 @@
   выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
   пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
+- **DASH: удалённое включение, выключение и перезагрузка** пока не работают: команда с веб-страницы или из программы
+  управления принимается картой, но до компьютера не доходит. Разбираемся. Экран BIOS в текстовой консоли DASH и
+  подключение ISO по сети тоже пока не работают.
 - **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
   и четыре планки памяти ещё никто не проверял.
 - **Ручная частота памяти** может давать лишнюю перезагрузку при каждом втором включении. Проверяется.
@@ -39,6 +42,9 @@
   yet: anyone on the same network can control the computer.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
+- **DASH remote power on, power off and restart** do not work yet: the card accepts the command from its web page or a
+  management program, but it does not reach the computer. Being worked on. The BIOS screen in the DASH text console and
+  attaching an ISO over the network do not work yet either.
 - **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
   other processors or four memory sticks yet.
 - **Manual memory speed** may cause an extra restart on every second power-on. Being checked.

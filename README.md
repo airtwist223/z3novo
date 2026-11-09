@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-> **Статус: публичный тест.** Первая тестовая версия — **T1** (готовится, ещё не выпущена).
+> **Статус: публичный тест.** Первая тестовая версия — **T1**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1), [что в ней](CHANGELOG.md).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -58,8 +58,8 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 - **Загрузка по сети UEFI (PXE).**
 - **DASH** — удалённое управление по сети через встроенную сетевую карту. По умолчанию выключено. Настройки сети
   DASH (адрес, маска, шлюз, имя) меняются прямо в приложении.
-- **В T1 (в работе):** обновление прошивки с флешки без программатора и «Отчёт для диагностики» по клавише F11 —
-  файл на флешке, который прикладывают к сообщению о проблеме ([подробнее](docs/DIAGNOSTICS.md)).
+- **Обновление прошивки с флешки** прямо из меню, без программатора ([как](docs/FLASHING.md#обновление)), и **«Отчёт для
+  диагностики»** по клавише F11 — файл на флешке, который прикладывают к сообщению о проблеме ([подробнее](docs/DIAGNOSTICS.md)).
 
 ## Что мы написали сами
 
@@ -99,7 +99,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
 | **DASH** (удалённое управление) | текстовая консоль по сети, настройка адреса DASH в новом меню, веб-страница DASH | экран BIOS в консоли DASH | включение, выключение и перезагрузка через DASH; подключение ISO по сети |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
-| **Меню BIOS** | новое меню (Del), выбор загрузки (F9), отчёт для диагностики (F11) | обновление прошивки с флешки (проверяется) | |
+| **Меню BIOS** | новое меню (Del), выбор загрузки (F9), отчёт для диагностики (F11), обновление прошивки с флешки | | |
 | **Системы** | Linux | Windows | |
 | **Звук** | | на плате и через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
@@ -128,7 +128,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-> **Status: public test.** The first test version is **T1** (in preparation, not released yet).
+> **Status: public test.** The first test version is **T1**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1), [what is in it](CHANGELOG.md).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
@@ -183,8 +183,8 @@ support, in Russian and English.
 - **UEFI network boot (PXE).**
 - **DASH** remote management over the onboard network card. Off by default. Its network settings (address, mask,
   gateway, name) are edited right in the app.
-- **Coming in T1 (in progress):** firmware updates from a USB stick without a programmer, and a "Diagnostics report" on
-  the F11 key — a file on a USB stick to attach to a problem report ([details](docs/DIAGNOSTICS.md)).
+- **Firmware updates from a USB stick** right from the menu, without a programmer ([how](docs/FLASHING.md#updating)), and a
+  **"Diagnostics report"** on the F11 key — a file on a USB stick to attach to a problem report ([details](docs/DIAGNOSTICS.md)).
 
 ## What we wrote ourselves
 
@@ -226,7 +226,7 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
 | **DASH** (remote management) | the text console over the network, setting the DASH address in the new menu, the DASH web page | the BIOS screen in the DASH console | power on, off and restart through DASH; attaching an ISO over the network |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
-| **BIOS menu** | new menu (Del), boot choice (F9), diagnostics report (F11) | firmware update from a USB stick (being tested) | |
+| **BIOS menu** | new menu (Del), boot choice (F9), diagnostics report (F11), firmware update from a USB stick | | |
 | **Systems** | Linux | Windows | |
 | **Sound** | | onboard and over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |

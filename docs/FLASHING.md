@@ -49,8 +49,20 @@
 
 ## Обновление
 
-С версии T1 — прямо из меню: «Обновить прошивку» и файл с USB-флешки. Ваши настройки, ключ Windows и данные платы при
-этом сохранятся. Подробная инструкция появится здесь, когда эту функцию проверят на плате.
+С версии T1 BIOS обновляется прямо из меню, без программатора. Ваши настройки, ключ Windows и данные TPM сохраняются.
+
+1. Скачайте новый образ и его контрольную сумму (`.sha256`). Положите оба файла на флешку FAT32 в папку `Z3NOVO`
+   (или в корень флешки).
+2. Включите компьютер, нажмите **Del**, откройте **Классика → Безопасность → «Прошивка BIOS» → «Обновить прошивку»**.
+3. Выберите файл. Меню проверит, что это образ Z3NOVO для этой платы и что файл цел (совпадает с `.sha256`), и покажет
+   его версию и сколько блоков изменится. Чужие образы (родной BIOS Lenovo, AFOX, Biostar) меню записывать откажется.
+4. Включите **копию микросхемы на флешку**: если что-то пойдёт не так, по ней всё можно вернуть программатором.
+5. Подтвердите и дождитесь конца записи. **Не выключайте компьютер во время записи.** Сам он не перезагрузится —
+   меню скажет, что запись закончена и проверена.
+6. Перезагрузите компьютер и откройте меню: версия видна в его заголовке.
+
+Ставить можно любую версию Z3NOVO — и новее, и старее нынешней. Вернуть родной BIOS Lenovo можно только
+программатором (см. ниже).
 
 ## Возврат к родному BIOS
 
@@ -112,8 +124,22 @@ again.
 
 ## Updating
 
-From T1 on, right from the menu: "Update firmware" with the file on a USB stick. Your settings, Windows key and board
-data are kept. Detailed instructions will be here once the feature has been tested on a board.
+From T1 on, the BIOS is updated right from the menu, with no programmer. Your settings, Windows key and TPM data are kept.
+
+1. Download the new image and its checksum (`.sha256`). Put both files on a FAT32 USB stick, in a `Z3NOVO` folder (or in
+   the stick's root).
+2. Power on, press **Del**, open **Classic → Security → BIOS firmware → Update firmware**.
+3. Pick the file. The menu checks that it is a Z3NOVO image for this board and that the file is intact (matches the
+   `.sha256`), and shows its version and how many blocks will change. It refuses other images (Lenovo's BIOS, AFOX,
+   Biostar).
+4. Turn on **a copy of the chip to the stick**: if anything goes wrong, everything can be put back from it with a
+   programmer.
+5. Confirm and wait for the write to finish. **Do not switch the computer off while it writes.** It does not restart by
+   itself; the menu says when the write is done and checked.
+6. Restart and open the menu: the version is shown in its header.
+
+Any Z3NOVO version can be installed, newer or older than the current one. Lenovo's BIOS can only be put back with a
+programmer (see below).
 
 ## Going back to Lenovo's BIOS
 

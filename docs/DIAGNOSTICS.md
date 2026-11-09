@@ -4,7 +4,7 @@
 
 | Инструмент | Где запускается | Что показывает |
 |---|---|---|
-| **Отчёт из BIOS (F11)** — с версии T1 | в меню BIOS, даже если Windows не загружается | что было при включении: где остановился запуск, почему плата перезагрузилась, ошибки процессора и памяти |
+| **Отчёт из BIOS (F11)** | в меню BIOS, даже если Windows не загружается | что было при включении: где остановился запуск, почему плата перезагрузилась, ошибки процессора и памяти |
 | **Скрипт для Windows или Linux** | в работающей системе | что было в системе: синие экраны, внезапные выключения, устройства без драйверов, ошибки дисков и видео |
 | **Тест-флешка** — готовится | загрузка с флешки, без Windows | сама гоняет тесты (нагрузка, память, сон, серия перезагрузок) и собирает всё сразу; для редких и непонятных сбоев |
 
@@ -14,8 +14,6 @@
 3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки.
 
 ## Отчёт из BIOS (F11)
-
-Появится в версии T1.
 
 1. Вставьте флешку (FAT32, свободно хотя бы 2 МБ).
 2. Включите компьютер и нажмите **Del** — откроется меню настроек.
@@ -88,7 +86,7 @@ There are three tools, and each catches something different:
 
 | Tool | Where it runs | What it shows |
 |---|---|---|
-| **BIOS report (F11)** — from version T1 | in the BIOS menu, even if Windows does not start | what happened at power-on: where a start stopped, why the board restarted, processor and memory errors |
+| **BIOS report (F11)** | in the BIOS menu, even if Windows does not start | what happened at power-on: where a start stopped, why the board restarted, processor and memory errors |
 | **Windows or Linux script** | in the running system | what happened in the system: blue screens, unexpected shutdowns, devices without drivers, disk and video errors |
 | **Test stick** — in preparation | boots from a USB stick, no Windows needed | runs tests by itself (load, memory, sleep, a series of restarts) and collects everything at once; for rare and puzzling failures |
 
@@ -98,8 +96,6 @@ There are three tools, and each catches something different:
 3. **If the failure is rare and puzzling** — the test stick's results folder.
 
 ## BIOS report (F11)
-
-Arrives in version T1.
 
 1. Plug in a USB stick (FAT32, at least 2 MB free).
 2. Power on and press **Del** — the settings menu opens.

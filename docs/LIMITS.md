@@ -26,13 +26,16 @@
 | «Игровые» с XMP на 1,2 В (обычно 2666, бывает 2933–3200) | любой | XMP |
 | «Игровые» с XMP на 1,35 В (почти все 3000 и выше) | любой | вручную на ступень-две ниже профиля, задержки «Авто» |
 
-- «Вручную» — в меню частота памяти, режим «Manual» и нужная частота; задержки оставить «Авто».
+- «Вручную» — в меню «Режим памяти» → «Вручную» и нужная частота; задержки оставить «Авто». Верхний предел в меню:
+  DDR4-3200 для Ryzen 1000, 2000, 2000G и 3000G, DDR4-3600 для Ryzen 3000, 4000G, 5000 и 5000G. Основные задержки
+  тоже можно задать вручную. При сохранении меню предупредит и попросит отметить «Я понимаю риск».
 - У «игровых» планок обычная частота без XMP — часто 2133 или 2400. В режиме «Авто» они на ней и работают.
 - XMP можно выбрать, только если все планки одинаковые и у них есть профиль. Если профилю нужно больше 1,2 В,
   меню предупредит.
 - После замены планок сначала один раз включите компьютер с «Авто», и только потом выбирайте XMP или ручную частоту.
 - Если с новой частотой память не заработала, компьютер после трёх неудачных попыток запустится сам на безопасных
-  настройках и покажет надпись «Memory OC fail». Тогда верните «Авто». Если компьютер завис и ничего не пишет,
+  настройках и покажет надпись «Memory OC fail». Так он и будет работать на обычной скорости, пока вы не откроете
+  меню (Del): оно само предложит вернуть «Авто» и объяснит, что случилось. Если компьютер завис и ничего не пишет,
   поможет только сброс настроек BIOS перемычкой или батарейкой (сбросятся все настройки).
 - Четыре планки работают медленнее, чем две: обычно DDR4-1866–2133.
 
@@ -53,7 +56,10 @@ Lenovo выпускала эту плату под процессоры с TDP �
   кулер и блок питания можно поменять, а её — только лучше охлаждать. Если ставите такой процессор: мощный блок питания,
   радиаторы на транзисторы схемы питания, обдув платы вокруг сокета, и следите за нагревом. Ограничить мощность
   процессора в меню T1 пока нельзя.
-- Разгон и автоматический разгон (PBO) в T1 выключены.
+- **Режим мощности** (Классика → Процессор): «Эко» (35 Вт — тише и холоднее), «Обычный» и «Повышенный» (до 88 Вт).
+  Есть только для Ryzen 2200G, 2400G, 3200G и 3400G; на других процессорах пункт закрыт и объясняет почему.
+  На 2200G и 3200G «Повышенный» почти ничего не даёт: этим процессорам столько обычно не нужно.
+- Разгон процессора и графики (своя частота и напряжение) в T1 закрыт.
 
 ## 4. Память для встроенной графики
 
@@ -101,13 +107,16 @@ What this means in practice:
 | "Gaming" with XMP at 1.2 V (usually 2666, sometimes 2933–3200) | any | XMP |
 | "Gaming" with XMP at 1.35 V (nearly all 3000 and up) | any | by hand, one or two steps below the profile, timings on Auto |
 
-- "By hand" means: in the menu, memory speed, mode "Manual" and the speed you want; leave the timings on Auto.
+- "By hand" means: in the menu, Memory mode → Manual and the speed you want; leave the timings on Auto. The menu goes
+  up to DDR4-3200 for Ryzen 1000, 2000, 2000G and 3000G and DDR4-3600 for Ryzen 3000, 4000G, 5000 and 5000G. The main
+  timings can be set by hand too. When you save, the menu warns you and asks you to tick "I understand the risk".
 - Without XMP, "gaming" sticks often run at an ordinary 2133 or 2400, and that is what they do on Auto.
 - XMP can be chosen only when all sticks are identical and have a profile. If the profile needs more than 1.2 V, the menu
   warns you.
 - After changing sticks, start the computer once on Auto before choosing XMP or a manual speed.
 - If memory does not work at the new speed, after three failed attempts the computer starts by itself on safe settings
-  and shows "Memory OC fail". Then set Auto again. If the computer hangs with nothing on screen, only resetting the BIOS
+  and shows "Memory OC fail". It keeps running at the normal speed until you open the menu (Del), which then offers Auto
+  by itself and explains what happened. If the computer hangs with nothing on screen, only resetting the BIOS
   settings with the jumper or the battery helps (it resets all settings).
 - Four sticks run slower than two, usually DDR4-1866–2133.
 
@@ -128,7 +137,10 @@ What follows from that:
   the cooler and the power supply can be replaced, the circuit can only be cooled better. If you fit one: a strong power
   supply, heatsinks on the power circuit's transistors, airflow over the board around the socket, and watch the
   temperatures. The T1 menu cannot cap the processor's power yet.
-- Overclocking and automatic overclocking (PBO) are off in T1.
+- **Power mode** (Classic → Processor): Eco (35 W, quieter and cooler), Normal and Boosted (up to 88 W). Only for the
+  Ryzen 2200G, 2400G, 3200G and 3400G; on other processors the item is closed and says why. On the 2200G and 3200G
+  Boosted makes little difference: these processors rarely need that much.
+- Processor and graphics overclocking (your own clock and voltage) is closed in T1.
 
 ## 4. Memory for built-in graphics
 
