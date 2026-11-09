@@ -1,5 +1,8 @@
 # Известные проблемы / Known issues
 
+- **⚠️ T1 и Windows: синий экран ACPI_BIOS_ERROR при загрузке.** Причина — наша правка таблиц ACPI в T1 (скрыт контроллер
+  GPIO, на который ссылаются другие устройства). Исправление — T1.1. Если пользуетесь Windows, T1 пока не ставьте; если уже
+  поставили — дождитесь T1.1 (обновится из меню с флешки) или верните прошлую прошивку.
 - **Windows может попросить активацию заново.** Новый BIOS называет плату по-другому, и в нём нет ключа Windows,
   который Lenovo записала в родной BIOS. Введите свой ключ или войдите в учётную запись Microsoft, к которой привязана
   лицензия. Ваш ключ остаётся в сохранённой копии родного BIOS.
@@ -32,6 +35,9 @@
 
 # Known issues
 
+- **⚠️ T1 and Windows: blue screen ACPI_BIOS_ERROR at boot.** The cause is our change to the ACPI tables in T1 (the GPIO
+  controller other devices refer to is hidden). The fix is T1.1. If you use Windows, do not install T1 yet; if you already
+  have, wait for T1.1 (it installs from the menu with a USB stick) or go back to your previous firmware.
 - **Windows may ask to be activated again.** The new BIOS gives the board a different name and does not carry the
   Windows key Lenovo put in its BIOS. Enter your key or sign in to the Microsoft account your licence is linked to.
   Your key stays in the saved copy of Lenovo's BIOS.
