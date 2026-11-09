@@ -1,8 +1,8 @@
 # Известные проблемы / Known issues
 
-- **⚠️ T1 и Windows: синий экран ACPI_BIOS_ERROR при загрузке.** Причина — наша правка таблиц ACPI в T1 (скрыт контроллер
-  GPIO, на который ссылаются другие устройства). Исправление — T1.1. Если пользуетесь Windows, T1 пока не ставьте; если уже
-  поставили — дождитесь T1.1 (обновится из меню с флешки) или верните прошлую прошивку.
+- **T1 и Windows: синий экран ACPI_BIOS_ERROR — исправлено в T1.1.** Если у вас T1, обновитесь до T1.1 из меню с флешки.
+  Если после синего экрана компьютер завис на заставке, держите кнопку питания 5 секунд, включите снова, нажмите Del и
+  обновитесь.
 - **Windows может попросить активацию заново.** Новый BIOS называет плату по-другому, и в нём нет ключа Windows,
   который Lenovo записала в родной BIOS. Введите свой ключ или войдите в учётную запись Microsoft, к которой привязана
   лицензия. Ваш ключ остаётся в сохранённой копии родного BIOS.
@@ -11,16 +11,17 @@
 - **Программы, показывающие температуры и обороты.** С процессором Ryzen 3 2200G связь с микросхемой датчиков на плате
   (ITE IT8738) иногда сбоит — это особенность процессора, прошивка её обходит. Не включайте в таких программах датчики
   этой микросхемы (раздел ITE в HWiNFO и AIDA64, драйвер it87 в Linux): они покажут ерунду и могут мешать вентилятору.
-  Температуру процессора смотрите по датчику самого процессора («CPU» в HWiNFO, k10temp в Linux).
+  Температуру процессора смотрите по датчику самого процессора («CPU» в HWiNFO, k10temp в Linux). Термозона ACPI
+  («ACPI Thermal Zone» в Windows, acpitz в Linux) всегда показывает 0 °C: это заглушка, настоящих показаний в ней нет.
+- **Linux пишет при загрузке `irq 7: nobody cared`.** Безвредно: Linux отключает это прерывание, всё остальное работает.
+  В Windows такого нет.
 - **DASH** (удалённое управление). Встроенная программа сетевой карты 2016 года, в ней есть известные дыры.
   Не включайте DASH без надобности. Если нужен — только на прямом кабеле к своему компьютеру или в отдельной сети без
   выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
   пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
 - **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
-- **Меню загрузки F9 не запускает флешку, для которой у прошивки нет постоянной записи загрузки** (обычно это только что
-  вставленная флешка): компьютер перезагружается и грузится как обычно. Пока обойти так: оставьте флешку единственным
-  загрузочным устройством и просто включите компьютер — прошивка загрузится с неё сама; или в нашем меню нажмите F1 и
-  выберите флешку в родном меню BIOS (Save & Exit → Boot Override). Исправление — в T1.1.
+- **Меню загрузки F9: диск (например, Windows Boot Manager) запускается через одну перезагрузку.** Компьютер
+  перезапускается и грузится с выбранного диска. Флешки запускаются сразу. Запуск дисков без перезагрузки — в T2.
 - **DASH: удалённое включение, выключение и перезагрузка в Linux.** Драйвер SMBus в Linux (`i2c_piix4`) при загрузке
   трогает ту же шину, по которой карта DASH передаёт команды питания, и они перестают доходить. Обход: параметр ядра
   `module_blacklist=i2c_piix4` (при этом в Linux не будут видны данные модулей памяти по SMBus). В Windows без программ,
@@ -35,9 +36,9 @@
 
 # Known issues
 
-- **⚠️ T1 and Windows: blue screen ACPI_BIOS_ERROR at boot.** The cause is our change to the ACPI tables in T1 (the GPIO
-  controller other devices refer to is hidden). The fix is T1.1. If you use Windows, do not install T1 yet; if you already
-  have, wait for T1.1 (it installs from the menu with a USB stick) or go back to your previous firmware.
+- **T1 and Windows: blue screen ACPI_BIOS_ERROR — fixed in T1.1.** If you have T1, update to T1.1 from the menu with a USB
+  stick. If the computer hangs on the logo after the blue screen, hold the power button for 5 seconds, turn it on again,
+  press Del and update.
 - **Windows may ask to be activated again.** The new BIOS gives the board a different name and does not carry the
   Windows key Lenovo put in its BIOS. Enter your key or sign in to the Microsoft account your licence is linked to.
   Your key stays in the saved copy of Lenovo's BIOS.
@@ -47,17 +48,18 @@
   (ITE IT8738) sometimes fails. That is a quirk of the processor, and the firmware works around it. Do not turn on that
   chip's sensors in such programs (the ITE section in HWiNFO and AIDA64, the it87 driver on Linux): they will show
   nonsense and can get in the fan's way. Read the processor temperature from the processor's own sensor ("CPU" in
-  HWiNFO, k10temp on Linux).
+  HWiNFO, k10temp on Linux). The ACPI thermal zone ("ACPI Thermal Zone" in Windows, acpitz on Linux) always reads 0 °C:
+  it is a placeholder with no real reading behind it.
+- **Linux prints `irq 7: nobody cared` at boot.** Harmless: Linux turns that interrupt off and everything else works.
+  Windows does not have this.
 - **DASH** (remote management). The network card's built-in program is from 2016 and has known holes. Do not turn DASH
   on unless you need it. If you do, use it only on a direct cable to your own computer or on a separate network with no
   internet access. DASH sign-in uses the factory password that every such card shares, and our menu cannot change it
   yet: anyone on the same network can control the computer.
 - **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
   tested yet.
-- **The F9 boot menu does not start a USB stick the firmware has no permanent boot entry for** (usually a stick that was
-  just plugged in): the computer restarts and boots as usual. Workaround for now: leave the stick as the only bootable
-  device and just power on, and the firmware boots from it by itself; or press F1 in our menu and pick the stick in the
-  stock BIOS menu (Save & Exit → Boot Override). The fix comes in T1.1.
+- **F9 boot menu: a disk (Windows Boot Manager, for example) starts through one restart.** The computer restarts and
+  boots from the chosen disk. USB sticks start at once. Starting disks without a restart comes in T2.
 - **DASH remote power on, power off and restart on Linux.** Linux's SMBus driver (`i2c_piix4`) touches, at boot, the same
   bus the DASH card sends its power commands over, and they stop getting through. Workaround: the kernel parameter
   `module_blacklist=i2c_piix4` (Linux then cannot read the memory sticks' data over SMBus). On Windows it does no harm

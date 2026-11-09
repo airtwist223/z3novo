@@ -3,6 +3,34 @@
 Новые версии сверху. T1, T2 и так далее — тестовые версии; 1.0 будет первой стабильной.
 Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable one.
 
+## T1.1 — исправления к T1
+
+- **Windows снова загружается.** На T1 Windows падала при загрузке с синим экраном ACPI_BIOS_ERROR, а следующий старт
+  зависал до выключения кнопкой. Причина — наша правка термозоны ACPI: прошивка превращала её в устройство без
+  названия, а Windows такое не принимает. Теперь термозона остаётся термозоной, но не обращается к микросхеме датчиков и
+  всегда показывает 0 °C (это заглушка, температуру процессора смотрите по датчику процессора).
+- **Контроллер GPIO снова виден системе** (в T1 он был скрыт). В Linux при загрузке снова появляется безвредная строка
+  `irq 7: nobody cared`.
+- **Меню загрузки F9 запускает флешку сразу**, без перезагрузки, даже если у прошивки ещё нет для неё записи загрузки.
+- **«Параметры встроенного ПО UEFI» в Windows** (и `systemctl reboot --firmware-setup` в Linux) открывают наше меню, а не
+  родное меню BIOS.
+- Обновление с T1: из меню с флешки, как обычно ([как обновить](docs/FLASHING.md#обновление)). Настройки сохраняются.
+
+## T1.1 — fixes for T1
+
+- **Windows boots again.** On T1 Windows stopped at boot with the blue screen ACPI_BIOS_ERROR, and the next start hung
+  until the power button was held. The cause was our change to the ACPI thermal zone: the firmware turned it into a
+  device with no name, which Windows does not accept. Now the thermal zone stays a thermal zone, but it no longer touches
+  the sensor chip and always reads 0 °C (a placeholder; read the processor temperature from the processor's own sensor).
+- **The GPIO controller is visible to the system again** (T1 hid it). Linux shows the harmless line
+  `irq 7: nobody cared` at boot again.
+- **The F9 boot menu starts a USB stick right away**, without a restart, even when the firmware has no boot entry for it
+  yet.
+- **"UEFI Firmware Settings" in Windows** (and `systemctl reboot --firmware-setup` on Linux) open our menu, not the stock
+  BIOS menu.
+- Updating from T1: from the menu with a USB stick, as usual ([how to update](docs/FLASHING.md#updating)). Settings are
+  kept.
+
 ## T1 — первая тестовая версия
 
 ### Что нового по сравнению с родным BIOS Lenovo

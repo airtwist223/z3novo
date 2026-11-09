@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-> **Статус: публичный тест.** Первая тестовая версия — **T1**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1), [что в ней](CHANGELOG.md).
+> **Статус: публичный тест.** Текущая тестовая версия — **T1.1**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1.1), [что в ней](CHANGELOG.md).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -97,10 +97,10 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
 | **Диски** | SATA (SSD, HDD) | M.2 SSD | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
-| **DASH** (удалённое управление) | текстовая консоль по сети, настройка адреса DASH в новом меню, веб-страница DASH, удалённые включение, выключение и перезагрузка (в Linux — с параметром `module_blacklist=i2c_piix4`) | экран BIOS в консоли DASH | подключение ISO по сети |
+| **DASH** (удалённое управление) | текстовая консоль по сети, настройка адреса DASH в новом меню, веб-страница DASH, удалённые включение, выключение и перезагрузка (в Linux — с параметром `module_blacklist=i2c_piix4`; перезагрузка проверена и при работающей Windows) | экран BIOS в консоли DASH | подключение ISO по сети |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
-| **Меню BIOS** | новое меню (Del), выбор загрузки (F9), отчёт для диагностики (F11), обновление прошивки с флешки | | |
-| **Системы** | Linux | Windows | |
+| **Меню BIOS** | новое меню (Del), выбор загрузки (F9, флешка запускается сразу), отчёт для диагностики (F11), обновление прошивки с флешки, вход в меню из Windows («Параметры встроенного ПО UEFI») | | |
+| **Системы** | Linux; Windows 11 (с T1.1: загрузка, драйверы чипсета AMD, TPM, сеть) | | |
 | **Звук** | | на плате и через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
 
@@ -129,7 +129,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-> **Status: public test.** The first test version is **T1**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1), [what is in it](CHANGELOG.md).
+> **Status: public test.** The current test version is **T1.1**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1.1), [what is in it](CHANGELOG.md).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
@@ -225,10 +225,10 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
 | **Drives** | SATA (SSD, HDD) | M.2 SSD | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
-| **DASH** (remote management) | the text console over the network, setting the DASH address in the new menu, the DASH web page, remote power on, off and restart (on Linux with `module_blacklist=i2c_piix4`) | the BIOS screen in the DASH console | attaching an ISO over the network |
+| **DASH** (remote management) | the text console over the network, setting the DASH address in the new menu, the DASH web page, remote power on, off and restart (on Linux with `module_blacklist=i2c_piix4`; restart also checked with Windows running) | the BIOS screen in the DASH console | attaching an ISO over the network |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
-| **BIOS menu** | new menu (Del), boot choice (F9), diagnostics report (F11), firmware update from a USB stick | | |
-| **Systems** | Linux | Windows | |
+| **BIOS menu** | new menu (Del), boot choice (F9, a USB stick starts at once), diagnostics report (F11), firmware update from a USB stick, opening the menu from Windows ("UEFI Firmware Settings") | | |
+| **Systems** | Linux; Windows 11 (from T1.1: boot, AMD chipset drivers, TPM, network) | | |
 | **Sound** | | onboard and over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |
 
