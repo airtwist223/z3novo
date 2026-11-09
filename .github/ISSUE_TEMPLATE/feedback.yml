@@ -1,0 +1,89 @@
+name: Идея или неудобство в меню / Menu idea or annoyance
+description: Предложение, неудобное место, кривой вид или непонятный текст в меню Z3NOVO / A suggestion, something awkward, something that looks off or text that is unclear in the Z3NOVO menu
+title: "[Меню / Menu] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Русский
+
+        Сюда — всё, что касается меню и удобства: идеи, что неудобно, что выглядит или работает криво, какой текст непонятен. Если компьютер зависает, перезагружается или не включается — это форма «Проблема», там нужны отчёты.
+
+        Одна мысль — одно сообщение: так их проще обсуждать и закрывать.
+
+        ---
+
+        ### English
+
+        Everything about the menu and how easy it is to use: ideas, what is awkward, what looks or works wrong, which text is unclear. If the computer hangs, restarts or does not start, use the "Problem" form instead: it needs the reports.
+
+        One idea per report: that makes them easier to discuss and close.
+
+        ---
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Что это / What it is
+      options:
+        - Идея, как сделать лучше / An idea to make it better
+        - Неудобно пользоваться / Awkward to use
+        - Выглядит или работает криво / Looks or works wrong
+        - Непонятный или неверный текст / Unclear or wrong text
+        - Не хватает настройки / A setting is missing
+        - Другое / Something else
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Где в меню / Where in the menu
+      description: Экран и пункт. Например, «Классика → Память → Частота памяти», «простой режим (EZ)», «меню загрузки F9», «окно сохранения». / The screen and the item. For example "Classic → Memory → Memory speed", "the simple view (EZ)", "the F9 boot menu", "the save window".
+      placeholder: Классика → Устройства → Resizable BAR
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: Как сейчас / What happens now
+      description: Что вы делаете и что видите. Если это текст — перепишите его или приложите фото. / What you do and what you see. If it is text, copy it or attach a photo.
+    validations:
+      required: true
+  - type: textarea
+    id: wanted
+    attributes:
+      label: Как было бы лучше / How it would be better
+      description: Что вы ожидали или как бы сделали сами. Можно примерно — главное, мысль. / What you expected or how you would do it. Rough is fine; the idea is what counts.
+  - type: textarea
+    id: pictures
+    attributes:
+      label: Фото или снимок экрана / Photo or screenshot
+      description: Перетащите сюда файлы. Фото экрана телефоном тоже подходит. / Drag the files here. A phone photo of the screen is fine too.
+  - type: input
+    id: version
+    attributes:
+      label: Версия Z3NOVO / Z3NOVO version
+      description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
+      placeholder: T1
+    validations:
+      required: true
+  - type: dropdown
+    id: input
+    attributes:
+      label: Чем пользуетесь в меню / How you use the menu
+      options:
+        - Мышь и клавиатура / Mouse and keyboard
+        - Только клавиатура / Keyboard only
+        - Только мышь / Mouse only
+  - type: dropdown
+    id: language
+    attributes:
+      label: Язык меню / Menu language
+      options:
+        - Русский / Russian
+        - English / English
+  - type: input
+    id: screen
+    attributes:
+      label: Монитор / Monitor
+      description: Разрешение и как подключён, если вопрос про вид. Необязательно. / The resolution and how it is connected, if the point is about how things look. Optional.
+      placeholder: 1920×1080, DisplayPort → HDMI
