@@ -45,6 +45,11 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
   страница состояния (температура процессора, вентилятор), меню загрузки (F9), разрешение экрана по монитору,
   экранная клавиатура.
 - **Вентилятор:** плавную кривую ведёт прошивка; режимы «Тихо», «Авто», «Макс» и свой редактор кривой.
+- **Родная микросхема платы.** Прошивка сделана под микросхему питания, вентиляторов и датчиков, которая стоит именно
+  на M715s, — ITE IT8738. Поэтому вентилятор процессора работает на своём разъёме и регулируется самой прошивкой,
+  а кнопка питания, включение после пропадания света и пробуждение работают как задумано. Прошивки, перенесённые
+  с других плат, рассчитаны на другую микросхему: например, у AFOX X470D4-MA-V2 стоит IT8613, и на M715s с ней
+  вентилятор процессора приходится переключать в разъём SYS_FAN, а обороты регулировать программой в Windows.
 - **Стабильный старт:** исправлены зависания при включении и перезагрузке, найденные на этой плате с Ryzen 3 2200G
   (в проверке 100 перезагрузок из 100).
 - **Включение после пропадания питания** (настройка «Restore on AC Power Loss»).
@@ -163,6 +168,11 @@ support, in Russian and English.
 - **Settings app (Del):** mouse and keyboard, RU/EN, settings search, a simple view and all settings, a status page (CPU
   temperature, fan), a boot menu (F9), screen resolution from the monitor, an on-screen keyboard.
 - **Fan:** the firmware drives a smooth curve; Quiet, Auto and Max presets and a curve editor of your own.
+- **The board's own chip.** The firmware is built for the power, fan and sensor chip that the M715s actually has, the
+  ITE IT8738. So the processor fan runs on its own header and is controlled by the firmware itself, and the power
+  button, power-on after a power cut and wake-up work as intended. Firmware carried over from other boards expects a
+  different chip: the AFOX X470D4-MA-V2, for example, has an IT8613, and on an M715s with it the processor fan has to
+  be moved to the SYS_FAN header and its speed set by a program in Windows.
 - **Reliable start:** fixes for hangs at power-on and reboot found on this board with the Ryzen 3 2200G (100 out of 100
   reboots in testing).
 - **Power on after a power loss** (the "Restore on AC Power Loss" setting).
