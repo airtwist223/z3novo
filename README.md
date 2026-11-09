@@ -93,7 +93,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **Процессор** | Ryzen 3 2200G | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
 | **Память** | 2 планки в двухканале, DDR4-2667 | 4 планки, профиль XMP | напряжение выше 1,2 В |
 | **Монитор** | оба разъёма DisplayPort (кабель DP→HDMI) | кабель DP→DP, VGA | |
-| **Видеокарта** | | в слоте PCIe x16 | |
+| **Видеокарта** | | в слоте PCIe x16; Resizable BAR — новый переключатель в меню (нужны видеокарта и процессор с его поддержкой) | |
 | **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
 | **Диски** | SATA (SSD, HDD) | M.2 SSD | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
@@ -220,7 +220,7 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **Processor** | Ryzen 3 2200G | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
 | **Memory** | 2 sticks in dual channel, DDR4-2667 | 4 sticks, XMP profile | voltage above 1.2 V |
 | **Monitor** | both DisplayPort sockets (DP→HDMI cable) | DP→DP cable, VGA | |
-| **Graphics card** | | in the PCIe x16 slot | |
+| **Graphics card** | | in the PCIe x16 slot; Resizable BAR, a new switch in the menu (needs a graphics card and processor that support it) | |
 | **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
 | **Drives** | SATA (SSD, HDD) | M.2 SSD | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
