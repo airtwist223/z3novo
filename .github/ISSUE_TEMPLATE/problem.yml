@@ -37,7 +37,7 @@ body:
     attributes:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
-      placeholder: T1
+      placeholder: T1.1
     validations:
       required: true
   - type: input

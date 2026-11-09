@@ -55,11 +55,11 @@ Lenovo выпускала эту плату под процессоры с TDP �
 - **Процессоры на 95–105 Вт** (2700X, 3800X, 5800X, 5900X и подобные) — главный предел тут схема питания на плате:
   кулер и блок питания можно поменять, а её — только лучше охлаждать. Если ставите такой процессор: мощный блок питания,
   радиаторы на транзисторы схемы питания, обдув платы вокруг сокета, и следите за нагревом. Ограничить мощность
-  процессора в меню T1 пока нельзя.
+  остальных процессоров в нашем меню пока нельзя (только «Режим мощности» ниже).
 - **Режим мощности** (Классика → Процессор): «Эко» (35 Вт — тише и холоднее), «Обычный» и «Повышенный» (до 88 Вт).
   Есть только для Ryzen 2200G, 2400G, 3200G и 3400G; на других процессорах пункт закрыт и объясняет почему.
   На 2200G и 3200G «Повышенный» почти ничего не даёт: этим процессорам столько обычно не нужно.
-- Разгон процессора и графики (своя частота и напряжение) в T1 закрыт.
+- Разгон процессора и графики (своя частота и напряжение) пока закрыт.
 
 ## 4. Память для встроенной графики
 
@@ -136,11 +136,11 @@ What follows from that:
 - **95–105 W processors** (2700X, 3800X, 5800X, 5900X and the like): the main limit here is the board's power circuit —
   the cooler and the power supply can be replaced, the circuit can only be cooled better. If you fit one: a strong power
   supply, heatsinks on the power circuit's transistors, airflow over the board around the socket, and watch the
-  temperatures. The T1 menu cannot cap the processor's power yet.
+  temperatures. Our menu cannot cap the power of other processors yet (only the Power mode below).
 - **Power mode** (Classic → Processor): Eco (35 W, quieter and cooler), Normal and Boosted (up to 88 W). Only for the
   Ryzen 2200G, 2400G, 3200G and 3400G; on other processors the item is closed and says why. On the 2200G and 3200G
   Boosted makes little difference: these processors rarely need that much.
-- Processor and graphics overclocking (your own clock and voltage) is closed in T1.
+- Processor and graphics overclocking (your own clock and voltage) is closed for now.
 
 ## 4. Memory for built-in graphics
 

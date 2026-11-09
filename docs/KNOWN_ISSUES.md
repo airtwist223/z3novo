@@ -19,7 +19,7 @@
   Не включайте DASH без надобности. Если нужен — только на прямом кабеле к своему компьютеру или в отдельной сети без
   выхода в интернет. Вход в DASH защищён заводским паролем, одинаковым у всех таких карт, а сменить его в нашем меню
   пока нельзя: любой, кто подключён к той же сети, может управлять компьютером.
-- **Разгон** процессора и графики в T1 выключен: защита от неудачного разгона ещё не проверена.
+- **Разгон** процессора и графики пока выключен: защита от неудачного разгона ещё не проверена.
 - **Меню загрузки F9: диск (например, Windows Boot Manager) запускается через одну перезагрузку.** Компьютер
   перезапускается и грузится с выбранного диска. Флешки запускаются сразу. Запуск дисков без перезагрузки — в T2.
 - **DASH: удалённое включение, выключение и перезагрузка в Linux.** Драйвер SMBus в Linux (`i2c_piix4`) при загрузке
@@ -56,7 +56,7 @@
   on unless you need it. If you do, use it only on a direct cable to your own computer or on a separate network with no
   internet access. DASH sign-in uses the factory password that every such card shares, and our menu cannot change it
   yet: anyone on the same network can control the computer.
-- **Overclocking** of the processor and graphics is off in T1: the protection against a failed overclock has not been
+- **Overclocking** of the processor and graphics is off for now: the protection against a failed overclock has not been
   tested yet.
 - **F9 boot menu: a disk (Windows Boot Manager, for example) starts through one restart.** The computer restarts and
   boots from the chosen disk. USB sticks start at once. Starting disks without a restart comes in T2.
