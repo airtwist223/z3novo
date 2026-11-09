@@ -111,6 +111,12 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — известные проблемы.
 - [CHANGELOG.md](CHANGELOG.md) — история версий.
 
+## Лицензия
+
+То, что написали мы (меню, драйверы, скрипты, документы), распространяется по лицензии [MIT](LICENSE): можно свободно брать,
+менять и раздавать, сохранив упоминание авторов. Образ прошивки содержит также части Biostar, AMI и AMD — на них эта
+лицензия не распространяется.
+
 ---
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
@@ -225,3 +231,9 @@ for processors up to 65 W (the cooler and the power supply can be upgraded; the 
 - Everything works? Tell us with the **"Works for me"** form under Issues — it builds the list of tested setups.
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — known problems.
 - [CHANGELOG.md](CHANGELOG.md) — version history.
+
+## License
+
+What we wrote ourselves (the menu, drivers, scripts and documents) is under the [MIT](LICENSE) licence: you may freely take,
+change and share it as long as the authors are credited. The firmware image also contains parts by Biostar, AMI and AMD;
+this licence does not cover them.
