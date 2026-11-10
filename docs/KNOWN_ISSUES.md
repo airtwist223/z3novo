@@ -3,6 +3,9 @@
 - **T1 и Windows: синий экран ACPI_BIOS_ERROR — исправлено в T1.1.** Если у вас T1, обновитесь до T1.1 из меню с флешки.
   Если после синего экрана компьютер завис на заставке, держите кнопку питания 5 секунд, включите снова, нажмите Del и
   обновитесь.
+- **Ryzen 4000G и Windows: тормоза после перезагрузки** (сообщение тестера с Ryzen 5 4600G). После «Перезагрузки» Windows
+  грузит процессор впустую, а «Время работы» в Диспетчере задач показывает около 10675199 дней. Пока обойти так: вместо
+  «Перезагрузки» выключите компьютер и включите снова. Исправление проверяется.
 - **Windows может попросить активацию заново.** Новый BIOS называет плату по-другому, и в нём нет ключа Windows,
   который Lenovo записала в родной BIOS. Введите свой ключ или войдите в учётную запись Microsoft, к которой привязана
   лицензия. Ваш ключ остаётся в сохранённой копии родного BIOS.
@@ -39,6 +42,9 @@
 - **T1 and Windows: blue screen ACPI_BIOS_ERROR — fixed in T1.1.** If you have T1, update to T1.1 from the menu with a USB
   stick. If the computer hangs on the logo after the blue screen, hold the power button for 5 seconds, turn it on again,
   press Del and update.
+- **Ryzen 4000G and Windows: slowdowns after a restart** (reported by a tester with a Ryzen 5 4600G). After Restart, Windows
+  keeps the processor busy for nothing and Task Manager shows an uptime of about 10675199 days. Workaround for now: instead
+  of Restart, shut the computer down and turn it on again. A fix is being tested.
 - **Windows may ask to be activated again.** The new BIOS gives the board a different name and does not carry the
   Windows key Lenovo put in its BIOS. Enter your key or sign in to the Microsoft account your licence is linked to.
   Your key stays in the saved copy of Lenovo's BIOS.

@@ -86,22 +86,22 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 ## Что работает, а что нет
 
-Проверено на плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G и двумя планками по 8 ГБ.
+Проверено на плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G и двумя планками по 8 ГБ, а также у тестеров с Ryzen 3 4300GE.
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
-| **Процессор** | Ryzen 3 2200G | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
-| **Память** | 2 планки в двухканале, DDR4-2667 | 4 планки, профиль XMP | напряжение выше 1,2 В |
-| **Монитор** | оба разъёма DisplayPort (кабель DP→HDMI) | кабель DP→DP, VGA | |
+| **Процессор** | Ryzen 3 2200G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
+| **Память** | 2 планки в двухканале, DDR4-2667; разгон из меню до DDR4-3000 (Crucial 2400 и 2666 на 4300GE) | 4 планки, профиль XMP | напряжение выше 1,2 В |
+| **Монитор** | оба разъёма DisplayPort (кабель DP→HDMI), VGA | кабель DP→DP | |
 | **Видеокарта** | | в слоте PCIe x16; Resizable BAR — новый переключатель в меню (нужны видеокарта и процессор с его поддержкой) | |
-| **USB** | USB 3.0, клавиатура, мышь | каждый разъём по отдельности | |
-| **Диски** | SATA (SSD, HDD) | M.2 SSD | |
+| **USB** | все разъёмы, USB 3.0, клавиатура, мышь | | |
+| **Диски** | SATA (SSD, HDD), M.2 NVMe (Samsung 970 EVO) | | |
 | **Сеть** | интернет 1 Гбит/с, включение по сети (Wake-on-LAN) | загрузка системы с сервера по сети (PXE) | |
 | **DASH** (удалённое управление) | текстовая консоль по сети, настройка адреса DASH в новом меню, веб-страница DASH, удалённые включение, выключение и перезагрузка (в Linux — с параметром `module_blacklist=i2c_piix4`; перезагрузка проверена и при работающей Windows) | экран BIOS в консоли DASH | подключение ISO по сети |
 | **Питание** | 100 перезагрузок без зависаний, сон, включение по таймеру и после отключения света | | |
 | **Меню BIOS** | новое меню (Del), выбор загрузки (F9, флешка запускается сразу), отчёт для диагностики (F11), обновление прошивки с флешки, вход в меню из Windows («Параметры встроенного ПО UEFI») | | |
 | **Системы** | Linux; Windows 11 (с T1.1: загрузка, драйверы чипсета AMD, TPM, сеть) | | |
-| **Звук** | | на плате и через DisplayPort | |
+| **Звук** | выход и микрофон спереди и сзади | через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
 
 ## Ограничения железа
@@ -214,22 +214,22 @@ was made from scratch:
 
 ## What works and what does not
 
-Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks.
+Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks, and by testers with a Ryzen 3 4300GE.
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
-| **Processor** | Ryzen 3 2200G | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
-| **Memory** | 2 sticks in dual channel, DDR4-2667 | 4 sticks, XMP profile | voltage above 1.2 V |
-| **Monitor** | both DisplayPort sockets (DP→HDMI cable) | DP→DP cable, VGA | |
+| **Processor** | Ryzen 3 2200G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
+| **Memory** | 2 sticks in dual channel, DDR4-2667; overclocking from the menu up to DDR4-3000 (Crucial 2400 and 2666 on a 4300GE) | 4 sticks, XMP profile | voltage above 1.2 V |
+| **Monitor** | both DisplayPort sockets (DP→HDMI cable), VGA | DP→DP cable | |
 | **Graphics card** | | in the PCIe x16 slot; Resizable BAR, a new switch in the menu (needs a graphics card and processor that support it) | |
-| **USB** | USB 3.0, keyboard, mouse | each socket on its own | |
-| **Drives** | SATA (SSD, HDD) | M.2 SSD | |
+| **USB** | every socket, USB 3.0, keyboard, mouse | | |
+| **Drives** | SATA (SSD, HDD), M.2 NVMe (Samsung 970 EVO) | | |
 | **Network** | 1 Gbit/s internet, power-on over the network (Wake-on-LAN) | starting a system from a server over the network (PXE) | |
 | **DASH** (remote management) | the text console over the network, setting the DASH address in the new menu, the DASH web page, remote power on, off and restart (on Linux with `module_blacklist=i2c_piix4`; restart also checked with Windows running) | the BIOS screen in the DASH console | attaching an ISO over the network |
 | **Power** | 100 restarts without a hang, sleep, power-on by timer and after a power cut | | |
 | **BIOS menu** | new menu (Del), boot choice (F9, a USB stick starts at once), diagnostics report (F11), firmware update from a USB stick, opening the menu from Windows ("UEFI Firmware Settings") | | |
 | **Systems** | Linux; Windows 11 (from T1.1: boot, AMD chipset drivers, TPM, network) | | |
-| **Sound** | | onboard and over DisplayPort | |
+| **Sound** | output and microphone, front and back | over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |
 
 ## Hardware limits
