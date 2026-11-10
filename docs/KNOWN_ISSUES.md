@@ -29,7 +29,9 @@
   трогает ту же шину, по которой карта DASH передаёт команды питания, и они перестают доходить. Обход: параметр ядра
   `module_blacklist=i2c_piix4` (при этом в Linux не будут видны данные модулей памяти по SMBus). В Windows без программ,
   которые опрашивают SMBus (HWiNFO, AIDA64 и подобные), это не мешает. В следующей версии прошивка спрячет эту шину
-  от системы сама. Экран BIOS в текстовой консоли DASH и подключение ISO по сети пока не работают.
+  от системы сама. Экран BIOS в текстовой консоли DASH пока не работает. Подключение ISO по сети работает, но не со всяким
+  HTTP-сервером: карта ждёт, что заголовок ответа и начало файла придут одним пакетом (простой `python3 -m http.server` так
+  не делает, и карта бросает подключение).
 - **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
   и четыре планки памяти ещё никто не проверял.
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
@@ -73,7 +75,9 @@
   bus the DASH card sends its power commands over, and they stop getting through. Workaround: the kernel parameter
   `module_blacklist=i2c_piix4` (Linux then cannot read the memory sticks' data over SMBus). On Windows it does no harm
   as long as no program polls the SMBus (HWiNFO, AIDA64 and the like). The next version will hide this bus from the
-  system by itself. The BIOS screen in the DASH text console and attaching an ISO over the network do not work yet.
+  system by itself. The BIOS screen in the DASH text console does not work yet. Attaching an ISO over the network works, but
+  not with every HTTP server: the card expects a reply's headers and the start of the file in one packet (a plain
+  `python3 -m http.server` does not do that, and the card gives up).
 - **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
   other processors or four memory sticks yet.
 - **Not every memory stick starts on this board.** A single-rank 16 GB stick built on 16 Gbit chips (AMD R7 16G
