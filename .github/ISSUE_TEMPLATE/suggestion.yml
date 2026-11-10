@@ -1,5 +1,5 @@
 name: Предложение / Suggestion
-description: Идея, что добавить в меню или в прошивку — новый пункт или экран, поддержка процессоров и памяти, разгон, скорость старта, PCIe, DASH / An idea for the menu or the firmware — a new item or screen, processor and memory support, overclocking, start-up speed, PCIe, DASH
+description: "Идея для меню или прошивки: новый пункт, процессоры, память, разгон, скорость старта, PCIe / An idea for the menu or the firmware: a new item, processors, memory, overclocking, start-up, PCIe"
 title: "[Предложение / Suggestion] "
 labels: ["enhancement"]
 body:
