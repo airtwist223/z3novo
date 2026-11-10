@@ -39,15 +39,11 @@ body:
       label: Где в меню / Where in the menu
       description: Экран и пункт. Например, «Классика → Память → Частота памяти», «простой режим (EZ)», «меню загрузки F9», «окно сохранения». / The screen and the item. For example "Classic → Memory → Memory speed", "the simple view (EZ)", "the F9 boot menu", "the save window".
       placeholder: Классика → Устройства → Resizable BAR
-    validations:
-      required: true
   - type: textarea
     id: now
     attributes:
       label: Как сейчас / What happens now
       description: Что вы делаете и что видите. Если это текст — перепишите его или приложите фото. / What you do and what you see. If it is text, copy it or attach a photo.
-    validations:
-      required: true
   - type: textarea
     id: wanted
     attributes:
