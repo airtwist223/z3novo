@@ -3,6 +3,14 @@
 Дополняется по мере проверок, наших и тестеров (форма «Всё работает» в Issues).
 Updated as checks and testers' reports (the "Everything works" form in Issues) come in.
 
+| Процессор | Поколение | Версии | Итог |
+|---|---|---|---|
+| [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1 | ✅ работает |
+| [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
+| [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправление проверяется |
+
+[English version](#what-has-been-tested)
+
 ## Ryzen 3 2200G
 
 > Raven Ridge · 4 ядра / 4 потока · встроенная Vega 8
@@ -49,6 +57,12 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 ---
 
 # What has been tested
+
+| Processor | Family | Versions | Result |
+|---|---|---|---|
+| [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1 | ✅ works |
+| [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
+| [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, a fix is being tested |
 
 ## Ryzen 3 2200G
 
