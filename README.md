@@ -116,6 +116,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 - [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — как собрать отчёт о проблеме.
 - Всё работает? Расскажите через форму **«Всё работает»** в разделе Issues — так собирается список проверенных сборок.
 - Есть идея, что-то неудобно или криво в меню? Форма **«Идея или неудобство в меню»** в разделе Issues.
+- Предложение, что добавить в саму прошивку (поддержка процессоров, разгон, скорость старта, PCIe…)? Форма **«Предложение»** в разделе Issues.
 - [docs/TESTED.md](docs/TESTED.md) — что проверено, на каком железе.
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — известные проблемы.
 - [CHANGELOG.md](CHANGELOG.md) — история версий.
@@ -246,6 +247,7 @@ for processors up to 65 W (the cooler and the power supply can be upgraded; the 
 - [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — how to collect a problem report.
 - Everything works? Tell us with the **"Works for me"** form under Issues — it builds the list of tested setups.
 - An idea, or something awkward or off in the menu? The **"Menu idea or annoyance"** form under Issues.
+- A suggestion for the firmware itself (processor support, overclocking, start-up speed, PCIe…)? The **"Suggestion"** form under Issues.
 - [docs/TESTED.md](docs/TESTED.md) — what has been tested, on which hardware.
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — known problems.
 - [CHANGELOG.md](CHANGELOG.md) — version history.

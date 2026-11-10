@@ -1,0 +1,72 @@
+name: Предложение / Suggestion
+description: Новая возможность прошивки — поддержка процессоров и памяти, разгон, скорость старта, PCIe, DASH и другое / A new firmware feature — processor and memory support, overclocking, start-up speed, PCIe, DASH and more
+title: "[Предложение / Suggestion] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Русский
+
+        Сюда — идеи, что ещё стоит добавить или изменить в самой прошивке. Все предложения собираются здесь, даже если сделать их сразу нельзя: так видно, что людям нужно.
+
+        Идея про само меню (вид, тексты, удобство) — форма «Идея или неудобство в меню». Если компьютер зависает или не включается — форма «Проблема».
+
+        Одна мысль — одно предложение.
+
+        ---
+
+        ### English
+
+        Ideas for what to add or change in the firmware itself. Every suggestion is collected here, even if it cannot be done right away: it shows what people need.
+
+        An idea about the menu itself (its look, texts, ease of use) goes to the "Menu idea or annoyance" form. If the computer hangs or does not start, use the "Problem" form.
+
+        One idea per suggestion.
+
+        ---
+  - type: dropdown
+    id: area
+    attributes:
+      label: О чём / What it is about
+      options:
+        - Поддержка процессоров / Processor support
+        - Память / Memory
+        - Разгон и питание / Overclocking and power
+        - PCIe, видеокарты, накопители / PCIe, graphics cards, drives
+        - Скорость старта и загрузка / Start-up speed and boot
+        - Сеть и DASH / Network and DASH
+        - Безопасность (пароли, Secure Boot, TPM) / Security (passwords, Secure Boot, TPM)
+        - Вентиляторы и датчики / Fans and sensors
+        - Обновление и восстановление прошивки / Firmware update and recovery
+        - Другое / Something else
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Что предлагаете / What you suggest
+      description: Коротко и по делу. / Short and to the point.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Зачем и кому пригодится / Why, and who would use it
+      description: "Что это даст: быстрее, стабильнее, заработает какое-то железо. / What it would give: faster, steadier, some hardware would work."
+  - type: textarea
+    id: elsewhere
+    attributes:
+      label: Где так уже сделано / Where it is already done
+      description: Необязательно. Если видели такое в BIOS другой платы — какой, и как там называется пункт. / Optional. If you have seen it in another board's BIOS — which one, and what the item is called there.
+  - type: input
+    id: hardware
+    attributes:
+      label: Ваше железо / Your hardware
+      description: Необязательно. Процессор, память, видеокарта, диски — если предложение про них. / Optional. Processor, memory, graphics card, drives — if the suggestion is about them.
+  - type: checkboxes
+    id: test
+    attributes:
+      label: Проверка / Testing
+      options:
+        - label: Готов(а) проверить на своём компьютере, когда будет пробная сборка / I can test it on my computer when there is a test build
