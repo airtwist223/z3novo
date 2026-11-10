@@ -88,7 +88,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
-| **Процессор** | Ryzen 3 2200G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
+| **Процессор** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
 | **Память** | 2 планки, разгон до DDR4-3200 | 4 планки, XMP | напряжение выше 1,2 В |
 | **Монитор** | оба DisplayPort, VGA | кабель DP→DP | |
 | **Видеокарта** | | PCIe x16, Resizable BAR | |
@@ -217,7 +217,7 @@ was made from scratch:
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
-| **Processor** | Ryzen 3 2200G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
+| **Processor** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
 | **Memory** | 2 sticks, overclocking up to DDR4-3200 | 4 sticks, XMP | voltage above 1.2 V |
 | **Monitor** | both DisplayPort sockets, VGA | DP→DP cable | |
 | **Graphics card** | | PCIe x16, Resizable BAR | |

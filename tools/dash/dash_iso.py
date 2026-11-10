@@ -83,6 +83,8 @@ class Card:
         insts = self.instances(cls)
         if index is not None:
             insts = insts[index:index + 1]
+        if not insts:
+            raise RuntimeError(f"{cls}: the card has no such service (is DASH on and the address right?)")
         for i in insts:
             body = f'<p:RequestStateChange_INPUT xmlns:p="{CIM + cls}"><p:RequestedState>{value}</p:RequestedState></p:RequestStateChange_INPUT>'
             r = self.call(CIM + cls, CIM + cls + "/RequestStateChange", body, self.selectors(i))

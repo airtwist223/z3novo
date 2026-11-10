@@ -41,6 +41,9 @@
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
   Nanya) не стартует на ней ни с одной прошивкой, включая родную Lenovo: писки и перезагрузка по кругу. Не помогает и
   пониженная частота (2133, 2T). На платах Intel тот же модуль работает. Обычные модули (на чипах 8 Гбит) работают.
+  В паре с другой планкой компьютер запускается, но этот модуль не используется: Windows показывает всю память как
+  установленную, а доступна только память второй планки, и работает один канал. В отчёте F11 это видно по строке
+  «видно в карте памяти» (с T2 — прямо: «планка стоит, но не используется»).
 - **Ручная частота памяти:** перед каждым запуском системы одна лишняя перезагрузка (несколько секунд, система потом
   работает нормально). Причина найдена — модуль AMD каждый раз пересобирает настройки памяти; исправление — в T2.
 - **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4.
@@ -92,7 +95,9 @@
 - **Not every memory stick starts on this board.** A single-rank 16 GB stick built on 16 Gbit chips (AMD R7 16G
   DDR4-2666, Nanya chips) does not start on it with any firmware, Lenovo's own included: beeps and a restart in a loop.
   A lower speed (2133, 2T) does not help either. The same stick works on Intel boards. Ordinary sticks (on 8 Gbit chips)
-  work.
+  work. Paired with another stick the computer starts, but this stick is not used: Windows lists all the memory as
+  installed, only the other stick's memory is available, and one channel works. The F11 report shows it in the
+  "visible in the memory map" line (from T2 directly: "stick present, not in use").
 - **Manual memory speed:** one extra restart before every start of the system (a few seconds; the system then runs
   normally). The cause is found: an AMD module rebuilds the memory settings every time; the fix comes in T2.
 - **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4.

@@ -6,7 +6,9 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | Процессор | Поколение | Версии | Итог |
 |---|---|---|---|
 | [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1 | ✅ работает |
+| [Ryzen 5 2400G](#ryzen-5-2400g) | Raven Ridge | T1.1 | ✅ работает, 2 × 16 ГБ до 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
+| [Ryzen 5 3400G](#ryzen-5-3400g) | Picasso | T1.1 | ✅ работает, сон и включения |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
 | [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправление проверяется |
 
@@ -29,6 +31,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 - Windows 11: после перезагрузки часы всех ядер совпадают (расхождение меньше 1 мкс).
 - Шторма прерываний от контроллера GPIO в Windows нет (0 % времени на прерывания).
 
+## Ryzen 5 2400G
+
+> Raven Ridge · 4 ядра / 8 потоков · встроенная Vega 11
+
+| | |
+|---|---|
+| **Версии** | T1.1 |
+| **Системы** | Windows 10 |
+| **Память** | 2 × 16 ГБ Apacer NOX (комплект DDR4-3600), проверено на 2133 и 3200 |
+| ✅ **Работает** | включение и перезагрузки · двухканальная память · DisplayPort · USB · сеть · звук · M.2 · частота памяти вручную · вентилятор · вычислительная видеокарта P106-100 вместе со встроенной графикой |
+| ⚠️ **Особенности** | частоты и напряжения процессора в T1.1 закрыты (разгон процессора — в T2) |
+
 ## Ryzen 3 3200G
 
 > Picasso · 4 ядра / 4 потока · встроенная Vega 8
@@ -39,6 +53,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Системы** | Windows |
 | ✅ **Работает** | разгон памяти до **2933** — штатного предела этого процессора по AMD |
 | ⚠️ **Особенности** | 3200 на 1,2 В не держит (контроллеру памяти этого процессора нужно больше, а напряжение памяти на этой плате не поднять) · через пассивный переходник DP→HDMI нет 144 Гц в 1440p ([известные проблемы](KNOWN_ISSUES.md)) |
+
+## Ryzen 5 3400G
+
+> Picasso · 4 ядра / 8 потоков · встроенная Vega 11
+
+| | |
+|---|---|
+| **Версии** | T1.1 |
+| **Системы** | Windows 11 |
+| **Память** | 2 × 8 ГБ Crucial DDR4-2400, разгон до 2866 |
+| ✅ **Работает** | перезагрузки · сон · включение после пропадания света · USB · сеть · звук · DisplayPort · SATA · M.2 · частота памяти вручную; включения стабильнее, чем на прошивках Acer и AFOX |
+| ⚠️ **Особенности** | с ручной частотой памяти перед запуском Windows бывает одна лишняя перезагрузка (исправление — в T2) |
 
 ## Ryzen 3 4300GE
 
@@ -76,7 +102,9 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | Processor | Family | Versions | Result |
 |---|---|---|---|
 | [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1 | ✅ works |
+| [Ryzen 5 2400G](#ryzen-5-2400g-1) | Raven Ridge | T1.1 | ✅ works, 2 × 16 GB up to 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
+| [Ryzen 5 3400G](#ryzen-5-3400g-1) | Picasso | T1.1 | ✅ works, sleep and power-ons |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
 | [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, a fix is being tested |
 
@@ -97,6 +125,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 - Windows 11: after a restart the clocks of all cores agree (less than 1 µs apart).
 - No interrupt storm from the GPIO controller in Windows (0 % interrupt time).
 
+## Ryzen 5 2400G
+
+> Raven Ridge · 4 cores / 8 threads · Vega 11 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.1 |
+| **Systems** | Windows 10 |
+| **Memory** | 2 × 16 GB Apacer NOX (a DDR4-3600 kit), tested at 2133 and 3200 |
+| ✅ **Works** | power-on and restarts · dual-channel memory · DisplayPort · USB · network · sound · M.2 · manual memory speed · fan · a P106-100 compute card alongside the built-in graphics |
+| ⚠️ **Notes** | the processor's clocks and voltages are locked in T1.1 (processor overclocking comes in T2) |
+
 ## Ryzen 3 3200G
 
 > Picasso · 4 cores / 4 threads · Vega 8 graphics
@@ -107,6 +147,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Systems** | Windows |
 | ✅ **Works** | memory overclocked to **2933**, AMD's stated limit for this processor |
 | ⚠️ **Notes** | does not hold 3200 at 1.2 V (this processor's memory controller needs more, and this board cannot raise the memory voltage) · no 144 Hz at 1440p through a passive DP→HDMI adapter ([known issues](KNOWN_ISSUES.md)) |
+
+## Ryzen 5 3400G
+
+> Picasso · 4 cores / 8 threads · Vega 11 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.1 |
+| **Systems** | Windows 11 |
+| **Memory** | 2 × 8 GB Crucial DDR4-2400, overclocked to 2866 |
+| ✅ **Works** | restarts · sleep · power-on after a power cut · USB · network · sound · DisplayPort · SATA · M.2 · manual memory speed; power-ons are steadier than with the Acer and AFOX firmware |
+| ⚠️ **Notes** | with a manual memory speed there is one extra restart before Windows starts (the fix comes in T2) |
 
 ## Ryzen 3 4300GE
 
