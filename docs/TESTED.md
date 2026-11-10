@@ -23,6 +23,15 @@ Updated as reports come in: our own checks and testers' reports (the "Everything
 | **Звук** | выход и микрофон спереди и сзади | через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
 
+### Отчёты: какое железо, что проверено
+
+| Процессор | Память | Версия | Что проверено |
+|---|---|---|---|
+| Ryzen 3 2200G | 2 × 8 ГБ DDR4-2666 (Crucial + Kingston) | T1, T1.1 | плата автора: всё из таблицы выше, Windows 11 и Linux, DASH, серии перезагрузок |
+| Ryzen 3 2200G | 2 × 4 ГБ (2666 + Samsung 2400), работают на 2400 | T1.1 | Windows 11 Pro: перезагрузки, сон, USB, сеть, звук, DisplayPort, SATA, обновление из меню |
+| Ryzen 3 4300GE | 2 × 8 ГБ Crucial (2666 + 2400) | T1.1r (тестовая) | память на 3000 и 3200 (задержки «Авто», AIDA64 15 мин, TestMem5 3 цикла), все USB, сеть, оба DisplayPort и VGA, звук и микрофон спереди и сзади, M.2 NVMe Samsung 970 EVO |
+| Ryzen 5 4600G | — | T1.1 | Windows: тормоза после перезагрузки (см. известные проблемы), исправление проверяется |
+
 ---
 
 ## What works and what does not
@@ -44,3 +53,12 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **Systems** | Linux; Windows 11 (from T1.1: boot, sleep, AMD chipset drivers, TPM, network) | | |
 | **Sound** | output and microphone, front and back | over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |
+
+### Reports: which hardware, what was tested
+
+| Processor | Memory | Version | What was tested |
+|---|---|---|---|
+| Ryzen 3 2200G | 2 × 8 GB DDR4-2666 (Crucial + Kingston) | T1, T1.1 | the author's board: everything in the table above, Windows 11 and Linux, DASH, restart series |
+| Ryzen 3 2200G | 2 × 4 GB (2666 + Samsung 2400), running at 2400 | T1.1 | Windows 11 Pro: restarts, sleep, USB, network, sound, DisplayPort, SATA, update from the menu |
+| Ryzen 3 4300GE | 2 × 8 GB Crucial (2666 + 2400) | T1.1r (test build) | memory at 3000 and 3200 (timings on Auto, AIDA64 15 min, TestMem5 3 cycles), every USB socket, network, both DisplayPort sockets and VGA, sound and microphone front and back, M.2 NVMe Samsung 970 EVO |
+| Ryzen 5 4600G | — | T1.1 | Windows: slowdowns after a restart (see known issues), a fix is being tested |
