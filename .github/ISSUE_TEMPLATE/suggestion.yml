@@ -1,5 +1,5 @@
 name: Предложение / Suggestion
-description: Новая возможность прошивки — поддержка процессоров и памяти, разгон, скорость старта, PCIe, DASH и другое / A new firmware feature — processor and memory support, overclocking, start-up speed, PCIe, DASH and more
+description: Идея, что добавить в меню или в прошивку — новый пункт или экран, поддержка процессоров и памяти, разгон, скорость старта, PCIe, DASH / An idea for the menu or the firmware — a new item or screen, processor and memory support, overclocking, start-up speed, PCIe, DASH
 title: "[Предложение / Suggestion] "
 labels: ["enhancement"]
 body:
@@ -8,9 +8,9 @@ body:
       value: |
         ### Русский
 
-        Сюда — идеи, что ещё стоит добавить или изменить в самой прошивке. Все предложения собираются здесь, даже если сделать их сразу нельзя: так видно, что людям нужно.
+        Сюда — идеи, что ещё стоит добавить или изменить: в меню или в самой прошивке. Все предложения собираются здесь, даже если сделать их сразу нельзя: так видно, что людям нужно.
 
-        Идея про само меню (вид, тексты, удобство) — форма «Идея или неудобство в меню». Если компьютер зависает или не включается — форма «Проблема».
+        Если в меню что-то неудобно, выглядит криво или непонятно написано — форма «Неудобство или ошибка в меню». Если компьютер зависает или не включается — форма «Проблема».
 
         Одна мысль — одно предложение.
 
@@ -18,9 +18,9 @@ body:
 
         ### English
 
-        Ideas for what to add or change in the firmware itself. Every suggestion is collected here, even if it cannot be done right away: it shows what people need.
+        Ideas for what to add or change: in the menu or in the firmware itself. Every suggestion is collected here, even if it cannot be done right away: it shows what people need.
 
-        An idea about the menu itself (its look, texts, ease of use) goes to the "Menu idea or annoyance" form. If the computer hangs or does not start, use the "Problem" form.
+        If something in the menu is awkward, looks off or reads unclearly, use the "Menu annoyance or glitch" form. If the computer hangs or does not start, use the "Problem" form.
 
         One idea per suggestion.
 
@@ -30,6 +30,7 @@ body:
     attributes:
       label: О чём / What it is about
       options:
+        - Меню (новый пункт, экран, функция) / The menu (a new item, screen or feature)
         - Поддержка процессоров / Processor support
         - Память / Memory
         - Разгон и питание / Overclocking and power

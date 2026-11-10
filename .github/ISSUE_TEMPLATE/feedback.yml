@@ -1,5 +1,5 @@
-name: Идея или неудобство в меню / Menu idea or annoyance
-description: Предложение, неудобное место, кривой вид или непонятный текст в меню Z3NOVO / A suggestion, something awkward, something that looks off or text that is unclear in the Z3NOVO menu
+name: Неудобство или ошибка в меню / Menu annoyance or glitch
+description: Неудобное место, кривой вид, непонятный текст или недостающая настройка в меню Z3NOVO / Something awkward, something that looks off, unclear text or a missing setting in the Z3NOVO menu
 title: "[Меню / Menu] "
 body:
   - type: markdown
@@ -7,7 +7,7 @@ body:
       value: |
         ### Русский
 
-        Сюда — всё, что касается меню и удобства: идеи, что неудобно, что выглядит или работает криво, какой текст непонятен. Если компьютер зависает, перезагружается или не включается — это форма «Проблема», там нужны отчёты. Новая возможность самой прошивки (процессоры, разгон, скорость старта) — форма «Предложение».
+        Сюда — что в меню неудобно, выглядит или работает криво, какой текст непонятен, какой настройки не хватает. Идеи, что добавить — в меню или в саму прошивку, — форма «Предложение». Если компьютер зависает, перезагружается или не включается — это форма «Проблема», там нужны отчёты.
 
         Одна мысль — одно сообщение: так их проще обсуждать и закрывать.
 
@@ -15,9 +15,9 @@ body:
 
         ### English
 
-        Everything about the menu and how easy it is to use: ideas, what is awkward, what looks or works wrong, which text is unclear. If the computer hangs, restarts or does not start, use the "Problem" form instead: it needs the reports. A new feature of the firmware itself (processors, overclocking, start-up speed) goes to the "Suggestion" form.
+        What in the menu is awkward, looks or works wrong, which text is unclear, which setting is missing. Ideas for something new — in the menu or in the firmware itself — go to the "Suggestion" form. If the computer hangs, restarts or does not start, use the "Problem" form instead: it needs the reports.
 
-        One idea per report: that makes them easier to discuss and close.
+        One thing per report: that makes them easier to discuss and close.
 
         ---
   - type: dropdown
@@ -25,7 +25,6 @@ body:
     attributes:
       label: Что это / What it is
       options:
-        - Идея, как сделать лучше / An idea to make it better
         - Неудобно пользоваться / Awkward to use
         - Выглядит или работает криво / Looks or works wrong
         - Непонятный или неверный текст / Unclear or wrong text
@@ -39,11 +38,15 @@ body:
       label: Где в меню / Where in the menu
       description: Экран и пункт. Например, «Классика → Память → Частота памяти», «простой режим (EZ)», «меню загрузки F9», «окно сохранения». / The screen and the item. For example "Classic → Memory → Memory speed", "the simple view (EZ)", "the F9 boot menu", "the save window".
       placeholder: Классика → Устройства → Resizable BAR
+    validations:
+      required: true
   - type: textarea
     id: now
     attributes:
       label: Как сейчас / What happens now
       description: Что вы делаете и что видите. Если это текст — перепишите его или приложите фото. / What you do and what you see. If it is text, copy it or attach a photo.
+    validations:
+      required: true
   - type: textarea
     id: wanted
     attributes:
