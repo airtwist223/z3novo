@@ -6,6 +6,10 @@
 - **Ryzen 4000G и Windows: тормоза после перезагрузки** (сообщение тестера с Ryzen 5 4600G). После «Перезагрузки» Windows
   грузит процессор впустую, а «Время работы» в Диспетчере задач показывает около 10675199 дней. Пока обойти так: вместо
   «Перезагрузки» выключите компьютер и включите снова. Исправление проверяется.
+- **Пассивный переходник DisplayPort → HDMI: нет высокой частоты кадров.** Оба разъёма платы работают как настоящие
+  DisplayPort (как у Lenovo), и с пассивным переходником драйвер AMD ограничивает частоту его паспортным пределом: для
+  1440p обычно 60–75 Гц. Для 144 Гц возьмите кабель DP→DP (если у монитора есть вход DisplayPort) или активный
+  переходник DP 1.4 → HDMI 2.0. В T2 в меню появится выбор «HDMI через переходник» для второго разъёма.
 - **Windows может попросить активацию заново.** Новый BIOS называет плату по-другому, и в нём нет ключа Windows,
   который Lenovo записала в родной BIOS. Введите свой ключ или войдите в учётную запись Microsoft, к которой привязана
   лицензия. Ваш ключ остаётся в сохранённой копии родного BIOS.
@@ -51,6 +55,10 @@
 - **Ryzen 4000G and Windows: slowdowns after a restart** (reported by a tester with a Ryzen 5 4600G). After Restart, Windows
   keeps the processor busy for nothing and Task Manager shows an uptime of about 10675199 days. Workaround for now: instead
   of Restart, shut the computer down and turn it on again. A fix is being tested.
+- **Passive DisplayPort → HDMI adapter: no high refresh rate.** Both of the board's sockets work as real DisplayPort (as
+  Lenovo has them), and with a passive adapter the AMD driver caps the refresh rate at the adapter's rated limit: for
+  1440p usually 60–75 Hz. For 144 Hz use a DP→DP cable (if the monitor has a DisplayPort input) or an active DP 1.4 →
+  HDMI 2.0 adapter. T2 adds a menu choice, "HDMI through an adapter", for the second socket.
 - **Windows may ask to be activated again.** The new BIOS gives the board a different name and does not carry the
   Windows key Lenovo put in its BIOS. Enter your key or sign in to the Microsoft account your licence is linked to.
   Your key stays in the saved copy of Lenovo's BIOS.

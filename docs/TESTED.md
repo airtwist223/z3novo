@@ -6,6 +6,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | Процессор | Поколение | Версии | Итог |
 |---|---|---|---|
 | [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1 | ✅ работает |
+| [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
 | [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправление проверяется |
 
@@ -27,6 +28,17 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 - Серии перезагрузок: 25, 10 и 100 подряд без зависаний.
 - Windows 11: после перезагрузки часы всех ядер совпадают (расхождение меньше 1 мкс).
 - Шторма прерываний от контроллера GPIO в Windows нет (0 % времени на прерывания).
+
+## Ryzen 3 3200G
+
+> Picasso · 4 ядра / 4 потока · встроенная Vega 8
+
+| | |
+|---|---|
+| **Версии** | T1.x |
+| **Системы** | Windows |
+| ✅ **Работает** | разгон памяти до **2933** — штатного предела этого процессора по AMD |
+| ⚠️ **Особенности** | 3200 на 1,2 В не держит (контроллеру памяти этого процессора нужно больше, а напряжение памяти на этой плате не поднять) · через пассивный переходник DP→HDMI нет 144 Гц в 1440p ([известные проблемы](KNOWN_ISSUES.md)) |
 
 ## Ryzen 3 4300GE
 
@@ -64,6 +76,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | Processor | Family | Versions | Result |
 |---|---|---|---|
 | [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1 | ✅ works |
+| [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
 | [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, a fix is being tested |
 
@@ -83,6 +96,17 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 - Restart series: 25, 10 and 100 in a row without a hang.
 - Windows 11: after a restart the clocks of all cores agree (less than 1 µs apart).
 - No interrupt storm from the GPIO controller in Windows (0 % interrupt time).
+
+## Ryzen 3 3200G
+
+> Picasso · 4 cores / 4 threads · Vega 8 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.x |
+| **Systems** | Windows |
+| ✅ **Works** | memory overclocked to **2933**, AMD's stated limit for this processor |
+| ⚠️ **Notes** | does not hold 3200 at 1.2 V (this processor's memory controller needs more, and this board cannot raise the memory voltage) · no 144 Hz at 1440p through a passive DP→HDMI adapter ([known issues](KNOWN_ISSUES.md)) |
 
 ## Ryzen 3 4300GE
 
