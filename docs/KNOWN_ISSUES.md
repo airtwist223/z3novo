@@ -39,8 +39,8 @@
 - **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
   и четыре планки памяти ещё никто не проверял.
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
-  Nanya) не стартует на ней ни с одной прошивкой, включая родную Lenovo: три писка и перезагрузка по кругу. На платах
-  Intel тот же модуль работает. Обычные модули (на чипах 8 Гбит) работают.
+  Nanya) не стартует на ней ни с одной прошивкой, включая родную Lenovo: писки и перезагрузка по кругу. Не помогает и
+  пониженная частота (2133, 2T). На платах Intel тот же модуль работает. Обычные модули (на чипах 8 Гбит) работают.
 - **Ручная частота памяти:** перед каждым запуском системы одна лишняя перезагрузка (несколько секунд, система потом
   работает нормально). Причина найдена — модуль AMD каждый раз пересобирает настройки памяти; исправление — в T2.
 - **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4.
@@ -90,8 +90,9 @@
 - **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
   other processors or four memory sticks yet.
 - **Not every memory stick starts on this board.** A single-rank 16 GB stick built on 16 Gbit chips (AMD R7 16G
-  DDR4-2666, Nanya chips) does not start on it with any firmware, Lenovo's own included: three beeps and a restart in a
-  loop. The same stick works on Intel boards. Ordinary sticks (on 8 Gbit chips) work.
+  DDR4-2666, Nanya chips) does not start on it with any firmware, Lenovo's own included: beeps and a restart in a loop.
+  A lower speed (2133, 2T) does not help either. The same stick works on Intel boards. Ordinary sticks (on 8 Gbit chips)
+  work.
 - **Manual memory speed:** one extra restart before every start of the system (a few seconds; the system then runs
   normally). The cause is found: an AMD module rebuilds the memory settings every time; the fix comes in T2.
 - **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4.
