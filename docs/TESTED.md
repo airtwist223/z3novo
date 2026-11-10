@@ -1,32 +1,50 @@
 # Что проверено / What has been tested
 
-Дополняется по мере проверок: наши собственные и отчёты тестеров (форма «Всё работает» в Issues).
-Updated as reports come in: our own checks and testers' reports (the "Everything works" form in Issues).
+Дополняется по мере проверок, наших и тестеров (форма «Всё работает» в Issues).
+Updated as checks and testers' reports (the "Everything works" form in Issues) come in.
 
-## По процессорам
+## Ryzen 3 2200G
 
-### Ryzen 3 2200G (Raven Ridge)
+> Raven Ridge · 4 ядра / 4 потока · встроенная Vega 8
 
-**Плата автора** — 2 × 8 ГБ DDR4-2666 (Crucial + Kingston), версии T1 и T1.1, Windows 11 и Linux:
-- всё из общей таблицы ниже: перезагрузки (серии по 10–100), сон, включение по таймеру, по сети и после пропадания
-  света, оба DisplayPort, USB 3.0, сеть 1 Гбит/с, SATA, TPM, вентилятор;
-- Windows 11: загрузка, драйверы чипсета AMD, часы ядер после перезагрузки в порядке;
-- DASH: консоль, веб-страница, удалённое включение, выключение и перезагрузка, ISO по сети.
+| | |
+|---|---|
+| **Версии** | T1, T1.1 |
+| **Системы** | Windows 11, Windows 11 Pro, Linux |
+| **Память** | 2 × 8 ГБ DDR4-2666 (Crucial + Kingston) · 2 × 4 ГБ разные (2666 + 2400) — вместе работают на 2400 |
+| ✅ **Работает** | перезагрузки, сон, включение по таймеру, по сети и после пропадания света · оба DisplayPort · USB 3.0 · сеть 1 Гбит/с · SATA · звук · TPM 2.0 · вентилятор · обновление BIOS из меню · DASH: консоль, веб-страница, удалённое питание, ISO по сети |
+| ⚠️ **Особенности** | COM-порт в Windows иногда не определяется |
 
-**Тестер** — 2 × 4 ГБ (2666 + Samsung 2400, вместе работают на 2400), T1.1, Windows 11 Pro:
-- перезагрузки, сон, USB, сеть, звук, DisplayPort, SATA, обновление BIOS из меню.
+**Опыты**
+- Серии перезагрузок: 25, 10 и 100 подряд без зависаний.
+- Windows 11: после перезагрузки часы всех ядер совпадают (расхождение меньше 1 мкс).
+- Шторма прерываний от контроллера GPIO в Windows нет (0 % времени на прерывания).
 
-### Ryzen 3 4300GE (Renoir)
+## Ryzen 3 4300GE
 
-**Тестер** — 2 × 8 ГБ Crucial (2666 + 2400), тестовая сборка T1.1r, Windows:
-- память на 3000 и 3200 с задержками «Авто»: AIDA64 (FPU, кэш, память) 15 минут, TestMem5 3 цикла — без ошибок;
-- перезагрузки без тормозов, все USB, сеть, оба DisplayPort и VGA, звук и микрофон спереди и сзади,
-  M.2 NVMe Samsung 970 EVO.
+> Renoir · 4 ядра / 8 потоков · встроенная Vega 5
 
-### Ryzen 5 4600G (Renoir)
+| | |
+|---|---|
+| **Версии** | T1.1r (тестовая сборка) |
+| **Системы** | Windows |
+| **Память** | 2 × 8 ГБ Crucial (2666 + 2400) |
+| ✅ **Работает** | перезагрузки · все USB · сеть · оба DisplayPort и VGA · звук и микрофон спереди и сзади · M.2 NVMe (Samsung 970 EVO) |
+| ⚠️ **Особенности** | с ручной частотой памяти при старте бывает лишняя перезагрузка |
 
-**Тестер**, T1.1, Windows:
-- после «Перезагрузки» Windows тормозит (см. [известные проблемы](KNOWN_ISSUES.md)); исправление (T1.1r) проверяется.
+**Опыты**
+- Память на **3000** и **3200** с задержками «Авто»: на 3200 вышло CL 24-23-23-52, 1T, контроллер памяти 1:1.
+  AIDA64 (FPU, кэш, память) 15 минут и TestMem5 3 цикла — без ошибок.
+
+## Ryzen 5 4600G
+
+> Renoir · 6 ядер / 12 потоков · встроенная Vega 7
+
+| | |
+|---|---|
+| **Версии** | T1.1 |
+| **Системы** | Windows |
+| ⚠️ **Особенности** | после «Перезагрузки» Windows тормозит ([известные проблемы](KNOWN_ISSUES.md)); исправление (T1.1r) проверяется |
 
 ## Общая таблица
 
@@ -50,30 +68,48 @@ Updated as reports come in: our own checks and testers' reports (the "Everything
 
 # What has been tested
 
-## By processor
+## Ryzen 3 2200G
 
-### Ryzen 3 2200G (Raven Ridge)
+> Raven Ridge · 4 cores / 4 threads · Vega 8 graphics
 
-**The author's board** — 2 × 8 GB DDR4-2666 (Crucial + Kingston), versions T1 and T1.1, Windows 11 and Linux:
-- everything in the table below: restarts (series of 10–100), sleep, power-on by timer, over the network and after a
-  power cut, both DisplayPort sockets, USB 3.0, 1 Gbit/s network, SATA, TPM, fan;
-- Windows 11: boot, AMD chipset drivers, the cores' clocks fine after a restart;
-- DASH: console, web page, remote power on, power off and restart, ISO over the network.
+| | |
+|---|---|
+| **Versions** | T1, T1.1 |
+| **Systems** | Windows 11, Windows 11 Pro, Linux |
+| **Memory** | 2 × 8 GB DDR4-2666 (Crucial + Kingston) · 2 × 4 GB of different kinds (2666 + 2400), together at 2400 |
+| ✅ **Works** | restarts, sleep, power-on by timer, over the network and after a power cut · both DisplayPort sockets · USB 3.0 · 1 Gbit/s network · SATA · sound · TPM 2.0 · fan · BIOS update from the menu · DASH: console, web page, remote power, ISO over the network |
+| ⚠️ **Notes** | the COM port is sometimes not detected in Windows |
 
-**A tester** — 2 × 4 GB (2666 + Samsung 2400, running together at 2400), T1.1, Windows 11 Pro:
-- restarts, sleep, USB, network, sound, DisplayPort, SATA, BIOS update from the menu.
+**Experiments**
+- Restart series: 25, 10 and 100 in a row without a hang.
+- Windows 11: after a restart the clocks of all cores agree (less than 1 µs apart).
+- No interrupt storm from the GPIO controller in Windows (0 % interrupt time).
 
-### Ryzen 3 4300GE (Renoir)
+## Ryzen 3 4300GE
 
-**A tester** — 2 × 8 GB Crucial (2666 + 2400), test build T1.1r, Windows:
-- memory at 3000 and 3200 with timings on Auto: AIDA64 (FPU, cache, memory) 15 minutes, TestMem5 3 cycles, no errors;
-- restarts without slowdowns, every USB socket, network, both DisplayPort sockets and VGA, sound and microphone front and
-  back, M.2 NVMe Samsung 970 EVO.
+> Renoir · 4 cores / 8 threads · Vega 5 graphics
 
-### Ryzen 5 4600G (Renoir)
+| | |
+|---|---|
+| **Versions** | T1.1r (test build) |
+| **Systems** | Windows |
+| **Memory** | 2 × 8 GB Crucial (2666 + 2400) |
+| ✅ **Works** | restarts · every USB socket · network · both DisplayPort sockets and VGA · sound and microphone front and back · M.2 NVMe (Samsung 970 EVO) |
+| ⚠️ **Notes** | with a manual memory speed there can be an extra restart at power-on |
 
-**A tester**, T1.1, Windows:
-- after Restart, Windows slows down (see [known issues](KNOWN_ISSUES.md)); a fix (T1.1r) is being tested.
+**Experiments**
+- Memory at **3000** and **3200** with timings on Auto: at 3200 that gave CL 24-23-23-52, 1T, memory controller 1:1.
+  AIDA64 (FPU, cache, memory) for 15 minutes and TestMem5 for 3 cycles, no errors.
+
+## Ryzen 5 4600G
+
+> Renoir · 6 cores / 12 threads · Vega 7 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.1 |
+| **Systems** | Windows |
+| ⚠️ **Notes** | after Restart, Windows slows down ([known issues](KNOWN_ISSUES.md)); a fix (T1.1r) is being tested |
 
 ## Overall table
 
