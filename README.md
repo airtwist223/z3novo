@@ -91,7 +91,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
 | **Процессор** | Ryzen 3 2200G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
-| **Память** | 2 планки в двухканале, DDR4-2667; разные планки вместе (2666 + 2400 работают на 2400); разгон из меню до DDR4-3000 (Crucial 2400 и 2666 на 4300GE) | 4 планки, профиль XMP | напряжение выше 1,2 В |
+| **Память** | 2 планки в двухканале, DDR4-2667; разные планки вместе (2666 + 2400 работают на 2400); разгон из меню до DDR4-3200 (Crucial 2400 и 2666 на 4300GE, задержки «Авто», проверено AIDA64 и TestMem5) | 4 планки, профиль XMP | напряжение выше 1,2 В |
 | **Монитор** | оба разъёма DisplayPort (кабель DP→HDMI), VGA | кабель DP→DP | |
 | **Видеокарта** | | в слоте PCIe x16; Resizable BAR — новый переключатель в меню (нужны видеокарта и процессор с его поддержкой) | |
 | **USB** | все разъёмы, USB 3.0, клавиатура, мышь | | |
@@ -219,7 +219,7 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
 | **Processor** | Ryzen 3 2200G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
-| **Memory** | 2 sticks in dual channel, DDR4-2667; different sticks together (2666 + 2400 run at 2400); overclocking from the menu up to DDR4-3000 (Crucial 2400 and 2666 on a 4300GE) | 4 sticks, XMP profile | voltage above 1.2 V |
+| **Memory** | 2 sticks in dual channel, DDR4-2667; different sticks together (2666 + 2400 run at 2400); overclocking from the menu up to DDR4-3200 (Crucial 2400 and 2666 on a 4300GE, timings on Auto, checked with AIDA64 and TestMem5) | 4 sticks, XMP profile | voltage above 1.2 V |
 | **Monitor** | both DisplayPort sockets (DP→HDMI cable), VGA | DP→DP cable | |
 | **Graphics card** | | in the PCIe x16 slot; Resizable BAR, a new switch in the menu (needs a graphics card and processor that support it) | |
 | **USB** | every socket, USB 3.0, keyboard, mouse | | |
