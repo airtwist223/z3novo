@@ -41,7 +41,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | ⚠️ **Особенности** | с ручной частотой памяти при старте бывает лишняя перезагрузка |
 
 **Опыты**
-- Память на **3000** и **3200** с задержками «Авто»: на 3200 вышло CL 24-23-23-52, 1T, контроллер памяти 1:1.
+- Память на **3000** и **3200** с задержками «Авто»: на 3200 вышло CL 24-23-23-52, 1T, Gear Down; память, Infinity Fabric
+  и контроллер памяти 1:1:1 (1600 МГц), напряжение SoC 0,99 В — без повышения.
   AIDA64 (FPU, кэш, память) 15 минут и TestMem5 3 цикла — без ошибок.
 
 ## Ryzen 5 4600G
@@ -94,7 +95,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | ⚠️ **Notes** | with a manual memory speed there can be an extra restart at power-on |
 
 **Experiments**
-- Memory at **3000** and **3200** with timings on Auto: at 3200 that gave CL 24-23-23-52, 1T, memory controller 1:1.
+- Memory at **3000** and **3200** with timings on Auto: at 3200 that gave CL 24-23-23-52, 1T, Gear Down; memory,
+  Infinity Fabric and memory controller 1:1:1 (1600 MHz), SoC voltage 0.99 V, not raised.
   AIDA64 (FPU, cache, memory) for 15 minutes and TestMem5 for 3 cycles, no errors.
 
 ## Ryzen 5 4600G
