@@ -3,9 +3,32 @@
 Дополняется по мере проверок: наши собственные и отчёты тестеров (форма «Всё работает» в Issues).
 Updated as reports come in: our own checks and testers' reports (the "Everything works" form in Issues).
 
-## Что работает, а что нет
+## По процессорам
 
-Проверено на плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G и двумя планками по 8 ГБ, а также у тестеров с Ryzen 3 4300GE.
+### Ryzen 3 2200G (Raven Ridge)
+
+**Плата автора** — 2 × 8 ГБ DDR4-2666 (Crucial + Kingston), версии T1 и T1.1, Windows 11 и Linux:
+- всё из общей таблицы ниже: перезагрузки (серии по 10–100), сон, включение по таймеру, по сети и после пропадания
+  света, оба DisplayPort, USB 3.0, сеть 1 Гбит/с, SATA, TPM, вентилятор;
+- Windows 11: загрузка, драйверы чипсета AMD, часы ядер после перезагрузки в порядке;
+- DASH: консоль, веб-страница, удалённое включение, выключение и перезагрузка, ISO по сети.
+
+**Тестер** — 2 × 4 ГБ (2666 + Samsung 2400, вместе работают на 2400), T1.1, Windows 11 Pro:
+- перезагрузки, сон, USB, сеть, звук, DisplayPort, SATA, обновление BIOS из меню.
+
+### Ryzen 3 4300GE (Renoir)
+
+**Тестер** — 2 × 8 ГБ Crucial (2666 + 2400), тестовая сборка T1.1r, Windows:
+- память на 3000 и 3200 с задержками «Авто»: AIDA64 (FPU, кэш, память) 15 минут, TestMem5 3 цикла — без ошибок;
+- перезагрузки без тормозов, все USB, сеть, оба DisplayPort и VGA, звук и микрофон спереди и сзади,
+  M.2 NVMe Samsung 970 EVO.
+
+### Ryzen 5 4600G (Renoir)
+
+**Тестер**, T1.1, Windows:
+- после «Перезагрузки» Windows тормозит (см. [известные проблемы](KNOWN_ISSUES.md)); исправление (T1.1r) проверяется.
+
+## Общая таблица
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
@@ -23,20 +46,36 @@ Updated as reports come in: our own checks and testers' reports (the "Everything
 | **Звук** | выход и микрофон спереди и сзади | через DisplayPort | |
 | **Прочее** | TPM 2.0, вентилятор процессора | COM-порт | |
 
-### Отчёты: какое железо, что проверено
-
-| Процессор | Память | Версия | Что проверено |
-|---|---|---|---|
-| Ryzen 3 2200G | 2 × 8 ГБ DDR4-2666 (Crucial + Kingston) | T1, T1.1 | плата автора: всё из таблицы выше, Windows 11 и Linux, DASH, серии перезагрузок |
-| Ryzen 3 2200G | 2 × 4 ГБ (2666 + Samsung 2400), работают на 2400 | T1.1 | Windows 11 Pro: перезагрузки, сон, USB, сеть, звук, DisplayPort, SATA, обновление из меню |
-| Ryzen 3 4300GE | 2 × 8 ГБ Crucial (2666 + 2400) | T1.1r (тестовая) | память на 3000 и 3200 (задержки «Авто», AIDA64 15 мин, TestMem5 3 цикла), все USB, сеть, оба DisplayPort и VGA, звук и микрофон спереди и сзади, M.2 NVMe Samsung 970 EVO |
-| Ryzen 5 4600G | — | T1.1 | Windows: тормоза после перезагрузки (см. известные проблемы), исправление проверяется |
-
 ---
 
-## What works and what does not
+# What has been tested
 
-Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks, and by testers with a Ryzen 3 4300GE.
+## By processor
+
+### Ryzen 3 2200G (Raven Ridge)
+
+**The author's board** — 2 × 8 GB DDR4-2666 (Crucial + Kingston), versions T1 and T1.1, Windows 11 and Linux:
+- everything in the table below: restarts (series of 10–100), sleep, power-on by timer, over the network and after a
+  power cut, both DisplayPort sockets, USB 3.0, 1 Gbit/s network, SATA, TPM, fan;
+- Windows 11: boot, AMD chipset drivers, the cores' clocks fine after a restart;
+- DASH: console, web page, remote power on, power off and restart, ISO over the network.
+
+**A tester** — 2 × 4 GB (2666 + Samsung 2400, running together at 2400), T1.1, Windows 11 Pro:
+- restarts, sleep, USB, network, sound, DisplayPort, SATA, BIOS update from the menu.
+
+### Ryzen 3 4300GE (Renoir)
+
+**A tester** — 2 × 8 GB Crucial (2666 + 2400), test build T1.1r, Windows:
+- memory at 3000 and 3200 with timings on Auto: AIDA64 (FPU, cache, memory) 15 minutes, TestMem5 3 cycles, no errors;
+- restarts without slowdowns, every USB socket, network, both DisplayPort sockets and VGA, sound and microphone front and
+  back, M.2 NVMe Samsung 970 EVO.
+
+### Ryzen 5 4600G (Renoir)
+
+**A tester**, T1.1, Windows:
+- after Restart, Windows slows down (see [known issues](KNOWN_ISSUES.md)); a fix (T1.1r) is being tested.
+
+## Overall table
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
@@ -53,12 +92,3 @@ Tested on an AM4P2MS revision 1.1 board with a Ryzen 3 2200G and two 8 GB sticks
 | **Systems** | Linux; Windows 11 (from T1.1: boot, sleep, AMD chipset drivers, TPM, network) | | |
 | **Sound** | output and microphone, front and back | over DisplayPort | |
 | **Other** | TPM 2.0, processor fan | COM port | |
-
-### Reports: which hardware, what was tested
-
-| Processor | Memory | Version | What was tested |
-|---|---|---|---|
-| Ryzen 3 2200G | 2 × 8 GB DDR4-2666 (Crucial + Kingston) | T1, T1.1 | the author's board: everything in the table above, Windows 11 and Linux, DASH, restart series |
-| Ryzen 3 2200G | 2 × 4 GB (2666 + Samsung 2400), running at 2400 | T1.1 | Windows 11 Pro: restarts, sleep, USB, network, sound, DisplayPort, SATA, update from the menu |
-| Ryzen 3 4300GE | 2 × 8 GB Crucial (2666 + 2400) | T1.1r (test build) | memory at 3000 and 3200 (timings on Auto, AIDA64 15 min, TestMem5 3 cycles), every USB socket, network, both DisplayPort sockets and VGA, sound and microphone front and back, M.2 NVMe Samsung 970 EVO |
-| Ryzen 5 4600G | — | T1.1 | Windows: slowdowns after a restart (see known issues), a fix is being tested |
