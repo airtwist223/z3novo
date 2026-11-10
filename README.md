@@ -86,9 +86,23 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 ## Что работает, а что нет
 
-Проверено на Ryzen 3 2200G (плата автора) и у тестеров на Ryzen 3 4300GE, с Windows 11 и Linux: память, USB, сеть,
-оба DisplayPort и VGA, звук, SATA и M.2, сон, обновление BIOS из меню, DASH. Полная таблица — что работает, что не
-проверено и что не работает: [docs/TESTED.md](docs/TESTED.md).
+| | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
+|---|---|---|---|
+| **Процессор** | Ryzen 3 2200G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
+| **Память** | 2 планки, разгон до DDR4-3200 | 4 планки, XMP | напряжение выше 1,2 В |
+| **Монитор** | оба DisplayPort, VGA | кабель DP→DP | |
+| **Видеокарта** | | PCIe x16, Resizable BAR | |
+| **USB** | все разъёмы | | |
+| **Диски** | SATA, M.2 NVMe | | |
+| **Сеть** | 1 Гбит/с, включение по сети | загрузка по сети (PXE) | |
+| **DASH** | консоль, веб-страница, удалённое питание, ISO по сети | экран BIOS в консоли | |
+| **Питание** | перезагрузки, сон, включение по таймеру и после пропадания света | | |
+| **Меню BIOS** | Del, F9, F11, обновление с флешки, вход из Windows | | |
+| **Системы** | Windows 11, Linux | | |
+| **Звук** | выход и микрофон | через DisplayPort | |
+| **Прочее** | TPM 2.0, вентилятор | COM-порт | |
+
+Подробности, условия проверок и отчёты тестеров — [docs/TESTED.md](docs/TESTED.md).
 
 ## Ограничения железа
 
@@ -201,9 +215,23 @@ was made from scratch:
 
 ## What works and what does not
 
-Tested on a Ryzen 3 2200G (the author's board) and by testers on a Ryzen 3 4300GE, with Windows 11 and Linux: memory,
-USB, network, both DisplayPort sockets and VGA, sound, SATA and M.2, sleep, BIOS updates from the menu, DASH. The full
-table of what works, what is not tested and what does not work: [docs/TESTED.md](docs/TESTED.md).
+| | ✅ Works | ⚠️ Not tested | ❌ Does not work |
+|---|---|---|---|
+| **Processor** | Ryzen 3 2200G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
+| **Memory** | 2 sticks, overclocking up to DDR4-3200 | 4 sticks, XMP | voltage above 1.2 V |
+| **Monitor** | both DisplayPort sockets, VGA | DP→DP cable | |
+| **Graphics card** | | PCIe x16, Resizable BAR | |
+| **USB** | every socket | | |
+| **Drives** | SATA, M.2 NVMe | | |
+| **Network** | 1 Gbit/s, power-on over the network | network boot (PXE) | |
+| **DASH** | console, web page, remote power, ISO over the network | the BIOS screen in the console | |
+| **Power** | restarts, sleep, power-on by timer and after a power cut | | |
+| **BIOS menu** | Del, F9, F11, update from a USB stick, opening from Windows | | |
+| **Systems** | Windows 11, Linux | | |
+| **Sound** | output and microphone | over DisplayPort | |
+| **Other** | TPM 2.0, fan | COM port | |
+
+Details, test conditions and testers' reports: [docs/TESTED.md](docs/TESTED.md).
 
 ## Hardware limits
 
