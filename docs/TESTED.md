@@ -43,6 +43,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 **Опыты**
 - Память на **3000** и **3200** с задержками «Авто»: на 3200 вышло CL 24-23-23-52, 1T, Gear Down; память, Infinity Fabric
   и контроллер памяти 1:1:1 (1600 МГц), напряжение SoC 0,99 В — без повышения.
+- Разные планки в разных каналах (двухранговая 2666 и одноранговая 2400): каждый канал получил свои задержки из своей
+  планки — CL 24-23-23 и CL 22-22-22 при общей частоте 3200.
   AIDA64 (FPU, кэш, память) 15 минут и TestMem5 3 цикла — без ошибок.
 
 ## Ryzen 5 4600G
@@ -97,6 +99,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 **Experiments**
 - Memory at **3000** and **3200** with timings on Auto: at 3200 that gave CL 24-23-23-52, 1T, Gear Down; memory,
   Infinity Fabric and memory controller 1:1:1 (1600 MHz), SoC voltage 0.99 V, not raised.
+- Different sticks in the two channels (dual-rank 2666 and single-rank 2400): each channel got its own timings from its
+  stick, CL 24-23-23 and CL 22-22-22, at a common 3200.
   AIDA64 (FPU, cache, memory) for 15 minutes and TestMem5 for 3 cycles, no errors.
 
 ## Ryzen 5 4600G
