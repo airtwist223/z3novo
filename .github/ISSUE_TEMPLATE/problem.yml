@@ -52,12 +52,16 @@ body:
         > ⚠️ If the computer hung and then started again, **make the F11 report first**, and only then reset the settings with the battery: the reset erases the boot log that shows the cause.
 
         ---
-  - type: input
+  - type: dropdown
     id: version
     attributes:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
-      placeholder: T1.1r
+      options:
+        - T1.1r
+        - T1.1
+        - T1
+        - Другая или пробная сборка — напишите какая в описании / Another or a trial build — say which in the description
     validations:
       required: true
   - type: input

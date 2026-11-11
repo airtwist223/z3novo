@@ -16,12 +16,16 @@ body:
         Thank you! "It works" reports matter as much as problem reports: they show which processors, memory and graphics cards the firmware has already been tested with.
 
         ---
-  - type: input
+  - type: dropdown
     id: version
     attributes:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
-      placeholder: T1.1r
+      options:
+        - T1.1r
+        - T1.1
+        - T1
+        - Другая или пробная сборка — напишите какая в описании / Another or a trial build — say which in the description
     validations:
       required: true
   - type: input

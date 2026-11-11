@@ -57,12 +57,16 @@ body:
     attributes:
       label: Фото или снимок экрана / Photo or screenshot
       description: Перетащите сюда файлы. Фото экрана телефоном тоже подходит. / Drag the files here. A phone photo of the screen is fine too.
-  - type: input
+  - type: dropdown
     id: version
     attributes:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
-      placeholder: T1.1r
+      options:
+        - T1.1r
+        - T1.1
+        - T1
+        - Другая или пробная сборка — напишите какая в описании / Another or a trial build — say which in the description
     validations:
       required: true
   - type: dropdown
