@@ -28,12 +28,16 @@ body:
         - Другая или пробная сборка — напишите какая в описании / Another or a trial build — say which in the description
     validations:
       required: true
-  - type: input
+  - type: dropdown
     id: revision
     attributes:
       label: Ревизия платы / Board revision
-      description: Напечатана на плате рядом с AM4P2MS. / Printed on the board next to AM4P2MS.
-      placeholder: Ver 1.1
+      description: Напечатана на плате рядом с AM4P2MS. Почти у всех 1.1. / Printed on the board next to AM4P2MS. Nearly everyone has 1.1.
+      options:
+        - Ver 1.1
+        - Другая — напишите какая в описании / Another — say which in the description
+        - Не смотрел / Did not check
+      default: 0
     validations:
       required: true
   - type: input
