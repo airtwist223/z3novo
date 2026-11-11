@@ -15,10 +15,10 @@
   «Авто» может выставить скорость быстрой планки: медленная тогда работает выше своей паспортной скорости, а при
   перезагрузке бывает лишний перезапуск. Пока выставьте вручную («Режим памяти» → «Вручную») частоту самой медленной
   планки. Исправление — в T2.
-- **Передние USB и два задних под сетевым разъёмом могут не работать** (одна плата с Ryzen 5 5600G на T1.1). Эти порты
-  идут от чипсета: при включении прошивка ждёт его ответа и после трёх неудачных попыток запускается без них. Остальные
-  задние порты подключены к процессору и работают всегда. Разбираемся
-  ([issue #5](https://github.com/airtwist223/z3novo/issues/5)).
+- **При включении три перезапуска подряд, потом не работают передние USB и два задних под сетевым разъёмом** — если
+  в памяти CMOS платы остался мусор от прежней прошивки (такое было на одной плате). Наша прошивка принимает один из этих
+  байтов за свою тестовую команду. Батарейка и шнур этот мусор не стирают. **Исправлено в T1.2:** при первом запуске
+  прошивка сама стирает свои служебные байты, если их записала не она. Обновитесь.
 - **Пассивный переходник DisplayPort → HDMI: нет высокой частоты кадров.** Оба разъёма платы работают как настоящие
   DisplayPort (как у Lenovo), и с пассивным переходником драйвер AMD ограничивает частоту его паспортным пределом: для
   1440p обычно 60–75 Гц. Для 144 Гц возьмите кабель DP→DP (если у монитора есть вход DisplayPort) или активный
@@ -78,10 +78,10 @@
 - **Memory mode "Auto" with sticks of different speeds.** With sticks rated for different speeds (2400 and 2666, for
   example), "Auto" may set the faster stick's speed: the slower one then runs above its rated speed, and a restart may
   bring an extra reset. For now set the slowest stick's speed by hand ("Memory mode" → "Manual"). The fix comes in T2.
-- **The front USB sockets and the two rear ones under the network socket may not work** (one board with a Ryzen 5 5600G
-  on T1.1). These sockets hang off the chipset: at power-on the firmware waits for it to answer and after three failed
-  tries starts without them. The other rear sockets are wired to the processor and always work. We are looking into it
-  ([issue #5](https://github.com/airtwist223/z3novo/issues/5)).
+- **Three restarts in a row at power-on, then the front USB sockets and the two rear ones under the network socket do
+  not work** — when the board's CMOS memory still holds leftovers from a previous firmware (seen on one board). Our
+  firmware takes one of those bytes for its own test command. The battery and the cord do not clear it. **Fixed in
+  T1.2:** at its first start the firmware clears its own service bytes if it did not write them itself. Update.
 - **Passive DisplayPort → HDMI adapter: no high refresh rate.** Both of the board's sockets work as real DisplayPort (as
   Lenovo has them), and with a passive adapter the AMD driver caps the refresh rate at the adapter's rated limit: for
   1440p usually 60–75 Hz. For 144 Hz use a DP→DP cable (if the monitor has a DisplayPort input) or an active DP 1.4 →

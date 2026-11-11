@@ -58,6 +58,7 @@ body:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
       options:
+        - T1.2
         - T1.1r
         - T1.1
         - T1

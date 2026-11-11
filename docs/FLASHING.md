@@ -39,7 +39,7 @@
    не отправляйте.**
 4. **Запишите Z3NOVO** (flashrom сам проверит запись):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.1r.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.2.bin
    ```
 5. **Снимите прищепку, вставьте шнур, включите.** Первый раз компьютер может сам перезагрузиться 2–4 раза, пока
    прошивка готовит настройки и проверяет память. Это нормально, подождите.
@@ -114,7 +114,7 @@ The chip: Winbond W25Q128FW, 16 MB. It is marked U53 on the board. flashrom call
    to anyone.**
 4. **Write Z3NOVO** (flashrom checks the write itself):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.1r.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.2.bin
    ```
 5. **Remove the clip, plug the cord back in, power on.** The first time, the computer may restart by itself 2–4 times
    while the firmware prepares its settings and checks the memory. That is normal; wait.

@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-> **Статус: публичный тест.** Текущая тестовая версия — **T1.1r**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1.1r), [что в ней](CHANGELOG.md).
+> **Статус: публичный тест.** Текущая тестовая версия — **T1.2**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1.2), [что в ней](CHANGELOG.md).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -131,7 +131,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-> **Status: public test.** The current test version is **T1.1r**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1.1r), [what is in it](CHANGELOG.md).
+> **Status: public test.** The current test version is **T1.2**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1.2), [what is in it](CHANGELOG.md).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.

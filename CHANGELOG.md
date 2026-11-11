@@ -3,6 +3,30 @@
 Новые версии сверху. T1, T2 и так далее — тестовые версии; 1.0 будет первой стабильной.
 Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable one.
 
+## T1.2 — служебные байты CMOS
+
+- **Прошивка больше не верит мусору в памяти CMOS.** Память CMOS (та, что держится на батарейке) хранит и служебные
+  байты нашей прошивки: журнал запусков, отметки для отчёта F11 и несколько тестовых команд для разработки. Если плата
+  пришла с остатками другой прошивки, случайное значение могло совпасть с такой командой. На одной плате из-за этого
+  при каждом включении было три перезапуска подряд, а передние USB и два задних под сетевым разъёмом не работали.
+  Теперь прошивка помечает свои байты подписью и при первом запуске, если подписи нет, один раз их стирает.
+- После установки журнал запусков в отчёте F11 начнётся заново — это нормально, один раз.
+- Больше ничего не менялось: всё остальное как в T1.1r.
+- Обновление с T1.1r, T1.1 или T1: из меню с флешки, как обычно ([как обновить](docs/FLASHING.md#обновление)).
+  Настройки сохраняются.
+
+## T1.2 — CMOS service bytes
+
+- **The firmware no longer trusts leftovers in CMOS memory.** The battery-backed CMOS memory also holds our firmware's
+  service bytes: the boot log, marks for the F11 report and a few test commands for development. When a board came with
+  another firmware's leftovers, a random value could match such a command. On one board that meant three restarts in a
+  row at every power-on, and the front USB sockets and the two rear ones under the network socket did not work. Now the
+  firmware marks its bytes with a signature and, at the first start without one, clears them once.
+- After installing, the boot log in the F11 report starts over — that is normal, once.
+- Nothing else changed: everything else is as in T1.1r.
+- Updating from T1.1r, T1.1 or T1: from the menu with a USB stick, as usual ([how to update](docs/FLASHING.md#updating)).
+  Settings are kept.
+
 ## T1.1r — перезагрузка на Ryzen 4000G и 5000G
 
 - **Перезагрузка теперь полная на всех процессорах, кроме Ryzen 2000G/3000G и Athlon 200GE/3000G.** В T1.1 она была

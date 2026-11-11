@@ -5,7 +5,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | Процессор | Поколение | Версии | Итог |
 |---|---|---|---|
-| [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1 | ✅ работает |
+| [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1, T1.2 | ✅ работает |
 | [Ryzen 5 2400G](#ryzen-5-2400g) | Raven Ridge | T1.1 | ✅ работает, 2 × 16 ГБ до 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g) | Picasso | T1.1 | ✅ работает, сон и включения |
@@ -21,7 +21,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1, T1.1 |
+| **Версии** | T1, T1.1, T1.2 |
 | **Системы** | Windows 11, Windows 11 Pro, Linux |
 | **Память** | 2 × 8 ГБ DDR4-2666 (Crucial + Kingston) · 2 × 4 ГБ разные (2666 + 2400) — вместе работают на 2400 |
 | ✅ **Работает** | перезагрузки, сон, включение по таймеру, по сети и после пропадания света · оба DisplayPort · USB 3.0 · сеть 1 Гбит/с · SATA · звук · TPM 2.0 · вентилятор · обновление BIOS из меню · DASH: консоль, веб-страница, удалённое питание, ISO по сети |
@@ -114,7 +114,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | Processor | Family | Versions | Result |
 |---|---|---|---|
-| [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1 | ✅ works |
+| [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1, T1.2 | ✅ works |
 | [Ryzen 5 2400G](#ryzen-5-2400g-1) | Raven Ridge | T1.1 | ✅ works, 2 × 16 GB up to 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g-1) | Picasso | T1.1 | ✅ works, sleep and power-ons |
@@ -128,7 +128,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1, T1.1 |
+| **Versions** | T1, T1.1, T1.2 |
 | **Systems** | Windows 11, Windows 11 Pro, Linux |
 | **Memory** | 2 × 8 GB DDR4-2666 (Crucial + Kingston) · 2 × 4 GB of different kinds (2666 + 2400), together at 2400 |
 | ✅ **Works** | restarts, sleep, power-on by timer, over the network and after a power cut · both DisplayPort sockets · USB 3.0 · 1 Gbit/s network · SATA · sound · TPM 2.0 · fan · BIOS update from the menu · DASH: console, web page, remote power, ISO over the network |
