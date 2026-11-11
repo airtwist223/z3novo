@@ -85,6 +85,14 @@ body:
       label: Видео и монитор / Graphics and monitor
       description: Встроенная графика или видеокарта; в какой разъём включён монитор и каким кабелем. / Built-in graphics or a graphics card; which socket the monitor is on and with what cable.
       placeholder: встроенная графика, DisplayPort → HDMI
+  - type: input
+    id: os
+    attributes:
+      label: Система / Operating system
+      description: Какая стоит и какой версии; если компьютер до неё не доходит — какая установлена. / Which one and which version; if the computer does not get that far, which one is installed.
+      placeholder: Windows 10 Pro 22H2
+    validations:
+      required: true
   - type: dropdown
     id: when
     attributes:
