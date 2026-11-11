@@ -39,7 +39,7 @@
 ### Linux
 
 1. Скачайте файл `z3report.sh`.
-2. Откройте терминал в папке со скриптом и запустите: `bash z3report.sh`
+2. Откройте терминал в папке со скриптом: в папке (обычно «Загрузки») щёлкните правой кнопкой по пустому месту → «Открыть в терминале»; если такого пункта нет, откройте терминал и наберите `cd ~/Загрузки` (или `cd ~/Downloads`). Запустите: `bash z3report.sh` и Enter. Двойной щелчок по файлу откроет его в редакторе — это не запуск.
 3. Скрипт предложит перезапуститься через sudo. Так отчёт будет полнее: модули памяти из SMBIOS, журналы ядра, сохранённые при сбое, журнал системы, если у вашего пользователя нет к нему доступа. Enter или «д» — да, sudo спросит пароль; «н» — нет. Можно и сразу `sudo bash z3report.sh`, а `bash z3report.sh --no-sudo` не задаёт вопрос.
 4. Файл `z3report-os-<дата>-<время>.txt` появится в домашней папке (если туда нельзя писать, в текущей), путь скрипт напишет в конце.
 
@@ -90,7 +90,7 @@ Computer name, user names, serial numbers, UUIDs, MAC addresses (the first 3 byt
 ### Linux
 
 1. Download the file `z3report.sh`.
-2. Open a terminal in its folder and run: `bash z3report.sh`
+2. Open a terminal in its folder: in the folder (usually Downloads) right-click an empty spot → "Open in Terminal"; if there is no such item, open a terminal and type `cd ~/Downloads`. Run `bash z3report.sh` and press Enter. Double-clicking the file opens it in an editor; that does not run it.
 3. The script offers to run again through sudo, which gives more details: memory modules from SMBIOS, kernel logs saved across a crash, and the system journal if your user may not read it. Enter or "y" for yes, sudo asks for your password; "n" for no. You can also start with `sudo bash z3report.sh` right away; `bash z3report.sh --no-sudo` skips the question.
 4. The file `z3report-os-<date>-<time>.txt` appears in your home folder (or the current folder if home is not writable); the script prints its path at the end.
 

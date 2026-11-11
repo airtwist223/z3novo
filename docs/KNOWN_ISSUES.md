@@ -3,9 +3,22 @@
 - **T1 и Windows: синий экран ACPI_BIOS_ERROR — исправлено в T1.1.** Если у вас T1, обновитесь до T1.1 из меню с флешки.
   Если после синего экрана компьютер завис на заставке, держите кнопку питания 5 секунд, включите снова, нажмите Del и
   обновитесь.
-- **Ryzen 4000G и Windows: тормоза после перезагрузки** (сообщение тестера с Ryzen 5 4600G). После «Перезагрузки» Windows
-  грузит процессор впустую, а «Время работы» в Диспетчере задач показывает около 10675199 дней. Пока обойти так: вместо
-  «Перезагрузки» выключите компьютер и включите снова. Исправление проверяется.
+- **Ryzen 4000G и 5000G: перезагрузка из Windows — исправлено в T1.1r.** В T1.1 после «Перезагрузки» Windows на
+  Ryzen 4000G грузила процессор впустую, а «Время работы» в Диспетчере задач показывало около 10675199 дней; на 5000G
+  перезагрузка зависала. Обновитесь до T1.1r. Пока стоит T1.1, вместо «Перезагрузки» выключайте компьютер и включайте
+  снова.
+- **Ryzen 5000G: выход из сна может зависнуть** (сообщение тестера с Ryzen 5 5600G и четырьмя разными планками памяти).
+  Компьютер засыпает нормально, но при пробуждении зависает: вентиляторы крутятся, экран чёрный. Похоже, дело в памяти,
+  которая работает выше своей паспортной скорости (см. следующий пункт); проверяем. Пока поставьте в Windows
+  «Сон: никогда». Если компьютер завис — выдерните шнур из розетки на 30 секунд и включите снова.
+- **Режим памяти «Авто» и планки разной скорости.** Если стоят планки на разную скорость (например, 2400 и 2666),
+  «Авто» может выставить скорость быстрой планки: медленная тогда работает выше своей паспортной скорости, а при
+  перезагрузке бывает лишний перезапуск. Пока выставьте вручную («Режим памяти» → «Вручную») частоту самой медленной
+  планки. Исправление — в T2.
+- **Передние USB и два задних под сетевым разъёмом могут не работать** (одна плата с Ryzen 5 5600G на T1.1). Эти порты
+  идут от чипсета: при включении прошивка ждёт его ответа и после трёх неудачных попыток запускается без них. Остальные
+  задние порты подключены к процессору и работают всегда. Разбираемся
+  ([issue #5](https://github.com/airtwist223/z3novo/issues/5)).
 - **Пассивный переходник DisplayPort → HDMI: нет высокой частоты кадров.** Оба разъёма платы работают как настоящие
   DisplayPort (как у Lenovo), и с пассивным переходником драйвер AMD ограничивает частоту его паспортным пределом: для
   1440p обычно 60–75 Гц. Для 144 Гц возьмите кабель DP→DP (если у монитора есть вход DisplayPort) или активный
@@ -36,8 +49,8 @@
   от системы сама. Экран BIOS в текстовой консоли DASH пока не работает. Подключение ISO по сети работает, но не со всяким
   HTTP-сервером: карта ждёт, что заголовок ответа и начало файла придут одним пакетом (простой `python3 -m http.server` так
   не делает, и карта бросает подключение). Готовый скрипт: [tools/dash](../tools/dash/README.md).
-- **Проверено только на плате AM4P2MS ревизии 1.1 и только с Ryzen 3 2200G.** Другие ревизии платы, другие процессоры
-  и четыре планки памяти ещё никто не проверял.
+- **Автор проверяет каждую версию только на своей плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G.** Что тестеры проверили
+  на других процессорах — в [списке проверенного](TESTED.md). Другие ревизии платы ещё никто не проверял.
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
   Nanya) не стартует на ней ни с одной прошивкой, включая родную Lenovo: писки и перезагрузка по кругу. Не помогает и
   пониженная частота (2133, 2T). На платах Intel тот же модуль работает. Обычные модули (на чипах 8 Гбит) работают.
@@ -55,9 +68,20 @@
 - **T1 and Windows: blue screen ACPI_BIOS_ERROR — fixed in T1.1.** If you have T1, update to T1.1 from the menu with a USB
   stick. If the computer hangs on the logo after the blue screen, hold the power button for 5 seconds, turn it on again,
   press Del and update.
-- **Ryzen 4000G and Windows: slowdowns after a restart** (reported by a tester with a Ryzen 5 4600G). After Restart, Windows
-  keeps the processor busy for nothing and Task Manager shows an uptime of about 10675199 days. Workaround for now: instead
-  of Restart, shut the computer down and turn it on again. A fix is being tested.
+- **Ryzen 4000G and 5000G: restart from Windows — fixed in T1.1r.** On T1.1, after Restart, Windows on a Ryzen 4000G
+  kept the processor busy for nothing and Task Manager showed an uptime of about 10675199 days; on a 5000G the restart
+  hung. Update to T1.1r. While you are on T1.1, shut the computer down and turn it on again instead of Restart.
+- **Ryzen 5000G: waking from sleep may hang** (reported by a tester with a Ryzen 5 5600G and four different memory
+  sticks). The computer goes to sleep normally but hangs when it wakes: the fans spin, the screen stays black. It looks
+  like memory running above its rated speed (see the next item); we are checking. For now set Windows to "Sleep: Never".
+  If the computer hangs, pull the cord out of the wall socket for 30 seconds and turn it on again.
+- **Memory mode "Auto" with sticks of different speeds.** With sticks rated for different speeds (2400 and 2666, for
+  example), "Auto" may set the faster stick's speed: the slower one then runs above its rated speed, and a restart may
+  bring an extra reset. For now set the slowest stick's speed by hand ("Memory mode" → "Manual"). The fix comes in T2.
+- **The front USB sockets and the two rear ones under the network socket may not work** (one board with a Ryzen 5 5600G
+  on T1.1). These sockets hang off the chipset: at power-on the firmware waits for it to answer and after three failed
+  tries starts without them. The other rear sockets are wired to the processor and always work. We are looking into it
+  ([issue #5](https://github.com/airtwist223/z3novo/issues/5)).
 - **Passive DisplayPort → HDMI adapter: no high refresh rate.** Both of the board's sockets work as real DisplayPort (as
   Lenovo has them), and with a passive adapter the AMD driver caps the refresh rate at the adapter's rated limit: for
   1440p usually 60–75 Hz. For 144 Hz use a DP→DP cable (if the monitor has a DisplayPort input) or an active DP 1.4 →
@@ -90,8 +114,8 @@
   system by itself. The BIOS screen in the DASH text console does not work yet. Attaching an ISO over the network works, but
   not with every HTTP server: the card expects a reply's headers and the start of the file in one packet (a plain
   `python3 -m http.server` does not do that, and the card gives up). A ready script: [tools/dash](../tools/dash/README.md).
-- **Tested only on an AM4P2MS revision 1.1 board and only with the Ryzen 3 2200G.** Nobody has tried other board revisions,
-  other processors or four memory sticks yet.
+- **The author tests every version only on the author's own AM4P2MS revision 1.1 board with a Ryzen 3 2200G.** What testers have
+  checked on other processors is in [the tested list](TESTED.md). Nobody has tried other board revisions yet.
 - **Not every memory stick starts on this board.** A single-rank 16 GB stick built on 16 Gbit chips (AMD R7 16G
   DDR4-2666, Nanya chips) does not start on it with any firmware, Lenovo's own included: beeps and a restart in a loop.
   A lower speed (2133, 2T) does not help either. The same stick works on Intel boards. Ordinary sticks (on 8 Gbit chips)

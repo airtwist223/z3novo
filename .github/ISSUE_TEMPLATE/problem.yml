@@ -15,6 +15,16 @@ body:
         2. **Если Windows или Linux запускаются** — отчёт скрипта: [для Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) или [для Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [как запустить](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки (готовится).
 
+        <details><summary><b>Как запустить скрипт</b> (нажмите, чтобы развернуть)</summary>
+
+        Скачайте файл: откройте ссылку на скрипт и нажмите кнопку «Download raw file» (стрелка вниз справа над текстом). Двойной щелчок по скачанному файлу откроет его в редакторе — это не запуск.
+
+        **Windows:** щёлкните по `z3report.ps1` правой кнопкой → «Выполнить с помощью PowerShell». На вопрос о правах администратора нажмите Enter и подтвердите. Через 1–2 минуты на Рабочем столе появится файл `z3report-os-….txt`.
+
+        **Linux:** откройте папку с файлом (обычно «Загрузки»), щёлкните правой кнопкой по пустому месту → «Открыть в терминале». Если такого пункта нет, откройте терминал и наберите `cd ~/Загрузки` (или `cd ~/Downloads`). Затем наберите `bash z3report.sh` и нажмите Enter. На вопрос про sudo нажмите Enter и введите свой пароль (при вводе он не виден). Файл `z3report-os-….txt` появится в домашней папке, путь скрипт напишет в конце. Строка «dmidecode не установлен» — не ошибка: отчёт всё равно соберётся. Чтобы в него попали планки памяти, поставьте пакет `dmidecode` (например, `sudo apt install dmidecode`) и запустите скрипт ещё раз.
+
+        </details>
+
         > ⚠️ Если компьютер завис, а потом снова включился — **сначала сделайте отчёт F11**, и только потом сбрасывайте настройки батарейкой: сброс стирает журнал запусков, по которому видна причина.
 
         ---
@@ -29,6 +39,16 @@ body:
         2. **If Windows or Linux starts** — the script report: [for Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) or [for Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [how to run them](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **If the failure is rare and puzzling** — the test stick's results folder (in preparation).
 
+        <details><summary><b>How to run the script</b> (click to expand)</summary>
+
+        Download the file: open the link to the script and press the "Download raw file" button (the down arrow at the top right of the text). Double-clicking the downloaded file opens it in an editor; that does not run it.
+
+        **Windows:** right-click `z3report.ps1` → "Run with PowerShell". When asked about administrator rights, press Enter and confirm. After a minute or two the file `z3report-os-….txt` appears on the Desktop.
+
+        **Linux:** open the folder with the file (usually Downloads), right-click an empty spot → "Open in Terminal". If there is no such item, open a terminal and type `cd ~/Downloads`. Then type `bash z3report.sh` and press Enter. When asked about sudo, press Enter and type your password (it is not shown as you type). The file `z3report-os-….txt` appears in your home folder; the script prints its path at the end. The line "dmidecode is not installed" is not an error: the report is still made. To get the memory sticks into it, install the `dmidecode` package (for example `sudo apt install dmidecode`) and run the script again.
+
+        </details>
+
         > ⚠️ If the computer hung and then started again, **make the F11 report first**, and only then reset the settings with the battery: the reset erases the boot log that shows the cause.
 
         ---
@@ -37,7 +57,7 @@ body:
     attributes:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
-      placeholder: T1.1
+      placeholder: T1.1r
     validations:
       required: true
   - type: input

@@ -10,7 +10,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g) | Picasso | T1.1 | ✅ работает, сон и включения |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
-| [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправление проверяется |
+| [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправлено в T1.1r (ждём подтверждения) |
+| [Ryzen 5 5600G](#ryzen-5-5600g) | Cezanne | T1.1, T1.1r | ⚠️ работает; выход из сна виснет, у одного тестера не работают USB чипсета |
 
 [English version](#what-has-been-tested)
 
@@ -72,7 +73,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1.1r (тестовая сборка) |
+| **Версии** | T1.1r |
 | **Системы** | Windows |
 | **Память** | 2 × 8 ГБ Crucial (2666 + 2400) |
 | ✅ **Работает** | перезагрузки · все USB · сеть · оба DisplayPort и VGA · звук и микрофон спереди и сзади · M.2 NVMe (Samsung 970 EVO) |
@@ -93,7 +94,19 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 |---|---|
 | **Версии** | T1.1 |
 | **Системы** | Windows |
-| ⚠️ **Особенности** | после «Перезагрузки» Windows тормозит ([известные проблемы](KNOWN_ISSUES.md)); исправление (T1.1r) проверяется |
+| ⚠️ **Особенности** | после «Перезагрузки» Windows тормозит ([известные проблемы](KNOWN_ISSUES.md)); исправлено в T1.1r, ждём подтверждения |
+
+## Ryzen 5 5600G
+
+> Cezanne · 6 ядер / 12 потоков · встроенная Vega 7
+
+| | |
+|---|---|
+| **Версии** | T1.1, T1.1r |
+| **Системы** | Windows 10 |
+| **Память** | 4 × 8 ГБ разные (две 2400, две 2666) · 1 × 8 ГБ Crucial 2400 |
+| ✅ **Работает** | запуск Windows · перезагрузки из Windows (на T1.1r) · четыре планки памяти |
+| ⚠️ **Особенности** | на T1.1 перезагрузка из Windows зависает (исправлено в T1.1r) · выход из сна зависает (с четырьмя разными планками, проверяем) · у одного тестера на T1.1 не работают передние USB и два задних под сетевым разъёмом ([известные проблемы](KNOWN_ISSUES.md)) |
 
 ---
 
@@ -106,7 +119,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g-1) | Picasso | T1.1 | ✅ works, sleep and power-ons |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
-| [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, a fix is being tested |
+| [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, fixed in T1.1r (awaiting confirmation) |
+| [Ryzen 5 5600G](#ryzen-5-5600g-1) | Cezanne | T1.1, T1.1r | ⚠️ works; waking from sleep hangs, one tester's chipset USB sockets do not work |
 
 ## Ryzen 3 2200G
 
@@ -166,7 +180,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1.1r (test build) |
+| **Versions** | T1.1r |
 | **Systems** | Windows |
 | **Memory** | 2 × 8 GB Crucial (2666 + 2400) |
 | ✅ **Works** | restarts · every USB socket · network · both DisplayPort sockets and VGA · sound and microphone front and back · M.2 NVMe (Samsung 970 EVO) |
@@ -187,4 +201,16 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 |---|---|
 | **Versions** | T1.1 |
 | **Systems** | Windows |
-| ⚠️ **Notes** | after Restart, Windows slows down ([known issues](KNOWN_ISSUES.md)); a fix (T1.1r) is being tested |
+| ⚠️ **Notes** | after Restart, Windows slows down ([known issues](KNOWN_ISSUES.md)); fixed in T1.1r, awaiting confirmation |
+
+## Ryzen 5 5600G
+
+> Cezanne · 6 cores / 12 threads · Vega 7 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.1, T1.1r |
+| **Systems** | Windows 10 |
+| **Memory** | 4 × 8 GB, all different (two 2400, two 2666) · 1 × 8 GB Crucial 2400 |
+| ✅ **Works** | Windows starts · restarts from Windows (on T1.1r) · four memory sticks |
+| ⚠️ **Notes** | on T1.1 a restart from Windows hangs (fixed in T1.1r) · waking from sleep hangs (with four different sticks, being checked) · on one tester's board on T1.1 the front USB sockets and the two rear ones under the network socket do not work ([known issues](KNOWN_ISSUES.md)) |

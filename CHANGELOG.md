@@ -3,6 +3,27 @@
 Новые версии сверху. T1, T2 и так далее — тестовые версии; 1.0 будет первой стабильной.
 Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable one.
 
+## T1.1r — перезагрузка на Ryzen 4000G и 5000G
+
+- **Перезагрузка теперь полная на всех процессорах, кроме Ryzen 2000G/3000G и Athlon 200GE/3000G.** В T1.1 она была
+  «мягкой», как у Lenovo: процессор сбрасывался не полностью. Ryzen 4000G и 5000G к такому не готовы: на 5000G
+  перезагрузка из Windows зависала, а на 4600G после неё Windows тормозила и показывала «Время работы» около 10675199
+  дней. Теперь перезагрузка на них полная, как в BIOS Biostar. Для Ryzen 2000G/3000G и Athlon всё осталось как в T1.1.
+- Больше ничего не менялось.
+- Обновление с T1.1 или T1: из меню с флешки, как обычно ([как обновить](docs/FLASHING.md#обновление)). Настройки
+  сохраняются.
+
+## T1.1r — restarts on Ryzen 4000G and 5000G
+
+- **A restart is now a full one on every processor except the Ryzen 2000G/3000G and Athlon 200GE/3000G.** In T1.1 it
+  was a "soft" one, as Lenovo has it: the processor was not reset all the way. The Ryzen 4000G and 5000G are not made for
+  that: on a 5000G a restart from Windows hung, and on a 4600G Windows slowed down after it and showed an uptime of about
+  10675199 days. Now these processors get a full restart, as in Biostar's BIOS. On the Ryzen 2000G/3000G and Athlon
+  nothing changed from T1.1.
+- Nothing else changed.
+- Updating from T1.1 or T1: from the menu with a USB stick, as usual ([how to update](docs/FLASHING.md#updating)).
+  Settings are kept.
+
 ## T1.1 — исправления к T1
 
 - **Windows снова загружается.** На T1 Windows падала при загрузке с синим экраном ACPI_BIOS_ERROR, а следующий старт
