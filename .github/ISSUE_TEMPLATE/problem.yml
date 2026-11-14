@@ -13,7 +13,7 @@ body:
 
         1. **Всегда** — отчёт из BIOS: флешка в компьютер, **Del** → **F11**, файл `\Z3NOVO\REPORT-….TXT` с флешки (с версии T1).
         2. **Если Windows или Linux запускаются** — отчёт скрипта: [для Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) или [для Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [как запустить](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
-        3. **Если сбой редкий и непонятный** — папку с результатами тест-флешки (готовится).
+        3. **Если сбой редкий и непонятный** — папку с результатами [тест-флешки](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4) — как записать и запустить, в [инструкции](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md#тест-флешка).
 
         <details><summary><b>Как запустить скрипт</b> (нажмите, чтобы развернуть)</summary>
 
@@ -37,7 +37,7 @@ body:
 
         1. **Always** — the BIOS report: USB stick in, **Del** → **F11**, the `\Z3NOVO\REPORT-….TXT` file from the stick (from version T1).
         2. **If Windows or Linux starts** — the script report: [for Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) or [for Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [how to run them](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
-        3. **If the failure is rare and puzzling** — the test stick's results folder (in preparation).
+        3. **If the failure is rare and puzzling** — the [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4)'s results folder — how to make and run it, in [the guide](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md#test-stick).
 
         <details><summary><b>How to run the script</b> (click to expand)</summary>
 
