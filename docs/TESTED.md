@@ -5,13 +5,15 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | Процессор | Поколение | Версии | Итог |
 |---|---|---|---|
-| [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1, T1.2 | ✅ работает |
+| [Ryzen 3 2200G](#ryzen-3-2200g) | Raven Ridge | T1, T1.1, T1.2, T2.0 | ✅ работает; разгон ядер до 3900 МГц |
 | [Ryzen 5 2400G](#ryzen-5-2400g) | Raven Ridge | T1.1 | ✅ работает, 2 × 16 ГБ до 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g) | Picasso | T1.1 | ✅ работает, сон и включения |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
+| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g) | Renoir | T1.2 | ✅ Resizable BAR, встроенная графика вместе с видеокартой; ⚠️ сон (исправлено в T2.0, ждём подтверждения) |
 | [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправлено в T1.1r (ждём подтверждения) |
-| [Ryzen 5 5600G](#ryzen-5-5600g) | Cezanne | T1.1, T1.1r | ⚠️ работает; выход из сна виснет, у одного тестера не работают USB чипсета |
+| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g) | Renoir | T1.2 | ✅ работает, 2 × 16 ГБ на 3200; ⚠️ с одним NVMe зависает Windows |
+| [Ryzen 5 5600G](#ryzen-5-5600g) | Cezanne | T1.1, T1.1r | ⚠️ работает; выход из сна виснет (исправлено в T2.0, ждём подтверждения), у одного тестера не работают USB чипсета |
 
 [English version](#what-has-been-tested)
 
@@ -21,11 +23,12 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1, T1.1, T1.2 |
+| **Версии** | T1, T1.1, T1.2, T2.0 (пробные сборки; последняя отличается от T2.0 только номером версии) |
 | **Системы** | Windows 11, Windows 11 Pro, Linux |
 | **Память** | 2 × 8 ГБ DDR4-2666 (Crucial + Kingston) · 2 × 4 ГБ разные (2666 + 2400) — вместе работают на 2400 |
 | ✅ **Работает** | перезагрузки, сон, включение по таймеру, по сети и после пропадания света · оба DisplayPort · USB 3.0 · сеть 1 Гбит/с · SATA · звук · TPM 2.0 · вентилятор · обновление BIOS из меню · DASH: консоль, веб-страница, удалённое питание, ISO по сети |
-| ⚠️ **Особенности** | COM-порт в Windows иногда не определяется |
+| ✅ **Новое в T2.0** | обновление из меню и возврат на предыдущую сборку · заставка с подсказками Del/F9 · F6 «Сбросить всё на заводские» и его отмена · F12 снимок экрана · строка F-клавиш и окно F1 с QR-кодами · окно «Состояние» · вкладка «Другое» · сервисный режим · сон и пробуждение в Windows и Linux · DASH: включение после выдёргивания шнура, наше меню в консоли · разгон ядер 3900 МГц при 1,375 В · откат после трёх неудачных запусков (на ранней пробной сборке) · «Память для графики» 11 ГБ · новое имя компьютера · нет «irq 7: nobody cared» в Linux |
+| ⚠️ **Особенности** | COM-порт в Windows иногда не определяется · на 4000 МГц ядра зависают при любом напряжении · разгон графики 1200 МГц / 1,200 В под нагрузкой зависал · что в T2.0 на этой плате ещё не проверено — в [истории версий](../CHANGELOG.md) |
 
 **Опыты**
 - Серии перезагрузок: 25, 10 и 100 подряд без зависаний.
@@ -86,6 +89,16 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
   планки — CL 24-23-23 и CL 22-22-22 при общей частоте 3200.
   AIDA64 (FPU, кэш, память) 15 минут и TestMem5 3 цикла — без ошибок.
 
+## Ryzen 3 PRO 4350G
+
+> Renoir · 4 ядра / 8 потоков · встроенная Vega 6
+
+| | |
+|---|---|
+| **Версии** | T1.2 |
+| ✅ **Работает** | Resizable BAR с видеокартой Intel Arc A380 · встроенная графика вместе с видеокартой (Arc A380, RX 550) · тест-флешка: память и нагрузка без ошибок |
+| ⚠️ **Особенности** | на T1.2 компьютер не просыпается из сна (обе проверки сна тест-флешкой) — исправлено в T2.0, ждём подтверждения · кружок загрузки Windows задевал логотип (в T2.0 новая заставка) |
+
 ## Ryzen 5 4600G
 
 > Renoir · 6 ядер / 12 потоков · встроенная Vega 7
@@ -95,6 +108,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Версии** | T1.1 |
 | **Системы** | Windows |
 | ⚠️ **Особенности** | после «Перезагрузки» Windows тормозит ([известные проблемы](KNOWN_ISSUES.md)); исправлено в T1.1r, ждём подтверждения |
+
+## Ryzen 5 PRO 4650G
+
+> Renoir · 6 ядер / 12 потоков · встроенная Vega 7
+
+| | |
+|---|---|
+| **Версии** | T1.2 |
+| **Системы** | Debian 13, Windows |
+| **Память** | 2 × 16 ГБ (Apacer + Crucial) на 3200 |
+| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков |
+| ⚠️ **Особенности** | с накопителем NVMe Western Digital в M.2 Windows зависает, с SATA — нет (в T2.0 такт слота M.2 как у Lenovo, ждём проверки) · вентиляторы на FAN2/FAN3 крутились на постоянных средних оборотах (в T2.0 их ведёт прошивка) · точное управление частотой (CPPC) было выключено (в T2.0 включено по умолчанию) · иногда не сохранялись настройки (исправлено в T2.0) |
 
 ## Ryzen 5 5600G
 
@@ -106,7 +131,7 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Системы** | Windows 10 |
 | **Память** | 4 × 8 ГБ разные (две 2400, две 2666) · 1 × 8 ГБ Crucial 2400 |
 | ✅ **Работает** | запуск Windows · перезагрузки из Windows (на T1.1r) · четыре планки памяти |
-| ⚠️ **Особенности** | на T1.1 перезагрузка из Windows зависает (исправлено в T1.1r) · выход из сна зависает (с четырьмя разными планками, проверяем) · у одного тестера на T1.1 не работают передние USB и два задних под сетевым разъёмом ([известные проблемы](KNOWN_ISSUES.md)) |
+| ⚠️ **Особенности** | на T1.1 перезагрузка из Windows зависает (исправлено в T1.1r) · выход из сна зависает (исправлено в T2.0, ждём подтверждения) · у одного тестера на T1.1 не работают передние USB и два задних под сетевым разъёмом ([известные проблемы](KNOWN_ISSUES.md)) |
 
 ---
 
@@ -114,13 +139,15 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | Processor | Family | Versions | Result |
 |---|---|---|---|
-| [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1, T1.2 | ✅ works |
+| [Ryzen 3 2200G](#ryzen-3-2200g-1) | Raven Ridge | T1, T1.1, T1.2, T2.0 | ✅ works; core overclock up to 3900 MHz |
 | [Ryzen 5 2400G](#ryzen-5-2400g-1) | Raven Ridge | T1.1 | ✅ works, 2 × 16 GB up to 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g-1) | Picasso | T1.1 | ✅ works, sleep and power-ons |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
+| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g-1) | Renoir | T1.2 | ✅ Resizable BAR, built-in graphics together with a card; ⚠️ sleep (fixed in T2.0, awaiting confirmation) |
 | [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, fixed in T1.1r (awaiting confirmation) |
-| [Ryzen 5 5600G](#ryzen-5-5600g-1) | Cezanne | T1.1, T1.1r | ⚠️ works; waking from sleep hangs, one tester's chipset USB sockets do not work |
+| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g-1) | Renoir | T1.2 | ✅ works, 2 × 16 GB at 3200; ⚠️ Windows hangs with one NVMe drive |
+| [Ryzen 5 5600G](#ryzen-5-5600g-1) | Cezanne | T1.1, T1.1r | ⚠️ works; waking from sleep hangs (fixed in T2.0, awaiting confirmation), one tester's chipset USB sockets do not work |
 
 ## Ryzen 3 2200G
 
@@ -128,11 +155,12 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1, T1.1, T1.2 |
+| **Versions** | T1, T1.1, T1.2, T2.0 (test builds; the last one differs from T2.0 only in its version number) |
 | **Systems** | Windows 11, Windows 11 Pro, Linux |
 | **Memory** | 2 × 8 GB DDR4-2666 (Crucial + Kingston) · 2 × 4 GB of different kinds (2666 + 2400), together at 2400 |
 | ✅ **Works** | restarts, sleep, power-on by timer, over the network and after a power cut · both DisplayPort sockets · USB 3.0 · 1 Gbit/s network · SATA · sound · TPM 2.0 · fan · BIOS update from the menu · DASH: console, web page, remote power, ISO over the network |
-| ⚠️ **Notes** | the COM port is sometimes not detected in Windows |
+| ✅ **New in T2.0** | updating from the menu and going back to the previous build · the boot screen with Del/F9 hints · F6 "Reset all to factory" and cancelling it · F12 screenshots · the F-key line and the F1 window with QR codes · the Health window · the Other tab · service mode · sleep and wake on Windows and Linux · DASH: power-on after the cord was out, our menu in the console · core overclock at 3900 MHz and 1.375 V · the rollback after three failed starts (on an early test build) · "Memory for graphics" at 11 GB · the new computer name · no "irq 7: nobody cared" on Linux |
+| ⚠️ **Notes** | the COM port is sometimes not detected in Windows · at 4000 MHz the cores freeze at any voltage · a graphics overclock of 1200 MHz / 1.200 V froze under load · what in T2.0 has not been tested on this board yet: see the [version history](../CHANGELOG.md) |
 
 **Experiments**
 - Restart series: 25, 10 and 100 in a row without a hang.
@@ -193,6 +221,16 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
   stick, CL 24-23-23 and CL 22-22-22, at a common 3200.
   AIDA64 (FPU, cache, memory) for 15 minutes and TestMem5 for 3 cycles, no errors.
 
+## Ryzen 3 PRO 4350G
+
+> Renoir · 4 cores / 8 threads · Vega 6 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.2 |
+| ✅ **Works** | Resizable BAR with an Intel Arc A380 card · built-in graphics together with a card (Arc A380, RX 550) · test stick: memory and load without errors |
+| ⚠️ **Notes** | on T1.2 the computer does not wake from sleep (both sleep checks of the test stick) — fixed in T2.0, awaiting confirmation · the Windows loading circle touched the logo (T2.0 has a new boot screen) |
+
 ## Ryzen 5 4600G
 
 > Renoir · 6 cores / 12 threads · Vega 7 graphics
@@ -202,6 +240,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Versions** | T1.1 |
 | **Systems** | Windows |
 | ⚠️ **Notes** | after Restart, Windows slows down ([known issues](KNOWN_ISSUES.md)); fixed in T1.1r, awaiting confirmation |
+
+## Ryzen 5 PRO 4650G
+
+> Renoir · 6 cores / 12 threads · Vega 7 graphics
+
+| | |
+|---|---|
+| **Versions** | T1.2 |
+| **Systems** | Debian 13, Windows |
+| **Memory** | 2 × 16 GB (Apacer + Crucial) at 3200 |
+| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks |
+| ⚠️ **Notes** | with a Western Digital NVMe drive in M.2 Windows hangs, with SATA it does not (in T2.0 the M.2 slot clock works as Lenovo's, awaiting a test) · the fans on FAN2/FAN3 ran at a fixed medium speed (in T2.0 the firmware drives them) · fine clock control (CPPC) was off (on by default in T2.0) · settings were sometimes not saved (fixed in T2.0) |
 
 ## Ryzen 5 5600G
 
@@ -213,4 +263,4 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | **Systems** | Windows 10 |
 | **Memory** | 4 × 8 GB, all different (two 2400, two 2666) · 1 × 8 GB Crucial 2400 |
 | ✅ **Works** | Windows starts · restarts from Windows (on T1.1r) · four memory sticks |
-| ⚠️ **Notes** | on T1.1 a restart from Windows hangs (fixed in T1.1r) · waking from sleep hangs (with four different sticks, being checked) · on one tester's board on T1.1 the front USB sockets and the two rear ones under the network socket do not work ([known issues](KNOWN_ISSUES.md)) |
+| ⚠️ **Notes** | on T1.1 a restart from Windows hangs (fixed in T1.1r) · waking from sleep hangs (fixed in T2.0, awaiting confirmation) · on one tester's board on T1.1 the front USB sockets and the two rear ones under the network socket do not work ([known issues](KNOWN_ISSUES.md)) |

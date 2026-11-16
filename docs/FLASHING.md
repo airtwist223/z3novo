@@ -39,7 +39,7 @@
    не отправляйте.**
 4. **Запишите Z3NOVO** (flashrom сам проверит запись):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.2.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.0.bin
    ```
 5. **Снимите прищепку, вставьте шнур, включите.** Первый раз компьютер может сам перезагрузиться 2–4 раза, пока
    прошивка готовит настройки и проверяет память. Это нормально, подождите.
@@ -63,6 +63,34 @@
 
 Ставить можно любую версию Z3NOVO — и новее, и старее нынешней. Вернуть родной BIOS Lenovo можно только
 программатором (см. ниже).
+
+### С T1.2 или T1.1r на T2.0
+
+Обновляйтесь из меню, как описано выше. Что важно знать:
+
+- **Первый запуск** на несколько секунд дольше: прошивка заново обучает память. Компьютер может один раз
+  перезапуститься сам. Это один раз.
+- **Настройки сохраняются.** Новое в T2.0 стоит на заводских значениях: «Защита от неудачного разгона» выключена,
+  процессоры на 95–105 Вт ограничены классом 65 Вт, вентиляторы FAN2 и FAN3 — «Авто».
+- **Новое имя компьютера.** Windows увидит компьютер как Z3NOVO Labs ThinkCentre M715s Reborn и может один раз попросить
+  подтвердить активацию ([что делать](KNOWN_ISSUES.md)).
+- **С T1.1 и T1** путь тот же, но переход сразу на T2.0 мы не проверяли.
+
+Переход с T1.2 и T1.1r на T2.0 проверен расчётом на компьютере (тот же план записи, что строит меню); на плате автора —
+обновление с T1.2 на раннюю пробную сборку T2.
+
+## Возврат на прежнюю версию Z3NOVO
+
+Тем же путём из меню: «Обновить прошивку» → файл прежней версии (например, `Z3NOVO_T1.2.bin` со
+[страницы выпуска](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Перед возвратом с T2.0 на T1.x:
+
+- верните разгон процессора и графики на «Авто» и выключите «Свои пределы мощности (PBO)»: в T1.x нет ни защиты от
+  неудачного разгона, ни ограничения процессоров на 95–105 Вт.
+
+После возврата компьютер снова называется именем платы Biostar, как в T1.x. Возврат с T2.0 на T1.2 мы проверили только
+расчётом на компьютере; на плате автора проверен возврат с последней пробной сборки T2 на предыдущую и обратно. Если после
+записи меню не открывается, запишите программатором копию микросхемы, которую меню сохранило на флешку перед
+обновлением.
 
 ## Возврат к родному BIOS
 
@@ -114,7 +142,7 @@ The chip: Winbond W25Q128FW, 16 MB. It is marked U53 on the board. flashrom call
    to anyone.**
 4. **Write Z3NOVO** (flashrom checks the write itself):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T1.2.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.0.bin
    ```
 5. **Remove the clip, plug the cord back in, power on.** The first time, the computer may restart by itself 2–4 times
    while the firmware prepares its settings and checks the memory. That is normal; wait.
@@ -140,6 +168,34 @@ From T1 on, the BIOS is updated right from the menu, with no programmer. Your se
 
 Any Z3NOVO version can be installed, newer or older than the current one. Lenovo's BIOS can only be put back with a
 programmer (see below).
+
+### From T1.2 or T1.1r to T2.0
+
+Update from the menu as described above. What to know:
+
+- **The first start** takes a few seconds longer: the firmware trains the memory anew. The computer may restart once by
+  itself. That happens once.
+- **Settings are kept.** What is new in T2.0 starts at its factory values: Failed overclock protection is off, 95–105 W
+  processors are limited to the 65 W class, the FAN2 and FAN3 fans are on Auto.
+- **A new computer name.** Windows will see the computer as a Z3NOVO Labs ThinkCentre M715s Reborn and may ask once to
+  confirm activation ([what to do](KNOWN_ISSUES.md#known-issues)).
+- **From T1.1 and T1** the way is the same, but we have not tested going straight to T2.0 from them.
+
+Going from T1.2 and T1.1r to T2.0 has been checked by calculation on a computer (the same write plan the menu builds); on
+the author's board, updating from T1.2 to an early T2 test build.
+
+## Going back to an earlier Z3NOVO version
+
+The same way, from the menu: Update firmware → the earlier version's file (for example `Z3NOVO_T1.2.bin` from its
+[release page](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Before going back from T2.0 to T1.x:
+
+- set the processor and graphics overclock back to Auto and turn "Own power limits (PBO)" off: T1.x has neither the
+  protection against a failed overclock nor the limit on 95–105 W processors.
+
+After going back, the computer goes by the Biostar board's name again, as on T1.x. Going back from T2.0 to T1.2 we have
+checked only by calculation on a computer; on the author's board, going from the last T2 test build back to the previous one and
+forward again has been tested. If the menu does not open after the write, write with a programmer the copy of the chip
+the menu saved to the stick before the update.
 
 ## Going back to Lenovo's BIOS
 

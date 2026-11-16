@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-> **Статус: публичный тест.** Текущая тестовая версия — **T1.2**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T1.2), [что в ней](CHANGELOG.md).
+> **Статус: публичный тест.** Текущая тестовая версия — **T2.0**: [скачать](https://github.com/airtwist223/z3novo/releases/tag/T2.0), [что нового](#что-нового-в-t20), [полный список изменений](CHANGELOG.md). Предыдущая — [T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -10,7 +10,7 @@
 <p align="center">
   <img src="docs/img/ez_home_ru.png" alt="Главный экран меню Z3NOVO" width="900">
 </p>
-<p align="center"><sub>Главный экран нового меню: процессор и его температура, память по слотам, вентилятор, быстрые настройки.</sub></p>
+<p align="center"><sub>Главный экран меню T2.0: процессор и его температура, память по слотам, вентилятор, быстрые настройки, внизу — строка F-клавиш.</sub></p>
 
 ## Отказ от ответственности
 
@@ -37,14 +37,54 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 именно этой платы Lenovo: линии PCIe, выводы, питание, вентилятор, Super I/O. Вместо старого текстового меню —
 своё графическое приложение настроек с мышью, на русском и английском.
 
+## Что нового в T2.0
+
+T2.0 — вторая тестовая версия: всё, что исправлено в T1.1r и T1.2, и много нового ([полный список](CHANGELOG.md)).
+Главное:
+
+- **Разгон процессора с защитой:** своя частота и напряжение ядер на Ryzen 2000G, 3000G и 4000G, разгон встроенной
+  графики, Curve Optimizer на Ryzen 5000. Если после разгона система 3 раза подряд не загрузится, прошивка сама вернёт
+  заводские значения ([пределы и оговорки](docs/LIMITS.md#6-разгон-процессора)).
+- **Процессоры на 95–105 Вт по умолчанию работают в классе 65 Вт** — на это рассчитана плата. Полную мощность можно
+  включить в меню на свой риск.
+- **Все три вентилятора** (процессора, FAN2 и FAN3) ведёт прошивка; новое окно **«Состояние»**: температура, обороты и
+  напряжения с графиками за минуту.
+- **Новая заставка** с подсказками Del/F9, **строка F-клавиш** внизу меню и окно F1 «Клавиши», **F6 — сброс всех
+  настроек на заводские**, **F12 — снимок экрана** на флешку.
+- **Пароль BIOS, очистка TPM и ключи Secure Boot** — прямо в нашем меню.
+- **Ручная частота памяти и XMP без лишней перезагрузки**; задержки памяти видны и настраиваются; «Память для графики» —
+  своё число в гигабайтах.
+- **DASH:** наше меню в консоли DASH; включение по сети работает и после выдёргивания шнура.
+- **Компьютер называется своим именем:** Z3NOVO Labs ThinkCentre M715s Reborn.
+- **Сон на Ryzen 4000G и 5000G исправлен, но ещё не подтверждён.** Если у вас такой процессор — проверьте, пожалуйста, и
+  напишите, что вышло ([как](docs/KNOWN_ISSUES.md)).
+
+### Как обновиться
+
+С T1.2 или T1.1r — прямо из меню, без программатора:
+
+1. Скачайте `Z3NOVO_T2.0.bin` и его `.sha256`, положите оба на флешку FAT32 в папку `Z3NOVO`.
+2. Del при включении → **Классика → Безопасность → «Прошивка BIOS» → «Обновить прошивку»** → выберите файл, включите
+   сохранение копии нынешней прошивки на флешку, подтвердите и дождитесь конца записи.
+3. Перезагрузите компьютер. Первый запуск на несколько секунд дольше: прошивка заново обучает память; компьютер может
+   один раз перезапуститься сам. Это один раз.
+
+Настройки сохраняются. Windows увидит новое имя компьютера и может один раз попросить подтвердить активацию. Подробно и
+как вернуться на T1.2 — в [FLASHING.md](docs/FLASHING.md#с-t12-или-t11r-на-t20). Первая установка (с родного BIOS
+Lenovo) — только программатором.
+
 ## Что умеет
 
 - **Процессоры:** Ryzen 1000–5000 для AM4 по возможностям AGESA. На этой плате проверен только Ryzen 3 2200G.
   Процессоры без встроенной графики (например, Ryzen 7 2700, Ryzen 5 5600) работают только с видеокартой.
 - **Приложение настроек (Del):** мышь и клавиатура, RU/EN, поиск по настройкам, простой режим и все настройки,
-  страница состояния (температура процессора, вентилятор), меню загрузки (F9), разрешение экрана по монитору,
-  экранная клавиатура.
-- **Вентилятор:** плавную кривую ведёт прошивка; режимы «Тихо», «Авто», «Макс» и свой редактор кривой.
+  окно «Состояние» (температура, обороты вентиляторов, напряжения), меню загрузки (F9), разрешение экрана по монитору,
+  экранная клавиатура; с T2.0 — снимок экрана (F12), сброс всех настроек на заводские (F6), пароль BIOS, очистка TPM
+  и ключи Secure Boot.
+- **Разгон процессора** (с T2.0) — только вместе с защитой от неудачного разгона
+  ([подробнее](docs/LIMITS.md#6-разгон-процессора)).
+- **Вентиляторы:** плавную кривую ведёт прошивка; режимы «Тихо», «Авто», «Макс» и свой редактор кривой для вентилятора
+  процессора; с T2.0 свои режимы есть и у вентиляторов на разъёмах FAN2 и FAN3.
 - **Родная микросхема платы.** Прошивка работает с той микросхемой питания, вентиляторов и датчиков, которая стоит
   именно на M715s, — ITE IT8738. Её настройку мы взяли из родной прошивки Lenovo (те же значения, что выставляет
   BIOS Lenovo) и встроили вместо настройки чужой микросхемы платы-донора, а поверх написали свои драйверы. Поэтому
@@ -57,7 +97,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 - **Включение после пропадания питания** (настройка «Restore on AC Power Loss»).
 - **Загрузка по сети UEFI (PXE).**
 - **DASH** — удалённое управление по сети через встроенную сетевую карту. По умолчанию выключено. Настройки сети
-  DASH (адрес, маска, шлюз, имя) меняются прямо в приложении.
+  DASH (адрес, маска, шлюз, имя) меняются прямо в приложении; с T2.0 наше меню открывается текстом и в консоли DASH.
 - **Обновление прошивки с флешки** прямо из меню, без программатора ([как](docs/FLASHING.md#обновление)), и **«Отчёт для
   диагностики»** по клавише F11 — файл на флешке, который прикладывают к сообщению о проблеме ([подробнее](docs/DIAGNOSTICS.md)).
 
@@ -66,9 +106,9 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 Z3NOVO — это не «слегка переделанный Biostar». От прошивки-донора взята только основа: код AMD и AMI, который запускает
 процессор, память и чипсет. Всё, что вы видите, и всё, что делает прошивку стабильной именно на M715s, сделано заново:
 
-- около **34 000 строк** своего кода на C в меню Z3NOVO и около **4 600 строк** в своих драйверах прошивки (C и ассемблер);
+- около **49 000 строк** своего кода на C в меню Z3NOVO и около **10 000 строк** в своих драйверах прошивки (C и ассемблер);
 - исправлено **больше 15 модулей** Biostar, AMD, AMI и Realtek;
-- около **1 200 автоматических проверок** меню в эмуляторе перед каждой сборкой;
+- около **2 500 автоматических проверок** меню в эмуляторе;
 - **сотни перезагрузок** на настоящей плате, пока искали и чинили зависания.
 
 
@@ -77,7 +117,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **Меню Z3NOVO** | графическое меню настроек внутри BIOS: мышь, RU/EN, поиск, простой режим, редактор кривой вентилятора, настройки сети DASH, отчёт F11, обновление с флешки | удобная настройка вместо старого текстового меню |
 | **Z3Entry** (драйвер) | по клавишам Del и F9 открывает наше меню и наше меню загрузки | новое меню без лишних шагов |
 | **Z3Chip** (драйвер) | работает с микросхемой датчиков и питания (Super I/O) с проверкой каждого обращения, выключает её собственный опрос температуры, включает компьютер после пропадания света по логике Lenovo, включает и выключает DASH | ушли зависания из-за этой микросхемы, работает автовключение |
-| **Z3Fan** (драйвер) | дважды в секунду берёт температуру прямо из процессора и плавно ведёт вентилятор — и в BIOS, и в Windows, и в Linux | тихий вентилятор без рывков |
+| **Z3Fan** (драйвер) | дважды в секунду берёт температуру прямо из процессора и плавно ведёт вентиляторы (с T2.0 — все три) — и в BIOS, и в Windows, и в Linux | тихие вентиляторы без рывков |
 | **Ранние исправления запуска** | ограничение времени на обмен по шине LPC, проверенная начальная настройка Super I/O, страховочный таймер на опасных участках, паузы без лишних обращений к шине | исчезли зависания при включении и перезагрузке: 100 перезагрузок из 100 |
 | **Журнал запусков** | при каждом включении записывает, до какого шага дошёл запуск и почему плата перезагрузилась | по нему нашли причины зависаний; на нём держится отчёт F11 |
 | **Доработанные модули AMD, Biostar и Realtek** | драйвер сетевой карты Realtek (зависал при сохранении настроек DASH), видеовыходы (DisplayPort вместо HDMI), лишние записи в микросхему Super I/O в модулях Biostar | сохраняются настройки DASH, правильно работают разъёмы DisplayPort |
@@ -88,38 +128,46 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
-| **Процессор** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE | другие Ryzen 1000–5000 | A-серия (A6–A12), разгон |
+| **Процессор** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G; разгон ядер на 2200G; разгон графики на 2200G — работает, но возможны зависания под нагрузкой ([почему](docs/LIMITS.md#6-разгон-процессора)) | другие Ryzen 1000–5000; разгон на других процессорах; ограничение 95–105 Вт | A-серия (A6–A12) |
 | **Память** | 2 планки, разгон до DDR4-3200 | 4 планки, XMP | напряжение выше 1,2 В |
-| **Монитор** | оба DisplayPort, VGA | кабель DP→DP | |
-| **Видеокарта** | | PCIe x16, Resizable BAR | |
+| **Монитор** | оба DisplayPort, VGA | кабель DP→DP, второй DisplayPort в режиме HDMI | |
+| **Видеокарта** | PCIe x16, Resizable BAR (Intel Arc A380), встроенная графика вместе с видеокартой | | |
 | **USB** | все разъёмы | | |
 | **Диски** | SATA, M.2 NVMe | | |
 | **Сеть** | 1 Гбит/с, включение по сети | загрузка по сети (PXE) | |
-| **DASH** | консоль, веб-страница, удалённое питание, ISO по сети | экран BIOS в консоли | |
-| **Питание** | перезагрузки, сон, включение по таймеру и после пропадания света | | |
-| **Меню BIOS** | Del, F9, F11, обновление с флешки, вход из Windows | | |
+| **DASH** | консоль, веб-страница, удалённое питание, ISO по сети, наше меню в консоли, включение после выдёргивания шнура | | |
+| **Питание** | перезагрузки, сон, включение по таймеру и после пропадания света | сон на Ryzen 4000G и 5000G (исправлено в T2.0, не подтверждено) | |
+| **Меню BIOS** | Del, F9, F11, F6, F12, обновление с флешки и возврат на прежнюю версию, вход из Windows | пароль BIOS, Secure Boot, очистка TPM | |
 | **Системы** | Windows 11, Linux | | |
 | **Звук** | выход и микрофон | через DisplayPort | |
-| **Прочее** | TPM 2.0, вентилятор | COM-порт | |
+| **Прочее** | TPM 2.0, вентилятор процессора | COM-порт, вентиляторы FAN2 и FAN3 | |
 
 Подробности, условия проверок и отчёты тестеров — [docs/TESTED.md](docs/TESTED.md).
 
 ## Ограничения железа
 
 Коротко: **напряжение памяти на этой плате всегда 1,2 В** — его не меняет никакая прошивка; питание процессора на плате рассчитано на
-процессоры до 65 Вт (кулер и блок питания можно поставить мощнее, а схему питания на плате — только лучше охлаждать). Подробно, с последствиями для XMP, разгона и памяти встроенной графики: [docs/LIMITS.md](docs/LIMITS.md).
+процессоры до 65 Вт (кулер и блок питания можно поставить мощнее, а схему питания на плате — только лучше охлаждать); **+12 В и +5 В
+на плате не измеряются** — эти входы датчиков не подключены, поэтому программы показывают там случайные числа. Подробно, с последствиями
+для XMP, разгона, памяти встроенной графики, DASH и Secure Boot: [docs/LIMITS.md](docs/LIMITS.md).
 
 ## Документы
 
 - [docs/FLASHING.md](docs/FLASHING.md) — установка, обновление, откат.
 - [docs/LIMITS.md](docs/LIMITS.md) — что плата может и чего не может.
 - [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — как собрать отчёт о проблеме.
+- Вопрос или отчёт о проблеме можно прислать и в Telegram-бот [@z3novo_bot](https://t.me/z3novo_bot).
 - Всё работает? Расскажите через форму **«Всё работает»** в разделе Issues — так собирается список проверенных сборок.
 - Есть идея, что добавить в меню или в прошивку (новый пункт, поддержка процессоров, разгон, скорость старта, PCIe…)? Форма **«Предложение»** в разделе Issues.
 - Что-то неудобно или криво в меню? Форма **«Неудобство или ошибка в меню»** в разделе Issues.
 - [docs/TESTED.md](docs/TESTED.md) — что проверено, на каком железе.
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — известные проблемы.
 - [CHANGELOG.md](CHANGELOG.md) — история версий.
+
+## Поддержать проект
+
+Поддержать проект можно в Telegram-боте [@z3novo_bot](https://t.me/z3novo_bot): кнопка «⭐ Поддержать проект» или
+команда /donate. В том же боте можно задать вопрос или отправить отчёт о проблеме.
 
 ## Лицензия
 
@@ -131,7 +179,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-> **Status: public test.** The current test version is **T1.2**: [download](https://github.com/airtwist223/z3novo/releases/tag/T1.2), [what is in it](CHANGELOG.md).
+> **Status: public test.** The current test version is **T2.0**: [download](https://github.com/airtwist223/z3novo/releases/tag/T2.0), [what is new](#what-is-new-in-t20), [the full list of changes](CHANGELOG.md). The previous one is [T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
@@ -139,7 +187,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 <p align="center">
   <img src="docs/img/ez_home_ru.png" alt="The Z3NOVO menu's home screen" width="900">
 </p>
-<p align="center"><sub>The new menu's home screen (shown in Russian; English is one click away): processor and its temperature, memory by slot, fan, quick settings.</sub></p>
+<p align="center"><sub>The T2.0 menu's home screen (shown in Russian; English is one click away): processor and its temperature, memory by slot, fan, quick settings, and the line of F keys at the bottom.</sub></p>
 
 ## Disclaimer
 
@@ -166,13 +214,55 @@ AGESA ComboAM4v2PI 1.2.0.F (from a Biostar board with the same chipset), carryin
 PCIe lanes, pins, power, fan, Super I/O. Instead of the old text menu it has its own graphical settings app with mouse
 support, in Russian and English.
 
+## What is new in T2.0
+
+T2.0 is the second test version: everything fixed in T1.1r and T1.2, and a lot that is new ([the full list](CHANGELOG.md)).
+The main things:
+
+- **Processor overclocking with protection:** your own core clock and voltage on the Ryzen 2000G, 3000G and 4000G,
+  built-in graphics overclocking, Curve Optimizer on the Ryzen 5000. If after an overclock the system fails to start 3
+  times in a row, the firmware puts the factory values back by itself
+  ([limits and caveats](docs/LIMITS.md#6-processor-overclocking)).
+- **95–105 W processors run in the 65 W class by default**, which is what the board is built for. Full power can be
+  turned on in the menu at your own risk.
+- **All three fans** (the processor's, FAN2 and FAN3) are driven by the firmware; a new **Health** window: temperature,
+  fan speeds and voltages with one-minute graphs.
+- **A new boot screen** with Del/F9 hints, **a line of F keys** at the bottom of the menu and the F1 Keys window, **F6 to
+  reset every setting to factory**, **F12 to save a screenshot** to a USB stick.
+- **The BIOS password, clearing the TPM and the Secure Boot keys** right in our menu.
+- **Manual memory speed and XMP without the extra restart**; the memory delays are shown and can be set; "Memory for
+  graphics" is a number of your own, in gigabytes.
+- **DASH:** our menu in the DASH console; power-on over the network works after the power cord was out, too.
+- **The computer goes by its own name:** Z3NOVO Labs ThinkCentre M715s Reborn.
+- **Sleep on the Ryzen 4000G and 5000G is fixed but not yet confirmed.** If you have one of these processors, please try
+  it and tell us how it went ([how](docs/KNOWN_ISSUES.md#known-issues)).
+
+### How to update
+
+From T1.2 or T1.1r, right from the menu, with no programmer:
+
+1. Download `Z3NOVO_T2.0.bin` and its `.sha256`, and put both on a FAT32 USB stick in a `Z3NOVO` folder.
+2. Del at power-on → **Classic → Security → BIOS firmware → Update firmware** → pick the file, turn on saving a copy of
+   the current firmware to the stick, confirm and wait for the write to finish.
+3. Restart. The first start takes a few seconds longer: the firmware trains the memory anew, and the computer may
+   restart once by itself. That happens once.
+
+Settings are kept. Windows will see the computer's new name and may ask once to confirm activation. Details, and how to
+go back to T1.2: [FLASHING.md](docs/FLASHING.md#from-t12-or-t11r-to-t20). The first install (from Lenovo's BIOS) needs a
+programmer.
+
 ## What it does
 
 - **Processors:** AM4 Ryzen 1000–5000 as far as AGESA supports them. Only the Ryzen 3 2200G has been tested on this board.
   Processors without integrated graphics (for example the Ryzen 7 2700 or Ryzen 5 5600) need a graphics card.
-- **Settings app (Del):** mouse and keyboard, RU/EN, settings search, a simple view and all settings, a status page (CPU
-  temperature, fan), a boot menu (F9), screen resolution from the monitor, an on-screen keyboard.
-- **Fan:** the firmware drives a smooth curve; Quiet, Auto and Max presets and a curve editor of your own.
+- **Settings app (Del):** mouse and keyboard, RU/EN, settings search, a simple view and all settings, a Health window
+  (temperature, fan speeds, voltages), a boot menu (F9), screen resolution from the monitor, an on-screen keyboard; from
+  T2.0 also screenshots (F12), resetting every setting to factory (F6), the BIOS password, clearing the TPM and the
+  Secure Boot keys.
+- **Processor overclocking** (from T2.0), only together with the protection against a failed overclock
+  ([details](docs/LIMITS.md#6-processor-overclocking)).
+- **Fans:** the firmware drives a smooth curve; Quiet, Auto and Max presets and a curve editor of your own for the
+  processor fan; from T2.0 the fans on the FAN2 and FAN3 headers have their own presets too.
 - **The board's own chip.** The firmware works with the power, fan and sensor chip that the M715s actually has, the
   ITE IT8738. We took its setup from Lenovo's own firmware (the same values Lenovo's BIOS sets), put it in place of
   the donor board's setup for a different chip, and wrote our own drivers on top. So the processor fan runs on its own
@@ -185,7 +275,7 @@ support, in Russian and English.
 - **Power on after a power loss** (the "Restore on AC Power Loss" setting).
 - **UEFI network boot (PXE).**
 - **DASH** remote management over the onboard network card. Off by default. Its network settings (address, mask,
-  gateway, name) are edited right in the app.
+  gateway, name) are edited right in the app; from T2.0 our menu opens as text in the DASH console too.
 - **Firmware updates from a USB stick** right from the menu, without a programmer ([how](docs/FLASHING.md#updating)), and a
   **"Diagnostics report"** on the F11 key — a file on a USB stick to attach to a problem report ([details](docs/DIAGNOSTICS.md)).
 
@@ -195,10 +285,10 @@ Z3NOVO is not "a lightly modified Biostar". Only the base comes from the donor f
 the processor, memory and chipset. Everything you see, and everything that makes the firmware stable on the M715s itself,
 was made from scratch:
 
-- about **34,000 lines** of our own C code in the Z3NOVO menu and about **4,600 lines** in our own firmware drivers (C and
+- about **49,000 lines** of our own C code in the Z3NOVO menu and about **10,000 lines** in our own firmware drivers (C and
   assembly);
 - **more than 15 modules** from Biostar, AMD, AMI and Realtek fixed;
-- about **1,200 automatic checks** of the menu in an emulator before every build;
+- about **2,500 automatic checks** of the menu in an emulator;
 - **hundreds of restarts** on a real board while the hangs were found and fixed.
 
 
@@ -207,7 +297,7 @@ was made from scratch:
 | **Z3NOVO menu** | a graphical settings menu inside the BIOS: mouse, RU/EN, search, a simple view, a fan curve editor, DASH network settings, the F11 report, updates from a USB stick | easy setup instead of the old text menu |
 | **Z3Entry** (driver) | opens our menu and our boot menu on the Del and F9 keys | the new menu with no extra steps |
 | **Z3Chip** (driver) | talks to the board's sensor and power chip (Super I/O), checking every access; turns off the chip's own temperature polling; powers the computer on after a power cut the way Lenovo does; turns DASH on and off | the hangs caused by this chip are gone, power-on after a power cut works |
-| **Z3Fan** (driver) | twice a second reads the temperature straight from the processor and drives the fan smoothly — in the BIOS, in Windows and in Linux | a quiet fan without jumps |
+| **Z3Fan** (driver) | twice a second reads the temperature straight from the processor and drives the fans smoothly (from T2.0 all three) — in the BIOS, in Windows and in Linux | quiet fans without jumps |
 | **Early start fixes** | a time limit on the LPC bus, a checked Super I/O setup, a safety timer over risky steps, pauses that do not hammer the bus | the hangs at power-on and restart are gone: 100 restarts out of 100 |
 | **Boot log** | on every power-on, records how far the start got and why the board restarted | it found the causes of the hangs; the F11 report is built on it |
 | **Reworked AMD, Biostar and Realtek modules** | the Realtek network card driver (hung when saving DASH settings), the video outputs (DisplayPort instead of HDMI), stray writes to the Super I/O chip in Biostar's modules | DASH settings save, the DisplayPort sockets work as they should |
@@ -218,39 +308,46 @@ was made from scratch:
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
-| **Processor** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE | other Ryzen 1000–5000 | A-series (A6–A12), overclocking |
+| **Processor** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G; core overclocking on the 2200G; graphics overclocking on the 2200G works, but it may freeze under load ([why](docs/LIMITS.md#6-processor-overclocking)) | other Ryzen 1000–5000; overclocking on other processors; the 95–105 W limit | A-series (A6–A12) |
 | **Memory** | 2 sticks, overclocking up to DDR4-3200 | 4 sticks, XMP | voltage above 1.2 V |
-| **Monitor** | both DisplayPort sockets, VGA | DP→DP cable | |
-| **Graphics card** | | PCIe x16, Resizable BAR | |
+| **Monitor** | both DisplayPort sockets, VGA | DP→DP cable, the second DisplayPort socket in HDMI mode | |
+| **Graphics card** | PCIe x16, Resizable BAR (Intel Arc A380), built-in graphics together with a card | | |
 | **USB** | every socket | | |
 | **Drives** | SATA, M.2 NVMe | | |
 | **Network** | 1 Gbit/s, power-on over the network | network boot (PXE) | |
-| **DASH** | console, web page, remote power, ISO over the network | the BIOS screen in the console | |
-| **Power** | restarts, sleep, power-on by timer and after a power cut | | |
-| **BIOS menu** | Del, F9, F11, update from a USB stick, opening from Windows | | |
+| **DASH** | console, web page, remote power, ISO over the network, our menu in the console, power-on after the cord was out | | |
+| **Power** | restarts, sleep, power-on by timer and after a power cut | sleep on the Ryzen 4000G and 5000G (fixed in T2.0, not confirmed) | |
+| **BIOS menu** | Del, F9, F11, F6, F12, update from a USB stick and going back to an earlier version, opening from Windows | BIOS password, Secure Boot, clearing the TPM | |
 | **Systems** | Windows 11, Linux | | |
 | **Sound** | output and microphone | over DisplayPort | |
-| **Other** | TPM 2.0, fan | COM port | |
+| **Other** | TPM 2.0, processor fan | COM port, FAN2 and FAN3 fans | |
 
 Details, test conditions and testers' reports: [docs/TESTED.md](docs/TESTED.md).
 
 ## Hardware limits
 
 In short: **the memory voltage on this board is always 1.2 V**, no firmware can change it, and the board's processor power circuit is built
-for processors up to 65 W (the cooler and the power supply can be upgraded; the board's power circuit can only be cooled better). Details, including what this means for XMP, overclocking and integrated graphics memory:
-[docs/LIMITS.md](docs/LIMITS.md).
+for processors up to 65 W (the cooler and the power supply can be upgraded; the board's power circuit can only be cooled better); **+12 V and
++5 V are not measured on this board**: those sensor inputs are not connected, so programs show random numbers there. Details, including what
+this means for XMP, overclocking, integrated graphics memory, DASH and Secure Boot: [docs/LIMITS.md](docs/LIMITS.md).
 
 ## Documents
 
 - [docs/FLASHING.md](docs/FLASHING.md) — installing, updating, going back.
 - [docs/LIMITS.md](docs/LIMITS.md) — what the board can and cannot do.
 - [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md) — how to collect a problem report.
+- Questions and problem reports can also go to the Telegram bot [@z3novo_bot](https://t.me/z3novo_bot).
 - Everything works? Tell us with the **"Works for me"** form under Issues — it builds the list of tested setups.
 - An idea for the menu or the firmware (a new item, processor support, overclocking, start-up speed, PCIe…)? The **"Suggestion"** form under Issues.
 - Something awkward or off in the menu? The **"Menu annoyance or glitch"** form under Issues.
 - [docs/TESTED.md](docs/TESTED.md) — what has been tested, on which hardware.
 - [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — known problems.
 - [CHANGELOG.md](CHANGELOG.md) — version history.
+
+## Support the project
+
+You can support the project in the Telegram bot [@z3novo_bot](https://t.me/z3novo_bot): the «⭐ Поддержать проект»
+("Support the project") button or the /donate command. The same bot takes questions and problem reports.
 
 ## License
 

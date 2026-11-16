@@ -22,6 +22,7 @@ body:
       label: Версия Z3NOVO / Z3NOVO version
       description: Видна в заголовке меню (клавиша Del). / Shown in the menu header (the Del key).
       options:
+        - T2.0
         - T1.2
         - T1.1r
         - T1.1
@@ -83,6 +84,18 @@ body:
         - label: Частота памяти вручную или XMP / Manual memory speed or XMP
         - label: Обновление BIOS из меню / BIOS update from the menu
         - label: DASH
+        - label: "DASH: включение после выдёргивания шнура / DASH: power-on after the power cord was out"
+        - label: "DASH: меню BIOS в консоли / DASH: the BIOS menu in the console"
+        - label: Окно «Состояние» (температура, обороты, напряжения) / The Health window (temperature, fan speeds, voltages)
+        - label: Вентиляторы FAN2 и FAN3 / FAN2 and FAN3 fans
+        - label: Разгон процессора с защитой от неудачного разгона / Processor overclocking with the failed-overclock protection
+        - label: Разгон встроенной графики / Built-in graphics overclocking
+        - label: Пароль BIOS / BIOS password
+        - label: Secure Boot
+        - label: Очистка TPM / Clearing the TPM
+        - label: Снимок экрана F12 / F12 screenshot
+        - label: Сброс на заводские F6 / F6 reset to factory
+        - label: Флешка exFAT / exFAT USB stick
         - label: Тест-флешка без ошибок / Test stick with no errors
   - type: input
     id: time
