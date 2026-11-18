@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-> **Статус: публичный тест.** Текущая тестовая версия — **T2.1**: [скачать](https://github.com/airtwist223/z3novo/releases/latest), [что нового](#что-нового-в-t21), [полный список изменений](CHANGELOG.md). Предыдущая — [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0).
+> **Статус: публичный тест.** Последняя версия: [скачать](https://github.com/airtwist223/z3novo/releases/latest), [что нового](#что-нового), [полный список изменений](CHANGELOG.md), [все версии](https://github.com/airtwist223/z3novo/releases).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -37,7 +37,7 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 именно этой платы Lenovo: линии PCIe, выводы, питание, вентилятор, Super I/O. Вместо старого текстового меню —
 своё графическое приложение настроек с мышью, на русском и английском.
 
-## Что нового в T2.1
+## Что нового
 
 T2.1 — исправления к T2.0, главное — вентиляторы ([полный список](CHANGELOG.md)):
 
@@ -199,7 +199,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-> **Status: public test.** The current test version is **T2.1**: [download](https://github.com/airtwist223/z3novo/releases/latest), [what is new](#what-is-new-in-t21), [the full list of changes](CHANGELOG.md). The previous one is [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0).
+> **Status: public test.** The latest version: [download](https://github.com/airtwist223/z3novo/releases/latest), [what is new](#what-is-new), [the full list of changes](CHANGELOG.md), [all versions](https://github.com/airtwist223/z3novo/releases).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
@@ -234,7 +234,7 @@ AGESA ComboAM4v2PI 1.2.0.F (from a Biostar board with the same chipset), carryin
 PCIe lanes, pins, power, fan, Super I/O. Instead of the old text menu it has its own graphical settings app with mouse
 support, in Russian and English.
 
-## What is new in T2.1
+## What is new
 
 T2.1 is a set of fixes to T2.0, mostly for the fans ([the full list](CHANGELOG.md)):
 
