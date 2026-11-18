@@ -4,7 +4,7 @@
 
 [![⭐ Поддержать проект](https://img.shields.io/badge/%E2%AD%90%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
 
-> **Статус: публичный тест.** Последняя версия: [скачать](https://github.com/airtwist223/z3novo/releases/latest), [что нового](#что-нового), [полный список изменений](CHANGELOG.md), [все версии](https://github.com/airtwist223/z3novo/releases).
+> **Статус: публичный тест.** Последняя версия: [скачать и что нового](https://github.com/airtwist223/z3novo/releases/latest), [как установить и обновить](docs/FLASHING.md), [полный список изменений](CHANGELOG.md), [все версии](https://github.com/airtwist223/z3novo/releases).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
 > **Проверено только на плате AM4P2MS ревизии 1.1.** На других ревизиях работа не проверялась и не гарантируется.
@@ -39,70 +39,20 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
 именно этой платы Lenovo: линии PCIe, выводы, питание, вентилятор, Super I/O. Вместо старого текстового меню —
 своё графическое приложение настроек с мышью, на русском и английском.
 
-## Что нового
-
-T2.1 — исправления к T2.0, главное — вентиляторы ([полный список](CHANGELOG.md)):
-
-- **После сна вентиляторы снова регулируются сами.** В T2.0 после пробуждения они оставались на средних оборотах до
-  перезагрузки. В режиме «Микросхемой» прошивка теперь после сна и при включении проверяет, что микросхема опрашивает
-  температуру процессора, иначе ставит полные обороты.
-- **Тише в простое:** «Тихо» вентилятора процессора — штатный кулер Lenovo около 900 об/мин вместо примерно 1300;
-  корпусные «Тихо» — 20 %, «Авто» — 25 % (было 30 и 35 %).
-- **У каждого вентилятора свои настройки:** режим, своя кривая и «Минимум» от 0 до 100 %; защита от остановки
-  вентилятора.
-- **Четвёртый разъём AUX2** виден в окне «Состояние», на главном экране и в отчёте F11; он работает от одного выхода с
-  AUX1 (FAN3). **Трёхпиновые вентиляторы на этой плате не регулируются ни на одном разъёме** — так устроена плата
-  ([подробнее](docs/LIMITS.md#10-вентиляторы)).
-- **Окно «Состояние» показывает настоящую скважность вентилятора** (раньше, например, 37,5 % показывались как «22 %»).
-- **Второй курсор мыши** (стрелка родного меню BIOS поверх нашего меню) больше не появляется.
-- **Устройства представляются как Lenovo** (код 17AA:36C7), а не Biostar: так их видят GPU-Z и диспетчер устройств.
-- **Меню прошивки находит новый файл**, даже если на флешке скопилось много старых копий: в списке до 64 файлов, файлы
-  из корня флешки — первыми, копии `Z3BACKUP` — в конце.
-- **Сон на Ryzen 4000G и 5000G, исправленный в T2.0, подтвердили тестеры** с Ryzen 5 PRO 4650G и Ryzen 5 5600G.
-
-### Как обновиться
-
-С T2.0, T1.2 или T1.1r — прямо из меню, без программатора:
-
-1. Если в папке `Z3NOVO` на флешке 24 и больше файлов `.BIN` (это копии `Z3BACKUP-…`, меню кладёт их туда при каждом
-   обновлении), перенесите их на компьютер или возьмите флешку без них — иначе меню T2.0 и T1.x не увидит новый файл.
-2. Скачайте `Z3NOVO_T2.1.bin` и его `.sha256`, положите оба на флешку FAT32 в папку `Z3NOVO`.
-3. Del при включении → **Классика → Безопасность → «Прошивка BIOS» → «Обновить прошивку»** → выберите файл, включите
-   сохранение копии нынешней прошивки на флешку, подтвердите и дождитесь конца записи.
-4. Перезагрузите компьютер.
-
-Настройки сохраняются. Windows при первом запуске может один раз заново найти устройства (новые коды). Подробно —
-в [FLASHING.md](docs/FLASHING.md#с-t20-на-t21); с T1.2 и T1.1r — ещё и [это](docs/FLASHING.md#с-t12-или-t11r-на-t20).
-Первая установка (с родного BIOS Lenovo) — только программатором.
-
-### Что появилось в T2.0
-
-- **Разгон процессора с защитой:** своя частота и напряжение ядер на Ryzen 2000G, 3000G и 4000G, разгон встроенной
-  графики, Curve Optimizer на Ryzen 5000. Если после разгона система 3 раза подряд не загрузится, прошивка сама вернёт
-  заводские значения ([пределы и оговорки](docs/LIMITS.md#6-разгон-процессора)).
-- **Процессоры на 95–105 Вт по умолчанию работают в классе 65 Вт** — на это рассчитана плата. Полную мощность можно
-  включить в меню на свой риск.
-- **Все три вентилятора** (процессора, FAN2 и FAN3) ведёт прошивка; новое окно **«Состояние»**: температура, обороты и
-  напряжения с графиками за минуту.
-- **Новая заставка** с подсказками Del/F9, **строка F-клавиш** внизу меню и окно F1 «Клавиши», **F6 — сброс всех
-  настроек на заводские**, **F12 — снимок экрана** на флешку.
-- **Пароль BIOS, очистка TPM и ключи Secure Boot** — прямо в нашем меню.
-- **Ручная частота памяти и XMP без лишней перезагрузки**; задержки памяти видны и настраиваются; «Память для графики» —
-  своё число в гигабайтах.
-- **DASH:** наше меню в консоли DASH; включение по сети работает и после выдёргивания шнура.
-- **Компьютер называется своим именем:** Z3NOVO Labs ThinkCentre M715s Reborn.
-- **Сон на Ryzen 4000G и 5000G исправлен.**
-
 ## Что умеет
 
-- **Процессоры:** Ryzen 1000–5000 для AM4 по возможностям AGESA. На этой плате проверен только Ryzen 3 2200G.
-  Процессоры без встроенной графики (например, Ryzen 7 2700, Ryzen 5 5600) работают только с видеокартой.
+- **Процессоры:** Ryzen 1000–5000 для AM4 по возможностям AGESA; какие проверены — в [таблице ниже](#что-работает-а-что-нет)
+  и в [списке проверенного](docs/TESTED.md). Процессоры без встроенной графики (например, Ryzen 7 2700, Ryzen 5 5600)
+  работают только с видеокартой. Процессоры на 95–105 Вт по умолчанию работают в классе 65 Вт — на это рассчитана плата;
+  полную мощность можно включить в меню на свой риск.
 - **Приложение настроек (Del):** мышь и клавиатура, RU/EN, поиск по настройкам, простой режим и все настройки,
   окно «Состояние» (температура, обороты вентиляторов, напряжения), меню загрузки (F9), разрешение экрана по монитору,
   экранная клавиатура; с T2.0 — снимок экрана (F12), сброс всех настроек на заводские (F6), пароль BIOS, очистка TPM
   и ключи Secure Boot.
-- **Разгон процессора** (с T2.0) — только вместе с защитой от неудачного разгона
-  ([подробнее](docs/LIMITS.md#6-разгон-процессора)).
+- **Разгон процессора** (с T2.0): частота и напряжение ядер на Ryzen 2000G, 3000G и 4000G, разгон встроенной графики,
+  Curve Optimizer на Ryzen 5000 — только вместе с защитой: если после разгона система 3 раза подряд не загрузится,
+  прошивка сама вернёт заводские значения ([подробнее](docs/LIMITS.md#6-разгон-процессора)).
+- **Память:** ручная частота и XMP без лишней перезагрузки, задержки памяти, «Память для графики» — своё число в гигабайтах.
 - **Вентиляторы:** плавную кривую ведёт прошивка, и после сна тоже; у каждого из трёх выходов — FAN1 (разъём CPU_FAN),
   FAN2 (SYS_FAN) и FAN3 (AUX1_FAN и AUX2_FAN вместе) — режимы «Тихо», «Авто», «Макс», своя кривая и свой «Минимум»;
   защита от остановки вентилятора (с T2.1).
@@ -203,7 +153,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 [![⭐ Support the project](https://img.shields.io/badge/%E2%AD%90%20Support%20the%20project-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
 
-> **Status: public test.** The latest version: [download](https://github.com/airtwist223/z3novo/releases/latest), [what is new](#what-is-new), [the full list of changes](CHANGELOG.md), [all versions](https://github.com/airtwist223/z3novo/releases).
+> **Status: public test.** The latest version: [download and what is new](https://github.com/airtwist223/z3novo/releases/latest), [how to install and update](docs/FLASHING.md), [the full list of changes](CHANGELOG.md), [all versions](https://github.com/airtwist223/z3novo/releases).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
 > Save a copy of your own BIOS chip before you install anything (see [docs/FLASHING.md](docs/FLASHING.md)).
 > **Tested only on the AM4P2MS board, revision 1.1.** Other revisions have not been tested and are not guaranteed to work.
@@ -238,73 +188,21 @@ AGESA ComboAM4v2PI 1.2.0.F (from a Biostar board with the same chipset), carryin
 PCIe lanes, pins, power, fan, Super I/O. Instead of the old text menu it has its own graphical settings app with mouse
 support, in Russian and English.
 
-## What is new
-
-T2.1 is a set of fixes to T2.0, mostly for the fans ([the full list](CHANGELOG.md)):
-
-- **After sleep the fans are controlled again by themselves.** In T2.0, after waking up, they stayed at a medium speed
-  until a restart. In "By the chip" mode the firmware now checks, after sleep and at power-on, that the chip polls the
-  processor's temperature, and sets full speed otherwise.
-- **Quieter at idle:** the processor fan's Quiet keeps Lenovo's stock cooler at about 900 rpm instead of about 1300; the
-  case fans' Quiet is 20 % and Auto 25 % (it was 30 and 35 %).
-- **Each fan has its own settings:** a mode, a custom curve and a minimum from 0 to 100 %; a guard against a stalled fan.
-- **The fourth header, AUX2,** shows in the Health window, on the home screen and in the F11 report; it runs on one output
-  with AUX1 (FAN3). **3-pin fans are not controlled on any header of this board**, that is how the board is built
-  ([details](docs/LIMITS.md#10-fans)).
-- **The Health window shows the fan's real duty** (before, a real 37.5 %, for example, showed as "22 %").
-- **No more second mouse pointer** (the stock BIOS menu's arrow over our menu).
-- **The devices present themselves as Lenovo's** (ID 17AA:36C7), not Biostar's: that is how GPU-Z and Device Manager see
-  them.
-- **The firmware menu finds a new file** even when many old copies have piled up on the stick: up to 64 files in the
-  list, the files in the stick's root first, the `Z3BACKUP` copies last.
-- **Sleep on the Ryzen 4000G and 5000G, fixed in T2.0, has been confirmed by testers** with a Ryzen 5 PRO 4650G and a
-  Ryzen 5 5600G.
-
-### How to update
-
-From T2.0, T1.2 or T1.1r, right from the menu, with no programmer:
-
-1. If the stick's `Z3NOVO` folder holds 24 or more `.BIN` files (the `Z3BACKUP-…` copies the menu puts there at every
-   update), move them to a computer or use a stick without them; otherwise the T2.0 and T1.x menu does not see the new
-   file.
-2. Download `Z3NOVO_T2.1.bin` and its `.sha256`, and put both on a FAT32 USB stick in a `Z3NOVO` folder.
-3. Del at power-on → **Classic → Security → BIOS firmware → Update firmware** → pick the file, turn on saving a copy of
-   the current firmware to the stick, confirm and wait for the write to finish.
-4. Restart.
-
-Settings are kept. At the first start Windows may find some devices anew, once (the new IDs). Details:
-[FLASHING.md](docs/FLASHING.md#from-t20-to-t21); from T1.2 and T1.1r, also [this](docs/FLASHING.md#from-t12-or-t11r-to-t20).
-The first install (from Lenovo's BIOS) needs a programmer.
-
-### What came in T2.0
-
-- **Processor overclocking with protection:** your own core clock and voltage on the Ryzen 2000G, 3000G and 4000G,
-  built-in graphics overclocking, Curve Optimizer on the Ryzen 5000. If after an overclock the system fails to start 3
-  times in a row, the firmware puts the factory values back by itself
-  ([limits and caveats](docs/LIMITS.md#6-processor-overclocking)).
-- **95–105 W processors run in the 65 W class by default**, which is what the board is built for. Full power can be
-  turned on in the menu at your own risk.
-- **All three fans** (the processor's, FAN2 and FAN3) are driven by the firmware; a new **Health** window: temperature,
-  fan speeds and voltages with one-minute graphs.
-- **A new boot screen** with Del/F9 hints, **a line of F keys** at the bottom of the menu and the F1 Keys window, **F6 to
-  reset every setting to factory**, **F12 to save a screenshot** to a USB stick.
-- **The BIOS password, clearing the TPM and the Secure Boot keys** right in our menu.
-- **Manual memory speed and XMP without the extra restart**; the memory delays are shown and can be set; "Memory for
-  graphics" is a number of your own, in gigabytes.
-- **DASH:** our menu in the DASH console; power-on over the network works after the power cord was out, too.
-- **The computer goes by its own name:** Z3NOVO Labs ThinkCentre M715s Reborn.
-- **Sleep on the Ryzen 4000G and 5000G is fixed.**
-
 ## What it does
 
-- **Processors:** AM4 Ryzen 1000–5000 as far as AGESA supports them. Only the Ryzen 3 2200G has been tested on this board.
-  Processors without integrated graphics (for example the Ryzen 7 2700 or Ryzen 5 5600) need a graphics card.
+- **Processors:** AM4 Ryzen 1000–5000 as far as AGESA supports them; which ones have been tested is in the
+  [table below](#what-works-and-what-does-not) and in [the tested list](docs/TESTED.md). Processors without integrated
+  graphics (for example the Ryzen 7 2700 or Ryzen 5 5600) need a graphics card. 95–105 W processors run in the 65 W
+  class by default, which is what the board is built for; full power can be turned on in the menu at your own risk.
 - **Settings app (Del):** mouse and keyboard, RU/EN, settings search, a simple view and all settings, a Health window
   (temperature, fan speeds, voltages), a boot menu (F9), screen resolution from the monitor, an on-screen keyboard; from
   T2.0 also screenshots (F12), resetting every setting to factory (F6), the BIOS password, clearing the TPM and the
   Secure Boot keys.
-- **Processor overclocking** (from T2.0), only together with the protection against a failed overclock
+- **Processor overclocking** (from T2.0): core clock and voltage on the Ryzen 2000G, 3000G and 4000G, built-in graphics
+  overclocking, Curve Optimizer on the Ryzen 5000, only together with the protection: if the system fails to start
+  3 times in a row after an overclock, the firmware puts the factory values back by itself
   ([details](docs/LIMITS.md#6-processor-overclocking)).
+- **Memory:** manual speed and XMP without an extra restart, memory timings, the graphics memory as a number of gigabytes.
 - **Fans:** the firmware drives a smooth curve, after sleep too; each of the three outputs — FAN1 (the CPU_FAN header),
   FAN2 (SYS_FAN) and FAN3 (AUX1_FAN and AUX2_FAN together) — has the Quiet, Auto and Max presets, a custom curve and a
   minimum of its own; a guard against a stalled fan (from T2.1).
