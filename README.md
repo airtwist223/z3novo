@@ -2,6 +2,8 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
+[![⭐ Поддержать проект](https://img.shields.io/badge/%E2%AD%90%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
+
 > **Статус: публичный тест.** Последняя версия: [скачать](https://github.com/airtwist223/z3novo/releases/latest), [что нового](#что-нового), [полный список изменений](CHANGELOG.md), [все версии](https://github.com/airtwist223/z3novo/releases).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
 > Перед установкой обязательно сохраните копию своей микросхемы BIOS (см. [docs/FLASHING.md](docs/FLASHING.md)).
@@ -186,8 +188,8 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 ## Поддержать проект
 
-Поддержать проект можно в Telegram-боте [@z3novo_bot](https://t.me/z3novo_bot): кнопка «⭐ Поддержать проект» или
-команда /donate. В том же боте можно задать вопрос или отправить отчёт о проблеме.
+Поддержать проект можно в Telegram-боте [@z3novo_bot](https://t.me/z3novo_bot?start=donate): ссылка сразу открывает поддержку, а в самом боте это кнопка
+«⭐ Поддержать проект» или команда /donate. В том же боте можно задать вопрос или отправить отчёт о проблеме.
 
 ## Лицензия
 
@@ -198,6 +200,8 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 ---
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
+
+[![⭐ Support the project](https://img.shields.io/badge/%E2%AD%90%20Support%20the%20project-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
 
 > **Status: public test.** The latest version: [download](https://github.com/airtwist223/z3novo/releases/latest), [what is new](#what-is-new), [the full list of changes](CHANGELOG.md), [all versions](https://github.com/airtwist223/z3novo/releases).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
@@ -388,8 +392,8 @@ integrated graphics memory, DASH, Secure Boot and fans: [docs/LIMITS.md](docs/LI
 
 ## Support the project
 
-You can support the project in the Telegram bot [@z3novo_bot](https://t.me/z3novo_bot): the «⭐ Поддержать проект»
-("Support the project") button or the /donate command. The same bot takes questions and problem reports.
+You can support the project in the Telegram bot [@z3novo_bot](https://t.me/z3novo_bot?start=donate): the link opens the support menu straight away; in the
+bot itself it is the «⭐ Поддержать проект» ("Support the project") button or the /donate command. The same bot takes questions and problem reports.
 
 ## License
 
