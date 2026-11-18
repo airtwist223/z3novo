@@ -2,7 +2,7 @@
 
 [Русский](#z3novo--прошивка-bios-для-lenovo-thinkcentre-m715s) · [English](#z3novo--bios-firmware-for-lenovo-thinkcentre-m715s)
 
-[![⭐ Поддержать проект](https://img.shields.io/badge/%E2%AD%90%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
+[![Поддержать проект](docs/img/support_ru.svg)](https://t.me/z3novo_bot?start=donate)
 
 > **Статус: публичный тест.** Последняя версия: [скачать и что нового](https://github.com/airtwist223/z3novo/releases/latest), [как установить и обновить](docs/FLASHING.md), [полный список изменений](CHANGELOG.md), [все версии](https://github.com/airtwist223/z3novo/releases).
 > Это неофициальная прошивка: не от Lenovo и не от AMD. Ставите на свой страх и риск.
@@ -151,7 +151,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 # Z3NOVO — BIOS firmware for Lenovo ThinkCentre M715s
 
-[![⭐ Support the project](https://img.shields.io/badge/%E2%AD%90%20Support%20the%20project-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/z3novo_bot?start=donate)
+[![Support the project](docs/img/support_en.svg)](https://t.me/z3novo_bot?start=donate)
 
 > **Status: public test.** The latest version: [download and what is new](https://github.com/airtwist223/z3novo/releases/latest), [how to install and update](docs/FLASHING.md), [the full list of changes](CHANGELOG.md), [all versions](https://github.com/airtwist223/z3novo/releases).
 > This is unofficial firmware, made neither by Lenovo nor by AMD. Install it at your own risk.
