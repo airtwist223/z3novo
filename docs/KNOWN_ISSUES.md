@@ -2,14 +2,18 @@
 
 ## Открытые
 
-- **Ryzen 4000G и 5000G: выход из сна — исправлено в T2.0, но ещё не подтверждено.** До T2.0 компьютер с такими
-  процессорами засыпал, но не просыпался: экран чёрный, вентиляторы крутятся, помогало только выдернуть шнур. Причину
-  нашли в коде и в T2.0 исправили, но проверить исправление на таком процессоре пока не на чем: у автора Ryzen 3 2200G (на
-  нём сон работает). **Если у вас Ryzen 4000G или 5000G, проверьте, пожалуйста, сон на T2.0** (Windows: «Пуск» →
-  кнопка питания → «Спящий режим», потом разбудите кнопкой питания, клавиатурой или мышью) и напишите, проснулся ли
-  компьютер: в Telegram-бот [@z3novo_bot](https://t.me/z3novo_bot) или в Issues на GitHub (форма «Проблема» или «Всё
-  работает»). Если не проснулся — выдерните шнур из розетки на 30 секунд, включите, нажмите Del и F11 и приложите этот
-  отчёт. Пока сон не подтверждён, можно поставить в Windows «Сон: никогда» или пользоваться гибернацией.
+- **Вентилятор после сна на Ryzen 4000G и 5000G — просьба проверить.** В T2.1 вентиляторы после пробуждения снова идут по
+  температуре; на Ryzen 3 2200G автора это проверено. Если у вас Ryzen 4000G или 5000G, послушайте после пробуждения:
+  через несколько секунд вентилятор должен вернуться к обычным для простоя оборотам. Напишите, что вышло, — особенно если он
+  так и шумит до перезагрузки: в бот или в Issues, с моделью процессора.
+- **Трёхпиновые вентиляторы не регулируются.** На всех четырёх разъёмах вентиляторов этой платы всегда 12 В, а обороты
+  меняются только по проводу ШИМ четырёхпиновых вентиляторов. Трёхпиновый вентилятор на любом разъёме крутится на полных
+  оборотах — так устроена плата, прошивка этого не изменит. Разъёмы AUX1_FAN и AUX2_FAN работают от одного выхода (FAN3)
+  и настраиваются только вместе ([подробнее](LIMITS.md#10-вентиляторы)).
+- **«Минимум» ниже 20 %.** Не всякий вентилятор держит низкие обороты, а при 0 % вентилятор может остановиться.
+  Вентилятор, обороты которого видит плата, защита от остановки раскрутит и до перезагрузки поднимет ему минимум;
+  вентилятор, обороты которого плата не видит (в окне «Состояние» его нет или там 0), может так и стоять — поставьте ему
+  минимум повыше ([подробнее](DIAGNOSTICS.md#вентиляторы)).
 - **С некоторыми накопителями NVMe в слоте M.2 Windows зависает** (одно сообщение: Ryzen 5 PRO 4650G, T1.2, накопитель
   Western Digital; с диском SATA зависаний нет). В T2.0 тактовый сигнал слота M.2 сделан как в родном BIOS Lenovo, но
   помогает ли это, ещё не проверено. Если у вас так — пришлите отчёт F11 и модель накопителя.
@@ -69,8 +73,31 @@
 - **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4. Наше меню на
   Ryzen 2000G/3000G не предлагает 3, 6 и 12 ГБ.
 
+## Исправлено в T2.1
+
+- **Вентиляторы после сна не регулировались.** В T2.0 после пробуждения они оставались на средних оборотах (около
+  56–60 %) до перезагрузки. В T2.1 через несколько секунд после пробуждения обороты снова идут по температуре; в режиме
+  «Микросхемой» прошивка проверяет, что микросхема опрашивает температуру, иначе ставит полные обороты.
+- **Корпусные вентиляторы на T2.0 громче, чем на T1.2.** В T2.1 в простое «Тихо» — 20 %, «Авто» — 25 % (было 30 и 35 %);
+  «Тихо» вентилятора процессора тоже тише.
+- **Окно «Состояние» показывало скважность вентилятора неверно** — например, «22 %» вместо настоящих 37,5 %.
+- **Вентилятор на разъёме AUX2_FAN нигде не показывался.** В T2.1 его обороты видны в «Состоянии», на главном экране и в
+  отчёте F11.
+- **Второй курсор мыши поверх нашего меню,** когда меню открывалось само (система не загрузилась, нет диска для
+  загрузки). Исправлено в T2.1 (проверено в эмуляторе).
+- **GPU-Z и диспетчер устройств показывали производителя Biostar** (код 1565:170B / 1565:370B). В T2.1 — Lenovo
+  (17AA:36C7), как в родном BIOS.
+- **Меню прошивки не показывало новый файл,** если в папке `\Z3NOVO` на флешке скопилось много копий `Z3BACKUP-….BIN`.
+  Исправлено в T2.1: в списке до 64 файлов, файлы из корня флешки — первыми. Чтобы обновиться с T2.0 или T1.x, сначала
+  перенесите старые копии на компьютер ([подробнее](FLASHING.md#обновление)).
+
 ## Исправлено в T2.0
 
+- **Ryzen 4000G и 5000G: компьютер засыпал, но не просыпался** (экран чёрный, вентиляторы крутятся, помогало только
+  выдернуть шнур). Исправлено в T2.0 и подтверждено тестерами: с Ryzen 5 PRO 4650G работают сон и гибернация, с Ryzen 5
+  5600G компьютер засыпает и просыпается от кнопки питания и клавиатуры. Если сон у вас всё же не работает — выдерните
+  шнур из розетки на 30 секунд, включите, нажмите Del и F11 и пришлите этот отчёт в бот
+  [@z3novo_bot](https://t.me/z3novo_bot) или в Issues.
 - **Режим памяти «Авто» и планки разной скорости.** «Авто» могло выставить скорость быстрой планки, и медленная работала
   выше своей паспортной скорости. В T2.0 частота — по более медленной планке (на плате автора ещё не проверено).
 - **Ручная частота памяти: лишняя перезагрузка перед каждым запуском системы.** В T2.0 компьютер перезапускается сам
@@ -110,14 +137,18 @@
 
 ## Open
 
-- **Ryzen 4000G and 5000G: waking from sleep — fixed in T2.0, but not yet confirmed.** Before T2.0 a computer with these
-  processors went to sleep but did not wake up: black screen, fans spinning, only pulling the cord helped. The cause was
-  found in the code and fixed in T2.0, but there is nothing to test the fix on yet: the author has a Ryzen 3 2200G (sleep
-  works on it). **If you have a Ryzen 4000G or 5000G, please try sleep on T2.0** (Windows: Start → Power → Sleep, then
-  wake it with the power button, the keyboard or the mouse) and tell us whether the computer woke up: in the Telegram bot
-  [@z3novo_bot](https://t.me/z3novo_bot) or under Issues on GitHub (the "Problem" or "Works for me" form). If it did not
-  wake up, pull the cord out of the wall socket for 30 seconds, power on, press Del and F11, and attach that report. Until
-  sleep is confirmed, you can set Windows to "Sleep: Never" or use hibernation.
+- **The fan after sleep on the Ryzen 4000G and 5000G: please check.** In T2.1 the fans follow the temperature again after
+  waking; on the author's Ryzen 3 2200G this has been tested. If you have a Ryzen 4000G or 5000G, listen after a wake:
+  within a few seconds the fan should come back to its usual idle speed. Tell us how it went, especially if it
+  stays loud until a restart: in the bot or under Issues, with your processor's model.
+- **3-pin fans are not controlled.** All four fan headers of this board always carry 12 V, and the speed changes only
+  through the PWM wire of 4-pin fans. A 3-pin fan on any header runs at full speed: that is how the board is built, and no
+  firmware can change it. The AUX1_FAN and AUX2_FAN headers run on one output (FAN3) and can only be set together
+  ([details](LIMITS.md#10-fans)).
+- **A minimum under 20 %.** Not every fan holds a low speed, and at 0 % a fan may stop. A fan whose speed the board can see
+  is spun up by the stall guard, which also raises its minimum until a restart; a fan whose speed the board cannot see
+  (it is missing from the Health window or shows 0 there) may just stay stopped — give it a higher minimum
+  ([details](DIAGNOSTICS.md#fans)).
 - **With some NVMe drives in the M.2 slot Windows hangs** (one report: Ryzen 5 PRO 4650G, T1.2, a Western Digital drive;
   no hangs with a SATA disk). In T2.0 the M.2 slot's reference clock works as in Lenovo's own BIOS, but whether this helps
   has not been tested yet. If you see this, send the F11 report and the drive's model.
@@ -180,8 +211,31 @@
 - **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4. On the Ryzen 2000G/3000G
   our menu does not offer 3, 6 or 12 GB.
 
+## Fixed in T2.1
+
+- **The fans were not controlled after sleep.** In T2.0, after waking up, they stayed at a medium speed (about 56–60 %)
+  until a restart. In T2.1 the speed follows the temperature again a few seconds after waking; in "By the chip" mode the
+  firmware checks that the chip polls the temperature and sets full speed otherwise.
+- **The case fans were louder on T2.0 than on T1.2.** In T2.1 at idle Quiet is 20 % and Auto 25 % (it was 30 and 35 %);
+  the processor fan's Quiet is quieter too.
+- **The Health window showed the fan's duty wrongly**, for example "22 %" for a real 37.5 %.
+- **A fan on the AUX2_FAN header was shown nowhere.** In T2.1 its speed is in the Health window, on the home screen and in
+  the F11 report.
+- **A second mouse pointer over our menu** when the menu opened by itself (the system did not start, no disk to boot).
+  Fixed in T2.1 (tested in an emulator).
+- **GPU-Z and Device Manager showed Biostar as the maker** (ID 1565:170B / 1565:370B). In T2.1 it is Lenovo (17AA:36C7),
+  as in Lenovo's own BIOS.
+- **The firmware menu did not show a new file** when many `Z3BACKUP-….BIN` copies had piled up in the stick's `\Z3NOVO`
+  folder. Fixed in T2.1: up to 64 files in the list, the files in the stick's root first. To update from T2.0 or T1.x,
+  move the old copies to a computer first ([details](FLASHING.md#updating)).
+
 ## Fixed in T2.0
 
+- **Ryzen 4000G and 5000G: the computer went to sleep but did not wake up** (black screen, fans spinning, only pulling the
+  cord helped). Fixed in T2.0 and confirmed by testers: with a Ryzen 5 PRO 4650G sleep and hibernation work, with a
+  Ryzen 5 5600G the computer goes to sleep and wakes up with the power button and the keyboard. If sleep still does not
+  work for you, pull the cord out of the wall socket for 30 seconds, power on, press Del and F11, and send that report to
+  the bot [@z3novo_bot](https://t.me/z3novo_bot) or under Issues.
 - **Memory mode Auto with sticks of different speeds.** Auto could set the faster stick's speed, and the slower one then
   ran above its rated speed. In T2.0 the speed follows the slower stick (not yet tested on the author's board).
 - **Manual memory speed: an extra restart before every start of the system.** In T2.0 the computer restarts by itself

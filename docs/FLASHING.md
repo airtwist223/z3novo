@@ -39,7 +39,7 @@
    не отправляйте.**
 4. **Запишите Z3NOVO** (flashrom сам проверит запись):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.0.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.1.bin
    ```
 5. **Снимите прищепку, вставьте шнур, включите.** Первый раз компьютер может сам перезагрузиться 2–4 раза, пока
    прошивка готовит настройки и проверяет память. Это нормально, подождите.
@@ -64,6 +64,25 @@
 Ставить можно любую версию Z3NOVO — и новее, и старее нынешней. Вернуть родной BIOS Lenovo можно только
 программатором (см. ниже).
 
+**Перед обновлением с T2.0 или T1.x уберите с флешки старые копии.** Меню этих версий не увидит новый файл, если в папке
+`\Z3NOVO` на флешке 24 и больше файлов `.BIN`: при каждом обновлении меню кладёт туда копию `Z3BACKUP-….BIN`, и они
+копятся. Перенесите старые копии из `\Z3NOVO` на компьютер (последнюю лучше сохранить у себя) или возьмите флешку без
+них. С T2.1 меню видит до 64 файлов, файлы из корня флешки показывает первыми, а копии — в конце.
+
+### С T2.0 на T2.1
+
+Обновляйтесь из меню, как описано выше. Что важно знать:
+
+- **Настройки сохраняются.** Новое стоит на заводских значениях: «Минимум» у всех трёх вентиляторов — 20 %, у FAN2 и
+  FAN3 режим тот же, что был. Новые «Тихо» вентилятора процессора и «Тихо»/«Авто» корпусных действуют сразу.
+- **Своя кривая не меняется.** Если вы рисовали свою кривую вентилятора процессора по старому «Тихо», новое «Тихо» к
+  ней само не придёт: выберите «Тихо» заново или перерисуйте кривую.
+- **Коды устройств.** При первом запуске Windows может заново найти графику, USB-контроллеры и SATA чипсета (у них
+  теперь код Lenovo): экран может мигнуть, разрешение — сброситься. Это один раз. Сетевая карта и NVMe не меняются.
+- **Перед обновлением** уберите с флешки старые копии `Z3BACKUP` — см. абзац выше: иначе меню T2.0 может не увидеть
+  файл T2.1.
+- **С T1.2 или T1.1r** — тем же путём; всё, что сказано в следующем разделе про переход на T2.0, относится и сюда.
+
 ### С T1.2 или T1.1r на T2.0
 
 Обновляйтесь из меню, как описано выше. Что важно знать:
@@ -81,13 +100,18 @@
 
 ## Возврат на прежнюю версию Z3NOVO
 
-Тем же путём из меню: «Обновить прошивку» → файл прежней версии (например, `Z3NOVO_T1.2.bin` со
-[страницы выпуска](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Перед возвратом с T2.0 на T1.x:
+Тем же путём из меню: «Обновить прошивку» → файл прежней версии (например, `Z3NOVO_T2.0.bin` или `Z3NOVO_T1.2.bin` со
+страниц выпусков [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0) и
+[T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Перед возвратом с T2.x на T1.x:
 
 - верните разгон процессора и графики на «Авто» и выключите «Свои пределы мощности (PBO)»: в T1.x нет ни защиты от
   неудачного разгона, ни ограничения процессоров на 95–105 Вт.
 
-После возврата компьютер снова называется именем платы Biostar, как в T1.x. Возврат с T2.0 на T1.2 мы проверили только
+С T2.1 на T2.0: свои кривые FAN2 и FAN3 и «Минимум» T2.0 не знает и не видит. Если своя кривая вентилятора процессора
+где-то опускается ниже 20 %, T2.0 сочтёт её неверной и возьмёт обычный режим — громче, а не тише. Коды устройств
+вернутся к Biostar, и Windows может ещё раз заново найти устройства.
+
+После возврата на T1.x компьютер снова называется именем платы Biostar. Возврат с T2.0 на T1.2 мы проверили только
 расчётом на компьютере; на плате автора проверен возврат с последней пробной сборки T2 на предыдущую и обратно. Если после
 записи меню не открывается, запишите программатором копию микросхемы, которую меню сохранило на флешку перед
 обновлением.
@@ -142,7 +166,7 @@ The chip: Winbond W25Q128FW, 16 MB. It is marked U53 on the board. flashrom call
    to anyone.**
 4. **Write Z3NOVO** (flashrom checks the write itself):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.0.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.1.bin
    ```
 5. **Remove the clip, plug the cord back in, power on.** The first time, the computer may restart by itself 2–4 times
    while the firmware prepares its settings and checks the memory. That is normal; wait.
@@ -169,6 +193,27 @@ From T1 on, the BIOS is updated right from the menu, with no programmer. Your se
 Any Z3NOVO version can be installed, newer or older than the current one. Lenovo's BIOS can only be put back with a
 programmer (see below).
 
+**Before updating from T2.0 or T1.x, clear the old copies off the stick.** The menu of these versions does not see the
+new file when the stick's `\Z3NOVO` folder holds 24 or more `.BIN` files: at every update the menu puts a
+`Z3BACKUP-….BIN` copy there, and they pile up. Move the old copies from `\Z3NOVO` to a computer (better keep the latest
+one) or use a stick without them. From T2.1 the menu sees up to 64 files, shows the files in the stick's root first and
+the copies last.
+
+### From T2.0 to T2.1
+
+Update from the menu as described above. What to know:
+
+- **Settings are kept.** What is new starts at its factory values: the minimum of all three fans is 20 %, FAN2 and FAN3
+  keep the mode they had. The processor fan's new Quiet and the case fans' new Quiet and Auto apply at once.
+- **A custom curve does not change.** If you drew your own processor fan curve after the old Quiet, the new Quiet does
+  not reach it by itself: pick Quiet again or redraw the curve.
+- **Device IDs.** At the first start Windows may find the graphics, the USB controllers and the chipset's SATA anew (they
+  now carry Lenovo's ID): the screen may blink, the resolution may reset. That happens once. The network card and NVMe
+  do not change.
+- **Before updating**, clear the old `Z3BACKUP` copies off the stick (see the paragraph above): otherwise T2.0's menu may
+  not see the T2.1 file.
+- **From T1.2 or T1.1r**, the same way; everything the next section says about going to T2.0 applies here too.
+
 ### From T1.2 or T1.1r to T2.0
 
 Update from the menu as described above. What to know:
@@ -186,13 +231,18 @@ the author's board, updating from T1.2 to an early T2 test build.
 
 ## Going back to an earlier Z3NOVO version
 
-The same way, from the menu: Update firmware → the earlier version's file (for example `Z3NOVO_T1.2.bin` from its
-[release page](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Before going back from T2.0 to T1.x:
+The same way, from the menu: Update firmware → the earlier version's file (for example `Z3NOVO_T2.0.bin` or
+`Z3NOVO_T1.2.bin` from the [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0) and
+[T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2) release pages). Before going back from T2.x to T1.x:
 
 - set the processor and graphics overclock back to Auto and turn "Own power limits (PBO)" off: T1.x has neither the
   protection against a failed overclock nor the limit on 95–105 W processors.
 
-After going back, the computer goes by the Biostar board's name again, as on T1.x. Going back from T2.0 to T1.2 we have
+From T2.1 to T2.0: T2.0 does not know the FAN2 and FAN3 custom curves or the minimums and does not see them. If your
+custom processor fan curve goes under 20 % anywhere, T2.0 takes it for a broken one and uses the usual mode: louder, not
+quieter. The device IDs go back to Biostar's, and Windows may find the devices anew once more.
+
+After going back to T1.x, the computer goes by the Biostar board's name again. Going back from T2.0 to T1.2 we have
 checked only by calculation on a computer; on the author's board, going from the last T2 test build back to the previous one and
 forward again has been tested. If the menu does not open after the write, write with a programmer the copy of the chip
 the menu saved to the stick before the update.

@@ -1,7 +1,7 @@
 # Что плата может и чего не может / What the board can and cannot do
 
 Здесь то, что зависит от самой платы Lenovo M715s, а не от BIOS. Это не изменит ни Z3NOVO, ни любая другая прошивка.
-С раздела 6 — что из этого следует для разгона, датчиков, DASH и безопасной загрузки.
+С раздела 6 — что из этого следует для разгона, датчиков, DASH, безопасной загрузки и вентиляторов.
 
 ## 1. Напряжение памяти всегда 1,2 В
 
@@ -188,12 +188,23 @@ Optimizer — что именно, зависит от процессора (т�
   устройства», заранее сохраните ключ восстановления. Порядок по шагам — в
   [DIAGNOSTICS.md](DIAGNOSTICS.md#secure-boot-по-шагам); на плате автора безопасная загрузка с T2.0 ещё не проверялась.
 
+## 10. Вентиляторы
+
+- **Трёхпиновые вентиляторы на этой плате не регулируются.** На всех четырёх разъёмах (CPU_FAN, SYS_FAN, AUX1_FAN,
+  AUX2_FAN) всегда 12 В, а обороты меняются только по отдельному проводу ШИМ — он есть у четырёхпиновых вентиляторов.
+  Трёхпиновый вентилятор на любом разъёме крутится на полных. На плате автора трёхпиновый вентилятор проверили на CPU_FAN
+  (1123–1147 об/мин при любой скважности и при любой из 8 частот ШИМ), на SYS_FAN (1121–1146) и на AUX2_FAN
+  (1117–1140). Хотите тише — берите четырёхпиновый вентилятор.
+- **Выходов три на четыре разъёма.** AUX1_FAN и AUX2_FAN работают от одного выхода (FAN3) и регулируются только вместе;
+  обороты у каждого разъёма видны свои.
+- Какой разъём на каком выходе и как их настроить — в [DIAGNOSTICS.md](DIAGNOSTICS.md#вентиляторы).
+
 ---
 
 # What the board can and cannot do
 
 These depend on the Lenovo M715s board itself, not on the BIOS. Neither Z3NOVO nor any other firmware can change them.
-From section 6 on: what follows from them for overclocking, sensors, DASH and Secure Boot.
+From section 6 on: what follows from them for overclocking, sensors, DASH, Secure Boot and fans.
 
 ## 1. The memory voltage is always 1.2 V
 
@@ -385,3 +396,13 @@ With a clock of your own the boost is off: the cores run at that clock.
 - Turning Secure Boot on or off changes the TPM measurements: if BitLocker or "Device encryption" is on in Windows, save
   the recovery key first. Step by step: [DIAGNOSTICS.md](DIAGNOSTICS.md#secure-boot-step-by-step); Secure Boot on T2.0 has
   not been tested on the author's board yet.
+
+## 10. Fans
+
+- **3-pin fans are not controlled on this board.** All four headers (CPU_FAN, SYS_FAN, AUX1_FAN, AUX2_FAN) always carry
+  12 V, and the speed changes only through a separate PWM wire, which 4-pin fans have. A 3-pin fan on any header runs at
+  full speed. On the author's board a 3-pin fan was tried on CPU_FAN (1123–1147 rpm at any duty and any of the 8 PWM
+  frequencies), on SYS_FAN (1121–1146) and on AUX2_FAN (1117–1140). For a quieter fan, take a 4-pin one.
+- **Three outputs for four headers.** AUX1_FAN and AUX2_FAN run on one output (FAN3) and can only be controlled
+  together; each header's speed is shown on its own.
+- Which header is on which output and how to set them: [DIAGNOSTICS.md](DIAGNOSTICS.md#fans).

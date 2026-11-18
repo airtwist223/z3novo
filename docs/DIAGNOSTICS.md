@@ -31,7 +31,9 @@
 сохранённого или обучена заново, за сколько открылось меню; строки «Напряжения / voltages»
 ([что они значат](#напряжения-aida64-и-hwinfo)), «Вентиляторы / fans» и «Выходы вентиляторов / fan outputs» (обороты
 FAN1–FAN3 и кто ведёт каждый выход); строка «меню загружено как файл тома прошивки (FvFile, нужно для Secure Boot)» — её
-смотрят перед включением безопасной загрузки ([по шагам](#secure-boot-по-шагам)).
+смотрят перед включением безопасной загрузки ([по шагам](#secure-boot-по-шагам)). С T2.1 — ещё строки «Скважность /
+duty» (настоящая скважность каждого выхода и встроенный предел микросхемы) и «Минимум / minimum», обороты вентилятора на
+разъёме AUX2 — в строках «Вентиляторы» и «Тахометры» ([про вентиляторы](#вентиляторы)).
 
 **Если компьютер зависает при включении:** после зависания включите его снова, нажмите Del и F11 — в отчёте будет видно,
 где остановился предыдущий запуск.
@@ -97,22 +99,42 @@ FAN1–FAN3 и кто ведёт каждый выход); строка «мен
 Какая строка программы какому входу соответствует, мы знаем пока только по устройству микросхемы. Если пришлёте снимок
 окна HWiNFO или AIDA64 и снимок «Состояния» Z3NOVO, сделанные один за другим, — допишем сюда точное соответствие.
 
-## Вентиляторы FAN2 и FAN3
+## Вентиляторы
 
-С T2.0 прошивка ведёт по температуре процессора не только вентилятор процессора (FAN1), но и вентиляторы на двух других
-разъёмах платы: FAN2 (у Lenovo — System fan) и FAN3 (Aux fan). Раньше они крутились на постоянных средних оборотах.
+На плате четыре разъёма вентиляторов и три выхода, которыми управляет прошивка. Какой разъём на каком выходе, проверено на
+плате автора:
 
-- **Где настроить:** Классика → Питание → «Вентилятор корпуса (FAN2)» и «Доп. вентилятор (FAN3)», у каждого «Тихо /
-  Авто / Макс» (по умолчанию «Авто»). Они тише процессорного: в простое около 30–35 %, с нагревом процессора обороты
-  растут, с 85 °C — полные. Эти строки действуют, когда «Управление вентилятором» стоит «Прошивкой»; при «Микросхемой» эти
-  вентиляторы ведёт сама микросхема по температуре процессора.
-- **Где видно:** в окне «Состояние» — дорожки FAN2 и FAN3 (появляются, когда на разъёме есть вентилятор), в отчёте F11 —
-  строки «Вентиляторы» и «Выходы вентиляторов».
-- **Какой разъём — FAN2, а какой — FAN3,** мы вывели из прошивки Lenovo; на плате автора к ним ничего не подключено, так
-  что это ещё не проверено. Чтобы узнать у себя: поставьте одному вентилятору «Макс», а другому «Тихо» и посмотрите в
-  «Состоянии», какая дорожка выросла.
+| Разъём на плате | Выход и строка в Классика → Питание | Дорожка в окне «Состояние» |
+|---|---|---|
+| CPU_FAN | FAN1 — «Режим вентилятора» (вентилятор процессора) | FAN1 |
+| SYS_FAN | FAN2 — «Вентилятор корпуса (FAN2)» | FAN2 |
+| AUX1_FAN | FAN3 — «Вентиляторы AUX1+AUX2 (FAN3)» | «FAN3 · AUX1» |
+| AUX2_FAN | тот же FAN3 | «AUX2 · с FAN3» |
+
+- **Регулируются только четырёхпиновые вентиляторы.** На всех разъёмах всегда 12 В, а обороты меняются по отдельному
+  проводу ШИМ. Трёхпиновый вентилятор на любом разъёме крутится на полных; его обороты видны, но «ШИМ N %» под ним к нему
+  не относится ([подробнее](LIMITS.md#10-вентиляторы)).
+- **AUX1 и AUX2 — один выход.** Режим, своя кривая и минимум FAN3 действуют на оба разъёма; по отдельности их не
+  настроить.
+- **Режимы:** «Тихо / Авто / Макс / Своя» у каждого выхода; «Своя» открывает редактор кривой для этого вентилятора.
+  Корпусные (FAN2 и FAN3) по умолчанию «Авто»: в простое 25 % («Тихо» — 20 %), с нагревом процессора обороты растут, с
+  85 °C — полные. Всё это действует, когда «Управление вентилятором» стоит «Прошивкой»; при «Микросхемой» вентиляторы
+  ведёт сама микросхема по температуре процессора, без своих кривых и минимумов.
+- **«Минимум FAN1 (процессор)», «Минимум FAN2 (корпус)», «Минимум FAN3 (AUX1 + AUX2)»** — от 0 до 100 %, по умолчанию
+  20 %: медленнее этого прошивка вентилятор не крутит. На строке +/− меняют на 1 %, Enter открывает окно ввода числа
+  (стрелки ±1, PgUp/PgDn ±10). У FAN1 и FAN3 есть общий встроенный предел микросхемы 20 %; если поставить одному из них
+  меньше, прошивка снимает этот предел сама и держит каждому его минимум. Действует со следующего запуска. Ниже 20 %
+  держит не всякий вентилятор: штатный кулер Lenovo, например, и при 5 % крутится около 870 об/мин, а при 0 % вентилятор
+  может остановиться.
+- **Защита от остановки:** если вентилятор, обороты которого видит плата, встал, хотя должен крутиться, прошивка примерно
+  через 15–25 секунд даёт ему 2 секунды полных оборотов и до перезагрузки держит его выход на 10 % выше. Если на AUX1 или
+  AUX2 встал один из двух вентиляторов, громче станут оба: выход у них общий. Вентилятор, обороты которого плата не видит,
+  так не защищён. Следа в отчёте F11 защита не оставляет — видно только, что скважность выхода выше кривой и минимума.
+- **Где видно:** в окне «Состояние» — дорожки вентиляторов (появляются, когда на разъёме есть вентилятор), в строке
+  дорожки — скважность и минимум («ШИМ 37 % · мин. 20 %»); F3 — подробности, в том числе включён ли предел микросхемы. В
+  отчёте F11 — строки «Вентиляторы», «Тахометры», «Выходы вентиляторов», «Скважность / duty» и «Минимум / minimum».
 - **Если вентилятор не слушается своей строки** (стоит, всё время на полных или на средних), пришлите отчёт F11, снятый
-  при работающем вентиляторе, и напишите, в какой разъём он включён.
+  при работающем вентиляторе, и напишите, в какой разъём он включён и сколько у него проводов (3 или 4).
 
 ## Secure Boot по шагам
 
@@ -215,7 +237,9 @@ in place but not in use is named as such), whether the memory was restored from 
 long the menu took to open; the "Напряжения / voltages" line ([what it means](#voltages-aida64-and-hwinfo)), the
 "Вентиляторы / fans" and "Выходы вентиляторов / fan outputs" lines (the FAN1–FAN3 speeds and what drives each output);
 the line «меню загружено как файл тома прошивки (FvFile, нужно для Secure Boot)» ("the menu was loaded as a firmware
-volume file"), to check before turning Secure Boot on ([step by step](#secure-boot-step-by-step)).
+volume file"), to check before turning Secure Boot on ([step by step](#secure-boot-step-by-step)). From T2.1 also the
+«Скважность / duty» line (each output's real duty and the chip's built-in floor) and the «Минимум / minimum» line; the
+speed of a fan on the AUX2 header is in the «Вентиляторы / fans» and «Тахометры / tach» lines ([about the fans](#fans)).
 
 **If the computer hangs at power-on:** after the hang, power it on again, press Del and F11 — the report shows where the
 previous start stopped.
@@ -280,22 +304,42 @@ It is better to read the voltages in our menu and not to turn on this chip's sen
 Which program line matches which input we know so far only from how the chip is built. If you send a screenshot of
 HWiNFO or AIDA64 and one of Z3NOVO's Health window, taken one after the other, we will add the exact match here.
 
-## FAN2 and FAN3 fans
+## Fans
 
-From T2.0 the firmware drives by the processor's temperature not only the processor fan (FAN1) but also the fans on the
-board's two other headers: FAN2 (Lenovo's System fan) and FAN3 (Aux fan). Before, they ran at a fixed medium speed.
+The board has four fan headers and three outputs the firmware controls. Which header is on which output has been checked
+on the author's board:
 
-- **Where to set them:** Classic → Power → "Case fan (FAN2)" and "Auxiliary fan (FAN3)", each with Quiet / Auto / Max
-  (Auto by default). They are quieter than the processor fan: about 30–35 % at idle, the speed rises as the processor
-  heats, full from 85 °C. These items apply while Fan control is "By firmware"; with "By the chip" the chip runs these
-  fans itself by the processor's temperature.
-- **Where to see them:** in the Health window, the FAN2 and FAN3 lanes (they appear once a fan is on the header); in the
-  F11 report, the "fans" and "fan outputs" lines.
-- **Which header is FAN2 and which is FAN3** we worked out from Lenovo's firmware; nothing is connected to them on the
-  author's board, so it has not been tested yet. To find out on yours: set one fan to Max and the other to Quiet and see
-  which lane in the Health window goes up.
-- **If a fan does not follow its item** (stands still, or runs at full or medium speed all the time), send an F11 report
-  taken with the fan running and say which header it is on.
+| Header on the board | Output and row in Classic → Power | Lane in the Health window |
+|---|---|---|
+| CPU_FAN | FAN1 — "Fan mode" (the processor fan) | FAN1 |
+| SYS_FAN | FAN2 — "Case fan (FAN2)" | FAN2 |
+| AUX1_FAN | FAN3 — "Fans AUX1 + AUX2 (FAN3)" | "FAN3 · AUX1" |
+| AUX2_FAN | the same FAN3 | "AUX2 · with FAN3" |
+
+- **Only 4-pin fans are controlled.** Every header always carries 12 V, and the speed changes through a separate PWM wire.
+  A 3-pin fan on any header runs at full speed; its speed is shown, but the "PWM N %" under it does not apply to it
+  ([details](LIMITS.md#10-fans)).
+- **AUX1 and AUX2 are one output.** FAN3's mode, custom curve and minimum apply to both headers; they cannot be set
+  apart.
+- **Modes:** Quiet / Auto / Max / Custom on each output; Custom opens the curve editor for that fan. The case fans (FAN2
+  and FAN3) are on Auto by default: 25 % at idle (Quiet: 20 %), the speed rises as the processor heats, full from 85 °C.
+  All of this applies while "Fan control" is "By firmware"; with "By the chip" the chip runs the fans itself by the
+  processor's temperature, without custom curves or minimums.
+- **"FAN1 minimum (CPU)", "FAN2 minimum (case)", "FAN3 minimum (AUX1 + AUX2)"**: from 0 to 100 %, 20 % by default; the
+  firmware never runs the fan slower. On the row +/− change it by 1 %, Enter opens the number window (arrows ±1, PgUp/PgDn
+  ±10). FAN1 and FAN3 share the chip's built-in 20 % floor; set either of them lower and the firmware takes that floor
+  off by itself and holds each one's minimum. It applies from the next start. Not every fan holds less than 20 %: Lenovo's
+  stock cooler, for example, still turns at about 870 rpm at 5 %, and at 0 % a fan may stop.
+- **Stall guard:** if a fan whose speed the board can see stops although it should be turning, the firmware gives it
+  2 seconds at full speed after about 15–25 seconds and keeps its output 10 % higher until a restart. If one of the two
+  fans on AUX1 and AUX2 stops, both get louder: they share the output. A fan whose speed the board cannot see has no such
+  guard. The guard leaves no trace in the F11 report, except that the output's duty is above the curve and the minimum.
+- **Where to see them:** in the Health window, the fan lanes (they appear once a fan is on the header), with the duty and
+  the minimum on the lane ("PWM 37 % · min. 20 %"); F3 for details, including whether the chip's floor is on. In the F11
+  report, the «Вентиляторы / fans», «Тахометры / tach», «Выходы вентиляторов / fan outputs», «Скважность / duty» and
+  «Минимум / minimum» lines.
+- **If a fan does not follow its row** (stands still, or runs at full or medium speed all the time), send an F11 report
+  taken with the fan running and say which header it is on and how many wires it has (3 or 4).
 
 ## Secure Boot step by step
 

@@ -3,6 +3,257 @@
 Новые версии сверху. T1, T2 и так далее — тестовые версии; 1.0 будет первой стабильной.
 Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable one.
 
+## T2.1 — вентиляторы после сна и тише
+
+В T2.1 вошло всё из T2.0. Главное — вентиляторы: после сна они снова регулируются сами, в простое тише, и у каждого
+теперь свои настройки.
+
+### Что нового
+
+**Вентиляторы после сна**
+- **После сна вентиляторы снова идут по температуре.** В T2.0 после пробуждения прошивка их больше не регулировала: они
+  оставались на средних оборотах (около 56–60 %) до перезагрузки. Теперь через несколько секунд после пробуждения обороты
+  снова следуют за температурой процессора.
+- **Прошивка следит за своим таймером после сна.** Вентиляторы регулирует таймер, который срабатывает дважды в секунду.
+  После пробуждения что-то в системе сбрасывает его настройки, хотя сам таймер продолжает идти; если бы его после этого
+  запустили заново, он срабатывал бы около 2000 раз в секунду. Теперь прошивка всегда запускает таймер с полными
+  настройками, а если заметит, что он срабатывает слишком часто, сама перезапускает его правильно.
+- **Режим «Микросхемой» после сна и при включении** (Классика → Питание → «Управление вентилятором»). В этом режиме
+  обороты ведёт сама микросхема платы по температуре процессора, которую она опрашивает. Теперь прошивка после сна и при
+  каждом включении проверяет, что опрос действительно запустился. Если это не подтвердилось, вентиляторы, которые ведёт
+  микросхема, идут на полных оборотах: громче, но не по застывшей температуре. Раньше после сна микросхема в этом
+  режиме вела вентиляторы по температуре, застывшей на значении до сна.
+- **Аварийная защита в режиме «Микросхемой» даёт настоящие полные обороты.** Если температура, по которой работает
+  микросхема, расходится с температурой процессора больше чем на 20 °C, прошивка ставит вентиляторам полные обороты.
+  Раньше вентилятор процессора в этом случае вставал примерно на 36–40 %, а корпусные не трогались.
+
+**Вентиляторы тише**
+- **«Тихо» вентилятора процессора тише в простое:** 25 % при 30 °C и 33 % при 50 °C (было 36 и 40 %); с 60 °C — как
+  раньше. Штатный кулер Lenovo в простое крутится около 900 об/мин вместо примерно 1300. «Авто» не менялось.
+- **Корпусные вентиляторы в простое тише:** «Тихо» — 20 %, «Авто» — 25 % (было 30 и 35 %); 25 % — столько стояло на
+  SYS_FAN в T1.2. С нагревом процессора обороты растут, с 75 °C — как раньше, с 85 °C — полные.
+
+**Настройки вентиляторов**
+- **У каждого вентилятора свой режим и своя кривая.** «Вентилятор корпуса (FAN2)» и «Вентиляторы AUX1+AUX2 (FAN3)»
+  получили четвёртый вариант «Своя»: открывается тот же редактор кривой, что у вентилятора процессора. Своя кривая
+  вентилятора процессора, сохранённая раньше, работает как прежде; если вы рисовали её по старому «Тихо», сама она не
+  изменится — чтобы получить новое «Тихо», выберите его заново.
+- **«Минимум» у каждого вентилятора** (Классика → Питание → «Минимум FAN1 (процессор)», «Минимум FAN2 (корпус)»,
+  «Минимум FAN3 (AUX1 + AUX2)»): от 0 до 100 %, по умолчанию 20 %. Медленнее этого прошивка вентилятор не крутит, что бы
+  ни говорили режим или своя кривая; точки своей кривой ниже минимума редактор поднимает до него. Ниже 20 % можно, но не
+  всякий вентилятор держит низкие обороты: штатный кулер Lenovo, например, и при 5 % крутится около 870 об/мин, а при 0 %
+  вентилятор может остановиться. Действует со следующего запуска.
+- **Защита от остановки.** Если вентилятор, обороты которого видит плата, остановился, хотя должен крутиться, прошивка
+  примерно через 15–25 секунд даёт ему 2 секунды полных оборотов и до перезагрузки держит этот выход на 10 % выше.
+  Короткие остановки на несколько секунд защиту не включают. Вентилятор, обороты которого плата не видит, так не
+  защищён.
+
+**Разъёмы вентиляторов**
+- **Четвёртый разъём AUX2 виден.** На плате четыре разъёма вентиляторов — CPU_FAN, SYS_FAN, AUX1_FAN и AUX2_FAN, — а
+  выходов, которыми управляет прошивка, три: AUX1 и AUX2 работают от одного выхода, FAN3, и регулируются вместе. Обороты
+  вентилятора на AUX2 раньше нигде не показывались; теперь они видны в окне «Состояние» (дорожка «AUX2 · с FAN3»), на
+  карточке вентилятора на главном экране и в отчёте F11. Строка FAN3 в «Питании» теперь называется «Вентиляторы
+  AUX1+AUX2 (FAN3)»: её режим, своя кривая и минимум действуют на оба разъёма, защита от остановки следит за обоими.
+- **Трёхпиновые вентиляторы на этой плате не регулируются ни на одном разъёме.** На разъёмах всегда 12 В, а обороты
+  меняются только по отдельному проводу ШИМ у четырёхпиновых вентиляторов. Трёхпиновый всегда крутится на полных — так
+  устроена плата, прошивка этого не изменит ([подробнее](docs/LIMITS.md#10-вентиляторы)). Справка в меню теперь об этом
+  предупреждает.
+
+**Окно «Состояние» и отчёт F11**
+- **Окно «Состояние» показывает настоящую скважность вентилятора.** Раньше оно не учитывало встроенный нижний предел
+  микросхемы 20 % у FAN1 и FAN3, и, например, настоящие 37,5 % показывались как «22 %». Теперь в строке вентилятора —
+  настоящая скважность и его минимум («ШИМ 37 % · мин. 20 %»), в подробностях (F3) — включён ли предел микросхемы.
+- **Отчёт F11:** новые строки «Скважность / duty» (настоящая скважность каждого выхода и предел микросхемы) и «Минимум /
+  minimum», обороты AUX2 — в строках «Вентиляторы» и «Тахометры».
+
+**Меню**
+- **Второй курсор мыши больше не появляется.** Когда наше меню открывалось само — система не загрузилась, нет диска для
+  загрузки, — поверх него двигалась ещё и белая стрелка родного меню BIOS, а наш курсор мог двигаться рывками: обе
+  программы читали одну мышь. Теперь прошивка перед запуском нашего меню выключает чужую стрелку. При Del и F9 второго
+  курсора не было и раньше.
+- **Меню прошивки находит новый файл, даже если на флешке много старых копий.** Окно «Обновить прошивку» вмещало только
+  24 файла и читало папку `\Z3NOVO` раньше корня флешки; копии `Z3BACKUP-….BIN`, которые меню сохраняет при каждом
+  обновлении, со временем занимали весь список, и новый файл не показывался. Теперь в списке до 64 файлов: сначала файлы
+  из корня флешки, потом из `\Z3NOVO`, копии `Z3BACKUP` — в конце, самые новые первыми; копия никогда не вытесняет образ.
+  Если файлов больше, окно пишет «Показаны не все файлы: N из M».
+- **В окне ввода числа PgUp и PgDn меняют значение на 10 шагов** (раньше они там ничего не делали) — во всех числовых
+  пунктах.
+
+**Коды устройств**
+- **Встроенные устройства представляются как Lenovo.** У графики, USB-контроллеров процессора и чипсета, SATA чипсета,
+  SMBus и LPC код платы в PCI (Subsystem) теперь 17AA:36C7 — как в родном BIOS Lenovo M715s, а не код Biostar
+  1565:170B / 1565:370B. GPU-Z и диспетчер устройств показывают производителя Lenovo; звук и сетевая карта были Lenovo и
+  раньше. При первом запуске Windows может заново найти эти устройства: экран мигнёт, разрешение может сброситься. Это
+  один раз. Мосты PCIe не менялись: иначе Windows сочла бы сетевую карту новой и сбросила бы её настройки.
+
+**Как обновиться**
+- С T2.0, T1.2 или T1.1r — из меню с флешки, как обычно ([по шагам](docs/FLASHING.md#с-t20-на-t21)). Настройки
+  сохраняются. **Перед обновлением** уберите с флешки старые копии: если в папке `\Z3NOVO` 24 и больше файлов `.BIN`,
+  меню T2.0 и T1.x не увидит новый файл. Перенесите копии `Z3BACKUP-….BIN` из `\Z3NOVO` на компьютер или возьмите
+  флешку без них.
+
+### Ограничения
+- Трёхпиновые вентиляторы на этой плате не регулируются ни на одном разъёме: всегда полные обороты
+  ([подробнее](docs/LIMITS.md#10-вентиляторы)).
+- AUX1_FAN и AUX2_FAN — один выход FAN3: по отдельности их не настроить.
+- Защита от остановки работает только у вентиляторов, обороты которых видит плата; поднятый ею минимум держится до
+  перезагрузки. В отчёте F11 её срабатывание видно только по тому, что скважность выше кривой и минимума.
+- «Минимум» и свои кривые действуют со следующего запуска и только когда «Управление вентилятором» стоит «Прошивкой».
+- [Известные проблемы](docs/KNOWN_ISSUES.md).
+
+### Что проверено
+На плате автора (AM4P2MS ревизии 1.1, Ryzen 3 2200G, две планки по 8 ГБ DDR4-2666) проверено:
+- **сон и вентилятор после пробуждения:** два сна подряд — после каждого прошивка снова регулирует вентиляторы дважды
+  в секунду, обороты как до сна (около 900 об/мин в простое); под нагрузкой после сна обороты растут вместе с
+  температурой (2616 об/мин при 69 °C) и снова снижаются, когда нагрузка кончилась;
+- **защита от сбоя таймера после сна:** таймер, нарочно запущенный после пробуждения с неверной настройкой (так он
+  срабатывал бы около 2000 раз в секунду), прошивка меньше чем за секунду перезапустила правильно;
+- **«Тихо» вентилятора процессора:** штатный кулер Lenovo в простое (29 °C) — 894 об/мин при 26 %; с прежней кривой было
+  1298 об/мин при 35 °C;
+- **разъёмы:** четырёхпиновый вентилятор на SYS_FAN слушается FAN2 (965 → 1573 об/мин на полных), на AUX1_FAN и
+  AUX2_FAN — FAN3 (954 → 1537 и 945 → 1510 об/мин); обороты AUX2 читаются отдельно;
+- **трёхпиновые вентиляторы:** на CPU_FAN 1123–1147 об/мин при любой скважности FAN1 и при любой из 8 частот ШИМ, на
+  SYS_FAN 1121–1146 при любой скважности FAN2, на AUX2_FAN 1117–1140 при любой FAN3 — не регулируются;
+- **защита от остановки:** четырёхпиновый вентилятор на AUX1 остановили рукой — через 16 секунд прошивка дала ему
+  2 секунды полных оборотов и подняла выход с 25 до 35 %, при повторной остановке — ещё раз, до 45 %; остановки на 3 и
+  8 секунд защиту не включили; трёхпиновый вентилятор на AUX2 ложных срабатываний не дал;
+- **коды устройств:** Linux (lspci) показывает 17AA:36C7 у графики, обоих USB-контроллеров процессора, звука, SMBus,
+  LPC, USB и SATA чипсета.
+
+Тестеры проверили на T2.0 сон: с Ryzen 5 PRO 4650G работают сон и гибернация (в журнале запусков — удачные выходы из
+сна), с Ryzen 5 5600G компьютер засыпает и просыпается от кнопки питания и клавиатуры. Исправление сна из T2.0
+подтверждено на Ryzen 4000G и 5000G. Что тестеры проверили раньше — в [списке проверенного](docs/TESTED.md).
+
+### Что ещё не проверено
+- Второй курсор мыши, когда меню открывается само (исправление проверено в эмуляторе).
+- Режим «Микросхемой».
+- Корпусные вентиляторы у тестеров на T2.1.
+
+## T2.1 — fans after sleep, and quieter
+
+T2.1 has everything from T2.0. The main thing is the fans: after sleep they are controlled again by themselves, they are
+quieter at idle, and each now has settings of its own.
+
+### What is new
+
+**Fans after sleep**
+- **After sleep the fans follow the temperature again.** In T2.0, after waking up, the firmware no longer controlled them:
+  they stayed at a medium speed (about 56–60 %) until a restart. Now, a few seconds after waking, the speed follows the
+  processor's temperature again.
+- **The firmware watches its timer after sleep.** The fans are driven by a timer that fires twice a second. After a wake
+  something in the system resets its settings while the timer itself keeps running; had it been started again after
+  that, it would fire about 2000 times a second. Now the firmware always starts the timer with its full settings, and if
+  it sees the timer firing too often, it restarts it correctly by itself.
+- **"By the chip" mode after sleep and at power-on** (Classic → Power → "Fan control"). In this mode the board's chip runs
+  the fans itself by the processor's temperature, which it polls. Now, after sleep and at every power-on, the firmware
+  checks that the polling really started. If that is not confirmed, the fans the chip runs go to full speed: louder, but
+  not following a frozen temperature. Before, after sleep the chip in this mode ran the fans by a temperature frozen at
+  its value from before the sleep.
+- **The emergency guard in "By the chip" mode gives real full speed.** If the temperature the chip works by differs from
+  the processor's by more than 20 °C, the firmware sets the fans to full speed. Before, the processor fan ended up at
+  about 36–40 % in that case, and the case fans were not touched.
+
+**Quieter fans**
+- **The processor fan's Quiet is quieter at idle:** 25 % at 30 °C and 33 % at 50 °C (it was 36 and 40 %); from 60 °C as
+  before. Lenovo's stock cooler turns at about 900 rpm at idle instead of about 1300. Auto has not changed.
+- **The case fans are quieter at idle:** Quiet is 20 %, Auto 25 % (it was 30 and 35 %); 25 % is what SYS_FAN ran at in
+  T1.2. The speed rises as the processor heats; from 75 °C as before, from 85 °C full.
+
+**Fan settings**
+- **Each fan has a mode and a curve of its own.** "Case fan (FAN2)" and "Fans AUX1 + AUX2 (FAN3)" got the fourth choice,
+  Custom: it opens the same curve editor as the processor fan's. A custom processor fan curve saved earlier works as
+  before; if you drew it after the old Quiet, it does not change by itself — to get the new Quiet, pick Quiet again.
+- **A "minimum" for each fan** (Classic → Power → "FAN1 minimum (CPU)", "FAN2 minimum (case)", "FAN3 minimum (AUX1 +
+  AUX2)"): from 0 to 100 %, 20 % by default. The firmware never runs the fan slower than this, whatever the mode or your
+  own curve says; the editor raises a custom curve's points under the minimum up to it. Under 20 % is allowed, but not
+  every fan holds a low speed: Lenovo's stock cooler, for example, still turns at about 870 rpm at 5 %, and at 0 % a fan
+  may stop. It applies from the next start.
+- **Stall guard.** If a fan whose speed the board can see stops although it should be turning, the firmware gives it
+  2 seconds at full speed after about 15–25 seconds and keeps that output 10 % higher until a restart. Short stops of a
+  few seconds do not trigger it. A fan whose speed the board cannot see has no such guard.
+
+**Fan headers**
+- **The fourth header, AUX2, is visible.** The board has four fan headers — CPU_FAN, SYS_FAN, AUX1_FAN and AUX2_FAN — but
+  three outputs the firmware controls: AUX1 and AUX2 run on one output, FAN3, and are controlled together. A fan on AUX2
+  was shown nowhere before; now its speed is in the Health window (the "AUX2 · with FAN3" lane), on the fan card of the
+  home screen and in the F11 report. FAN3's row in Power is now called "Fans AUX1 + AUX2 (FAN3)": its mode, custom curve
+  and minimum apply to both headers, and the stall guard watches both.
+- **3-pin fans are not controlled on any header of this board.** The headers always carry 12 V, and the speed changes only
+  through the separate PWM wire of 4-pin fans. A 3-pin fan always runs at full speed — that is how the board is built,
+  and no firmware can change it ([details](docs/LIMITS.md#10-fans)). The menu's help now says so.
+
+**The Health window and the F11 report**
+- **The Health window shows the fan's real duty.** Before, it did not take the chip's built-in 20 % floor on FAN1 and FAN3
+  into account, so a real 37.5 %, for example, showed as "22 %". Now the fan's line shows the real duty and its minimum
+  ("PWM 37 % · min. 20 %"), and the details (F3) show whether the chip's floor is on.
+- **The F11 report:** new lines «Скважность / duty» (each output's real duty and the chip's floor) and «Минимум /
+  minimum»; AUX2's speed is in the «Вентиляторы / fans» and «Тахометры / tach» lines.
+
+**Menu**
+- **No more second mouse pointer.** When our menu opened by itself — the system did not start, there was no disk to boot —
+  the stock BIOS menu's white arrow moved over it too, and our pointer could move in jerks: both programs read the same
+  mouse. Now the firmware turns the other arrow off before starting our menu. With Del and F9 there was no second pointer
+  before either.
+- **The firmware menu finds a new file even when the stick holds many old copies.** The "Update firmware" window held
+  only 24 files and read the `\Z3NOVO` folder before the stick's root; the `Z3BACKUP-….BIN` copies the menu saves at every
+  update filled the whole list over time, and a new file did not show. Now the list holds up to 64 files: first the files
+  in the stick's root, then those in `\Z3NOVO`, the `Z3BACKUP` copies last, newest first; a copy never pushes an image
+  out. When there are more files, the window says "Not all files are shown: N of M".
+- **In the number entry window PgUp and PgDn change the value by 10 steps** (before, they did nothing there), for every
+  number item.
+
+**Device IDs**
+- **The built-in devices present themselves as Lenovo's.** The graphics, the processor's and the chipset's USB
+  controllers, the chipset's SATA, SMBus and LPC now carry the board ID (PCI Subsystem) 17AA:36C7, as in Lenovo's own
+  M715s BIOS, instead of Biostar's 1565:170B / 1565:370B. GPU-Z and Device Manager show Lenovo as the maker; the sound
+  and the network card were Lenovo's before too. At the first start Windows may find these devices anew: the screen
+  blinks, the resolution may reset. That happens once. The PCIe bridges were left as they were: otherwise Windows would
+  take the network card for a new one and drop its settings.
+
+**How to update**
+- From T2.0, T1.2 or T1.1r: from the menu with a USB stick, as usual ([step by step](docs/FLASHING.md#from-t20-to-t21)).
+  Settings are kept. **Before updating**, clear the old copies off the stick: with 24 or more `.BIN` files in the
+  `\Z3NOVO` folder, the T2.0 and T1.x menu does not see the new file. Move the `Z3BACKUP-….BIN` copies from `\Z3NOVO` to a
+  computer, or use a stick without them.
+
+### Limits
+- 3-pin fans are not controlled on any header of this board: always full speed
+  ([details](docs/LIMITS.md#10-fans)).
+- AUX1_FAN and AUX2_FAN are one output, FAN3: they cannot be set apart.
+- The stall guard works only for fans whose speed the board can see; the minimum it raises holds until a restart. In the
+  F11 report it shows only as a duty above the curve and the minimum.
+- The minimums and custom curves apply from the next start, and only while "Fan control" is "By firmware".
+- [Known issues](docs/KNOWN_ISSUES.md#known-issues).
+
+### Tested
+On the author's board (AM4P2MS revision 1.1, Ryzen 3 2200G, two 8 GB sticks of DDR4-2666):
+- **sleep and the fan after waking:** two sleeps in a row — after each, the firmware controls the fans twice a second
+  again, at the same speed as before sleep (about 900 rpm at idle); under load after sleep the speed rises with the
+  temperature (2616 rpm at 69 °C) and goes down again when the load is over;
+- **the timer guard after sleep:** a timer started on purpose with a wrong setting after waking (it would have fired about
+  2000 times a second) was restarted correctly by the firmware in under a second;
+- **the processor fan's Quiet:** Lenovo's stock cooler at idle (29 °C) turns at 894 rpm at 26 %; with the previous curve
+  it was 1298 rpm at 35 °C;
+- **the headers:** a 4-pin fan on SYS_FAN follows FAN2 (965 → 1573 rpm at full), on AUX1_FAN and AUX2_FAN it follows FAN3
+  (954 → 1537 and 945 → 1510 rpm); AUX2's speed is read on its own;
+- **3-pin fans:** on CPU_FAN 1123–1147 rpm at any FAN1 duty and any of the 8 PWM frequencies, on SYS_FAN 1121–1146 at any
+  FAN2 duty, on AUX2_FAN 1117–1140 at any FAN3 duty — not controlled;
+- **the stall guard:** a 4-pin fan on AUX1 was stopped by hand — after 16 seconds the firmware gave it 2 seconds at full
+  speed and raised the output from 25 to 35 %, and when stopped again, once more, to 45 %; stops of 3 and 8 seconds did not
+  trigger it; a 3-pin fan on AUX2 gave no false alarms;
+- **the device IDs:** Linux (lspci) shows 17AA:36C7 on the graphics, both of the processor's USB controllers, the sound,
+  SMBus, LPC and the chipset's USB and SATA.
+
+Testers tried sleep on T2.0: with a Ryzen 5 PRO 4650G sleep and hibernation work (the boot log shows successful wakes
+from sleep), with a Ryzen 5 5600G the computer goes to sleep and wakes up with the power button and the keyboard. The
+T2.0 sleep fix is confirmed on the Ryzen 4000G and 5000G. What testers checked earlier is in
+[the tested list](docs/TESTED.md#what-has-been-tested).
+
+### Not tested yet
+- The second mouse pointer when the menu opens by itself (the fix was tested in an emulator).
+- "By the chip" mode.
+- The case fans at testers' on T2.1.
+
 ## T2.0 — вторая тестовая версия
 
 В T2.0 вошло всё, что исправлено в T1.1r и T1.2, и много нового.
