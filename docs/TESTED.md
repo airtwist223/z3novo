@@ -116,11 +116,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1.2, T2.0 |
+| **Версии** | T1.2, T2.0, T2.1 |
 | **Системы** | Debian 13, Windows |
 | **Память** | 2 × 16 ГБ (Apacer + Crucial) на 3200 |
-| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация на T2.0 (в журнале запусков — удачные выходы из сна) |
-| ⚠️ **Особенности** | с накопителем NVMe Western Digital в M.2 Windows зависает, с SATA — нет (в T2.0 такт слота M.2 как у Lenovo, ждём проверки) · вентиляторы на FAN2/FAN3 крутились на постоянных средних оборотах (в T2.0 их ведёт прошивка) · на T2.0 корпусные вентиляторы громче, чем на T1.2, а окно «Состояние» показывало скважность неверно (исправлено в T2.1) · точное управление частотой (CPPC) было выключено (в T2.0 включено по умолчанию) · иногда не сохранялись настройки (исправлено в T2.0) |
+| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация на T2.0 (в журнале запусков — удачные выходы из сна) · на T2.1: вентилятор после сна сам возвращается к кривой, корпусные вентиляторы (FAN2, AUX1, AUX2) идут по кривой, «Тихо» и «Минимум» у каждого вентилятора |
+| ⚠️ **Особенности** | с накопителем NVMe Western Digital в M.2 Windows зависает, с SATA — нет (в T2.0 такт слота M.2 как у Lenovo, ждём проверки) · вентиляторы на FAN2/FAN3 крутились на постоянных средних оборотах (в T2.0 их ведёт прошивка) · на T2.0 корпусные вентиляторы громче, чем на T1.2, а окно «Состояние» показывало скважность неверно (исправлено в T2.1, подтверждено) · точное управление частотой (CPPC) было выключено (в T2.0 включено по умолчанию) · иногда не сохранялись настройки (исправлено в T2.0) |
 
 ## Ryzen 5 5600G
 
@@ -128,11 +128,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1.1, T1.1r, T2.0 |
+| **Версии** | T1.1, T1.1r, T2.0, T2.1 |
 | **Системы** | Windows 10 |
 | **Память** | 4 × 8 ГБ разные (две 2400, две 2666) · 1 × 8 ГБ Crucial 2400 |
-| ✅ **Работает** | запуск Windows · перезагрузки из Windows (на T1.1r) · четыре планки памяти · сон на T2.0: лампа мигает, будят кнопка питания и любая клавиша |
-| ⚠️ **Особенности** | на T1.1 перезагрузка из Windows зависает (исправлено в T1.1r) · до T2.0 выход из сна зависал (исправлено в T2.0, подтверждено) · на T2.0 после сна вентилятор не возвращался к кривой до перезагрузки, в меню бывал второй курсор мыши, а GPU-Z показывал производителя Biostar (всё исправлено в T2.1) · у одного тестера на T1.1 не работают передние USB и два задних под сетевым разъёмом ([известные проблемы](KNOWN_ISSUES.md)) |
+| ✅ **Работает** | запуск Windows · перезагрузки из Windows (на T1.1r) · четыре планки памяти · сон на T2.0: лампа мигает, будят кнопка питания и любая клавиша · на T2.1: вентилятор после сна сам возвращается к кривой (до обычных оборотов — плавно, за пару минут), GPU-Z показывает производителя Lenovo |
+| ⚠️ **Особенности** | на T1.1 перезагрузка из Windows зависает (исправлено в T1.1r) · до T2.0 выход из сна зависал (исправлено в T2.0, подтверждено) · на T2.0 после сна вентилятор не возвращался к кривой до перезагрузки и GPU-Z показывал производителя Biostar (исправлено в T2.1, подтверждено), в меню бывал второй курсор мыши (исправлено в T2.1) · после обновления на T2.1 Windows один раз поставила стандартный видеодрайвер (у устройств новые коды), драйвер AMD переустановили · у одного тестера на T1.1 не работают передние USB и два задних под сетевым разъёмом ([известные проблемы](KNOWN_ISSUES.md)) |
 
 ---
 
@@ -249,11 +249,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1.2, T2.0 |
+| **Versions** | T1.2, T2.0, T2.1 |
 | **Systems** | Debian 13, Windows |
 | **Memory** | 2 × 16 GB (Apacer + Crucial) at 3200 |
-| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation on T2.0 (the boot log shows successful wakes from sleep) |
-| ⚠️ **Notes** | with a Western Digital NVMe drive in M.2 Windows hangs, with SATA it does not (in T2.0 the M.2 slot clock works as Lenovo's, awaiting a test) · the fans on FAN2/FAN3 ran at a fixed medium speed (in T2.0 the firmware drives them) · on T2.0 the case fans were louder than on T1.2, and the Health window showed the duty wrongly (fixed in T2.1) · fine clock control (CPPC) was off (on by default in T2.0) · settings were sometimes not saved (fixed in T2.0) |
+| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation on T2.0 (the boot log shows successful wakes from sleep) · on T2.1: the fan goes back to its curve by itself after sleep, the case fans (FAN2, AUX1, AUX2) follow their curve, Quiet and a minimum for each fan |
+| ⚠️ **Notes** | with a Western Digital NVMe drive in M.2 Windows hangs, with SATA it does not (in T2.0 the M.2 slot clock works as Lenovo's, awaiting a test) · the fans on FAN2/FAN3 ran at a fixed medium speed (in T2.0 the firmware drives them) · on T2.0 the case fans were louder than on T1.2, and the Health window showed the duty wrongly (fixed in T2.1, confirmed) · fine clock control (CPPC) was off (on by default in T2.0) · settings were sometimes not saved (fixed in T2.0) |
 
 ## Ryzen 5 5600G
 
@@ -261,8 +261,8 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1.1, T1.1r, T2.0 |
+| **Versions** | T1.1, T1.1r, T2.0, T2.1 |
 | **Systems** | Windows 10 |
 | **Memory** | 4 × 8 GB, all different (two 2400, two 2666) · 1 × 8 GB Crucial 2400 |
-| ✅ **Works** | Windows starts · restarts from Windows (on T1.1r) · four memory sticks · sleep on T2.0: the light blinks, the power button and any key wake it |
-| ⚠️ **Notes** | on T1.1 a restart from Windows hangs (fixed in T1.1r) · before T2.0 waking from sleep hung (fixed in T2.0, confirmed) · on T2.0 the fan did not go back to its curve after sleep until a restart, a second mouse pointer sometimes showed in the menu, and GPU-Z showed Biostar as the maker (all fixed in T2.1) · on one tester's board on T1.1 the front USB sockets and the two rear ones under the network socket do not work ([known issues](KNOWN_ISSUES.md)) |
+| ✅ **Works** | Windows starts · restarts from Windows (on T1.1r) · four memory sticks · sleep on T2.0: the light blinks, the power button and any key wake it · on T2.1: the fan goes back to its curve by itself after sleep (down to its usual speed smoothly, within a couple of minutes), GPU-Z shows Lenovo as the maker |
+| ⚠️ **Notes** | on T1.1 a restart from Windows hangs (fixed in T1.1r) · before T2.0 waking from sleep hung (fixed in T2.0, confirmed) · on T2.0 the fan did not go back to its curve after sleep until a restart and GPU-Z showed Biostar as the maker (fixed in T2.1, confirmed), a second mouse pointer sometimes showed in the menu (fixed in T2.1) · after the update to T2.1 Windows once put in its standard display driver (the devices have new IDs), AMD's driver was reinstalled · on one tester's board on T1.1 the front USB sockets and the two rear ones under the network socket do not work ([known issues](KNOWN_ISSUES.md)) |

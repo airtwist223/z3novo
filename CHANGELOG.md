@@ -13,7 +13,8 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 **Вентиляторы после сна**
 - **После сна вентиляторы снова идут по температуре.** В T2.0 после пробуждения прошивка их больше не регулировала: они
   оставались на средних оборотах (около 56–60 %) до перезагрузки. Теперь через несколько секунд после пробуждения обороты
-  снова следуют за температурой процессора.
+  снова следуют за температурой процессора; до обычных оборотов вентиляторы опускаются плавно, за полминуты–пару
+  минут, пока процессор остывает.
 - **Прошивка следит за своим таймером после сна.** Вентиляторы регулирует таймер, который срабатывает дважды в секунду.
   После пробуждения что-то в системе сбрасывает его настройки, хотя сам таймер продолжает идти; если бы его после этого
   запустили заново, он срабатывал бы около 2000 раз в секунду. Теперь прошивка всегда запускает таймер с полными
@@ -83,7 +84,7 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 - **Встроенные устройства представляются как Lenovo.** У графики, USB-контроллеров процессора и чипсета, SATA чипсета,
   SMBus и LPC код платы в PCI (Subsystem) теперь 17AA:36C7 — как в родном BIOS Lenovo M715s, а не код Biostar
   1565:170B / 1565:370B. GPU-Z и диспетчер устройств показывают производителя Lenovo; звук и сетевая карта были Lenovo и
-  раньше. При первом запуске Windows может заново найти эти устройства: экран мигнёт, разрешение может сброситься. Это
+  раньше. При первом запуске Windows может заново найти эти устройства: экран мигнёт, разрешение может сброситься, может встать стандартный видеодрайвер (тогда переустановите драйвер AMD). Это
   один раз. Мосты PCIe не менялись: иначе Windows сочла бы сетевую карту новой и сбросила бы её настройки.
 
 **Как обновиться**
@@ -122,12 +123,12 @@ Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable o
 
 Тестеры проверили на T2.0 сон: с Ryzen 5 PRO 4650G работают сон и гибернация (в журнале запусков — удачные выходы из
 сна), с Ryzen 5 5600G компьютер засыпает и просыпается от кнопки питания и клавиатуры. Исправление сна из T2.0
-подтверждено на Ryzen 4000G и 5000G. Что тестеры проверили раньше — в [списке проверенного](docs/TESTED.md).
+подтверждено на Ryzen 4000G и 5000G. На T2.1 тестеры с теми же процессорами подтвердили: вентилятор после сна сам
+возвращается к кривой, корпусные вентиляторы идут по кривой, GPU-Z показывает Lenovo. Что тестеры проверили раньше — в [списке проверенного](docs/TESTED.md).
 
 ### Что ещё не проверено
 - Второй курсор мыши, когда меню открывается само (исправление проверено в эмуляторе).
 - Режим «Микросхемой».
-- Корпусные вентиляторы у тестеров на T2.1.
 
 ## T2.1 — fans after sleep, and quieter
 
@@ -139,7 +140,8 @@ quieter at idle, and each now has settings of its own.
 **Fans after sleep**
 - **After sleep the fans follow the temperature again.** In T2.0, after waking up, the firmware no longer controlled them:
   they stayed at a medium speed (about 56–60 %) until a restart. Now, a few seconds after waking, the speed follows the
-  processor's temperature again.
+  processor's temperature again; the fans come down to their usual speed smoothly, within half a minute to a couple
+  of minutes, as the processor cools.
 - **The firmware watches its timer after sleep.** The fans are driven by a timer that fires twice a second. After a wake
   something in the system resets its settings while the timer itself keeps running; had it been started again after
   that, it would fire about 2000 times a second. Now the firmware always starts the timer with its full settings, and if
@@ -207,7 +209,7 @@ quieter at idle, and each now has settings of its own.
   controllers, the chipset's SATA, SMBus and LPC now carry the board ID (PCI Subsystem) 17AA:36C7, as in Lenovo's own
   M715s BIOS, instead of Biostar's 1565:170B / 1565:370B. GPU-Z and Device Manager show Lenovo as the maker; the sound
   and the network card were Lenovo's before too. At the first start Windows may find these devices anew: the screen
-  blinks, the resolution may reset. That happens once. The PCIe bridges were left as they were: otherwise Windows would
+  blinks, the resolution may reset, Windows may put in its standard display driver (then reinstall AMD's driver). That happens once. The PCIe bridges were left as they were: otherwise Windows would
   take the network card for a new one and drop its settings.
 
 **How to update**
@@ -246,13 +248,13 @@ On the author's board (AM4P2MS revision 1.1, Ryzen 3 2200G, two 8 GB sticks of D
 
 Testers tried sleep on T2.0: with a Ryzen 5 PRO 4650G sleep and hibernation work (the boot log shows successful wakes
 from sleep), with a Ryzen 5 5600G the computer goes to sleep and wakes up with the power button and the keyboard. The
-T2.0 sleep fix is confirmed on the Ryzen 4000G and 5000G. What testers checked earlier is in
+T2.0 sleep fix is confirmed on the Ryzen 4000G and 5000G. On T2.1 testers with the same processors confirmed that the fan goes back to
+its curve by itself after sleep, the case fans follow their curve and GPU-Z shows Lenovo. What testers checked earlier is in
 [the tested list](docs/TESTED.md#what-has-been-tested).
 
 ### Not tested yet
 - The second mouse pointer when the menu opens by itself (the fix was tested in an emulator).
 - "By the chip" mode.
-- The case fans at testers' on T2.1.
 
 ## T2.0 — вторая тестовая версия
 

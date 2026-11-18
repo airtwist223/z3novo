@@ -148,7 +148,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
 | **Процессор** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; разгон ядер на 2200G; разгон графики на 2200G — работает, но возможны зависания под нагрузкой ([почему](docs/LIMITS.md#6-разгон-процессора)) | другие Ryzen 1000–5000; разгон на других процессорах; ограничение 95–105 Вт | A-серия (A6–A12) |
-| **Память** | 2 планки, разгон до DDR4-3200 | 4 планки, XMP | напряжение выше 1,2 В |
+| **Память** | 2 и 4 планки, разгон до DDR4-3200 | XMP | напряжение выше 1,2 В |
 | **Монитор** | оба DisplayPort, VGA | кабель DP→DP, второй DisplayPort в режиме HDMI | |
 | **Видеокарта** | PCIe x16, Resizable BAR (Intel Arc A380), встроенная графика вместе с видеокартой | | |
 | **USB** | все разъёмы | | |
@@ -157,9 +157,9 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **DASH** | консоль, веб-страница, удалённое питание, ISO по сети, наше меню в консоли, включение после выдёргивания шнура | | |
 | **Питание** | перезагрузки, сон (на Ryzen 4000G и 5000G — с T2.0), включение по таймеру и после пропадания света | | |
 | **Меню BIOS** | Del, F9, F11, F6, F12, обновление с флешки и возврат на прежнюю версию, вход из Windows | пароль BIOS, Secure Boot, очистка TPM | |
-| **Системы** | Windows 11, Linux | | |
+| **Системы** | Windows 10, Windows 11, Linux | | |
 | **Звук** | выход и микрофон | через DisplayPort | |
-| **Прочее** | TPM 2.0, четырёхпиновые вентиляторы на всех четырёх разъёмах, вентиляторы после сна | COM-порт | регулировка трёхпиновых вентиляторов (так устроена плата) |
+| **Прочее** | TPM 2.0, четырёхпиновые вентиляторы на всех четырёх разъёмах, режим и минимум у каждого вентилятора, защита от остановки вентилятора, вентиляторы после сна (проверено на 2200G, 4650G и 5600G) | COM-порт | регулировка трёхпиновых вентиляторов (так устроена плата) |
 
 Подробности, условия проверок и отчёты тестеров — [docs/TESTED.md](docs/TESTED.md).
 
@@ -350,7 +350,7 @@ was made from scratch:
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
 | **Processor** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; core overclocking on the 2200G; graphics overclocking on the 2200G works, but it may freeze under load ([why](docs/LIMITS.md#6-processor-overclocking)) | other Ryzen 1000–5000; overclocking on other processors; the 95–105 W limit | A-series (A6–A12) |
-| **Memory** | 2 sticks, overclocking up to DDR4-3200 | 4 sticks, XMP | voltage above 1.2 V |
+| **Memory** | 2 and 4 sticks, overclocking up to DDR4-3200 | XMP | voltage above 1.2 V |
 | **Monitor** | both DisplayPort sockets, VGA | DP→DP cable, the second DisplayPort socket in HDMI mode | |
 | **Graphics card** | PCIe x16, Resizable BAR (Intel Arc A380), built-in graphics together with a card | | |
 | **USB** | every socket | | |
@@ -359,9 +359,9 @@ was made from scratch:
 | **DASH** | console, web page, remote power, ISO over the network, our menu in the console, power-on after the cord was out | | |
 | **Power** | restarts, sleep (on the Ryzen 4000G and 5000G from T2.0), power-on by timer and after a power cut | | |
 | **BIOS menu** | Del, F9, F11, F6, F12, update from a USB stick and going back to an earlier version, opening from Windows | BIOS password, Secure Boot, clearing the TPM | |
-| **Systems** | Windows 11, Linux | | |
+| **Systems** | Windows 10, Windows 11, Linux | | |
 | **Sound** | output and microphone | over DisplayPort | |
-| **Other** | TPM 2.0, 4-pin fans on all four headers, fans after sleep | COM port | controlling 3-pin fans (the board is built that way) |
+| **Other** | TPM 2.0, 4-pin fans on all four headers, a mode and a minimum for each fan, the stall guard, fans after sleep (tested on the 2200G, 4650G and 5600G) | COM port | controlling 3-pin fans (the board is built that way) |
 
 Details, test conditions and testers' reports: [docs/TESTED.md](docs/TESTED.md).
 

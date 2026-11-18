@@ -78,7 +78,7 @@
 - **Своя кривая не меняется.** Если вы рисовали свою кривую вентилятора процессора по старому «Тихо», новое «Тихо» к
   ней само не придёт: выберите «Тихо» заново или перерисуйте кривую.
 - **Коды устройств.** При первом запуске Windows может заново найти графику, USB-контроллеры и SATA чипсета (у них
-  теперь код Lenovo): экран может мигнуть, разрешение — сброситься. Это один раз. Сетевая карта и NVMe не меняются.
+  теперь код Lenovo): экран может мигнуть, разрешение — сброситься, может встать стандартный видеодрайвер — тогда переустановите драйвер AMD. Это один раз. Если перед прошивкой Windows выключали обычным «Завершением работы» (включён быстрый запуск), после прошивки она может восстановить прежний сеанс, и программы покажут старую версию BIOS и старые коды устройств: сделайте один раз «Перезагрузку». Сетевая карта и NVMe не меняются.
 - **Перед обновлением** уберите с флешки старые копии `Z3BACKUP` — см. абзац выше: иначе меню T2.0 может не увидеть
   файл T2.1.
 - **С T1.2 или T1.1r** — тем же путём; всё, что сказано в следующем разделе про переход на T2.0, относится и сюда.
@@ -208,7 +208,7 @@ Update from the menu as described above. What to know:
 - **A custom curve does not change.** If you drew your own processor fan curve after the old Quiet, the new Quiet does
   not reach it by itself: pick Quiet again or redraw the curve.
 - **Device IDs.** At the first start Windows may find the graphics, the USB controllers and the chipset's SATA anew (they
-  now carry Lenovo's ID): the screen may blink, the resolution may reset. That happens once. The network card and NVMe
+  now carry Lenovo's ID): the screen may blink, the resolution may reset, Windows may put in its standard display driver (then reinstall AMD's driver). That happens once. If Windows was turned off with a plain Shut down before flashing (Fast Startup on), after flashing it may bring back its old session, and programs will show the old BIOS version and the old device IDs: restart Windows once. The network card and NVMe
   do not change.
 - **Before updating**, clear the old `Z3BACKUP` copies off the stick (see the paragraph above): otherwise T2.0's menu may
   not see the T2.1 file.

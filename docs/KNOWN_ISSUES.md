@@ -2,10 +2,6 @@
 
 ## Открытые
 
-- **Вентилятор после сна на Ryzen 4000G и 5000G — просьба проверить.** В T2.1 вентиляторы после пробуждения снова идут по
-  температуре; на Ryzen 3 2200G автора это проверено. Если у вас Ryzen 4000G или 5000G, послушайте после пробуждения:
-  через несколько секунд вентилятор должен вернуться к обычным для простоя оборотам. Напишите, что вышло, — особенно если он
-  так и шумит до перезагрузки: в бот или в Issues, с моделью процессора.
 - **Трёхпиновые вентиляторы не регулируются.** На всех четырёх разъёмах вентиляторов этой платы всегда 12 В, а обороты
   меняются только по проводу ШИМ четырёхпиновых вентиляторов. Трёхпиновый вентилятор на любом разъёме крутится на полных
   оборотах — так устроена плата, прошивка этого не изменит. Разъёмы AUX1_FAN и AUX2_FAN работают от одного выхода (FAN3)
@@ -76,7 +72,7 @@
 ## Исправлено в T2.1
 
 - **Вентиляторы после сна не регулировались.** В T2.0 после пробуждения они оставались на средних оборотах (около
-  56–60 %) до перезагрузки. В T2.1 через несколько секунд после пробуждения обороты снова идут по температуре; в режиме
+  56–60 %) до перезагрузки. В T2.1 через несколько секунд после пробуждения прошивка снова ведёт их по температуре, до обычных оборотов они опускаются плавно — от полуминуты до пары минут, пока процессор остывает (подтверждено на Ryzen 3 2200G, Ryzen 5 PRO 4650G и Ryzen 5 5600G); в режиме
   «Микросхемой» прошивка проверяет, что микросхема опрашивает температуру, иначе ставит полные обороты.
 - **Корпусные вентиляторы на T2.0 громче, чем на T1.2.** В T2.1 в простое «Тихо» — 20 %, «Авто» — 25 % (было 30 и 35 %);
   «Тихо» вентилятора процессора тоже тише.
@@ -137,10 +133,6 @@
 
 ## Open
 
-- **The fan after sleep on the Ryzen 4000G and 5000G: please check.** In T2.1 the fans follow the temperature again after
-  waking; on the author's Ryzen 3 2200G this has been tested. If you have a Ryzen 4000G or 5000G, listen after a wake:
-  within a few seconds the fan should come back to its usual idle speed. Tell us how it went, especially if it
-  stays loud until a restart: in the bot or under Issues, with your processor's model.
 - **3-pin fans are not controlled.** All four fan headers of this board always carry 12 V, and the speed changes only
   through the PWM wire of 4-pin fans. A 3-pin fan on any header runs at full speed: that is how the board is built, and no
   firmware can change it. The AUX1_FAN and AUX2_FAN headers run on one output (FAN3) and can only be set together
@@ -214,7 +206,7 @@
 ## Fixed in T2.1
 
 - **The fans were not controlled after sleep.** In T2.0, after waking up, they stayed at a medium speed (about 56–60 %)
-  until a restart. In T2.1 the speed follows the temperature again a few seconds after waking; in "By the chip" mode the
+  until a restart. In T2.1 the firmware drives them by the temperature again a few seconds after waking; they come down to their usual speed smoothly, within half a minute to a couple of minutes as the processor cools (confirmed on the Ryzen 3 2200G, Ryzen 5 PRO 4650G and Ryzen 5 5600G); in "By the chip" mode the
   firmware checks that the chip polls the temperature and sets full speed otherwise.
 - **The case fans were louder on T2.0 than on T1.2.** In T2.1 at idle Quiet is 20 % and Auto 25 % (it was 30 and 35 %);
   the processor fan's Quiet is quieter too.
