@@ -6,7 +6,7 @@
 |---|---|---|
 | **Отчёт из BIOS (F11)** | в меню BIOS, даже если Windows не загружается | что было при включении: где остановился запуск, почему плата перезагрузилась, ошибки процессора и памяти |
 | **Скрипт для Windows или Linux** | в работающей системе | что было в системе: синие экраны, внезапные выключения, устройства без драйверов, ошибки дисков и видео |
-| **[Тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4)** | загрузка с флешки, без Windows | сама гоняет тесты (нагрузка, память, сон, серия перезагрузок) и собирает всё сразу; для редких и непонятных сбоев |
+| **[Тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5)** | загрузка с флешки, без Windows | сама гоняет тесты (нагрузка, память, сон, серия перезагрузок) и собирает всё сразу; для редких и непонятных сбоев |
 
 **Что прикладывать:**
 1. **Всегда** — отчёт из BIOS (F11).
@@ -47,14 +47,14 @@ duty» (настоящая скважность каждого выхода и �
 
 ## Тест-флешка
 
-[Скачать тест-флешку](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4) — маленький Linux, который
+[Скачать тест-флешку](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) — маленький Linux, который
 загружается с флешки, сам собирает сведения и гоняет проверки, а результаты пишет на ту же флешку. Windows и ваши диски
 он не трогает, в прошивку и настройки BIOS ничего не пишет.
 
 1. **Записать флешку** — любой из трёх способов:
-   - **Ventoy:** положите файл `Z3NOVO-TestStick-1.4.iso` на флешку Ventoy (имя должно начинаться с `Z3NOVO`);
-   - **архив:** распакуйте `Z3NOVO-TestStick-1.4.zip` на флешку FAT32, чтобы в её корне были папки `EFI` и `Z3NOVO`;
-   - **образ:** запишите `Z3NOVO-TestStick-1.4.img` программой Rufus или balenaEtcher (сотрёт флешку).
+   - **Ventoy:** положите файл `Z3NOVO-TestStick-1.5.iso` на флешку Ventoy (имя должно начинаться с `Z3NOVO`);
+   - **архив:** распакуйте `Z3NOVO-TestStick-1.5.zip` на флешку FAT32, чтобы в её корне были папки `EFI` и `Z3NOVO`;
+   - **образ:** запишите `Z3NOVO-TestStick-1.5.img` программой Rufus или balenaEtcher (сотрёт флешку).
 2. **Загрузиться с неё:** F9 (прошивка Z3NOVO) или F12 (родной BIOS Lenovo) и выберите флешку.
 3. **Выбрать проверку** (клавиши 1–5) или ничего не нажимать: через 10 секунд начнётся «Только сведения» — 1–2 минуты,
    без нагрузки и без сна; потом компьютер выключится сам. Клавиатура для этого не нужна.
@@ -210,7 +210,7 @@ There are three tools, and each catches something different:
 |---|---|---|
 | **BIOS report (F11)** | in the BIOS menu, even if Windows does not start | what happened at power-on: where a start stopped, why the board restarted, processor and memory errors |
 | **Windows or Linux script** | in the running system | what happened in the system: blue screens, unexpected shutdowns, devices without drivers, disk and video errors |
-| **[Test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4)** | boots from a USB stick, no Windows needed | runs tests by itself (load, memory, sleep, a series of restarts) and collects everything at once; for rare and puzzling failures |
+| **[Test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5)** | boots from a USB stick, no Windows needed | runs tests by itself (load, memory, sleep, a series of restarts) and collects everything at once; for rare and puzzling failures |
 
 **What to attach:**
 1. **Always** — the BIOS report (F11).
@@ -253,14 +253,14 @@ do → untick "Turn on fast startup"): otherwise "Shut down" is not a full shutd
 
 ## Test stick
 
-[Download the test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4): a small Linux that starts
+[Download the test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5): a small Linux that starts
 from a USB stick, collects the details and runs checks by itself, and writes the results to the same stick. It does not
 touch Windows or your disks and writes nothing to the firmware or the BIOS settings.
 
 1. **Make the stick**, any of three ways:
-   - **Ventoy:** copy `Z3NOVO-TestStick-1.4.iso` onto the Ventoy stick (the name must start with `Z3NOVO`);
-   - **archive:** unpack `Z3NOVO-TestStick-1.4.zip` onto a FAT32 stick so that `EFI` and `Z3NOVO` sit at its top level;
-   - **image:** write `Z3NOVO-TestStick-1.4.img` with Rufus or balenaEtcher (this erases the stick).
+   - **Ventoy:** copy `Z3NOVO-TestStick-1.5.iso` onto the Ventoy stick (the name must start with `Z3NOVO`);
+   - **archive:** unpack `Z3NOVO-TestStick-1.5.zip` onto a FAT32 stick so that `EFI` and `Z3NOVO` sit at its top level;
+   - **image:** write `Z3NOVO-TestStick-1.5.img` with Rufus or balenaEtcher (this erases the stick).
 2. **Start from it:** F9 (Z3NOVO firmware) or F12 (stock Lenovo BIOS) and pick the stick.
 3. **Pick a check** (keys 1–5) or press nothing: after 10 seconds "Information only" starts — 1–2 minutes, no load and
    no sleep; then the computer switches itself off. No keyboard needed for that.

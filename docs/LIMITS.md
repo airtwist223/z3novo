@@ -181,7 +181,7 @@ Optimizer — что именно, зависит от процессора (т�
 ## 9. Безопасная загрузка (Secure Boot)
 
 - С включённой безопасной загрузкой запускаются только подписанные загрузчики: Windows и большинство Linux (через shim)
-  — да; неподписанные флешки — нет. Среди них и наша [тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4):
+  — да; неподписанные флешки — нет. Среди них и наша [тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5):
   чтобы загрузиться с неё, сначала выключите безопасную загрузку.
 - Без записанных ключей безопасная загрузка не действует, даже если переключатель стоит на «Вкл».
 - Включение и выключение безопасной загрузки меняют измерения TPM: если в Windows включён BitLocker или «Шифрование
@@ -390,7 +390,7 @@ With a clock of your own the boost is off: the cores run at that clock.
 ## 9. Secure Boot
 
 - With Secure Boot on, only signed boot loaders start: Windows and most Linux distributions (through shim) do; unsigned
-  USB sticks do not. Our [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.4) is one of them: to
+  USB sticks do not. Our [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) is one of them: to
   boot from it, turn Secure Boot off first.
 - Without keys installed, Secure Boot does nothing, even with its switch on.
 - Turning Secure Boot on or off changes the TPM measurements: if BitLocker or "Device encryption" is on in Windows, save
