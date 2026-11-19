@@ -14,6 +14,7 @@ body:
         1. **Всегда** — отчёт из BIOS: флешка в компьютер, **Del** → **F11**, файл `\Z3NOVO\REPORT-….TXT` с флешки (с версии T1).
         2. **Если Windows или Linux запускаются** — отчёт скрипта: [для Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) или [для Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [как запустить](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **Если сбой редкий и непонятный** — папку с результатами [тест-флешки](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) — как записать и запустить, в [инструкции](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md#тест-флешка).
+        4. **Если просят проверить сон, перезагрузки или стабильность в вашей системе** — архив [проверки в системе (z3test)](https://github.com/airtwist223/z3novo/blob/main/tools/test/README.md): `Z3TEST-win-….zip` с рабочего стола или `Z3TEST-linux-….zip` из домашней папки.
 
         <details><summary><b>Как запустить скрипт</b> (нажмите, чтобы развернуть)</summary>
 
@@ -38,6 +39,7 @@ body:
         1. **Always** — the BIOS report: USB stick in, **Del** → **F11**, the `\Z3NOVO\REPORT-….TXT` file from the stick (from version T1).
         2. **If Windows or Linux starts** — the script report: [for Windows (z3report.ps1)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.ps1) or [for Linux (z3report.sh)](https://github.com/airtwist223/z3novo/blob/main/tools/report/z3report.sh), [how to run them](https://github.com/airtwist223/z3novo/blob/main/tools/report/README.md).
         3. **If the failure is rare and puzzling** — the [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5)'s results folder — how to make and run it, in [the guide](https://github.com/airtwist223/z3novo/blob/main/docs/DIAGNOSTICS.md#test-stick).
+        4. **If you are asked to test sleep, restarts or stability in your own system** — the [in-system test (z3test)](https://github.com/airtwist223/z3novo/blob/main/tools/test/README.md) archive: `Z3TEST-win-….zip` from the Desktop or `Z3TEST-linux-….zip` from the home folder.
 
         <details><summary><b>How to run the script</b> (click to expand)</summary>
 
@@ -154,6 +156,7 @@ body:
         - label: Отчёт из BIOS (F11) / BIOS report (F11)
         - label: Отчёт скрипта из Windows или Linux / Windows or Linux script report
         - label: Результаты тест-флешки / Test stick results
+        - label: Архив проверки в системе (z3test) / In-system test (z3test) archive
   - type: textarea
     id: reports
     attributes:

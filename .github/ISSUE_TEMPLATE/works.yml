@@ -98,6 +98,7 @@ body:
         - label: Сброс на заводские F6 / F6 reset to factory
         - label: Флешка exFAT / exFAT USB stick
         - label: Тест-флешка без ошибок / Test stick with no errors
+        - label: Проверка в системе (z3test) без замечаний / In-system test (z3test) with no notes
   - type: input
     id: time
     attributes:
