@@ -1,17 +1,20 @@
 # Отчёт о проблеме / Problem reports
 
-Есть три инструмента, каждый ловит своё:
+Есть четыре инструмента, каждый ловит своё:
 
 | Инструмент | Где запускается | Что показывает |
 |---|---|---|
 | **Отчёт из BIOS (F11)** | в меню BIOS, даже если Windows не загружается | что было при включении: где остановился запуск, почему плата перезагрузилась, ошибки процессора и памяти |
 | **Скрипт для Windows или Linux** | в работающей системе | что было в системе: синие экраны, внезапные выключения, устройства без драйверов, ошибки дисков и видео |
+| **[Проверка в своей системе (z3test)](#проверка-в-своей-системе-z3test)** | в работающей Windows или Linux, сама, 30–90 минут | сон и пробуждение, нагрузка, простой и серия перезагрузок именно в вашей системе, ошибки за это время; итог простыми словами |
 | **[Тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5)** | загрузка с флешки, без Windows | сама гоняет тесты (нагрузка, память, сон, серия перезагрузок) и собирает всё сразу; для редких и непонятных сбоев |
 
 **Что прикладывать:**
 1. **Всегда** — отчёт из BIOS (F11).
 2. **Если Windows или Linux запускаются** — ещё отчёт скрипта.
 3. **Если сбой редкий и непонятный** — папку с результатами [тест-флешки](#тест-флешка).
+4. **Если просят проверить сон, перезагрузки или стабильность в вашей Windows или Linux** — архив
+   [z3test](#проверка-в-своей-системе-z3test).
 
 ## Отчёт из BIOS (F11)
 
@@ -44,6 +47,17 @@ duty» (настоящая скважность каждого выхода и �
 собирает журналы сбоев за 30 дней в один файл. Как запустить — [tools/report/README.md](../tools/report/README.md).
 На время тестов прошивки выключите в Windows быстрый запуск (Панель управления → Электропитание → Действия кнопок питания
 → снять «Включить быстрый запуск»): иначе «Завершение работы» — не полное выключение, и часть проверок будет неверной.
+
+## Проверка в своей системе (z3test)
+
+Скрипт [`z3test.ps1`](../tools/test/z3test.ps1) для Windows или [`z3test.sh`](../tools/test/z3test.sh) для Linux сам
+проверяет прошивку в вашей системе, пока вы заняты своим: снимок системы (весь отчёт скрипта выше и ещё память, линки
+PCIe, NVMe, Secure Boot, TPM, активация Windows), сон с пробуждением по таймеру, нагрузка на процессор и память с проверкой,
+простой, серия перезагрузок и журналы ошибок за это время. Короткий режим — около 30–35 минут, долгий — около полутора часов.
+В конце — один архив: в Windows — на рабочем столе, в Linux — в домашней папке; главный файл в нём — `SUMMARY.txt` с итогом
+простыми словами. Если компьютер не проснулся или завис и его включили заново, скрипт сам это распознает и напишет в итоге.
+Перед запуском сохраните работу и выключите быстрый запуск Windows (см. выше); с BitLocker с PIN перезагрузки будут пропущены.
+Как запустить, как остановить и что скрипт временно меняет — [tools/test/README.md](../tools/test/README.md).
 
 ## Тест-флешка
 
@@ -204,18 +218,21 @@ duty» (настоящая скважность каждого выхода и �
 
 # Problem reports
 
-There are three tools, and each catches something different:
+There are four tools, and each catches something different:
 
 | Tool | Where it runs | What it shows |
 |---|---|---|
 | **BIOS report (F11)** | in the BIOS menu, even if Windows does not start | what happened at power-on: where a start stopped, why the board restarted, processor and memory errors |
 | **Windows or Linux script** | in the running system | what happened in the system: blue screens, unexpected shutdowns, devices without drivers, disk and video errors |
+| **[In-system test (z3test)](#in-system-test-z3test)** | in the running Windows or Linux, by itself, 30–90 minutes | sleep and waking, load, idling and a series of restarts in your own system, the errors meanwhile; the result in plain words |
 | **[Test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5)** | boots from a USB stick, no Windows needed | runs tests by itself (load, memory, sleep, a series of restarts) and collects everything at once; for rare and puzzling failures |
 
 **What to attach:**
 1. **Always** — the BIOS report (F11).
 2. **If Windows or Linux starts** — the script report as well.
 3. **If the failure is rare and puzzling** — the [test stick](#test-stick)'s results folder.
+4. **If you are asked to test sleep, restarts or stability in your own Windows or Linux** — the
+   [z3test](#in-system-test-z3test) archive.
 
 ## BIOS report (F11)
 
@@ -250,6 +267,18 @@ The [`z3report.ps1`](../tools/report/z3report.ps1) script for Windows or [`z3rep
 Linux gathers 30 days of crash logs into one file. How to run them: [tools/report/README.md](../tools/report/README.md).
 While testing the firmware, turn off Windows Fast Startup (Control Panel → Power Options → Choose what the power buttons
 do → untick "Turn on fast startup"): otherwise "Shut down" is not a full shutdown and some checks will be wrong.
+
+## In-system test (z3test)
+
+The [`z3test.ps1`](../tools/test/z3test.ps1) script for Windows or [`z3test.sh`](../tools/test/z3test.sh) for Linux tests
+the firmware in your own system by itself while you do other things: a snapshot (the whole report of the script above plus
+memory, PCIe links, NVMe, Secure Boot, TPM, Windows activation), sleep woken by a timer, load on the CPU and memory with
+checks, idling, a series of restarts, and the error logs of that time. The short run takes about 30–35 minutes, the long one
+about an hour and a half. At the end there is one archive: on the Desktop in Windows, in the home folder in Linux; its main
+file, `SUMMARY.txt`, has the result in plain words. If the computer did not wake up, or hung and was powered on again, the
+script finds out by itself and says so in the result. Save your work and turn Windows Fast Startup off first (see above);
+with BitLocker and a PIN the restarts are skipped. How to run it, how to stop it and what it changes for a while:
+[tools/test/README.md](../tools/test/README.md).
 
 ## Test stick
 

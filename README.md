@@ -93,7 +93,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | **Журнал запусков** | при каждом включении записывает, до какого шага дошёл запуск и почему плата перезагрузилась | по нему нашли причины зависаний; на нём держится отчёт F11 |
 | **Доработанные модули AMD, Biostar и Realtek** | драйвер сетевой карты Realtek (зависал при сохранении настроек DASH), видеовыходы (DisplayPort вместо HDMI), лишние записи в микросхему Super I/O в модулях Biostar | сохраняются настройки DASH, правильно работают разъёмы DisplayPort |
 | **Адаптация под плату M715s** | из родной прошивки Lenovo перенесено устройство именно этой платы: какие разъёмы и слоты куда подключены, видеовыходы, питание процессоров, настройка Super I/O | прошивка знает, как разведена M715s, а не плата-донор |
-| **Инструменты вне BIOS** | скрипты отчёта для Windows и Linux, расшифровщик отчётов, [тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) | сведения о сбоях у тестеров собираются за минуту |
+| **Инструменты вне BIOS** | скрипты отчёта и [проверки в системе](tools/test/README.md) для Windows и Linux, расшифровщик отчётов, [тест-флешка](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) | сведения о сбоях у тестеров собираются за минуту |
 
 ## Что работает, а что нет
 
@@ -245,7 +245,7 @@ was made from scratch:
 | **Boot log** | on every power-on, records how far the start got and why the board restarted | it found the causes of the hangs; the F11 report is built on it |
 | **Reworked AMD, Biostar and Realtek modules** | the Realtek network card driver (hung when saving DASH settings), the video outputs (DisplayPort instead of HDMI), stray writes to the Super I/O chip in Biostar's modules | DASH settings save, the DisplayPort sockets work as they should |
 | **Fitted to the M715s board** | the layout of this very board taken over from Lenovo's own firmware: which sockets and slots go where, the video outputs, processor power, the Super I/O setup | the firmware knows how the M715s is wired, not the donor board |
-| **Tools outside the BIOS** | report scripts for Windows and Linux, a report decoder, a [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) | testers collect failure details in a minute |
+| **Tools outside the BIOS** | report and [in-system test](tools/test/README.md) scripts for Windows and Linux, a report decoder, a [test stick](https://github.com/airtwist223/z3novo/releases/tag/TestStick-1.5) | testers collect failure details in a minute |
 
 ## What works and what does not
 
