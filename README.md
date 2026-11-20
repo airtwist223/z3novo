@@ -53,6 +53,10 @@ Z3NOVO — прошивка для Lenovo ThinkCentre M715s (корпус SFF, �
   Curve Optimizer на Ryzen 5000 — только вместе с защитой: если после разгона система 3 раза подряд не загрузится,
   прошивка сама вернёт заводские значения ([подробнее](docs/LIMITS.md#6-разгон-процессора)).
 - **Память:** ручная частота и XMP без лишней перезагрузки, задержки памяти, «Память для графики» — своё число в гигабайтах.
+- **Видеокарты и слот x16** (с T2.2): деление слота x16 для нескольких SSD M.2 — x8+x4+x4 на Ryzen 4000G и 5000G,
+  x4+x4+x4+x4 на Ryzen без встроенной графики; встроенная графика рядом с видеокартой («Две видеокарты сразу» — «Авто»
+  по умолчанию); видео UEFI по умолчанию, а для старых видеокарт прошивка сама включает CSM
+  ([подробнее](docs/LIMITS.md#11-слот-x16-две-видеокарты-и-csm)).
 - **Вентиляторы:** плавную кривую ведёт прошивка, и после сна тоже; у каждого из трёх выходов — FAN1 (разъём CPU_FAN),
   FAN2 (SYS_FAN) и FAN3 (AUX1_FAN и AUX2_FAN вместе) — режимы «Тихо», «Авто», «Макс», своя кривая и свой «Минимум»;
   защита от остановки вентилятора (с T2.1).
@@ -86,7 +90,7 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 | Что | Что делает | Что это дало |
 |---|---|---|
 | **Меню Z3NOVO** | графическое меню настроек внутри BIOS: мышь, RU/EN, поиск, простой режим, редактор кривой вентилятора, настройки сети DASH, отчёт F11, обновление с флешки | удобная настройка вместо старого текстового меню |
-| **Z3Entry** (драйвер) | по клавишам Del и F9 открывает наше меню и наше меню загрузки | новое меню без лишних шагов |
+| **Z3Entry** (драйвер) | по клавишам Del и F9 открывает наше меню и наше меню загрузки; с T2.2 прячет надписи родного BIOS, пишет под логотипом о сбросе CMOS и неудачном разгоне памяти, включает CSM, если старая видеокарта без него не даёт изображения | новое меню без лишних шагов, чистая заставка |
 | **Z3Chip** (драйвер) | работает с микросхемой датчиков и питания (Super I/O) с проверкой каждого обращения, выключает её собственный опрос температуры, включает компьютер после пропадания света по логике Lenovo, включает и выключает DASH | ушли зависания из-за этой микросхемы, работает автовключение |
 | **Z3Fan** (драйвер) | дважды в секунду берёт температуру прямо из процессора и плавно ведёт вентиляторы (с T2.0 — все три выхода, с T2.1 — и после сна, с защитой от остановки) — и в BIOS, и в Windows, и в Linux | тихие вентиляторы без рывков |
 | **Ранние исправления запуска** | ограничение времени на обмен по шине LPC, проверенная начальная настройка Super I/O, страховочный таймер на опасных участках, паузы без лишних обращений к шине | исчезли зависания при включении и перезагрузке: 100 перезагрузок из 100 |
@@ -203,6 +207,10 @@ support, in Russian and English.
   3 times in a row after an overclock, the firmware puts the factory values back by itself
   ([details](docs/LIMITS.md#6-processor-overclocking)).
 - **Memory:** manual speed and XMP without an extra restart, memory timings, the graphics memory as a number of gigabytes.
+- **Graphics cards and the x16 slot** (from T2.2): x16 slot bifurcation for several M.2 SSDs — x8+x4+x4 on the Ryzen
+  4000G and 5000G, x4+x4+x4+x4 on Ryzen without built-in graphics; the built-in graphics next to a card ("Both graphics at
+  once" Auto by default); UEFI video by default, and for old cards the firmware turns CSM on by itself
+  ([details](docs/LIMITS.md#11-the-x16-slot-two-graphics-and-csm)).
 - **Fans:** the firmware drives a smooth curve, after sleep too; each of the three outputs — FAN1 (the CPU_FAN header),
   FAN2 (SYS_FAN) and FAN3 (AUX1_FAN and AUX2_FAN together) — has the Quiet, Auto and Max presets, a custom curve and a
   minimum of its own; a guard against a stalled fan (from T2.1).
@@ -238,7 +246,7 @@ was made from scratch:
 | What | What it does | What it gave |
 |---|---|---|
 | **Z3NOVO menu** | a graphical settings menu inside the BIOS: mouse, RU/EN, search, a simple view, a fan curve editor, DASH network settings, the F11 report, updates from a USB stick | easy setup instead of the old text menu |
-| **Z3Entry** (driver) | opens our menu and our boot menu on the Del and F9 keys | the new menu with no extra steps |
+| **Z3Entry** (driver) | opens our menu and our boot menu on the Del and F9 keys; from T2.2 hides the stock BIOS messages, tells under the logo about a CMOS reset and a failed memory overclock, turns CSM on when an old card gives no picture without it | the new menu with no extra steps, a clean boot screen |
 | **Z3Chip** (driver) | talks to the board's sensor and power chip (Super I/O), checking every access; turns off the chip's own temperature polling; powers the computer on after a power cut the way Lenovo does; turns DASH on and off | the hangs caused by this chip are gone, power-on after a power cut works |
 | **Z3Fan** (driver) | twice a second reads the temperature straight from the processor and drives the fans smoothly (from T2.0 all three outputs, from T2.1 after sleep too, with a stall guard) — in the BIOS, in Windows and in Linux | quiet fans without jumps |
 | **Early start fixes** | a time limit on the LPC bus, a checked Super I/O setup, a safety timer over risky steps, pauses that do not hammer the bus | the hangs at power-on and restart are gone: 100 restarts out of 100 |

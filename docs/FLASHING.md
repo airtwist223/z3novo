@@ -39,7 +39,7 @@
    не отправляйте.**
 4. **Запишите Z3NOVO** (flashrom сам проверит запись):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.1.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.2.bin
    ```
 5. **Снимите прищепку, вставьте шнур, включите.** Первый раз компьютер может сам перезагрузиться 2–4 раза, пока
    прошивка готовит настройки и проверяет память. Это нормально, подождите.
@@ -68,6 +68,22 @@
 `\Z3NOVO` на флешке 24 и больше файлов `.BIN`: при каждом обновлении меню кладёт туда копию `Z3BACKUP-….BIN`, и они
 копятся. Перенесите старые копии из `\Z3NOVO` на компьютер (последнюю лучше сохранить у себя) или возьмите флешку без
 них. С T2.1 меню видит до 64 файлов, файлы из корня флешки показывает первыми, а копии — в конце.
+
+### С T2.1 на T2.2
+
+Обновляйтесь из меню, как описано выше. Что важно знать:
+
+- **Настройки сохраняются, новые заводские значения при обновлении не ставятся.** У Z3NOVO теперь свои заводские
+  значения: «Поддержка старых систем» (CSM) — выкл, «Две видеокарты сразу» — «Авто». Встанут они только после F6
+  «Сбросить всё», сброса CMOS или замены процессора.
+- **Windows или Linux в режиме MBR** после F6 или сброса CMOS загружаются только с CSM: включите его (Классика →
+  Загрузка → «Поддержка старых систем»). Если загрузиться не с чего, наше меню само откроет окно «Нет диска для загрузки»
+  с той же подсказкой.
+- **Видеокарта и встроенная графика.** Если в слоте видеокарта, а «Две видеокарты сразу» у вас выключены, после
+  обновления прошивка AMD выключит встроенную графику, как и задумано, и компьютер один раз перезапустится сам. Нужны обе
+  — поставьте «Авто».
+- **С T2.0, T1.2 или T1.1r** — тем же путём; перед этим уберите с флешки старые копии `Z3BACKUP` (см. абзац выше). Всё,
+  что сказано в следующих разделах про переход на T2.1 и T2.0, относится и сюда.
 
 ### С T2.0 на T2.1
 
@@ -100,12 +116,17 @@
 
 ## Возврат на прежнюю версию Z3NOVO
 
-Тем же путём из меню: «Обновить прошивку» → файл прежней версии (например, `Z3NOVO_T2.0.bin` или `Z3NOVO_T1.2.bin` со
-страниц выпусков [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0) и
+Тем же путём из меню: «Обновить прошивку» → файл прежней версии (например, `Z3NOVO_T2.1.bin` или `Z3NOVO_T1.2.bin` со
+страниц выпусков [T2.1](https://github.com/airtwist223/z3novo/releases/tag/T2.1) и
 [T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2)). Перед возвратом с T2.x на T1.x:
 
 - верните разгон процессора и графики на «Авто» и выключите «Свои пределы мощности (PBO)»: в T1.x нет ни защиты от
   неудачного разгона, ни ограничения процессоров на 95–105 Вт.
+
+С T2.2 на T2.1 или T2.0: сначала верните «Деление слота x16» на «x16». Прежние версии читают ту же настройку, а пункта
+в их меню нет — вернуть его там можно только через F6. С процессором со встроенной графикой и видеокартой перед возвратом
+поставьте «Две видеокарты сразу» = «Авто». На Ryzen без встроенной графики с видеокартой на T2.1 и раньше заставка снова
+будет застывать перед запуском системы.
 
 С T2.1 на T2.0: свои кривые FAN2 и FAN3 и «Минимум» T2.0 не знает и не видит. Если своя кривая вентилятора процессора
 где-то опускается ниже 20 %, T2.0 сочтёт её неверной и возьмёт обычный режим — громче, а не тише. Коды устройств
@@ -166,7 +187,7 @@ The chip: Winbond W25Q128FW, 16 MB. It is marked U53 on the board. flashrom call
    to anyone.**
 4. **Write Z3NOVO** (flashrom checks the write itself):
    ```
-   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.1.bin
+   flashrom -p ch341a_spi -c W25Q128.W -w Z3NOVO_T2.2.bin
    ```
 5. **Remove the clip, plug the cord back in, power on.** The first time, the computer may restart by itself 2–4 times
    while the firmware prepares its settings and checks the memory. That is normal; wait.
@@ -198,6 +219,22 @@ new file when the stick's `\Z3NOVO` folder holds 24 or more `.BIN` files: at eve
 `Z3BACKUP-….BIN` copy there, and they pile up. Move the old copies from `\Z3NOVO` to a computer (better keep the latest
 one) or use a stick without them. From T2.1 the menu sees up to 64 files, shows the files in the stick's root first and
 the copies last.
+
+### From T2.1 to T2.2
+
+Update from the menu as described above. What to know:
+
+- **Settings are kept, and the new factory values are not put in by the update.** Z3NOVO now has factory values of its
+  own: "Legacy system support" (CSM) off, "Both graphics at once" Auto. They come in only after F6 "Reset all", clearing
+  CMOS or changing the processor.
+- **Windows or Linux in MBR mode** start only with CSM after F6 or clearing CMOS: turn it on (Classic → Boot → "Legacy
+  system support"). If there is nothing to start from, our menu opens the "No disk to start from" window with the same
+  hint by itself.
+- **A graphics card and built-in graphics.** With a card in the slot and "Both graphics at once" off, after the update
+  AMD's firmware turns the built-in graphics off, as intended, and the computer restarts once by itself. If you want both,
+  set Auto.
+- **From T2.0, T1.2 or T1.1r**, the same way; clear the old `Z3BACKUP` copies off the stick first (see the paragraph
+  above). Everything the next sections say about going to T2.1 and T2.0 applies here too.
 
 ### From T2.0 to T2.1
 
@@ -231,12 +268,17 @@ the author's board, updating from T1.2 to an early T2 test build.
 
 ## Going back to an earlier Z3NOVO version
 
-The same way, from the menu: Update firmware → the earlier version's file (for example `Z3NOVO_T2.0.bin` or
-`Z3NOVO_T1.2.bin` from the [T2.0](https://github.com/airtwist223/z3novo/releases/tag/T2.0) and
+The same way, from the menu: Update firmware → the earlier version's file (for example `Z3NOVO_T2.1.bin` or
+`Z3NOVO_T1.2.bin` from the [T2.1](https://github.com/airtwist223/z3novo/releases/tag/T2.1) and
 [T1.2](https://github.com/airtwist223/z3novo/releases/tag/T1.2) release pages). Before going back from T2.x to T1.x:
 
 - set the processor and graphics overclock back to Auto and turn "Own power limits (PBO)" off: T1.x has neither the
   protection against a failed overclock nor the limit on 95–105 W processors.
+
+From T2.2 to T2.1 or T2.0: first set "x16 slot bifurcation" back to x16. The earlier versions read the same setting but
+have no item for it in their menu: there only F6 sets it back. With a processor with built-in graphics and a card, set
+"Both graphics at once" to Auto before going back. On a Ryzen without built-in graphics with a card, T2.1 and earlier
+freeze the splash before the system starts again.
 
 From T2.1 to T2.0: T2.0 does not know the FAN2 and FAN3 custom curves or the minimums and does not see them. If your
 custom processor fan curve goes under 20 % anywhere, T2.0 takes it for a broken one and uses the usual mode: louder, not

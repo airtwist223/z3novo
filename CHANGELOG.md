@@ -3,6 +3,215 @@
 Новые версии сверху. T1, T2 и так далее — тестовые версии; 1.0 будет первой стабильной.
 Newest first. T1, T2 and so on are test versions; 1.0 will be the first stable one.
 
+## T2.2 — видеокарты, деление слота и чистая загрузка
+
+В T2.2 вошло всё из T2.1. Главное — видеокарты: на Ryzen без встроенной графики видеокарта больше не пропадает перед
+запуском системы, а процессоры со встроенной графикой с видеокартой больше не остаются без изображения и не
+перезапускаются по кругу. Слот x16 можно делить для нескольких SSD. Надписи родного BIOS при включении больше не
+появляются.
+
+### Что нового
+
+**Видеокарты**
+- **На Ryzen без встроенной графики видеокарта больше не пропадает перед запуском системы.** На Ryzen 1000, 2000, 3000 и
+  5000 без буквы G (например, 1500X, 2600, 3100, 3300X, 5600X) прошивка прямо перед запуском загрузчика выключала
+  тактовый сигнал слота x16: так велела таблица, оставшаяся от процессоров A-серии. Видеокарта пропадала с шины, и на
+  мониторе застывала заставка BIOS, хотя Windows или Linux продолжали загружаться. Теперь сигнал слота включён всё время,
+  как в родном BIOS Lenovo. Ошибка была во всех прежних версиях.
+- **Встроенная графика рядом с видеокартой больше не ломает запуск** (Ryzen 2000G–5000G, Athlon). Если в слоте есть
+  видеокарта, а «Две видеокарты сразу» выключены, прошивка AMD сама выключает встроенную графику: ставит отметку в CMOS,
+  забирает у неё память и один раз перезапускает компьютер. T2.0 и T2.1 стирали эту отметку при каждом запуске, и части
+  прошивки переставали понимать друг друга: изображения не было, Athlon перезапускался по кругу, а Ryzen 5 5600G
+  переставал запускаться вовсе, даже без видеокарты, пока прошивку не записывали заново. Теперь отметку никто не стирает.
+- **«Две видеокарты сразу» по умолчанию — «Авто»** (было «Выкл»). С видеокартой встроенная графика остаётся включённой: к
+  ней можно подключить ещё один монитор. Цена — её память (512 МБ на Ryzen 4000G и 5000G, 2 ГБ на 2000G и 3000G при 8 ГБ
+  памяти и больше) и немного энергии. «Выкл» выключает встроенную графику и возвращает её память системе. Без видеокарты
+  и на процессорах без встроенной графики настройка ни на что не влияет.
+- **Окно сохранения не даст молча остаться без изображения.** Если в слоте есть видеокарта, а выбраны «Основная
+  видеокарта: Встроенная», «Встроенная графика: Авто» и «Две видеокарты сразу: Выкл», после перезапуска изображения не
+  будет: встроенную графику выключит AMD. Теперь окно сохранения об этом предупреждает и просит подтвердить «Я понимаю
+  риск».
+- **«Поддержка старых систем» (CSM) по умолчанию выключена, со страховкой.** Изображение при включении выводят
+  UEFI-драйверы видеокарт. Так работают Resizable BAR, память для встроенной графики больше 2 ГБ и встроенная графика
+  рядом с видеокартой в Windows (со старым режимом видео у неё бывает код 43). Если CSM выключен, а видеокарта без
+  UEFI-драйвера не даёт изображения (так бывает у старых карт), прошивка сама включает CSM со старым режимом видео и один
+  раз перезапускает компьютер; меню потом объясняет, что случилось. Если в «Какие системы загружать» стояло «Только
+  старые», там станет «UEFI и старые», чтобы Windows и Linux в режиме UEFI продолжали загружаться. Второго перезапуска
+  подряд не бывает.
+- **Где действуют новые заводские значения** («Две видеокарты сразу» — «Авто», CSM — выкл): F6 «Сбросить всё»,
+  сброс CMOS и замена процессора (со следующего запуска) и первая установка программатором. **Обновление из меню ваши
+  настройки не меняет.**
+- **Windows или Linux, установленные в старом режиме (MBR), загружаются только с CSM.** Окна «Нет диска для загрузки» и
+  «Система не загрузилась» теперь говорят об этом и где CSM включить: Классика → Загрузка → «Поддержка старых систем».
+
+**Деление слота x16**
+- **Новый пункт «Деление слота x16»** (Классика → Устройства, под «Скорость слотов PCIe»). Слот для видеокарты делится на
+  независимые части — для переходника с несколькими SSD M.2 или видеокарты вместе с SSD:
+  - Ryzen 4000G и 5000G — x8+x4+x4 (видеокарта x8 и два SSD по x4);
+  - Ryzen 1000, 2000, 3000 и 5000 без встроенной графики — x4+x4+x4+x4;
+  - Ryzen 2000G, 3000G и Athlon слот не делят: в слот выведено 8 линий (у Athlon — 4).
+
+  x8+x8 нет ни для одного процессора. Чего ваш процессор не умеет, в меню закрыто и объяснено. Действует со следующего
+  запуска, при сохранении меню просит подтвердить «Я понимаю риск». Вернуть — «x16», F6 или батарейка.
+- **Части слота не теряют тактовый сигнал.** На Ryzen 4000G и 5000G при x8+x4+x4 первая часть (x8) может быть пустой:
+  SSD в частях x4 остаются видны в системе. При x4+x4+x4+x4 сигнал включён всегда (см. первый пункт).
+
+**Загрузка и заставка**
+- **Надписи родного BIOS больше не появляются.** «No option to boot to», «System Configuration Changed» и «Memory OC
+  fail» не мелькают перед нашими окнами, а 10 секунд ожидания после сброса CMOS и неудачной частоты памяти больше нет.
+  Код в правом нижнем углу заставки больше не рисуется. Из прошивки убраны прошивальщик BIO-Flasher и экраны Biostar при
+  включении. Наше меню загрузки (F9) сообщает прошивке о запуске системы так же, как родное меню, — этот сигнал теперь
+  получают все её части.
+- **Жёлтая строка под логотипом** вместо этих надписей: «Настройки BIOS сброшены на заводские (сброс CMOS)» или «Разгон
+  памяти не прошёл — память работает на заводской частоте. Подробности — Del». Без пауз: загрузка идёт дальше, перед
+  запуском системы строка стирается. Язык — как у меню.
+- **Дата BIOS в Windows и Linux** (сведения о системе, `dmidecode`) — дата этой версии; раньше там всегда было
+  08/31/2025.
+
+**Меню**
+- **F6 «Сбросить всё» — обычные несохранённые изменения.** После F6 заводские значения видны в строках и в счётчике
+  изменений: их можно поправить и записать одним F10, а отменить — как любые правки (вернуть строку или «Выйти без
+  сохранения»). Раньше после сброса сразу открывалось окно сохранения, и до записи ничего нельзя было поменять. Первое
+  окно F6 говорит, какие заводские значения у Z3NOVO свои.
+- **Окно сохранения без служебных строк.** После F6 и после возврата резервной копии в списке только пункты, которые есть
+  в меню; скрытые настройки прошивки — одной фразой с их числом. F6 больше не трогает служебные поля, которые прошивка
+  пишет сама при каждом запуске. Строки «Отметка о сбросе CMOS» больше нет: отметку снимает любое сохранение.
+- **Окно «Обновить прошивку» на экране 800×600:** строки списка файлов больше не налезают друг на друга, длинный текст
+  проверки прокручивается и не уходит под кнопки.
+- Значения AMD «True/False» на вкладке «Другое» показываются как «Да/Нет»; длинные значения в окне сохранения не
+  обрезаются; в «Резервных копиях» нет английских имён служебных данных.
+- **Отчёт F11:** в строке «мощность ЦП» вместо «нет» печатались непонятные символы — исправлено.
+
+**Вентиляторы**
+- **Нет ложных «пинков» вентиляторам AUX.** Защита от остановки (с T2.1) принимала сбойное чтение оборотов за остановку
+  вентилятора. У трёхпинового вентилятора на AUX2 такие чтения бывают пачками, поэтому выход FAN3 время от времени
+  получал 2 секунды полных оборотов и каждый раз поднимался на 10 % до перезагрузки: за несколько часов вентиляторы
+  AUX сами доходили с 25 % до полных оборотов. Теперь сбойное чтение просто пропускается; остановкой считается только настоящее
+  «нет оборотов».
+- **Кривые вентилятора процессора.** «Тихо» — 25 % до 40 °C и 30 % при 55 °C (было 25 % при 30 °C и 33 % при 50 °C):
+  тише на Ryzen 4000G и 5000G, которые в простое теплее. «Авто» в простое тише: 36 % при 30 °C и 40 % при 50 °C (было 40
+  и 48 %). С 60 °C обе кривые — как раньше.
+
+**Как обновиться**
+- С T2.1 — из меню с флешки, как обычно ([по шагам](docs/FLASHING.md#с-t21-на-t22)). С T2.0, T1.2 и T1.1r — тем же
+  путём, но сначала уберите с флешки старые копии `Z3BACKUP` (как для T2.1). Настройки сохраняются.
+
+### Ограничения
+- Деление слота — только то, что описано выше; x8+x8 нет ни для одного процессора
+  ([подробнее](docs/LIMITS.md#11-слот-x16-две-видеокарты-и-csm)).
+- Встроенная графика рядом с видеокартой работает в Windows только с видео UEFI (CSM выключен, как по умолчанию в T2.2);
+  со старым режимом видео у неё бывает код 43.
+- После смены деления слота или процессора Windows может показать у встроенной графики код 43 — переустановите драйверы
+  чипсета и видео AMD.
+- Старая видеокарта без UEFI-драйвера вместе с процессором со встроенной графикой: страховка CSM не срабатывает
+  (UEFI-драйвер есть у встроенной), и до загрузки системы на мониторе видеокарты пусто. Включите CSM сами или подключите
+  монитор к плате.
+- [Известные проблемы](docs/KNOWN_ISSUES.md).
+
+## T2.2 — graphics cards, slot bifurcation and a clean start
+
+T2.2 has everything from T2.1. The main thing is graphics cards: on Ryzen processors without built-in graphics the card no
+longer drops off before the system starts, and processors with built-in graphics no longer end up with no picture or
+restart in a loop when a card is in. The x16 slot can be split for several SSDs. The stock BIOS messages no longer show
+at power-on.
+
+### What is new
+
+**Graphics cards**
+- **On Ryzen processors without built-in graphics the card no longer drops off before the system starts.** On the Ryzen
+  1000, 2000, 3000 and 5000 without the G (for example the 1500X, 2600, 3100, 3300X, 5600X) the firmware switched the x16
+  slot's reference clock off right before starting the boot loader: a table left over from the A-series processors said
+  so. The card dropped off the bus, and the BIOS splash froze on the monitor although Windows or Linux went on loading.
+  Now the slot's clock stays on all the time, as in Lenovo's own BIOS. The bug was in every earlier version.
+- **Built-in graphics next to a card no longer break the start** (Ryzen 2000G–5000G, Athlon). With a card in the slot and
+  "Both graphics at once" off, AMD's firmware turns the built-in graphics off by itself: it puts a mark in CMOS, takes
+  their memory away and restarts the computer once. T2.0 and T2.1 erased that mark at every start, and the parts of the
+  firmware stopped agreeing with each other: there was no picture, an Athlon restarted in a loop, and a Ryzen 5 5600G
+  stopped starting at all, even without the card, until the firmware was written again. Now nothing erases the mark.
+- **"Both graphics at once" is Auto by default** (it was Off). With a card the built-in graphics stay on: you can plug
+  one more monitor into them. The price is their memory (512 MB on the Ryzen 4000G and 5000G, 2 GB on the 2000G and 3000G
+  with 8 GB of memory or more) and a little power. Off turns the built-in graphics off and gives their memory back to the
+  system. Without a card, and on processors without built-in graphics, the setting changes nothing.
+- **The save window will not let you end up with no picture without a word.** With a card in the slot and "Primary
+  graphics: Integrated", "Integrated graphics: Auto" and "Both graphics at once: Off" chosen, there will be no picture
+  after the restart: AMD turns the built-in graphics off. Now the save window warns about it and asks you to confirm
+  "I understand the risk".
+- **Legacy system support (CSM) is off by default, with a safety net.** The picture at power-on comes from the cards'
+  UEFI drivers. That is what Resizable BAR, more than 2 GB of memory for the built-in graphics and the built-in graphics
+  next to a card in Windows need (with the legacy video mode they may show code 43). If CSM is off and a card without a
+  UEFI driver gives no picture (old cards do that), the firmware turns CSM on by itself with the legacy video mode and
+  restarts the computer once; the menu then explains what happened. If "Which systems to boot" was Legacy only, it
+  becomes UEFI and legacy, so Windows and Linux in UEFI mode keep starting. There is never a second restart in a row.
+- **Where the new factory values apply** ("Both graphics at once" Auto, CSM off): F6 "Reset all", clearing CMOS and
+  changing the processor (from the next start), and the first install with a programmer. **Updating from the menu does
+  not change your settings.**
+- **Windows or Linux installed the old way (MBR) start only with CSM.** The "No disk to start from" and "The system did not
+  start" windows now say so and where to turn CSM on: Classic → Boot → "Legacy system support".
+
+**x16 slot bifurcation**
+- **The new item "x16 slot bifurcation"** (Classic → Devices, under "PCIe slot speed"). The graphics slot is split into
+  independent parts, for an adapter with several M.2 SSDs or a graphics card together with SSDs:
+  - the Ryzen 4000G and 5000G: x8+x4+x4 (the card x8 and two SSDs x4 each);
+  - the Ryzen 1000, 2000, 3000 and 5000 without built-in graphics: x4+x4+x4+x4;
+  - the Ryzen 2000G, 3000G and Athlon do not split the slot: it has 8 lanes on them (4 on the Athlon).
+
+  No processor has x8+x8. What your processor cannot do is locked in the menu with the reason. It applies from the next
+  start, and saving asks you to confirm "I understand the risk". To undo: x16, F6 or the battery.
+- **The parts of the slot keep their reference clock.** On the Ryzen 4000G and 5000G at x8+x4+x4 the first part (x8)
+  may be empty: the SSDs in the x4 parts stay visible in the system. At x4+x4+x4+x4 the clock is always on (see the first
+  item).
+
+**Boot and boot screen**
+- **The stock BIOS messages no longer show.** "No option to boot to", "System Configuration Changed" and "Memory OC fail"
+  no longer flash up before our windows, and the 10-second wait after clearing CMOS or a failed memory speed is gone. The
+  code in the bottom right corner of the boot screen is no longer drawn. The BIO-Flasher and Biostar's power-on screens
+  are taken out of the firmware. Our boot menu (F9) tells the firmware a system is starting the same way the stock menu
+  does, so every part of the firmware that waits for that signal now gets it.
+- **A yellow line under the logo** instead of those messages: "BIOS settings reset to factory defaults (CMOS reset)" or
+  "Memory overclock failed — memory runs at the stock speed. Details — Del". No pauses: the start goes on, and the line is
+  wiped before the system starts. In the menu's language.
+- **The BIOS date in Windows and Linux** (System Information, `dmidecode`) is this version's date; before, it was always
+  08/31/2025.
+
+**Menu**
+- **F6 "Reset all" gives ordinary unsaved changes.** After F6 the factory values show in the rows and in the change
+  counter: you can adjust them and write everything with one F10, or undo them like any changes (put a row back or "Leave
+  without saving"). Before, the save window opened right after the reset, and nothing could be changed before writing. The
+  first F6 window says which factory values are Z3NOVO's own.
+- **No service rows in the save window.** After F6 and after restoring a backup, the list holds only items that are in the
+  menu; the firmware's hidden settings go into one sentence with their number. F6 no longer touches the service fields the
+  firmware writes itself at every start. The "CMOS reset mark" row is gone: any save clears the mark.
+- **The "Update firmware" window on an 800×600 screen:** the lines of the file list no longer overlap, and a long check
+  text scrolls instead of going under the buttons.
+- AMD's "True/False" values on the Other tab show as Yes/No; long values in the save window are no longer cut; "Backups"
+  shows no English names of service data.
+- **The F11 report:** the «мощность ЦП» (CPU power) line printed garbled characters instead of «нет» (none) — fixed.
+
+**Fans**
+- **No false "kicks" to the AUX fans.** The stall guard (from T2.1) took a failed speed reading for a stopped fan. A 3-pin
+  fan on AUX2 gives such readings in bursts, so the FAN3 output now and then got 2 seconds at full speed and was raised by
+  10 % until a restart each time: over a few hours the AUX fans crept up from 25 % to full speed by themselves. Now a failed
+  reading is just skipped; only a real "no speed" counts as a stop.
+- **The processor fan's curves.** Quiet is 25 % up to 40 °C and 30 % at 55 °C (it was 25 % at 30 °C and 33 % at 50 °C):
+  quieter on the Ryzen 4000G and 5000G, which run warmer at idle. Auto is quieter at idle: 36 % at 30 °C and 40 % at
+  50 °C (it was 40 and 48 %). From 60 °C both curves are as before.
+
+**How to update**
+- From T2.1: from the menu with a USB stick, as usual ([step by step](docs/FLASHING.md#from-t21-to-t22)). From T2.0, T1.2
+  and T1.1r: the same way, but first clear the old `Z3BACKUP` copies off the stick (as for T2.1). Settings are kept.
+
+### Limits
+- Slot bifurcation is only what is described above; no processor has x8+x8
+  ([details](docs/LIMITS.md#11-the-x16-slot-two-graphics-and-csm)).
+- The built-in graphics next to a card work in Windows only with UEFI video (CSM off, the T2.2 default); with the legacy
+  video mode they may show code 43.
+- After changing the slot bifurcation or the processor, Windows may show code 43 on the built-in graphics: reinstall the
+  AMD chipset and graphics drivers.
+- An old card without a UEFI driver together with a processor with built-in graphics: the CSM safety net does not fire
+  (the built-in graphics have a UEFI driver), and the card's monitor stays blank until the system starts. Turn CSM on
+  yourself or plug the monitor into the board.
+- [Known issues](docs/KNOWN_ISSUES.md#known-issues).
+
 ## T2.1 — вентиляторы после сна и тише
 
 В T2.1 вошло всё из T2.0. Главное — вентиляторы: после сна они снова регулируются сами, в простое тише, и у каждого

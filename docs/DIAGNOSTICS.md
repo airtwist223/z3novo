@@ -183,6 +183,16 @@ PCIe, NVMe, Secure Boot, TPM, активация Windows), сон с пробу�
 пропустила наше меню проверкой подписи. Пришлите отчёт (или фото) и верните копию микросхемы программатором. Сброс
 настроек батарейкой, скорее всего, тоже выключит безопасную загрузку, но этот путь мы ещё не проверяли.
 
+## Изображение застыло на заставке
+
+Если на мониторе осталась заставка Z3NOVO, а Windows или Linux, судя по лампе диска, звукам или сети, загружаются:
+- **Ryzen без встроенной графики и версия T2.1 или раньше** — видеокарта пропадала перед запуском системы. Обновитесь на
+  T2.2: меню (Del) с видеокартой при этом работает.
+- **Старая видеокарта без UEFI-драйвера** — с T2.2 прошивка сама включает для неё CSM. Если у процессора есть встроенная
+  графика, страховка не срабатывает: включите CSM сами (Классика → Загрузка → «Поддержка старых систем»).
+
+Не подошло — после зависания включите компьютер, нажмите Del и F11 и пришлите отчёт.
+
 ## Если компьютер не включается совсем
 
 Отчёт тогда снять нечем, поэтому важно то, что вы видите. Запишите:
@@ -192,9 +202,10 @@ PCIe, NVMe, Secure Boot, TPM, активация Windows), сон с пробу�
 Потом попробуйте по порядку:
 1. Выключите, выньте шнур из розетки на минуту, включите снова.
 2. Если меняли память или её частоту — подождите пару минут: после трёх неудачных попыток плата сама запускается на
-   безопасных настройках.
+   безопасных настройках. С T2.2 под логотипом тогда будет жёлтая строка «Разгон памяти не прошёл».
 3. Сбросьте настройки BIOS: выключите, выньте шнур и круглую батарейку на плате на 5 минут. Все настройки вернутся
-   к заводским, а записи Windows и Linux в меню загрузки пропадут.
+   к заводским, а записи Windows и Linux в меню загрузки пропадут. С T2.2 после этого CSM выключен: Windows или Linux,
+   установленные в режиме MBR, загрузятся, только когда вы включите его снова.
 
    ⚠️ Если после шага 1 или 2 компьютер включился — **сначала сделайте отчёт F11**, и только потом, если нужно,
    сбрасывайте настройки. Сброс батарейкой стирает журнал запусков, по которому видна причина.
@@ -403,6 +414,17 @@ firmware's signature check did not let our menu through. Send a report (or a pho
 programmer. Resetting the settings with the battery will most likely turn Secure Boot off too, but we have not tested
 that way yet.
 
+## The picture froze on the boot screen
+
+If the Z3NOVO boot screen stays on the monitor while Windows or Linux, judging by the disk light, sounds or the network,
+go on loading:
+- **A Ryzen without built-in graphics and T2.1 or earlier**: the card dropped off before the system started. Update to
+  T2.2: the menu (Del) works with the card meanwhile.
+- **An old card without a UEFI driver**: from T2.2 the firmware turns CSM on for it by itself. If the processor has
+  built-in graphics, the safety net does not fire: turn CSM on yourself (Classic → Boot → "Legacy system support").
+
+None of these? After the hang, start the computer, press Del and F11, and send the report.
+
 ## If the computer does not start at all
 
 Then there is no way to make a report, so what you see matters. Write down:
@@ -412,9 +434,10 @@ Then there is no way to make a report, so what you see matters. Write down:
 Then try, in this order:
 1. Shut it down, unplug the cord for a minute, power it on again.
 2. If you changed the memory or its speed, wait a couple of minutes: after three failed attempts the board starts by
-   itself on safe settings.
+   itself on safe settings. From T2.2 a yellow line under the logo then says the memory overclock failed.
 3. Reset the BIOS settings: shut down, unplug the cord and take out the round battery on the board for 5 minutes. All
-   settings go back to factory values, and the Windows and Linux entries in the boot menu disappear.
+   settings go back to factory values, and the Windows and Linux entries in the boot menu disappear. From T2.2 CSM is off
+   after that: Windows or Linux installed in MBR mode start only once you turn it on again.
 
    ⚠️ If the computer starts after step 1 or 2, **make the F11 report first**, and only then reset the settings if needed.
    The battery reset erases the boot log that shows the cause.

@@ -49,16 +49,29 @@
   возвращения питания сам включается на несколько секунд, готовит DASH и выключается — так и задумано. Если в эти секунды нажать кнопку питания,
   компьютер может выключиться сам — нажмите кнопку ещё раз. При «Автовключение: Как было» компьютер, который был выключен,
   когда пропало питание, по DASH не включится, пока его хоть раз не включат кнопкой или по сети (Wake-on-LAN).
-- **Перед нашим окном может мелькнуть текст родного BIOS** — «No option to boot to», «System Configuration Changed» или
-  «Memory OC fail». Так бывает в редких случаях: нет ни одного пункта загрузки, после сброса CMOS или после неудачной
-  частоты памяти. Это на доли секунды; дальше открывается наше окно.
 - **Батарейка стирает больше, чем кажется.** Если вынуть батарейку (или заменить процессор), прошивка сбрасывает все
-  настройки BIOS, а записи Windows и Linux в меню загрузки пропадают. Зависший компьютер выключайте кнопкой (держать 5
-  секунд) или вынимайте шнур на 30 секунд; батарейку — только если компьютер совсем не включается
+  настройки BIOS, а записи Windows и Linux в меню загрузки пропадают. С T2.2 со следующего запуска встают заводские
+  значения Z3NOVO: CSM выключен, «Две видеокарты сразу» — «Авто»; Windows или Linux, установленные в режиме MBR, тогда
+  не загрузятся, пока не включите CSM (Классика → Загрузка → «Поддержка старых систем»). Зависший компьютер выключайте
+  кнопкой (держать 5 секунд) или вынимайте шнур на 30 секунд; батарейку — только если компьютер совсем не включается
   ([что делать](DIAGNOSTICS.md#если-компьютер-не-включается-совсем)).
+- **Код 43 у встроенной графики рядом с видеокартой.** После смены деления слота x16 или процессора Windows может
+  показать у встроенной графики AMD жёлтый значок (код 43): устройства получили новые номера. Переустановите драйверы
+  чипсета и видео AMD. Встроенная графика рядом с видеокартой работает только с видео UEFI (CSM выключен, как по
+  умолчанию в T2.2); со старым режимом видео у неё бывает код 43.
+- **Старая видеокарта без UEFI-драйвера и процессор со встроенной графикой.** Если CSM выключен, изображение при
+  включении выводит встроенная графика, а на мониторе видеокарты до загрузки Windows пусто: страховка CSM не
+  срабатывает, потому что UEFI-драйвер у встроенной графики есть. Включите CSM (Классика → Загрузка → «Поддержка старых
+  систем») или подключите монитор к разъёму на плате.
+- **`shutdown /r /fw` в первый раз — ошибка 203.** Команда Windows «перезагрузиться в настройки BIOS» в первый раз может
+  закончиться ошибкой 203. Компьютер всё равно откроет наше меню при следующей перезагрузке, а дальше команда работает
+  сразу. Исправление — в следующей версии.
+- **«Какие системы загружать» однажды само сменилось на «Только старые»** (одно сообщение): после сохранения «Только
+  UEFI» и перезагрузки пункт показал «Только старые», со второго раза значение сохранилось. Ни прошивка, ни меню этот
+  пункт сами не меняют, причина пока не найдена. Если у вас так — сразу сделайте отчёт F11 и пришлите его.
 - **PCIe 4.0 на Ryzen 3000 и 5000 без графики не проверен.** Если накопитель или видеокарта PCIe 4.0 работают со сбоями,
   поставьте Классика → Устройства → «Скорость слотов PCIe» → Gen 3 и напишите нам.
-- **Автор проверяет каждую версию только на своей плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G.** Что тестеры проверили
+- **Автор проверяет Z3NOVO только на своей плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G.** Что тестеры проверили
   на других процессорах — в [списке проверенного](TESTED.md). Другие ревизии платы ещё никто не проверял.
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
   Nanya) не стартует на ней ни с одной прошивкой, включая родную Lenovo: писки и перезагрузка по кругу. Не помогает и
@@ -68,6 +81,27 @@
   «видно в карте памяти» (с T2.0 — прямо: «планка стоит, но не используется»).
 - **«3G» памяти для графики при включённом CSM** опасен — см. [ограничения платы](LIMITS.md), раздел 4. Наше меню на
   Ryzen 2000G/3000G не предлагает 3, 6 и 12 ГБ.
+
+## Исправлено в T2.2
+
+- **Ryzen без встроенной графики: видеокарта пропадала перед запуском системы** (Ryzen 1000, 2000, 3000 и 5000 без
+  буквы G; все версии до T2.1 включительно). На мониторе застывала заставка BIOS, хотя Windows или Linux загружались:
+  прошивка перед загрузчиком выключала тактовый сигнал слота x16. Лекарство — обновиться на T2.2; меню BIOS (Del) с
+  видеокартой при этом работает, обновиться можно из него.
+- **Процессоры со встроенной графикой с видеокартой** (Ryzen 2000G–5000G, Athlon; T2.0 и T2.1). При «Две видеокарты
+  сразу: Выкл» не было изображения, Athlon перезапускался по кругу, а Ryzen 4000G и 5000G могли перестать запускаться
+  вовсе, даже без видеокарты. Прошивка стирала отметку, которой AMD выключает встроенную графику. Лекарство — обновиться
+  на T2.2. Пока стоит T2.0 или T2.1, до установки видеокарты поставьте «Две видеокарты сразу» = «Авто». Если плата с
+  Ryzen 4000G или 5000G уже не запускается и без видеокарты, обновитесь на T2.2 с другим процессором, с которым она
+  запускается: при обновлении меню запишет блок настроек памяти процессора из файла. Другого процессора нет — запишите
+  T2.2 программатором ([как](FLASHING.md#первая-установка)).
+- **Вентиляторы AUX сами разгонялись** (T2.1). Защита от остановки принимала сбойное чтение оборотов (у трёхпинового
+  вентилятора на AUX2 их бывает много) за остановку: выход FAN3 время от времени получал 2 секунды полных оборотов и до
+  перезагрузки поднимался на 10 % — за несколько часов с 25 % до полных оборотов. Лекарство — обновиться на T2.2.
+- **Перед нашим окном мелькал текст родного BIOS** — «No option to boot to», «System Configuration Changed» или «Memory
+  OC fail», после сброса CMOS и неудачной частоты памяти ещё и с ожиданием 10 секунд. В T2.2 этих надписей нет; о сбросе
+  CMOS и неудачном разгоне памяти говорит жёлтая строка под логотипом.
+- **Windows и Linux показывали дату BIOS 08/31/2025.** В T2.2 — дата версии.
 
 ## Исправлено в T2.1
 
@@ -182,16 +216,29 @@
   those seconds, the computer may turn itself off: press the button again. With Auto power-on at As it was, a computer
   that was off when the power went cannot be turned on over DASH until it has been turned on once with the button or over
   the network (Wake-on-LAN).
-- **Text from the stock BIOS may flash up before our window**: "No option to boot to", "System Configuration Changed" or
-  "Memory OC fail". It happens in rare cases: no boot entry at all, after clearing CMOS or after a failed memory speed. It
-  lasts a fraction of a second; then our window opens.
 - **The battery clears more than it seems.** Taking the battery out (or changing the processor) makes the firmware reset
-  every BIOS setting, and the Windows and Linux entries in the boot menu disappear. Turn a frozen computer off with the
-  power button (hold it for 5 seconds) or unplug it for 30 seconds; take the battery out only if the computer does not
-  start at all ([what to do](DIAGNOSTICS.md#if-the-computer-does-not-start-at-all)).
+  every BIOS setting, and the Windows and Linux entries in the boot menu disappear. From T2.2 Z3NOVO's factory values
+  come in from the next start: CSM off, "Both graphics at once" Auto; Windows or Linux installed in MBR mode then do not
+  start until you turn CSM on (Classic → Boot → "Legacy system support"). Turn a frozen computer off with the power
+  button (hold it for 5 seconds) or unplug it for 30 seconds; take the battery out only if the computer does not start
+  at all ([what to do](DIAGNOSTICS.md#if-the-computer-does-not-start-at-all)).
+- **Code 43 on the built-in graphics next to a card.** After changing the x16 slot bifurcation or the processor, Windows
+  may show a yellow mark (code 43) on AMD's built-in graphics: the devices got new numbers. Reinstall the AMD chipset and
+  graphics drivers. The built-in graphics next to a card work only with UEFI video (CSM off, the T2.2 default); with the
+  legacy video mode they may show code 43.
+- **An old card without a UEFI driver and a processor with built-in graphics.** With CSM off the built-in graphics give
+  the picture at power-on, and the card's monitor stays blank until Windows starts: the CSM safety net does not fire,
+  because the built-in graphics have a UEFI driver. Turn CSM on (Classic → Boot → "Legacy system support") or plug the
+  monitor into a socket on the board.
+- **`shutdown /r /fw` fails with error 203 the first time.** The Windows command "restart into the BIOS settings" may
+  end with error 203 the first time. The computer still opens our menu at the next restart, and from then on the command
+  works at once. The fix is in the next version.
+- **"Which systems to boot" once changed to Legacy only by itself** (one report): after saving UEFI only and restarting,
+  the item showed Legacy only; the second time the value stayed. Neither the firmware nor the menu changes this item by
+  itself, and the cause has not been found yet. If it happens to you, make an F11 report right away and send it.
 - **PCIe 4.0 on the Ryzen 3000 and 5000 without graphics has not been tested.** If a PCIe 4.0 drive or graphics card
   misbehaves, set Classic → Devices → "PCIe slot speed" → Gen 3 and let us know.
-- **The author tests every version only on the author's own AM4P2MS revision 1.1 board with a Ryzen 3 2200G.** What
+- **The author tests Z3NOVO only on the author's own AM4P2MS revision 1.1 board with a Ryzen 3 2200G.** What
   testers have checked on other processors is in [the tested list](TESTED.md). Nobody has tried other board revisions
   yet.
 - **Not every memory stick starts on this board.** A single-rank 16 GB stick built on 16 Gbit chips (AMD R7 16G
@@ -202,6 +249,27 @@
   "visible in the memory map" line (from T2.0 directly: "stick present, not in use").
 - **"3G" of graphics memory with CSM on** is dangerous, see [board limits](LIMITS.md), section 4. On the Ryzen 2000G/3000G
   our menu does not offer 3, 6 or 12 GB.
+
+## Fixed in T2.2
+
+- **Ryzen without built-in graphics: the card dropped off before the system started** (the Ryzen 1000, 2000, 3000 and 5000
+  without the G; every version up to T2.1). The BIOS splash froze on the monitor although Windows or Linux went on
+  loading: the firmware switched the x16 slot's reference clock off before the boot loader. The cure is updating to T2.2;
+  the BIOS menu (Del) works with the card meanwhile, so you can update from it.
+- **Processors with built-in graphics and a card** (Ryzen 2000G–5000G, Athlon; T2.0 and T2.1). With "Both graphics at
+  once: Off" there was no picture, an Athlon restarted in a loop, and a Ryzen 4000G or 5000G could stop starting at all,
+  even without the card. The firmware erased the mark AMD turns the built-in graphics off with. The cure is updating to
+  T2.2. While T2.0 or T2.1 is on, set "Both graphics at once" to Auto before putting the card in. If a board with a Ryzen
+  4000G or 5000G no longer starts even without the card, update to T2.2 with another processor the board starts with:
+  the update writes the processor's memory settings block from the file. No other processor at hand — write T2.2 with a
+  programmer ([how](FLASHING.md#first-install)).
+- **The AUX fans sped up by themselves** (T2.1). The stall guard took a failed speed reading (a 3-pin fan on AUX2 gives
+  many) for a stop: the FAN3 output now and then got 2 seconds at full speed and was raised by 10 % until a restart —
+  from 25 % to full speed within a few hours. The cure is updating to T2.2.
+- **Stock BIOS text flashed up before our window**: "No option to boot to", "System Configuration Changed" or "Memory OC
+  fail", after clearing CMOS and a failed memory speed with a 10-second wait as well. T2.2 shows none of it; a yellow line
+  under the logo tells about a CMOS reset and a failed memory overclock.
+- **Windows and Linux showed the BIOS date 08/31/2025.** In T2.2 it is the version's date.
 
 ## Fixed in T2.1
 

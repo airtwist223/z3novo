@@ -1,7 +1,8 @@
 # Что плата может и чего не может / What the board can and cannot do
 
 Здесь то, что зависит от самой платы Lenovo M715s, а не от BIOS. Это не изменит ни Z3NOVO, ни любая другая прошивка.
-С раздела 6 — что из этого следует для разгона, датчиков, DASH, безопасной загрузки и вентиляторов.
+С раздела 6 — что из этого следует для разгона, датчиков, DASH, безопасной загрузки, вентиляторов, слота x16 и
+видеокарт.
 
 ## 1. Напряжение памяти всегда 1,2 В
 
@@ -91,7 +92,8 @@ Lenovo выпускала эту плату под процессоры с TDP �
 - С T2.0 размер задаётся своим числом («Память для графики»). На Ryzen 4000G и 5000G — от 1 ГБ до «вся память минус
   3 ГБ», шаг 1 ГБ (при 32 ГБ — до 29 ГБ); если системе остаётся меньше 8 ГБ, меню предупредит, что Windows будет
   тормозить. На Ryzen 2000G и 3000G — от 512 МБ до 16 ГБ, кроме 3, 6 и 12 ГБ.
-- **Больше 2 ГБ получится, только если выключен режим совместимости со старыми системами (CSM).**
+- **Больше 2 ГБ получится, только если выключен режим совместимости со старыми системами (CSM).** С T2.2 он выключен
+  по умолчанию ([раздел 11](#11-слот-x16-две-видеокарты-и-csm)).
 - На плате автора (Ryzen 3 2200G, 16 ГБ памяти) 11 ГБ работают: Linux видит 11 ГБ видеопамяти. Больше 16 ГБ и драйвер
   Windows с таким объёмом ещё никто не проверял.
 - **Не выбирайте «3G», если CSM включён:** компьютер может перестать запускаться, и сброс настроек это не исправит.
@@ -103,7 +105,8 @@ Lenovo выпускала эту плату под процессоры с TDP �
 
 - Процессоры A-серии (A6, A8, A10, A12, Athlon X4 9xx) с этой прошивкой не работают.
 - Процессорам без встроенной графики нужна видеокарта. Без неё изображения нет (8 коротких сигналов при включении —
-  обычное «нет изображения»); с T2.0 плата в этом случае хотя бы не перезагружается по кругу.
+  обычное «нет изображения»); с T2.0 плата в этом случае хотя бы не перезагружается по кругу. До T2.2 видеокарта на них
+  пропадала перед запуском системы и на мониторе застывала заставка — обновитесь на T2.2.
 
 ## 6. Разгон процессора
 
@@ -199,12 +202,52 @@ Optimizer — что именно, зависит от процессора (т�
   обороты у каждого разъёма видны свои.
 - Какой разъём на каком выходе и как их настроить — в [DIAGNOSTICS.md](DIAGNOSTICS.md#вентиляторы).
 
+## 11. Слот x16, две видеокарты и CSM
+
+**Деление слота x16** (с T2.2: Классика → Устройства → «Деление слота x16»). Слот для видеокарты можно разделить на
+независимые части — для пассивного переходника с несколькими SSD M.2 или с видеокартой и SSD вместе. Какие деления
+есть, решает процессор:
+
+| Процессоры | Деление |
+|---|---|
+| Ryzen 4000G и 5000G | x8+x4+x4: видеокарта (или SSD) x8 и два SSD по x4 |
+| Ryzen 1000, 2000, 3000 и 5000 без встроенной графики | x4+x4+x4+x4: видеокарта в первой части получает x4 |
+| Ryzen 2000G, 3000G, Athlon | нет: в слот выведено 8 линий (у Athlon — 4) |
+
+- Ryzen 4500 и 5500 сделаны на кристаллах 4000G и 5000G и делят слот так же, x8+x4+x4.
+- x8+x8 нет ни для одного процессора. Чего ваш процессор не умеет, в меню закрыто и объяснено.
+- Деление действует со следующего запуска. Вернуть — «x16», F6 или батарейка.
+- Тактовый сигнал слота с T2.2 включён всегда: части x4 работают, даже когда первая часть пуста.
+- После смены деления или процессора Windows может показать у встроенной графики код 43 — переустановите драйверы
+  чипсета и видео AMD.
+- Перед возвратом на T2.1 и раньше верните «x16»: прежние версии читают ту же настройку, а пункта в их меню нет.
+
+**Две видеокарты** (Классика → Устройства → «Две видеокарты сразу») — для процессоров со встроенной графикой (Ryzen
+2000G–5000G, Athlon), когда в слоте видеокарта:
+- **«Авто»** (заводское с T2.2): встроенная графика остаётся включённой, монитор можно подключить и к ней. Она держит
+  свою память — 512 МБ на Ryzen 4000G и 5000G, 2 ГБ на 2000G и 3000G при 8 ГБ памяти и больше — и берёт немного энергии.
+- **«Выкл»:** прошивка AMD выключает встроенную графику и возвращает её память системе; после смены компьютер один раз
+  перезапускается сам. Монитор — только к видеокарте, «Основная видеокарта» — «Видеокарта».
+- Встроенная графика рядом с видеокартой работает в Windows только с видео UEFI (CSM выключен): нужную драйверу таблицу
+  она получает только от своего UEFI-драйвера. Со старым режимом видео у неё бывает код 43.
+
+**CSM — «Поддержка старых систем»** (Классика → Загрузка). С T2.2 заводское — выкл.
+- Изображение при включении выводит UEFI-драйвер видеокарты. Это нужно для Resizable BAR, памяти встроенной графики
+  больше 2 ГБ и встроенной графики рядом с видеокартой.
+- **Страховка.** Если CSM выключен, ни одна видеокарта не дала изображения через UEFI, а видеокарта в слоте есть, прошивка
+  сама включает CSM со старым режимом видео и один раз перезапускает компьютер; меню потом объясняет, что случилось. Если
+  вы снова выключите CSM и сохраните, при следующем запуске страховка сработает снова. Две подряд — никогда.
+- Страховка не срабатывает, если у встроенной графики процессора UEFI-драйвер есть, а монитор подключён к старой
+  видеокарте без него: тогда включите CSM сами.
+- Windows и Linux, установленные в режиме MBR, без CSM не загружаются.
+
 ---
 
 # What the board can and cannot do
 
 These depend on the Lenovo M715s board itself, not on the BIOS. Neither Z3NOVO nor any other firmware can change them.
-From section 6 on: what follows from them for overclocking, sensors, DASH, Secure Boot and fans.
+From section 6 on: what follows from them for overclocking, sensors, DASH, Secure Boot, fans, the x16 slot and graphics
+cards.
 
 ## 1. The memory voltage is always 1.2 V
 
@@ -297,7 +340,8 @@ A processor with built-in graphics gives part of the main memory to it.
 - From T2.0 the size is a number of your own ("Memory for graphics"). On the Ryzen 4000G and 5000G it goes from 1 GB up
   to all the memory less 3 GB, in steps of 1 GB (up to 29 GB with 32 GB); if the system is left with less than 8 GB, the
   menu warns that Windows will be slow. On the Ryzen 2000G and 3000G it is 512 MB to 16 GB, except 3, 6 and 12 GB.
-- **More than 2 GB works only with the legacy compatibility mode (CSM) turned off.**
+- **More than 2 GB works only with the legacy compatibility mode (CSM) turned off.** From T2.2 it is off by default
+  ([section 11](#11-the-x16-slot-two-graphics-and-csm)).
 - On the author's board (Ryzen 3 2200G, 16 GB of memory) 11 GB works: Linux sees 11 GB of video memory. Nobody has tried
   more than 16 GB, or the Windows driver with that much, yet.
 - **Do not choose "3G" with CSM on:** the computer may stop starting, and resetting the settings will not fix it. Our menu
@@ -309,7 +353,8 @@ A processor with built-in graphics gives part of the main memory to it.
 
 - A-series processors (A6, A8, A10, A12, Athlon X4 9xx) do not work with this firmware.
 - Processors without built-in graphics need a graphics card. Without one there is no picture (eight short beeps at
-  power-on are the usual "no picture"); from T2.0 the board at least no longer restarts in a loop then.
+  power-on are the usual "no picture"); from T2.0 the board at least no longer restarts in a loop then. Before T2.2 the
+  card dropped off on them before the system started, and the splash froze on the monitor: update to T2.2.
 
 ## 6. Processor overclocking
 
@@ -406,3 +451,43 @@ With a clock of your own the boost is off: the cores run at that clock.
 - **Three outputs for four headers.** AUX1_FAN and AUX2_FAN run on one output (FAN3) and can only be controlled
   together; each header's speed is shown on its own.
 - Which header is on which output and how to set them: [DIAGNOSTICS.md](DIAGNOSTICS.md#fans).
+
+## 11. The x16 slot, two graphics and CSM
+
+**x16 slot bifurcation** (from T2.2: Classic → Devices → "x16 slot bifurcation"). The graphics slot can be split into
+independent parts: for a passive adapter with several M.2 SSDs, or with a graphics card and SSDs together. The processor
+decides which splits there are:
+
+| Processors | Split |
+|---|---|
+| Ryzen 4000G and 5000G | x8+x4+x4: the card (or an SSD) x8 and two SSDs x4 each |
+| Ryzen 1000, 2000, 3000 and 5000 without built-in graphics | x4+x4+x4+x4: a card in the first part gets x4 |
+| Ryzen 2000G, 3000G, Athlon | none: the slot has 8 lanes on them (4 on the Athlon) |
+
+- The Ryzen 4500 and 5500 are built on the 4000G and 5000G dies and split the slot the same way, x8+x4+x4.
+- No processor has x8+x8. What your processor cannot do is locked in the menu with the reason.
+- The split applies from the next start. To undo: x16, F6 or the battery.
+- From T2.2 the slot's reference clock is always on: the x4 parts work even when the first part is empty.
+- After changing the split or the processor, Windows may show code 43 on the built-in graphics: reinstall the AMD chipset
+  and graphics drivers.
+- Before going back to T2.1 or earlier, set x16 back: the earlier versions read the same setting but have no item for it.
+
+**Two graphics** (Classic → Devices → "Both graphics at once"), for processors with built-in graphics (Ryzen
+2000G–5000G, Athlon) with a card in the slot:
+- **Auto** (the factory value from T2.2): the built-in graphics stay on, and a monitor can go to them too. They keep their
+  memory — 512 MB on the Ryzen 4000G and 5000G, 2 GB on the 2000G and 3000G with 8 GB of memory or more — and take a
+  little power.
+- **Off:** AMD's firmware turns the built-in graphics off and gives their memory back to the system; after the change the
+  computer restarts once by itself. The monitor goes to the card only, and "Primary graphics" must be "Graphics card".
+- The built-in graphics next to a card work in Windows only with UEFI video (CSM off): they get the table their driver
+  needs only from their own UEFI driver. With the legacy video mode they may show code 43.
+
+**CSM, "Legacy system support"** (Classic → Boot). Off by factory from T2.2.
+- The picture at power-on comes from the card's UEFI driver. Resizable BAR, more than 2 GB of built-in graphics memory
+  and the built-in graphics next to a card need that.
+- **The safety net.** If CSM is off, no card gave a picture through UEFI, and there is a card in the slot, the firmware
+  turns CSM on by itself with the legacy video mode and restarts the computer once; the menu then explains what happened.
+  If you turn CSM off again and save, the safety net fires again at the next start. Never twice in a row.
+- The safety net does not fire when the processor's built-in graphics have a UEFI driver but the monitor is on an old
+  card without one: turn CSM on yourself then.
+- Windows and Linux installed in MBR mode do not start without CSM.
