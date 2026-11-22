@@ -9,11 +9,12 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | [Ryzen 5 2400G](#ryzen-5-2400g) | Raven Ridge | T1.1 | ✅ работает, 2 × 16 ГБ до 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g) | Picasso | T1.x | ✅ работает, память 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g) | Picasso | T1.1 | ✅ работает, сон и включения |
+| [Ryzen 3 3300X](#ryzen-3-3300x) | Matisse | T2.1, T2.2 | ✅ работает с видеокартой RX 6400 на T2.2; ⚠️ слот x16 только PCIe 3.0 |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge) | Renoir | T1.1r | ✅ работает, память до 3200 |
-| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g) | Renoir | T1.2 | ✅ Resizable BAR, встроенная графика вместе с видеокартой; ⚠️ сон на T1.2 (исправлено в T2.0, подтверждено на Ryzen 5 PRO 4650G) |
+| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g) | Renoir | T1.2, T2.2 | ✅ работает, сон на T2.2, четыре планки памяти, Resizable BAR, встроенная графика вместе с видеокартой; ⚠️ не работает PS/2 |
 | [Ryzen 5 4600G](#ryzen-5-4600g) | Renoir | T1.1 | ⚠️ тормоза после перезагрузки, исправлено в T1.1r (ждём подтверждения) |
-| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g) | Renoir | T1.2, T2.0 | ✅ работает, 2 × 16 ГБ на 3200, сон и гибернация на T2.0; ⚠️ с одним NVMe зависает Windows |
-| [Ryzen 5 5600G](#ryzen-5-5600g) | Cezanne | T1.1, T1.1r, T2.0 | ✅ работает, сон на T2.0; ⚠️ у одного тестера не работают USB чипсета |
+| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g) | Renoir | T1.2, T2.0, T2.1, T2.2 | ✅ работает, 2 × 16 ГБ на 3200, сон и гибернация на T2.0, на T2.2 видеокарта вместе со встроенной графикой; ⚠️ с одним NVMe зависает Windows; в Linux не включается amd_pstate |
+| [Ryzen 5 5600G](#ryzen-5-5600g) | Cezanne | T1.1, T1.1r, T2.0, T2.1 | ✅ работает, сон на T2.0; ⚠️ у одного тестера не работают USB чипсета |
 
 [English version](#what-has-been-tested)
 
@@ -71,6 +72,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | ✅ **Работает** | перезагрузки · сон · включение после пропадания света · USB · сеть · звук · DisplayPort · SATA · M.2 · частота памяти вручную; включения стабильнее, чем на прошивках Acer и AFOX |
 | ⚠️ **Особенности** | с ручной частотой памяти перед запуском Windows бывает одна лишняя перезагрузка (исправление — в T2) |
 
+## Ryzen 3 3300X
+
+> Matisse · 4 ядра / 8 потоков · без встроенной графики
+
+| | |
+|---|---|
+| **Версии** | T2.1, T2.2 |
+| **Системы** | Windows, Linux (тест-флешка) |
+| **Память** | 2 × 16 ГБ Kingston: HyperX Fury KHX3200C16D4/16GX и FURY Beast KF3200C16D4/16GX, работают на 2400 |
+| ✅ **Работает** | на T2.2 с видеокартой Radeon RX 6400: изображение с самого включения (UEFI) и в системе · 15 стартов подряд дошли до системы или меню, сбоев нет · звук: система видит кодек Realtek и звук HDMI видеокарты · USB |
+| ⚠️ **Особенности** | на T2.1 видеокарта пропадала перед запуском системы и застывала заставка (исправлено в T2.2, подтверждено) · слот x16 работает на PCIe 3.0 (8 ГТ/с), PCIe 4.0 нет: так AMD ограничивает процессоры на платах этого класса (чипсет B350) · XMP нельзя выбрать: меню разрешает его только для одинаковых планок, а у этих разные названия, хотя обе — Kingston DDR4-3200 CL16 на 16 ГБ |
+
 ## Ryzen 3 4300GE
 
 > Renoir · 4 ядра / 8 потоков · встроенная Vega 5
@@ -96,9 +109,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1.2 |
-| ✅ **Работает** | Resizable BAR с видеокартой Intel Arc A380 · встроенная графика вместе с видеокартой (Arc A380, RX 550) · тест-флешка: память и нагрузка без ошибок |
-| ⚠️ **Особенности** | на T1.2 компьютер не просыпается из сна (обе проверки сна тест-флешкой) — исправлено в T2.0 (на Ryzen 5 PRO 4650G подтверждено) · кружок загрузки Windows задевал логотип (в T2.0 новая заставка) |
+| **Версии** | T1.2, T2.2 |
+| **Системы** | Windows 11 |
+| **Память** | 4 × 4 ГБ разные: две Ramaxel и две Micron, все на 2400 |
+| ✅ **Работает** | Resizable BAR с видеокартой Intel Arc A380 · встроенная графика вместе с видеокартой (Arc A380, RX 550, на T2.2 — CMP 30HX) · тест-флешка: память и нагрузка без ошибок · на T2.2: включение и перезагрузки, сон (тест-флешка: 5 из 5), включение после пропадания света, USB, DisplayPort, VGA, SATA, M.2, обновление BIOS из меню, вентиляторы FAN2 и FAN3, сброс F6, долгая проверка тест-флешкой без ошибок |
+| ⚠️ **Особенности** | на T1.2 компьютер не просыпается из сна (обе проверки сна тест-флешкой) — исправлено в T2.0, на T2.2 подтверждено и на этом процессоре · кружок загрузки Windows задевал логотип (в T2.0 новая заставка) · на T2.2 не работает PS/2 (питание на разъём идёт) |
 
 ## Ryzen 5 4600G
 
@@ -116,11 +131,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Версии** | T1.2, T2.0, T2.1 |
+| **Версии** | T1.2, T2.0, T2.1, T2.2 |
 | **Системы** | Debian 13, Windows |
 | **Память** | 2 × 16 ГБ (Apacer + Crucial) на 3200 |
-| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация на T2.0 (в журнале запусков — удачные выходы из сна) · на T2.1: вентилятор после сна сам возвращается к кривой, корпусные вентиляторы (FAN2, AUX1, AUX2) идут по кривой, «Тихо» и «Минимум» у каждого вентилятора |
-| ⚠️ **Особенности** | с накопителем NVMe Western Digital в M.2 Windows зависает, с SATA — нет (в T2.0 такт слота M.2 как у Lenovo, ждём проверки) · вентиляторы на FAN2/FAN3 крутились на постоянных средних оборотах (в T2.0 их ведёт прошивка) · на T2.0 корпусные вентиляторы громче, чем на T1.2, а окно «Состояние» показывало скважность неверно (исправлено в T2.1, подтверждено) · точное управление частотой (CPPC) было выключено (в T2.0 включено по умолчанию) · иногда не сохранялись настройки (исправлено в T2.0) |
+| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация на T2.0 (в журнале запусков — удачные выходы из сна) · на T2.1: вентилятор после сна сам возвращается к кривой, корпусные вентиляторы (FAN2, AUX1, AUX2) идут по кривой, «Тихо» и «Минимум» у каждого вентилятора · на T2.2: видеокарта RX 560 и встроенная графика работают одновременно, сон 5 из 5, нагрузка на память и процессор без ошибок (тест-флешка) |
+| ⚠️ **Особенности** | с накопителем NVMe Western Digital в M.2 Windows зависает, с SATA — нет (в T2.0 такт слота M.2 как у Lenovo, ждём проверки) · вентиляторы на FAN2/FAN3 крутились на постоянных средних оборотах (в T2.0 их ведёт прошивка) · на T2.0 корпусные вентиляторы громче, чем на T1.2, а окно «Состояние» показывало скважность неверно (исправлено в T2.1, подтверждено) · точное управление частотой (CPPC) в Linux не включается: драйвер amd_pstate не запускается, частотой управляет acpi-cpufreq (так и на T2.2) · иногда не сохранялись настройки (исправлено в T2.0) |
 
 ## Ryzen 5 5600G
 
@@ -144,11 +159,12 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | [Ryzen 5 2400G](#ryzen-5-2400g-1) | Raven Ridge | T1.1 | ✅ works, 2 × 16 GB up to 3200 |
 | [Ryzen 3 3200G](#ryzen-3-3200g-1) | Picasso | T1.x | ✅ works, memory at 2933 |
 | [Ryzen 5 3400G](#ryzen-5-3400g-1) | Picasso | T1.1 | ✅ works, sleep and power-ons |
+| [Ryzen 3 3300X](#ryzen-3-3300x-1) | Matisse | T2.1, T2.2 | ✅ works with an RX 6400 card on T2.2; ⚠️ the x16 slot is PCIe 3.0 only |
 | [Ryzen 3 4300GE](#ryzen-3-4300ge-1) | Renoir | T1.1r | ✅ works, memory up to 3200 |
-| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g-1) | Renoir | T1.2 | ✅ Resizable BAR, built-in graphics together with a card; ⚠️ sleep on T1.2 (fixed in T2.0, confirmed on a Ryzen 5 PRO 4650G) |
+| [Ryzen 3 PRO 4350G](#ryzen-3-pro-4350g-1) | Renoir | T1.2, T2.2 | ✅ works, sleep on T2.2, four memory sticks, Resizable BAR, built-in graphics together with a card; ⚠️ PS/2 does not work |
 | [Ryzen 5 4600G](#ryzen-5-4600g-1) | Renoir | T1.1 | ⚠️ slowdowns after a restart, fixed in T1.1r (awaiting confirmation) |
-| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g-1) | Renoir | T1.2, T2.0 | ✅ works, 2 × 16 GB at 3200, sleep and hibernation on T2.0; ⚠️ Windows hangs with one NVMe drive |
-| [Ryzen 5 5600G](#ryzen-5-5600g-1) | Cezanne | T1.1, T1.1r, T2.0 | ✅ works, sleep on T2.0; ⚠️ one tester's chipset USB sockets do not work |
+| [Ryzen 5 PRO 4650G](#ryzen-5-pro-4650g-1) | Renoir | T1.2, T2.0, T2.1, T2.2 | ✅ works, 2 × 16 GB at 3200, sleep and hibernation on T2.0, on T2.2 a card together with the built-in graphics; ⚠️ Windows hangs with one NVMe drive; amd_pstate does not come on in Linux |
+| [Ryzen 5 5600G](#ryzen-5-5600g-1) | Cezanne | T1.1, T1.1r, T2.0, T2.1 | ✅ works, sleep on T2.0; ⚠️ one tester's chipset USB sockets do not work |
 
 ## Ryzen 3 2200G
 
@@ -204,6 +220,18 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 | ✅ **Works** | restarts · sleep · power-on after a power cut · USB · network · sound · DisplayPort · SATA · M.2 · manual memory speed; power-ons are steadier than with the Acer and AFOX firmware |
 | ⚠️ **Notes** | with a manual memory speed there is one extra restart before Windows starts (the fix comes in T2) |
 
+## Ryzen 3 3300X
+
+> Matisse · 4 cores / 8 threads · no built-in graphics
+
+| | |
+|---|---|
+| **Versions** | T2.1, T2.2 |
+| **Systems** | Windows, Linux (test stick) |
+| **Memory** | 2 × 16 GB Kingston: HyperX Fury KHX3200C16D4/16GX and FURY Beast KF3200C16D4/16GX, running at 2400 |
+| ✅ **Works** | on T2.2 with a Radeon RX 6400 card: a picture from power-on (UEFI) and in the system · 15 starts in a row reached the system or the menu, no faults · sound: the system sees the Realtek codec and the card's HDMI sound · USB |
+| ⚠️ **Notes** | on T2.1 the card dropped off before the system started and the splash froze (fixed in T2.2, confirmed) · the x16 slot runs at PCIe 3.0 (8 GT/s), not 4.0: that is how AMD limits processors on boards of this class (B350 chipset) · XMP cannot be chosen: the menu allows it only for identical sticks, and these two have different names, though both are Kingston DDR4-3200 CL16 16 GB |
+
 ## Ryzen 3 4300GE
 
 > Renoir · 4 cores / 8 threads · Vega 5 graphics
@@ -229,9 +257,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1.2 |
-| ✅ **Works** | Resizable BAR with an Intel Arc A380 card · built-in graphics together with a card (Arc A380, RX 550) · test stick: memory and load without errors |
-| ⚠️ **Notes** | on T1.2 the computer does not wake from sleep (both sleep checks of the test stick) — fixed in T2.0 (confirmed on a Ryzen 5 PRO 4650G) · the Windows loading circle touched the logo (T2.0 has a new boot screen) |
+| **Versions** | T1.2, T2.2 |
+| **Systems** | Windows 11 |
+| **Memory** | 4 × 4 GB of different kinds: two Ramaxel and two Micron, all at 2400 |
+| ✅ **Works** | Resizable BAR with an Intel Arc A380 card · built-in graphics together with a card (Arc A380, RX 550, on T2.2 a CMP 30HX) · test stick: memory and load without errors · on T2.2: power-on and restarts, sleep (test stick: 5 out of 5), power-on after a power cut, USB, DisplayPort, VGA, SATA, M.2, BIOS update from the menu, fans on FAN2 and FAN3, the F6 reset, the test stick's long test without errors |
+| ⚠️ **Notes** | on T1.2 the computer does not wake from sleep (both sleep checks of the test stick) — fixed in T2.0, on T2.2 confirmed on this processor too · the Windows loading circle touched the logo (T2.0 has a new boot screen) · on T2.2 PS/2 does not work (the socket does get power) |
 
 ## Ryzen 5 4600G
 
@@ -249,11 +279,11 @@ Updated as checks and testers' reports (the "Everything works" form in Issues) c
 
 | | |
 |---|---|
-| **Versions** | T1.2, T2.0, T2.1 |
+| **Versions** | T1.2, T2.0, T2.1, T2.2 |
 | **Systems** | Debian 13, Windows |
 | **Memory** | 2 × 16 GB (Apacer + Crucial) at 3200 |
-| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation on T2.0 (the boot log shows successful wakes from sleep) · on T2.1: the fan goes back to its curve by itself after sleep, the case fans (FAN2, AUX1, AUX2) follow their curve, Quiet and a minimum for each fan |
-| ⚠️ **Notes** | with a Western Digital NVMe drive in M.2 Windows hangs, with SATA it does not (in T2.0 the M.2 slot clock works as Lenovo's, awaiting a test) · the fans on FAN2/FAN3 ran at a fixed medium speed (in T2.0 the firmware drives them) · on T2.0 the case fans were louder than on T1.2, and the Health window showed the duty wrongly (fixed in T2.1, confirmed) · fine clock control (CPPC) was off (on by default in T2.0) · settings were sometimes not saved (fixed in T2.0) |
+| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation on T2.0 (the boot log shows successful wakes from sleep) · on T2.1: the fan goes back to its curve by itself after sleep, the case fans (FAN2, AUX1, AUX2) follow their curve, Quiet and a minimum for each fan · on T2.2: an RX 560 card and the built-in graphics work at the same time, sleep 5 out of 5, memory and processor load without errors (test stick) |
+| ⚠️ **Notes** | with a Western Digital NVMe drive in M.2 Windows hangs, with SATA it does not (in T2.0 the M.2 slot clock works as Lenovo's, awaiting a test) · the fans on FAN2/FAN3 ran at a fixed medium speed (in T2.0 the firmware drives them) · on T2.0 the case fans were louder than on T1.2, and the Health window showed the duty wrongly (fixed in T2.1, confirmed) · fine clock control (CPPC) does not come on in Linux: the amd_pstate driver does not start, and acpi-cpufreq drives the clocks (still so on T2.2) · settings were sometimes not saved (fixed in T2.0) |
 
 ## Ryzen 5 5600G
 

@@ -69,8 +69,8 @@
 - **«Какие системы загружать» однажды само сменилось на «Только старые»** (одно сообщение): после сохранения «Только
   UEFI» и перезагрузки пункт показал «Только старые», со второго раза значение сохранилось. Ни прошивка, ни меню этот
   пункт сами не меняют, причина пока не найдена. Если у вас так — сразу сделайте отчёт F11 и пришлите его.
-- **PCIe 4.0 на Ryzen 3000 и 5000 без графики не проверен.** Если накопитель или видеокарта PCIe 4.0 работают со сбоями,
-  поставьте Классика → Устройства → «Скорость слотов PCIe» → Gen 3 и напишите нам.
+- **PCIe 4.0 на Ryzen 3000 и 5000 без графики не включается:** слоты работают как PCIe 3.0 (8 ГТ/с), даже если видеокарта
+  или накопитель умеют 4.0. Так AMD ограничивает эти процессоры на платах этого класса; проверено на Ryzen 3 3300X.
 - **Автор проверяет Z3NOVO только на своей плате AM4P2MS ревизии 1.1 с Ryzen 3 2200G.** Что тестеры проверили
   на других процессорах — в [списке проверенного](TESTED.md). Другие ревизии платы ещё никто не проверял.
 - **Не всякая память заводится на этой плате.** Одноранговый модуль 16 ГБ на чипах 16 Гбит (AMD R7 16G DDR4-2666, чипы
@@ -236,8 +236,8 @@
 - **"Which systems to boot" once changed to Legacy only by itself** (one report): after saving UEFI only and restarting,
   the item showed Legacy only; the second time the value stayed. Neither the firmware nor the menu changes this item by
   itself, and the cause has not been found yet. If it happens to you, make an F11 report right away and send it.
-- **PCIe 4.0 on the Ryzen 3000 and 5000 without graphics has not been tested.** If a PCIe 4.0 drive or graphics card
-  misbehaves, set Classic → Devices → "PCIe slot speed" → Gen 3 and let us know.
+- **PCIe 4.0 does not turn on with the Ryzen 3000 and 5000 without graphics:** the slots run as PCIe 3.0 (8 GT/s) even
+  when the graphics card or drive supports 4.0. AMD limits these processors this way on boards of this class; checked on a Ryzen 3 3300X.
 - **The author tests Z3NOVO only on the author's own AM4P2MS revision 1.1 board with a Ryzen 3 2200G.** What
   testers have checked on other processors is in [the tested list](TESTED.md). Nobody has tried other board revisions
   yet.
