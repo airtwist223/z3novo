@@ -103,10 +103,10 @@ Z3NOVO — это не «слегка переделанный Biostar». От �
 
 | | ✅ Работает | ⚠️ Не проверено | ❌ Не работает |
 |---|---|---|---|
-| **Процессор** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 3300X, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; разгон ядер на 2200G; разгон графики на 2200G — работает, но возможны зависания под нагрузкой ([почему](docs/LIMITS.md#6-разгон-процессора)) | другие Ryzen 1000–5000; разгон на других процессорах; ограничение 95–105 Вт | A-серия (A6–A12) |
-| **Память** | 2 и 4 планки, разгон до DDR4-3200 | XMP | напряжение выше 1,2 В |
+| **Процессор** | Ryzen 5 1500X, Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 5 2600, Ryzen 3 3200G, Ryzen 5 3400G, Athlon PRO 300GE, Ryzen 3 3100, Ryzen 3 3300X, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 4600G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; разгон ядер на 2200G; разгон графики на 2200G — работает, но возможны зависания под нагрузкой ([почему](docs/LIMITS.md#6-разгон-процессора)) | другие Ryzen 1000–5000; разгон на других процессорах; ограничение 95–105 Вт | A-серия (A6–A12) |
+| **Память** | 2 и 4 планки, разгон до DDR4-3200 (на Ryzen 4000G и 5000G — до 3600) | XMP | напряжение выше 1,2 В |
 | **Монитор** | оба DisplayPort, VGA | кабель DP→DP, второй DisplayPort в режиме HDMI | |
-| **Видеокарта** | PCIe x16, Resizable BAR (Intel Arc A380), встроенная графика вместе с видеокартой | | PCIe 4.0: на Ryzen 3000 и 5000 без встроенной графики слот x16 работает как PCIe 3.0, так AMD ограничивает их на платах с B350 (проверено на 3300X) |
+| **Видеокарта** | PCIe x16, Resizable BAR (Intel Arc A380), встроенная графика вместе с видеокартой, деление слота x16 (x8+x4+x4 и x4+x4+x4+x4) | | PCIe 4.0: на Ryzen 3000 и 5000 без встроенной графики слот x16 работает как PCIe 3.0, так AMD ограничивает их на платах с B350 (проверено на 3300X) |
 | **USB** | все разъёмы | | |
 | **Диски** | SATA, M.2 NVMe | | |
 | **Сеть** | 1 Гбит/с, включение по сети | загрузка по сети (PXE) | |
@@ -259,10 +259,10 @@ was made from scratch:
 
 | | ✅ Works | ⚠️ Not tested | ❌ Does not work |
 |---|---|---|---|
-| **Processor** | Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 3 3300X, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; core overclocking on the 2200G; graphics overclocking on the 2200G works, but it may freeze under load ([why](docs/LIMITS.md#6-processor-overclocking)) | other Ryzen 1000–5000; overclocking on other processors; the 95–105 W limit | A-series (A6–A12) |
-| **Memory** | 2 and 4 sticks, overclocking up to DDR4-3200 | XMP | voltage above 1.2 V |
+| **Processor** | Ryzen 5 1500X, Ryzen 3 2200G, Ryzen 5 2400G, Ryzen 5 2600, Ryzen 3 3200G, Ryzen 5 3400G, Athlon PRO 300GE, Ryzen 3 3100, Ryzen 3 3300X, Ryzen 3 4300GE, Ryzen 3 PRO 4350G, Ryzen 5 4600G, Ryzen 5 PRO 4650G, Ryzen 5 5600G; core overclocking on the 2200G; graphics overclocking on the 2200G works, but it may freeze under load ([why](docs/LIMITS.md#6-processor-overclocking)) | other Ryzen 1000–5000; overclocking on other processors; the 95–105 W limit | A-series (A6–A12) |
+| **Memory** | 2 and 4 sticks, overclocking up to DDR4-3200 (up to 3600 on the Ryzen 4000G and 5000G) | XMP | voltage above 1.2 V |
 | **Monitor** | both DisplayPort sockets, VGA | DP→DP cable, the second DisplayPort socket in HDMI mode | |
-| **Graphics card** | PCIe x16, Resizable BAR (Intel Arc A380), built-in graphics together with a card | | PCIe 4.0: on the Ryzen 3000 and 5000 without built-in graphics the x16 slot runs as PCIe 3.0, AMD limits them so on boards with the B350 (tested on a 3300X) |
+| **Graphics card** | PCIe x16, Resizable BAR (Intel Arc A380), built-in graphics together with a card, x16 slot bifurcation (x8+x4+x4 and x4+x4+x4+x4) | | PCIe 4.0: on the Ryzen 3000 and 5000 without built-in graphics the x16 slot runs as PCIe 3.0, AMD limits them so on boards with the B350 (tested on a 3300X) |
 | **USB** | every socket | | |
 | **Drives** | SATA, M.2 NVMe | | |
 | **Network** | 1 Gbit/s, power-on over the network | network boot (PXE) | |
