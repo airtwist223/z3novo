@@ -163,9 +163,9 @@ Updated as the author's checks and testers' reports (the "Everything works" form
 | | |
 |---|---|
 | **Версии** | T1.2, T2.0, T2.2 |
-| **Системы** | Windows 11 |
-| **Память** | 4 × 4 ГБ разные: две Ramaxel и две Micron, все на 2400 |
-| ✅ **Работает** | Resizable BAR с видеокартой Intel Arc A380 · встроенная графика вместе с видеокартой (Arc A380, RX 550, на T2.2 — CMP 30HX) · тест-флешка: память и нагрузка без ошибок · на T2.2: включение и перезагрузки, сон (тест-флешка: 5 из 5), включение после пропадания света, USB, DisplayPort, VGA, SATA, M.2, обновление BIOS из меню, вентиляторы FAN2 и FAN3, сброс F6, долгая проверка тест-флешкой без ошибок |
+| **Системы** | Windows 10, Windows 11 |
+| **Память** | 2 × 16 ГБ с XMP 3200 · четыре планки на 3200 вручную · 4 × 4 ГБ разные: две Ramaxel и две Micron, все на 2400 |
+| ✅ **Работает** | Resizable BAR с видеокартой Intel Arc A380 · встроенная графика вместе с видеокартой (Arc A380, RX 550, на T2.2 — CMP 30HX) · тест-флешка: память и нагрузка без ошибок · на T1.2: все USB, все слоты PCIe, M.2 (NVMe), звук сзади · на T2.0: включение и перезагрузки, сон, USB, сеть, звук, DisplayPort, VGA, частота памяти вручную, обновление BIOS из меню, сброс F6 · на T2.2: включение и перезагрузки, сон (тест-флешка: 5 из 5), включение после пропадания света, USB, DisplayPort, VGA, SATA, M.2, обновление BIOS из меню, вентиляторы FAN2 и FAN3, сброс F6, долгая проверка тест-флешкой без ошибок |
 | ⚠️ **Особенности** | на T1.2 компьютер не просыпался из сна (исправлено в T2.0, подтверждено) · кружок загрузки Windows задевал логотип (в T2.0 новая заставка) · на T2.2 не работает PS/2 (питание на разъём идёт) |
 
 ## Ryzen 5 4600G
@@ -189,7 +189,7 @@ Updated as the author's checks and testers' reports (the "Everything works" form
 | **Версии** | T1.2, T2.0, T2.1, T2.2 |
 | **Системы** | Debian 13, Windows |
 | **Память** | 2 × 16 ГБ (Apacer + Crucial) на 3200 |
-| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация с T2.0 (в журнале запусков — удачные выходы из сна) · на T2.1: вентилятор после сна сам возвращается к кривой, корпусные вентиляторы (FAN2, AUX1, AUX2) идут по кривой, «Тихо» и «Минимум» у каждого вентилятора · на T2.2: видеокарта RX 560 и встроенная графика работают одновременно, сон 5 из 5, нагрузка на память и процессор без ошибок (тест-флешка) |
+| ✅ **Работает** | двое суток без зависаний и отвалов USB · Linux и Windows · переключение загрузочных дисков · сон и гибернация с T2.0 (в журнале запусков — удачные выходы из сна) · на T2.1: вентилятор после сна сам возвращается к кривой, корпусные вентиляторы (FAN2, AUX1, AUX2) идут по кривой, «Тихо» и «Минимум» у каждого вентилятора · на T2.2: видеокарта RX 560 и встроенная графика работают одновременно, сон 5 из 5, нагрузка на память и процессор без ошибок (тест-флешка), включение после пропадания света, сеть, звук, DisplayPort, SATA, M.2 (NVMe WD SN740), частота памяти вручную, вентиляторы FAN2 и FAN3 |
 | ⚠️ **Особенности** | на T1.2 с накопителем NVMe Western Digital в M.2 Windows зависала, с SATA — нет; в T2.0 тактовый сигнал слота M.2 сделан как в BIOS Lenovo, помогло ли — ещё не проверено · в Linux частотой процессора управляет старый драйвер (так и на T2.2), буст работает · иногда не сохранялись настройки (исправлено в T2.0) |
 
 ## Ryzen 5 5600G
@@ -366,9 +366,9 @@ Updated as the author's checks and testers' reports (the "Everything works" form
 | | |
 |---|---|
 | **Versions** | T1.2, T2.0, T2.2 |
-| **Systems** | Windows 11 |
-| **Memory** | 4 × 4 GB of different kinds: two Ramaxel and two Micron, all at 2400 |
-| ✅ **Works** | Resizable BAR with an Intel Arc A380 card · built-in graphics together with a card (Arc A380, RX 550, on T2.2 a CMP 30HX) · test stick: memory and load without errors · on T2.2: power-on and restarts, sleep (test stick: 5 out of 5), power-on after a power cut, USB, DisplayPort, VGA, SATA, M.2, BIOS update from the menu, fans on FAN2 and FAN3, the F6 reset, the test stick's long test without errors |
+| **Systems** | Windows 10, Windows 11 |
+| **Memory** | 2 × 16 GB with XMP 3200 · four sticks at 3200 set by hand · 4 × 4 GB of different kinds: two Ramaxel and two Micron, all at 2400 |
+| ✅ **Works** | Resizable BAR with an Intel Arc A380 card · built-in graphics together with a card (Arc A380, RX 550, on T2.2 a CMP 30HX) · test stick: memory and load without errors · on T1.2: all USB sockets, all PCIe slots, M.2 (NVMe), rear sound · on T2.0: power-on and restarts, sleep, USB, network, sound, DisplayPort, VGA, a manual memory speed, BIOS update from the menu, the F6 reset · on T2.2: power-on and restarts, sleep (test stick: 5 out of 5), power-on after a power cut, USB, DisplayPort, VGA, SATA, M.2, BIOS update from the menu, fans on FAN2 and FAN3, the F6 reset, the test stick's long test without errors |
 | ⚠️ **Notes** | on T1.2 the computer did not wake from sleep (fixed in T2.0, confirmed) · the Windows loading circle touched the logo (T2.0 has a new boot screen) · on T2.2 PS/2 does not work (the socket does get power) |
 
 ## Ryzen 5 4600G
@@ -392,7 +392,7 @@ Updated as the author's checks and testers' reports (the "Everything works" form
 | **Versions** | T1.2, T2.0, T2.1, T2.2 |
 | **Systems** | Debian 13, Windows |
 | **Memory** | 2 × 16 GB (Apacer + Crucial) at 3200 |
-| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation from T2.0 (the boot log shows successful wakes from sleep) · on T2.1: the fan goes back to its curve by itself after sleep, the case fans (FAN2, AUX1, AUX2) follow their curve, Quiet and a minimum for each fan · on T2.2: an RX 560 card and the built-in graphics work at the same time, sleep 5 out of 5, memory and processor load without errors (test stick) |
+| ✅ **Works** | two days without hangs or USB drop-outs · Linux and Windows · switching boot disks · sleep and hibernation from T2.0 (the boot log shows successful wakes from sleep) · on T2.1: the fan goes back to its curve by itself after sleep, the case fans (FAN2, AUX1, AUX2) follow their curve, Quiet and a minimum for each fan · on T2.2: an RX 560 card and the built-in graphics work at the same time, sleep 5 out of 5, memory and processor load without errors (test stick), power-on after a power cut, network, sound, DisplayPort, SATA, M.2 (a WD SN740 NVMe drive), a manual memory speed, fans on FAN2 and FAN3 |
 | ⚠️ **Notes** | on T1.2 Windows hung with a Western Digital NVMe drive in M.2, with SATA it did not; in T2.0 the M.2 slot clock works as in Lenovo's BIOS, whether that helps has not been tested yet · on Linux the older driver controls the processor clock (still so on T2.2), boost works · settings were sometimes not saved (fixed in T2.0) |
 
 ## Ryzen 5 5600G
